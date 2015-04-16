@@ -41,47 +41,38 @@ public class SelectOrCreateController implements Initializable {
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        try {
-            if (event.getSource().equals(create)) {
+        if (event.getSource().equals(create)) {
 
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
+            switchScene(event, "CharCreation.fxml");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("CharCreation.fxml"));
-                Parent root = loader.load();
+        } else if (event.getSource().equals(choose)) {
 
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+            switchScene(event, "ViewChar.fxml");
 
-            } else if (event.getSource().equals(choose)) {
+        } else if (event.getSource().equals(back)) {
 
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
+            switchScene(event, "Login.fxml");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewChar.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } else if (event.getSource().equals(back)) {
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
+
+    }
+
+    public void switchScene(ActionEvent event, String Destination) {
+
+        try {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Destination));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+
+        }
+
     }
 
 }

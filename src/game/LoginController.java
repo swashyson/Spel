@@ -31,7 +31,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private Label label;
-
     @FXML
     private Button createAccount;
     @FXML
@@ -44,54 +43,63 @@ public class LoginController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
+        if (event.getSource().equals(login)) {
+            
+            logIn(event);
+            
+        } else if (event.getSource().equals(createAccount)) {
+            
+            createAccount(event);
+
+        }
+    }
+
+    public void logIn(ActionEvent event) {
+
         try {
-            if (event.getSource().equals(login)) {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                // String URL = "jdbc:mysql://194.47.47.18:3306/YOUR_DATABASE_NAME?user=YOUR_USER_NAME&password=YOUR_PASSWORD";
-                
-                
-                // SKRIV IN ER DATABAS HÄR, MIN HETER game med user som root och password som root  //
-                String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=root";
-                Connection c = DriverManager.getConnection(URL);
+            DBConnect.connect();
+            Connection c = DBConnect.getConnection();
 
-                Statement st = c.createStatement();
-                ResultSet rs = st.executeQuery("select * from game.login");
-                while (rs.next()) {
-                    String name1 = rs.getString("userName");
-                    String password1 = rs.getString("userPassword");
-                    if (name.getText().equals(name1) && password.getText().equals(password1)) {
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("select * from game.login");
+            while (rs.next()) {
+                String name1 = rs.getString("userName");
+                String password1 = rs.getString("userPassword");
+                if (name.getText().equals(name1) && password.getText().equals(password1)) {
 
-                        Node node = (Node) event.getSource();
-                        Stage stage = (Stage) node.getScene().getWindow();
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectOrCreate.fxml"));
-                        Parent root = loader.load();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectOrCreate.fxml"));
+                    Parent root = loader.load();
 
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    System.out.println("Accepted");
+                    
+                    DBConnect.close();
 
-                    } else {
-                        label.setText("Fel inloggning");
-                    }
                 }
-                c.close();
-            }
-            if (event.getSource().equals(createAccount)) {
-
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateAccount.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
             }
         } catch (Exception ex) {
-            System.err.println("Fel: " + ex);
-        
+
+        }
+    }
+    public void createAccount(ActionEvent event) {
+
+        try {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateAccount.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

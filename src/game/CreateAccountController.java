@@ -5,8 +5,6 @@
  */
 package game;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,56 +54,67 @@ public class CreateAccountController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private void handleButtonAction(ActionEvent event) {
+
+        if (event.getSource().equals(create)) {
+
+            create(event);
+
+        } else if (event.getSource().equals(back)) {
+            
+            back(event);
+
+        }
+    }
+
+    public void create(ActionEvent event) {
 
         try {
-            if (event.getSource().equals(create)) {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                
-                
-                // SKRIV IN ER DATABAS HÄR, MIN HETER game med user som root och password som root  //
-                
-                String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=root";
-                Connection c = DriverManager.getConnection(URL);
-                Statement st = c.createStatement();
 
-                typeName = name.getText();
-                typePassword = password.getText();
+            DBConnect.connect();
+            Connection c = DBConnect.getConnection();
+            Statement st = c.createStatement();
 
-                ResultSet RS = st.executeQuery("select max(userID) from game.login");
-                while (RS.next()) {
-                    surrogateKey = RS.getInt("max(userID)");
-                    surrogateKey = surrogateKey + 1;
-                    System.out.println(surrogateKey);
-                }
+            typeName = name.getText();
+            typePassword = password.getText();
 
-                System.out.println("INSERT INTO game.login (userID, userName, userPassword)" + " VALUES('" + surrogateKey + "','" + typeName + "','" + typePassword + "')");
-                st.executeUpdate("INSERT INTO game.login (userID, userName, userPassword)" + " VALUES(" + surrogateKey + ",'" + typeName + "','" + typePassword + "')");
-                System.out.println("Account skapat");
-                c.close();
-            } else if (event.getSource().equals(back)) {
+            ResultSet RS = st.executeQuery("select max(userID) from game.login");
 
-                try {
-                    Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                    Parent root;
-                    root = loader.load();
-
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    System.out.println("test");
-                }
-
+            while (RS.next()) {
+                surrogateKey = RS.getInt("max(userID)");
+                surrogateKey = surrogateKey + 1;
+                System.out.println(surrogateKey);
             }
 
+            System.out.println("INSERT INTO game.login (userID, userName, userPassword)" + " VALUES('" + surrogateKey + "','" + typeName + "','" + typePassword + "')");
+            st.executeUpdate("INSERT INTO game.login (userID, userName, userPassword)" + " VALUES(" + surrogateKey + ",'" + typeName + "','" + typePassword + "')");
+
+            System.out.println("Account skapat");
+            DBConnect.close();
+
         } catch (SQLException ex) {
-            //ex.printStackTrace();
-            System.out.println("Anvädarnamnet är redan taget");
+            System.out.println("AnvädarNamnet redan taget");
+        }
+
+    }
+
+    public void back(ActionEvent event) {
+
+        try {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            Parent root;
+            root = loader.load();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("test");
         }
     }
 
