@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -17,12 +18,15 @@ import javafx.fxml.Initializable;
  */
 public class ViewCharController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    public void back(ActionEvent event) {
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "SelectOrCreate");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

@@ -1,4 +1,3 @@
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -38,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `game`.`login` (
   `userID` INT(11) NOT NULL,
   `userName` VARCHAR(45) NULL DEFAULT NULL,
   `userPassword` VARCHAR(45) NULL DEFAULT NULL,
+  `userEmail` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE INDEX `userID_UNIQUE` (`userID` ASC),
   UNIQUE INDEX `userName_UNIQUE` (`userName` ASC))

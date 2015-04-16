@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,12 +11,53 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" translateX="1.0" translateY="1.0" translateZ="1.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" translateX="1.0" translateY="1.0" translateZ="1.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.LoginController">
     <children>
-        <Button fx:id="login" focusTraversable="false" layoutX="250.0" layoutY="311.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="110.0" text="Login" translateX="1.0" translateY="1.0" translateZ="1.0" />
-        <Label fx:id="label" layoutX="102.0" layoutY="343.0" prefHeight="41.0" prefWidth="448.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="343.0" />
-      <TextField fx:id="password" layoutX="231.0" layoutY="207.0" promptText="Password" />
-      <Button fx:id="createAccount" focusTraversable="false" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Create Account" />
-      <TextField fx:id="name" layoutX="231.0" layoutY="155.0" promptText="Name" />
+        <Label fx:id="label" layoutX="92.0" layoutY="348.0" prefHeight="41.0" prefWidth="448.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="112.0" AnchorPane.topAnchor="348.0" />
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/LoginCity.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="createAccount" focusTraversable="false" layoutX="330.0" layoutY="478.0" mnemonicParsing="false" onAction="#createAccount" text="Create Account">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mattias/Documents/NetBeansProjects/Game/src/game/Recourses/Create.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <Button fx:id="login" focusTraversable="false" layoutX="329.0" layoutY="516.0" onAction="#logIn" prefHeight="32.0" prefWidth="110.0" text="Login" translateX="1.0" translateY="1.0" translateZ="1.0">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mattias/Documents/NetBeansProjects/Game/src/game/Recourses/Login.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="forgot" layoutX="330.0" layoutY="559.0" mnemonicParsing="false" onAction="#forgot" prefHeight="32.0" prefWidth="110.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mattias/Documents/NetBeansProjects/Game/src/game/Recourses/Forgot.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="305.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="305.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="name" layoutX="305.0" layoutY="389.0" prefHeight="25.0" prefWidth="160.0" promptText="Name">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+      <TextField fx:id="password" layoutX="305.0" layoutY="423.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
     </children>
 </AnchorPane>

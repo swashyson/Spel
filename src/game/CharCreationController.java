@@ -7,6 +7,7 @@ package game;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,9 +33,12 @@ public class CharCreationController implements Initializable {
     @FXML
     private Button back;
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    public void back(ActionEvent event) {
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "SelectOrCreate");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

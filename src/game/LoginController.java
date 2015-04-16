@@ -5,6 +5,7 @@
  */
 package game;
 
+import java.awt.Font;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,6 +22,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -36,23 +39,11 @@ public class LoginController implements Initializable {
     @FXML
     private Button login;
     @FXML
+    private Button forgot;
+    @FXML
     private TextField name;
     @FXML
     private TextField password;
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-
-        if (event.getSource().equals(login)) {
-            
-            logIn(event);
-            
-        } else if (event.getSource().equals(createAccount)) {
-            
-            createAccount(event);
-
-        }
-    }
 
     public void logIn(ActionEvent event) {
 
@@ -67,17 +58,9 @@ public class LoginController implements Initializable {
                 String password1 = rs.getString("userPassword");
                 if (name.getText().equals(name1) && password.getText().equals(password1)) {
 
-                    Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
+                    SwitchScene sc = new SwitchScene();
+                    sc.change(event, "SelectOrCreate");
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectOrCreate.fxml"));
-                    Parent root = loader.load();
-
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                    System.out.println("Accepted");
-                    
                     DBConnect.close();
 
                 }
@@ -86,21 +69,18 @@ public class LoginController implements Initializable {
 
         }
     }
+
     public void createAccount(ActionEvent event) {
 
-        try {
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "CreateAccount");
+    }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateAccount.fxml"));
-            Parent root = loader.load();
+    public void forgot(ActionEvent event) {
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "ForgotPW");
+
     }
 
     @Override

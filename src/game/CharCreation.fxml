@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.CharCreationController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.CharCreationController">
    <children>
-      <TextField fx:id="name" layoutX="209.0" layoutY="78.0" promptText="Hero Name" />
+      <TextField fx:id="name" layoutX="326.0" layoutY="76.0" promptText="Hero Name" />
       <Button fx:id="hero1" layoutX="106.0" layoutY="260.0" mnemonicParsing="false" text="Hero1" />
-      <Button fx:id="hero2" layoutX="258.0" layoutY="260.0" mnemonicParsing="false" text="Hero2" />
-      <Button fx:id="hero3" layoutX="400.0" layoutY="260.0" mnemonicParsing="false" text="Hero3" />
-      <Button fx:id="create" layoutX="258.0" layoutY="327.0" mnemonicParsing="false" text="Create" />
-      <Button fx:id="back" layoutX="258.0" layoutY="352.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="hero2" layoutX="376.0" layoutY="254.0" mnemonicParsing="false" text="Hero2" />
+      <Button fx:id="hero3" layoutX="687.0" layoutY="260.0" mnemonicParsing="false" text="Hero3" />
+      <Button fx:id="create" layoutX="375.0" layoutY="477.0" mnemonicParsing="false" text="Create" />
+      <Button fx:id="back" layoutX="380.0" layoutY="526.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

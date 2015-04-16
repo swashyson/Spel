@@ -38,9 +38,12 @@ public class CreateAccountController implements Initializable {
     private Button create;
     @FXML
     private Button back;
+    @FXML
+    private TextField mail;
 
     private String typeName;
     private String typePassword;
+    private String typeMail;
     private int surrogateKey = 5;
 
     @Override
@@ -61,10 +64,11 @@ public class CreateAccountController implements Initializable {
             create(event);
 
         } else if (event.getSource().equals(back)) {
-            
+
             back(event);
 
         }
+
     }
 
     public void create(ActionEvent event) {
@@ -77,6 +81,7 @@ public class CreateAccountController implements Initializable {
 
             typeName = name.getText();
             typePassword = password.getText();
+            typeMail = mail.getText();
 
             ResultSet RS = st.executeQuery("select max(userID) from game.login");
 
@@ -86,8 +91,8 @@ public class CreateAccountController implements Initializable {
                 System.out.println(surrogateKey);
             }
 
-            System.out.println("INSERT INTO game.login (userID, userName, userPassword)" + " VALUES('" + surrogateKey + "','" + typeName + "','" + typePassword + "')");
-            st.executeUpdate("INSERT INTO game.login (userID, userName, userPassword)" + " VALUES(" + surrogateKey + ",'" + typeName + "','" + typePassword + "')");
+            System.out.println("INSERT INTO game.login (userID, userName, userPassword, userEmail)" + " VALUES('" + surrogateKey + "','" + typeName + "','" + typePassword + "','" + typeMail + "')");
+            st.executeUpdate("INSERT INTO game.login (userID, userName, userPassword, userEmail)" + " VALUES('" + surrogateKey + "','" + typeName + "','" + typePassword + "','" + typeMail + "')");
 
             System.out.println("Account skapat");
             DBConnect.close();
@@ -99,23 +104,9 @@ public class CreateAccountController implements Initializable {
     }
 
     public void back(ActionEvent event) {
-
-        try {
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-            Parent root;
-            root = loader.load();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("test");
-        }
+        
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "Login");
     }
 
 }
