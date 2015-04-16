@@ -107,7 +107,7 @@ public class CreateAccountController implements Initializable {
 
         } catch (SQLException ex) {
             //ex.printStackTrace();
-            System.out.println("Anvädarnamnet är redan taget");
+            System.out.println("Anvädarnamnet är upptaget, välj ett nytt!");
         }
     }
 
