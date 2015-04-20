@@ -6,6 +6,8 @@
 package game;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,10 +35,48 @@ public class CharCreationController implements Initializable {
     @FXML
     private Button back;
 
+    public int type;
+
     @FXML
     public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "SelectOrCreate");
+    }
+
+    @FXML
+    public void Select(ActionEvent event) {
+        if (event.getSource().equals(hero1)) {
+            type = 1;
+        } else if (event.getSource().equals(hero2)) {
+            type = 2;
+        } else if (event.getSource().equals(hero3)) {
+            type = 3;
+        }
+    }
+
+    public void Create() {
+        DBConnect.connect();
+        Connection c = DBConnect.getConnection();
+
+        getID();
+
+        DBConnect.CreateInsertStatement("INSERT INTO `game`.`hero` (`idHero`, `heroName`, `heroType`, `userID`, `heroLevel`, `eqWeapon`, `eqArmour`)"
+                + " VALUES ('1', '1', '1', '1', '1', '1', '1')");
+    }
+
+    public void getID() {
+        try {
+            ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.login");
+            
+            while(rs.next()){
+                
+            rs.getInt("UserID");
+            
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
