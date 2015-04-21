@@ -99,7 +99,7 @@ public class CreateAccountController implements Initializable {
             DBConnect.close();
  
         } catch (SQLException ex) {
-            System.out.println("AnvädarNamnet redan taget");
+            System.out.println("Anvädarnamnet redan taget");
             ex.printStackTrace();
         }
  
