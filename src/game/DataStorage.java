@@ -5,17 +5,36 @@
  */
 package game;
 
-
 /**
  *
  * @author gul_h_000
  */
 public class DataStorage {
 
-    private static int userID;
+    private static int userID, currentHealth, gold, currentLevel;
 
-    private DataStorage(int userID) {
+    private DataStorage(int userID, int currentHealth, int gold, int currentLevel) {
         this.userID = userID;
+        this.currentHealth = currentHealth;
+        this.gold = gold;
+        this.currentLevel = currentLevel;
 
     }
+
+    private int getHealth() {
+        return currentHealth;
+    }
+
+    private int getGold() {
+        return gold;
+    }
+
+    private int getUserID() {
+        return userID;
+    }
+
+    private int getLevel() {
+        return currentLevel;
+    }
+
 }
