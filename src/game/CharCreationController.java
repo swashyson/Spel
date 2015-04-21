@@ -55,33 +55,25 @@ public class CharCreationController implements Initializable {
     }
 
     public void Create() {
+        try{
         DBConnect.connect();
         Connection c = DBConnect.getConnection();
+        
+        int userID = DataStorage.getInstance().getUserID();
 
-        getID();
-
-        DBConnect.CreateInsertStatement("INSERT INTO `game`.`hero` (`idHero`, `heroName`, `heroType`, `userID`, `heroLevel`, `eqWeapon`, `eqArmour`)"
-                + " VALUES ('1', '1', '1', '1', '1', '1', '1')");
-    }
-
-    public void getID() {
-        try {
-            ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.login");
-            
-            while(rs.next()){
-                
-            rs.getInt("UserID");
-            
-            }
-
-        } catch (Exception ex) {
+        DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour)"
+                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null)");
+        System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour)"
+                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null)");
+        }catch(Exception ex){
             ex.printStackTrace();
         }
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        System.out.println(DataStorage.getInstance().getUserID());
     }
 
 }

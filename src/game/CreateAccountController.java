@@ -50,6 +50,7 @@ public class CreateAccountController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
  
         try {
+            
  
         } catch (Exception ex) {
             ex.printStackTrace();

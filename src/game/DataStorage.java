@@ -11,30 +11,27 @@ package game;
  */
 public class DataStorage {
 
-    private static int userID, currentHealth, gold, currentLevel;
+    private static DataStorage myDataStorage;
+    private int userID;
+
 
     private DataStorage(int userID, int currentHealth, int gold, int currentLevel) {
+    }
+    public static DataStorage getInstance() {
+        if (myDataStorage == null) {
+            myDataStorage = new DataStorage();
+        }
+
+        return myDataStorage;
+    }
+    public void setUserID(int userID){
+
         this.userID = userID;
-        this.currentHealth = currentHealth;
-        this.gold = gold;
-        this.currentLevel = currentLevel;
+
 
     }
-
-    private int getHealth() {
-        return currentHealth;
-    }
-
-    private int getGold() {
-        return gold;
-    }
-
-    private int getUserID() {
+    public int getUserID(){
         return userID;
-    }
 
-    private int getLevel() {
-        return currentLevel;
-    }
-
+}
 }
