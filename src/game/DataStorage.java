@@ -5,17 +5,26 @@
  */
 package game;
 
-
 /**
  *
  * @author gul_h_000
  */
 public class DataStorage {
 
-    private static int userID;
+    private static DataStorage myDataStorage;
+    private int userID;
 
-    private DataStorage(int userID) {
+    public static DataStorage getInstance() {
+        if (myDataStorage == null) {
+            myDataStorage = new DataStorage();
+        }
+
+        return myDataStorage;
+    }
+    public void setUserID(int userID){
         this.userID = userID;
-
+    }
+    public int getUserID(){
+        return userID;
     }
 }

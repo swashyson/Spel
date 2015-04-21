@@ -9,5 +9,7 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.ViewCharController">
    <children>
       <Button fx:id="back" layoutX="380.0" layoutY="525.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <ListView fx:id="list" layoutX="306.0" layoutY="51.0" onMouseClicked="#selectChar" prefHeight="136.0" prefWidth="200.0" />
+      <ListView fx:id="stats" layoutX="306.0" layoutY="218.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

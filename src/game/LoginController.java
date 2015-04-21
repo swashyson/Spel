@@ -49,8 +49,11 @@ public class LoginController implements Initializable {
 
             if (rs.first()) {
 
+                int ID;
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "SelectOrCreate");
+                ID = rs.getInt("userID");
+                DataStorage.getInstance().setUserID(ID);
 
                 DBConnect.close();
             } else {
