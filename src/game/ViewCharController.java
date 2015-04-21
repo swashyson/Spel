@@ -31,6 +31,7 @@ public class ViewCharController implements Initializable {
     private ListView stats;
 
     private ArrayList<String> getName = new ArrayList();
+    private ArrayList getStats = new ArrayList();
 
     @FXML
     public void back(ActionEvent event) {
@@ -57,14 +58,41 @@ public class ViewCharController implements Initializable {
             ObservableList<String> OL = FXCollections.observableArrayList(getName);
             list.setItems(OL);
 
+            DBConnect.close();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    public void selectChar(ActionEvent event){
-        
-        //
-        System.out.println("test");
+
+    @FXML
+    public void selectChar() {
+
+        try {
+            
+            getStats.removeAll(getStats);
+
+            Object name = list.getSelectionModel().getSelectedItem();
+            String stringName = (String) name;
+            int userID = DataStorage.getInstance().getUserID();
+
+            DBConnect.connect();
+            Connection c = DBConnect.getConnection();
+
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
+            while (rs.next()) {
+                int level = rs.getInt("heroLevel");
+                int type = rs.getInt("heroType");
+                getStats.add("Level: " + level);
+                getStats.add("Type: " + type);
+            }
+            ObservableList<Object> OL = FXCollections.observableArrayList(getStats);
+            stats.setItems(OL);
+            DBConnect.close();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
