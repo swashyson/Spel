@@ -61,10 +61,10 @@ public class CharCreationController implements Initializable {
         
         int userID = DataStorage.getInstance().getUserID();
 
-        DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour)"
-                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null)");
-        System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour)"
-                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null)");
+        DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null, '0', '10', '0', '10', '5', '2')" );
+        System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null, '0', '10', '0', '10', '5', '2' )");
         }catch(Exception ex){
             ex.printStackTrace();
         }
