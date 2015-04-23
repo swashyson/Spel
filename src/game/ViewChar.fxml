@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.ViewCharController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/BackGround.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="back" layoutX="367.0" layoutY="497.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="109.0" text="Back">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Back.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <ListView fx:id="list" layoutX="65.0" layoutY="64.0" onMouseClicked="#selectChar" prefHeight="136.0" prefWidth="200.0" />
+      <ListView fx:id="stats" layoutX="65.0" layoutY="216.0" prefHeight="61.0" prefWidth="200.0" />
+      <Button layoutX="367.0" layoutY="451.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="109.0" text="Play">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/play.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

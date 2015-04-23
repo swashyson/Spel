@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" translateX="1.0" translateY="1.0" translateZ="1.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.LoginController">
+    <children>
+        <Label fx:id="label" layoutX="92.0" layoutY="348.0" prefHeight="41.0" prefWidth="448.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="112.0" AnchorPane.topAnchor="348.0" />
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/LoginCity.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="createAccount" focusTraversable="false" layoutX="330.0" layoutY="478.0" mnemonicParsing="false" onAction="#createAccount" text="Create Account">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Create.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <Button fx:id="login" focusTraversable="false" layoutX="329.0" layoutY="516.0" onAction="#logIn" prefHeight="32.0" prefWidth="110.0" text="Login" translateX="1.0" translateY="1.0" translateZ="1.0">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Login.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="forgot" layoutX="330.0" layoutY="559.0" mnemonicParsing="false" onAction="#forgot" prefHeight="32.0" prefWidth="110.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Forgot.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="305.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="305.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="name" layoutX="305.0" layoutY="389.0" prefHeight="25.0" prefWidth="160.0" promptText="Name">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+      <TextField fx:id="password" layoutX="305.0" layoutY="423.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
+    </children>
+</AnchorPane>
