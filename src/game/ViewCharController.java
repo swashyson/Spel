@@ -5,6 +5,7 @@
  */
 package game;
 
+import java.awt.Image;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -32,6 +34,10 @@ public class ViewCharController implements Initializable {
     private ListView stats;
     @FXML
     private Button play;
+    @FXML
+    private Button back;
+    @FXML
+    private ImageView imageView;
 
     private ArrayList<String> getName = new ArrayList();
     private ArrayList getStats = new ArrayList();
@@ -87,8 +93,20 @@ public class ViewCharController implements Initializable {
                 int level = rs.getInt("heroLevel");
                 int type = rs.getInt("heroType");
 
+                if (type == 1) {
+                    getStats.add("Type: Warrior");
+                    changePic("Melee");
+                } else if (type == 2) {
+                    getStats.add("Type: Ranger");
+                    changePic("range");
+                } else if (type == 3) {
+                    getStats.add("Type: Mage");
+                    changePic("Mage");
+                } else {
+                    getStats.add("Type: No class");
+                }
+
                 getStats.add("Level: " + level);
-                getStats.add("Type: " + type);
             }
             ObservableList<Object> OL = FXCollections.observableArrayList(getStats);
             stats.setItems(OL);
@@ -141,6 +159,12 @@ public class ViewCharController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void changePic(String type) {
+        javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("Recourses/" + type + ".png").toExternalForm());
+        imageView.setImage(image);
+
     }
 
 }

@@ -34,5 +34,6 @@
             </ImageInput>
          </effect>
       </Button>
+      <ImageView fx:id="imageView" fitHeight="339.0" fitWidth="232.0" layoutX="297.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
