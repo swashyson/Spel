@@ -25,7 +25,7 @@
          </effect></Button>
       <ListView fx:id="list" layoutX="65.0" layoutY="64.0" onMouseClicked="#selectChar" prefHeight="136.0" prefWidth="200.0" />
       <ListView fx:id="stats" layoutX="65.0" layoutY="216.0" prefHeight="61.0" prefWidth="200.0" />
-      <Button layoutX="367.0" layoutY="451.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="109.0" text="Play">
+      <Button fx:id="play" layoutX="367.0" layoutY="451.0" mnemonicParsing="false" onAction="#play" prefHeight="32.0" prefWidth="109.0" text="Play">
          <effect>
             <ImageInput>
                <source>
