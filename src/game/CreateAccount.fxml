@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,10 +11,47 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.CreateAccountController">
    <children>
-      <TextField fx:id="name" layoutX="326.0" layoutY="87.0" promptText="Name" />
-      <TextField fx:id="password" layoutX="326.0" layoutY="140.0" promptText="Password" />
-      <Button fx:id="create" layoutX="375.0" layoutY="485.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Create" />
-      <Button fx:id="back" layoutX="380.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Back" />
-      <TextField fx:id="mail" layoutX="326.0" layoutY="200.0" promptText="E-Mail" />
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/BackGround.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="310.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="310.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="310.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="name" layoutX="315.0" layoutY="102.0" prefHeight="25.0" prefWidth="190.0" promptText="Name">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+      <TextField fx:id="password" layoutX="315.0" layoutY="194.0" prefHeight="25.0" prefWidth="190.0" promptText="Password" />
+      <Button fx:id="create" layoutX="355.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="111.0" text="Create">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Create.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="back" layoutX="355.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="111.0" text="Back">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Back.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <TextField fx:id="mail" layoutX="315.0" layoutY="288.0" prefHeight="25.0" prefWidth="190.0" promptText="E-Mail" />
    </children>
 </AnchorPane>

@@ -70,7 +70,7 @@ public class ForgotPWController implements Initializable {
 
     public void sendMail() {
 
-            ////////////////////Man måste ha en Mail hanterar program för att få det till att funka... detta var ju lätt...///////////////////////////
+        ////////////////////Man måste ha en Mail hanterar program för att få det till att funka... detta var ju lätt...///////////////////////////
         //////////////////// Behöver två nya libraries///// JAVAX-MAIL-API-1.5.3.jar/////////JAVAX.MAIL-1.5.3.jar////////////
         try {
 
@@ -96,10 +96,11 @@ public class ForgotPWController implements Initializable {
         }
     }
 
+    @FXML
     public void back(ActionEvent event) {
-
+        
         SwitchScene sc = new SwitchScene();
-        sc.change(event, "login");
+        sc.change(event, "Login");
 
     }
 
