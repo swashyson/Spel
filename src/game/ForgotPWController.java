@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -102,6 +103,23 @@ public class ForgotPWController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 
+    }
+        public void hoverIN(MouseEvent event) {
+
+        if (event.getSource().equals(getItBack)) {
+            HoverMouse.inHover(getItBack);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.inHover(back);
+        }
+    }
+
+    public void hoverOUT(MouseEvent event) {
+
+        if (event.getSource().equals(getItBack)) {
+            HoverMouse.outHover(getItBack);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.outHover(back);
+        }
     }
 
     @Override

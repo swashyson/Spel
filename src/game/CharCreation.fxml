@@ -45,7 +45,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <Button fx:id="create" layoutX="248.0" layoutY="558.0" mnemonicParsing="false" onAction="#Create" prefHeight="31.0" prefWidth="108.0" text="Create">
+      <Button fx:id="create" layoutX="248.0" layoutY="558.0" mnemonicParsing="false" onAction="#Create" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="31.0" prefWidth="108.0" text="Create">
          <effect>
             <ImageInput>
                <source>
@@ -53,7 +53,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <Button fx:id="back" layoutX="448.0" layoutY="558.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="108.0" text="Back">
+      <Button fx:id="back" layoutX="448.0" layoutY="558.0" mnemonicParsing="false" onAction="#back" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="31.0" prefWidth="108.0" text="Back">
          <effect>
             <ImageInput>
                <source>
