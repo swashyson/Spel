@@ -119,7 +119,7 @@ public class ViewCharController implements Initializable {
     }
 
     @FXML
-    public void play() {
+    public void play(ActionEvent event) {
         try {
 
             DBConnect.connect();
@@ -156,6 +156,9 @@ public class ViewCharController implements Initializable {
             }
             DataStorage.getInstance().printAll();
             DBConnect.close();
+            
+         SwitchScene sc = new SwitchScene();
+        sc.change(event, "City");
 
         } catch (Exception ex) {
             ex.printStackTrace();
