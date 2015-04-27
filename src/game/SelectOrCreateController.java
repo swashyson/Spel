@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -73,6 +74,28 @@ public class SelectOrCreateController implements Initializable {
 
         }
 
+    }
+
+    public void hoverIN(MouseEvent event) {
+
+        if (event.getSource().equals(choose)) {
+            HoverMouse.inHover(choose);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.inHover(back);
+        } else if (event.getSource().equals(create)) {
+            HoverMouse.inHover(create);
+        }
+    }
+
+    public void hoverOUT(MouseEvent event) {
+
+        if (event.getSource().equals(choose)) {
+            HoverMouse.outHover(choose);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.outHover(back);
+        } else if (event.getSource().equals(create)) {
+            HoverMouse.outHover(create);
+        }
     }
 
 }

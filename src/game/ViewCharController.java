@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -159,6 +160,24 @@ public class ViewCharController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    
+        public void hoverIN(MouseEvent event) {
+
+        if (event.getSource().equals(play)) {
+            HoverMouse.inHover(play);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.inHover(back);
+        } 
+    }
+
+    public void hoverOUT(MouseEvent event) {
+
+        if (event.getSource().equals(play)) {
+            HoverMouse.outHover(play);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.outHover(back);
+        } 
     }
 
     public void changePic(String type) {

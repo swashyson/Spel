@@ -13,12 +13,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -39,6 +41,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField password;
 
+    @FXML
     public void logIn(ActionEvent event) {
 
         try {
@@ -65,16 +68,44 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public void createAccount(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "CreateAccount");
     }
 
+    @FXML
     public void forgot(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ForgotPW");
+
+    }
+
+    @FXML
+    public void hoverIN(MouseEvent event) {
+
+        if (event.getSource().equals(createAccount)) {
+            HoverMouse.inHover(createAccount);
+        } else if (event.getSource().equals(login)) {
+            HoverMouse.inHover(login);
+        } else if (event.getSource().equals(forgot)) {
+            HoverMouse.inHover(forgot);
+        }
+
+    }
+
+    @FXML
+    public void hoverOUT(MouseEvent event) {
+
+        if (event.getSource().equals(createAccount)) {
+            HoverMouse.outHover(createAccount);
+        } else if (event.getSource().equals(login)) {
+            HoverMouse.outHover(login);
+        } else if (event.getSource().equals(forgot)) {
+            HoverMouse.outHover(forgot);
+        }
 
     }
 
