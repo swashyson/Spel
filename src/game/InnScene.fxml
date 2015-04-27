@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.InnSceneController">
+   <children>
+      <Button fx:id="restoreHealth" layoutX="354.0" layoutY="148.0" mnemonicParsing="false" onAction="#restoreHealth" text="Restore Health" />
+      <Label layoutX="120.0" layoutY="152.0" text="Current Health: " />
+      <Label fx:id="health" layoutX="231.0" layoutY="152.0" text="0 / 0" />
+      <Button fx:id="back" layoutX="274.0" layoutY="279.0" mnemonicParsing="false" onAction="#back" text="Back" />
+   </children>
+</AnchorPane>
