@@ -7,6 +7,7 @@ package game;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,6 +25,9 @@ public class InnSceneController implements Initializable {
      */
     
     @FXML
+    private Button restoreHitpoint;
+    
+    @FXML
     private Button restoreHealth;
     
     @FXML
@@ -31,21 +35,35 @@ public class InnSceneController implements Initializable {
     
     @FXML
     private Label health;
+
+//    kunna restora hitpoints?
+//    @FXML
+//    private Label hitpoint;
     
     private int currentHealth;
     private int maxHealth;
     
+    
+//    kunna restora hitpoints?    
+//    private int currentHitpoint;
+//    private int maxHitpoint;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
-    public void back(){
-        
+    public void back(ActionEvent event){
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, null);
     }
     
-    public void restoreHealth(){
+//    kunna restora hitpoints?    
+//    public void restoreHitpoint(ActionEvent event){
+//        
+//    }
+    
+    public void restoreHealthpoints(ActionEvent event){
         
     }
-    
 }
