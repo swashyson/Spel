@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -46,30 +47,56 @@ public class CharCreationController implements Initializable {
     @FXML
     public void Select(ActionEvent event) {
         if (event.getSource().equals(hero1)) {
+            HoverMouse.inHover(hero1);
+            HoverMouse.outHover(hero2);
+            HoverMouse.outHover(hero3);
             type = 1;
         } else if (event.getSource().equals(hero2)) {
+            HoverMouse.inHover(hero2);
+            HoverMouse.outHover(hero1);
+            HoverMouse.outHover(hero3);
             type = 2;
         } else if (event.getSource().equals(hero3)) {
+            HoverMouse.inHover(hero3);
+            HoverMouse.outHover(hero2);
+            HoverMouse.outHover(hero1);
             type = 3;
         }
     }
 
     public void Create() {
-        try{
-        DBConnect.connect();
-        Connection c = DBConnect.getConnection();
-        
-        int userID = DataStorage.getInstance().getUserID();
+        try {
+            DBConnect.connect();
+            Connection c = DBConnect.getConnection();
 
-        DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null, '0', '10', '0', '10', '5', '2')" );
-        System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                + " VALUES ( '"+ name.getText() + "', '"+ type + "', '"+ userID +"', '1', null, null, '0', '10', '0', '10', '5', '2' )");
-        }catch(Exception ex){
+            int userID = DataStorage.getInstance().getUserID();
+
+            DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                    + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2')");
+            System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                    + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2' )");
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
+    public void hoverIN(MouseEvent event) {
+
+        if (event.getSource().equals(create)) {
+            HoverMouse.inHover(create);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.inHover(back);
+        }
+    }
+
+    public void hoverOUT(MouseEvent event) {
+
+        if (event.getSource().equals(create)) {
+            HoverMouse.outHover(create);
+        } else if (event.getSource().equals(back)) {
+            HoverMouse.outHover(back);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
