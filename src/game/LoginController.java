@@ -41,6 +41,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField password;
 
+    @FXML
     public void logIn(ActionEvent event) {
 
         try {
@@ -67,12 +68,14 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public void createAccount(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "CreateAccount");
     }
 
+    @FXML
     public void forgot(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
