@@ -37,65 +37,34 @@ public class SelectOrCreateController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        HoverMouse.inHover(create);
+        HoverMouse.outHover(create);
+        HoverMouse.inHover(choose);
+        HoverMouse.outHover(choose);
+        HoverMouse.inHover(back);
+        HoverMouse.outHover(back);
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
+
+        SwitchScene SC = new SwitchScene();
+
         if (event.getSource().equals(create)) {
 
-            switchScene(event, "CharCreation.fxml");
+            SC.change(event, "CharCreation");
 
         } else if (event.getSource().equals(choose)) {
 
-            switchScene(event, "ViewChar.fxml");
+            SC.change(event, "ViewChar");
 
         } else if (event.getSource().equals(back)) {
 
-            switchScene(event, "Login.fxml");
+            SC.change(event, "Login");
 
         }
 
-    }
-
-    public void switchScene(ActionEvent event, String Destination) {
-
-        try {
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Destination));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception ex) {
-
-        }
-
-    }
-
-    public void hoverIN(MouseEvent event) {
-
-        if (event.getSource().equals(choose)) {
-            HoverMouse.inHover(choose);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.inHover(back);
-        } else if (event.getSource().equals(create)) {
-            HoverMouse.inHover(create);
-        }
-    }
-
-    public void hoverOUT(MouseEvent event) {
-
-        if (event.getSource().equals(choose)) {
-            HoverMouse.outHover(choose);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.outHover(back);
-        } else if (event.getSource().equals(create)) {
-            HoverMouse.outHover(create);
-        }
     }
 
 }

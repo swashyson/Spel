@@ -5,7 +5,6 @@
  */
 package game;
 
-import java.awt.Image;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,6 +49,11 @@ public class ViewCharController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        HoverMouse.inHover(play);
+        HoverMouse.outHover(play);
+        HoverMouse.inHover(back);
+        HoverMouse.outHover(back);
 
         try {
             DBConnect.connect();
@@ -156,31 +159,13 @@ public class ViewCharController implements Initializable {
             }
             DataStorage.getInstance().printAll();
             DBConnect.close();
-            
-         SwitchScene sc = new SwitchScene();
-        sc.change(event, "City");
+
+            SwitchScene sc = new SwitchScene();
+            sc.change(event, "City");
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-    
-        public void hoverIN(MouseEvent event) {
-
-        if (event.getSource().equals(play)) {
-            HoverMouse.inHover(play);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.inHover(back);
-        } 
-    }
-
-    public void hoverOUT(MouseEvent event) {
-
-        if (event.getSource().equals(play)) {
-            HoverMouse.outHover(play);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.outHover(back);
-        } 
     }
 
     public void changePic(String type) {
