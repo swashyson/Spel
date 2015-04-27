@@ -53,7 +53,7 @@ public class ShoppingSceneController implements Initializable {
     
     public void back(ActionEvent event){
         SwitchScene sc = new SwitchScene();
-        sc.change(event, null);
+        sc.change(event, "City");
     }
     
     public void selectArmorOrWeapon(ActionEvent event){

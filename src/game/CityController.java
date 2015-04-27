@@ -31,7 +31,7 @@ public class CityController implements Initializable {
     public void goToInn(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
-        sc.change(event, "Inn");
+        sc.change(event, "InnScene");
     }
 
     @FXML
@@ -45,7 +45,7 @@ public class CityController implements Initializable {
     public void goToShop(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
-        sc.change(event, "Shop");
+        sc.change(event, "ShoppingScene");
     }
 
     @Override

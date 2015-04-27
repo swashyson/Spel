@@ -55,7 +55,7 @@ public class InnSceneController implements Initializable {
     
     public void back(ActionEvent event){
         SwitchScene sc = new SwitchScene();
-        sc.change(event, null);
+        sc.change(event, "City");
     }
     
 //    kunna restora hitpoints?    
