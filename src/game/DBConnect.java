@@ -12,7 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.scene.control.Label;
+ 
 /**
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
@@ -67,13 +68,14 @@ public class DBConnect {
         }
         return rs;
     }
-
-    public static void CreateInsertStatement(String commando) {
+    public static void CreateInsertStatement(String commando, Label label, String Medelande) {
         try {
             Statement st = c.createStatement();
             st.execute(commando);
         } catch (Exception ex) {
-            ex.printStackTrace();
+           
+            label.setText(Medelande);
+            System.out.println("Fel");
         }
     }
 

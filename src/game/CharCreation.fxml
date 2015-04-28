@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -20,7 +21,7 @@
             <Image url="@Recourses/TextField.png" />
          </image>
       </ImageView>
-      <TextField fx:id="name" layoutX="307.0" layoutY="14.0" prefHeight="25.0" prefWidth="190.0" promptText="Hero Name" />
+      <TextField fx:id="name" layoutX="307.0" layoutY="14.0" onMouseClicked="#clickOnTextField" prefHeight="25.0" prefWidth="190.0" promptText="Hero Name" />
       <Button fx:id="hero1" layoutX="55.0" layoutY="51.0" mnemonicParsing="false" onAction="#Select" prefHeight="500.0" prefWidth="200.0" text="Hero1">
          <effect>
             <ImageInput>
@@ -61,5 +62,10 @@
                </source>
             </ImageInput>
          </effect></Button>
+      <Label fx:id="fel" alignment="CENTER" layoutX="200.0" layoutY="493.0" prefHeight="65.0" prefWidth="404.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

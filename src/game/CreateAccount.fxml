@@ -53,5 +53,10 @@
             </ImageInput>
          </effect></Button>
       <TextField fx:id="mail" layoutX="315.0" layoutY="288.0" prefHeight="25.0" prefWidth="190.0" promptText="E-Mail" />
+      <Label fx:id="fel" contentDisplay="CENTER" layoutX="282.0" layoutY="25.0" prefHeight="53.0" prefWidth="257.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

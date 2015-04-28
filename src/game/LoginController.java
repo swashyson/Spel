@@ -10,12 +10,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,6 +28,8 @@ public class LoginController implements Initializable {
     @FXML
     private Label label;
     @FXML
+    private Label fel;
+    @FXML
     private Button createAccount;
     @FXML
     private Button login;
@@ -43,6 +42,8 @@ public class LoginController implements Initializable {
 
     @FXML
     public void logIn(ActionEvent event) {
+        
+        
 
         try {
             DBConnect.connect();
@@ -60,7 +61,7 @@ public class LoginController implements Initializable {
 
                 DBConnect.close();
             } else {
-                System.out.println("Fel användarnamn/lösenord");
+                fel.setText("Wrong username/password");
             }
 
         } catch (Exception ex) {
@@ -92,6 +93,8 @@ public class LoginController implements Initializable {
         HoverMouse.outHover(login);
         HoverMouse.inHover(forgot);
         HoverMouse.outHover(forgot);
+        
+        HoverMouse.ClickEffect(login);
 
     }
 

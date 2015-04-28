@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,8 @@ public class ViewCharController implements Initializable {
     private Button back;
     @FXML
     private ImageView imageView;
+    @FXML
+    private Label fel;
 
     private ArrayList<String> getName = new ArrayList();
     private ArrayList getStats = new ArrayList();
@@ -83,6 +86,8 @@ public class ViewCharController implements Initializable {
     public void selectChar() {
 
         try {
+
+            resetText();
 
             getStats.removeAll(getStats);
 
@@ -135,37 +140,42 @@ public class ViewCharController implements Initializable {
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
             System.out.println("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
 
-            if (rs.next()) {
-                int heroType = rs.getInt("heroType");
-                int heroLevel = rs.getInt("heroLevel");
-                int heroGold = rs.getInt("heroGold");
-                int eqWeapon = rs.getInt("eqWeapon");
-                int eqArmour = rs.getInt("eqArmour");
-                int heroCurrentHP = rs.getInt("heroCurrentHP");
-                int heroEXP = rs.getInt("heroEXP");
-                int heroBaseHP = rs.getInt("heroBaseHP");
-                int heroBaseSpeed = rs.getInt("heroBaseSpeed");
-                int heroBaseDamage = rs.getInt("heroBaseDamage");
+            if (!stringName.equals("")) {
 
-                DataStorage.getInstance().setHeroType(heroType);
-                DataStorage.getInstance().setUserLevel(heroLevel);
-                DataStorage.getInstance().setHeroGold(heroGold);
-                DataStorage.getInstance().setEqArmour(eqArmour);
-                DataStorage.getInstance().setEqWeapon(eqWeapon);
-                DataStorage.getInstance().setHeroCurrentHP(heroCurrentHP);
-                DataStorage.getInstance().setHeroEXP(heroEXP);
-                DataStorage.getInstance().setHeroBaseHP(heroBaseHP);
-                DataStorage.getInstance().setHeroBaseSpeed(heroBaseSpeed);
-                DataStorage.getInstance().setHeroBaseDamage(heroBaseDamage);
+                if (rs.next()) {
+                    int heroType = rs.getInt("heroType");
+                    int heroLevel = rs.getInt("heroLevel");
+                    int heroGold = rs.getInt("heroGold");
+                    int eqWeapon = rs.getInt("eqWeapon");
+                    int eqArmour = rs.getInt("eqArmour");
+                    int heroCurrentHP = rs.getInt("heroCurrentHP");
+                    int heroEXP = rs.getInt("heroEXP");
+                    int heroBaseHP = rs.getInt("heroBaseHP");
+                    int heroBaseSpeed = rs.getInt("heroBaseSpeed");
+                    int heroBaseDamage = rs.getInt("heroBaseDamage");
+
+                    DataStorage.getInstance().setHeroType(heroType);
+                    DataStorage.getInstance().setUserLevel(heroLevel);
+                    DataStorage.getInstance().setHeroGold(heroGold);
+                    DataStorage.getInstance().setEqArmour(eqArmour);
+                    DataStorage.getInstance().setEqWeapon(eqWeapon);
+                    DataStorage.getInstance().setHeroCurrentHP(heroCurrentHP);
+                    DataStorage.getInstance().setHeroEXP(heroEXP);
+                    DataStorage.getInstance().setHeroBaseHP(heroBaseHP);
+                    DataStorage.getInstance().setHeroBaseSpeed(heroBaseSpeed);
+                    DataStorage.getInstance().setHeroBaseDamage(heroBaseDamage);
+                }
+                DataStorage.getInstance().printAll();
+                DBConnect.close();
+
+                SwitchScene sc = new SwitchScene();
+                sc.change(event, "City");
+
+            } else {
+                fel.setText("You must select a hero");
             }
-            DataStorage.getInstance().printAll();
-            DBConnect.close();
-
-            SwitchScene sc = new SwitchScene();
-            sc.change(event, "City");
-
         } catch (Exception ex) {
-            ex.printStackTrace();
+            fel.setText("You must select a hero");
         }
     }
 
@@ -174,9 +184,10 @@ public class ViewCharController implements Initializable {
         imageView.setImage(image);
 
     }
-    public void resetPic(){
+
+    public void resetPic() {
         imageView.setImage(null);
-        
+
     }
 
     public void remove() {
@@ -189,25 +200,29 @@ public class ViewCharController implements Initializable {
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
             int userID = DataStorage.getInstance().getUserID();
-            
+
             int whatRow = list.getSelectionModel().getSelectedIndex();
             System.out.println(whatRow);
-            
+
             ObservableList<Object> OL = FXCollections.observableArrayList(getName);
             OL.remove(whatRow);
-            
+
             getName.remove(whatRow);
             list.setItems(OL);
-            
-            DBConnect.CreateInsertStatement("delete from game.hero where heroName = '"+stringName+"' and userID = '"+userID+"';");
+
+            DBConnect.CreateInsertStatement("delete from game.hero where heroName = '" + stringName + "' and userID = '" + userID + "';", null, null);
             resetPic();
             getStats.removeAll(getStats);
             stats.setItems(null);
-            
-            
+
         } catch (Exception ex) {
-            ex.printStackTrace();
+            fel.setText("You must select a hero");
         }
+
+    }
+
+    public void resetText() {
+        fel.setText(null);
 
     }
 
