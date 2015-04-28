@@ -18,8 +18,6 @@ public class DataStorage {
     private String heroName;
     private int heroType;
     private int heroLevel;
-    private int eqWeapon;
-    private int eqArmour;
     private int heroGold;
     private int heroCurrentHP;
     private int heroEXP;
@@ -57,22 +55,6 @@ public class DataStorage {
 
     public int getUserLevel() {
         return heroLevel;
-    }
-
-    public void setEqWeapon(int eqWeapon) {
-        this.eqWeapon = eqWeapon;
-    }
-
-    public int getEqWeapon() {
-        return eqWeapon;
-    }
-
-    public void setEqArmour(int eqArmour) {
-        this.eqArmour = eqArmour;
-    }
-
-    public int getEqArmour() {
-        return eqArmour;
     }
 
     public void setHeroGold(int heroGold) {
@@ -135,8 +117,6 @@ public class DataStorage {
         System.out.println("userID = " + userID);
         System.out.println("heroType = " + heroType);
         System.out.println("heroLevel = " + heroLevel);
-        System.out.println("eqWeapon = " + eqWeapon);
-        System.out.println("eqArmour = " + eqArmour);
         System.out.println("heroGold = " + heroGold);
         System.out.println("heroCurrentHP = " + heroCurrentHP);
         System.out.println("heroEXP = " + heroEXP);

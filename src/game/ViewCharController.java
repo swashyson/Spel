@@ -146,8 +146,6 @@ public class ViewCharController implements Initializable {
                     int heroType = rs.getInt("heroType");
                     int heroLevel = rs.getInt("heroLevel");
                     int heroGold = rs.getInt("heroGold");
-                    int eqWeapon = rs.getInt("eqWeapon");
-                    int eqArmour = rs.getInt("eqArmour");
                     int heroCurrentHP = rs.getInt("heroCurrentHP");
                     int heroEXP = rs.getInt("heroEXP");
                     int heroBaseHP = rs.getInt("heroBaseHP");
@@ -157,8 +155,6 @@ public class ViewCharController implements Initializable {
                     DataStorage.getInstance().setHeroType(heroType);
                     DataStorage.getInstance().setUserLevel(heroLevel);
                     DataStorage.getInstance().setHeroGold(heroGold);
-                    DataStorage.getInstance().setEqArmour(eqArmour);
-                    DataStorage.getInstance().setEqWeapon(eqWeapon);
                     DataStorage.getInstance().setHeroCurrentHP(heroCurrentHP);
                     DataStorage.getInstance().setHeroEXP(heroEXP);
                     DataStorage.getInstance().setHeroBaseHP(heroBaseHP);

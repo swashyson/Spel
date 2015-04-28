@@ -82,10 +82,10 @@ public class CharCreationController implements Initializable {
                 fel.setText("You already have a hero by this name");
             } else {
 
-                DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2')", null, null);
-                System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2' )");
+                DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2')", null, null);
+                System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2' )");
 
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "ViewChar");
