@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class CreateAccountController implements Initializable {
 

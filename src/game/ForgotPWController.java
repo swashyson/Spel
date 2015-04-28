@@ -30,7 +30,7 @@ import javax.activation.*;
 /**
  * FXML Controller class
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class ForgotPWController implements Initializable {
 

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  
 /**
  *
- * @author Mattias,Jonathan
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class DBConnect {
  

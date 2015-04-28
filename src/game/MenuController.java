@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 /**
  * FXML Controller class
  *
- * @author Hyypes
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class MenuController implements Initializable {
 

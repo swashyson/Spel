@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
- * @author Hyypes
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class FightController implements Initializable {
 

@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
- * @author Mohini
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class InnSceneController implements Initializable {
 
