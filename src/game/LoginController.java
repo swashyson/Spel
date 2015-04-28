@@ -83,34 +83,15 @@ public class LoginController implements Initializable {
 
     }
 
-    @FXML
-    public void hoverIN(MouseEvent event) {
-
-        if (event.getSource().equals(createAccount)) {
-            HoverMouse.inHover(createAccount);
-        } else if (event.getSource().equals(login)) {
-            HoverMouse.inHover(login);
-        } else if (event.getSource().equals(forgot)) {
-            HoverMouse.inHover(forgot);
-        }
-
-    }
-
-    @FXML
-    public void hoverOUT(MouseEvent event) {
-
-        if (event.getSource().equals(createAccount)) {
-            HoverMouse.outHover(createAccount);
-        } else if (event.getSource().equals(login)) {
-            HoverMouse.outHover(login);
-        } else if (event.getSource().equals(forgot)) {
-            HoverMouse.outHover(forgot);
-        }
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        HoverMouse.inHover(createAccount);
+        HoverMouse.outHover(createAccount);
+        HoverMouse.inHover(login);
+        HoverMouse.outHover(login);
+        HoverMouse.inHover(forgot);
+        HoverMouse.outHover(forgot);
 
     }
 

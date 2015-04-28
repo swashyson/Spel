@@ -11,6 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -21,6 +24,13 @@ public class FightController implements Initializable {
 
     @FXML
     Button backToCity;
+    @FXML
+    private ImageView XP;
+
+    @FXML
+    private AnchorPane pane;
+
+    private int heroEXP;
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -29,9 +39,42 @@ public class FightController implements Initializable {
         sc.change(event, "City");
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+        heroEXP = DataStorage.getInstance().getHeroEXP();
+        XPBAR();
+
+        if (DataStorage.getInstance().getHeroType() == 1) {
+            
+            Warrior("Recourses/Warrior.png");
+
+        }
+    }
+
+    public void XPBAR() {
+
+        XP.setScaleX(heroEXP);
+        XP.setX(XP.getScaleX() / 2);
+
+    }
+
+    public void Warrior(String URL) {
+
+        ImageView warrior = new ImageView();
+        Image warriorDisplay = new Image(getClass().getResourceAsStream(URL));
+        warrior.setImage(warriorDisplay);
+        
+        warrior.setY(500);
+        warrior.setX(30);
+        
+        pane.getChildren().add(warrior);
+
+    }
+
+    public void CreateChar() {
+
+    }
+
 }

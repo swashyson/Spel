@@ -16,8 +16,11 @@ public class CityController implements Initializable {
 
     @FXML
     Button fight;
+    @FXML
     Button inn;
+    @FXML
     Button shop;
+    @FXML
     Button menu;
 
     @FXML
@@ -45,11 +48,24 @@ public class CityController implements Initializable {
     public void goToShop(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
-        sc.change(event, "ShoppingScene");
+        sc.change(event, "Shop");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        HoverMouse.inHover(fight);
+        HoverMouse.outHover(fight);
+        HoverMouse.inHover(inn);
+        HoverMouse.outHover(inn);
+        HoverMouse.inHover(shop);
+        HoverMouse.outHover(shop);
+        HoverMouse.inHover(menu);
+        HoverMouse.outHover(menu);
+
+    }
+
+    public void warrior() {
 
     }
 

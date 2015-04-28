@@ -15,7 +15,7 @@
             <Image url="@Recourses/BackGround.png" />
          </image>
       </ImageView>
-      <Button fx:id="create" layoutX="57.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="502.0" prefWidth="301.0" text="Create Character">
+      <Button fx:id="create" layoutX="57.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="502.0" prefWidth="301.0" text="Create Character">
          <effect>
             <ImageInput>
                <source>
@@ -23,7 +23,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <Button fx:id="choose" layoutX="443.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="502.0" prefWidth="301.0" text="Choose Character">
+      <Button fx:id="choose" layoutX="443.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="502.0" prefWidth="301.0" text="Choose Character">
          <effect>
             <ImageInput>
                <source>
@@ -31,7 +31,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <Button fx:id="back" layoutX="345.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="33.0" prefWidth="110.0" text="Back">
+      <Button fx:id="back" layoutX="345.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="33.0" prefWidth="110.0" text="Back">
          <effect>
             <ImageInput>
                <source>

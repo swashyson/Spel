@@ -99,32 +99,18 @@ public class ForgotPWController implements Initializable {
 
     @FXML
     public void back(ActionEvent event) {
-        
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 
     }
-        public void hoverIN(MouseEvent event) {
-
-        if (event.getSource().equals(getItBack)) {
-            HoverMouse.inHover(getItBack);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.inHover(back);
-        }
-    }
-
-    public void hoverOUT(MouseEvent event) {
-
-        if (event.getSource().equals(getItBack)) {
-            HoverMouse.outHover(getItBack);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.outHover(back);
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        HoverMouse.inHover(getItBack);
+        HoverMouse.outHover(getItBack);
+        HoverMouse.inHover(back);
+        HoverMouse.outHover(back);
     }
 
 }

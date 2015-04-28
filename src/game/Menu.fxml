@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.MenuController">
    <children>
-      <Button fx:id="backToCity" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#goToCity" text="Button" />
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/Inn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backToCity" layoutX="370.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToCity" text="Option1" />
    </children>
 </AnchorPane>

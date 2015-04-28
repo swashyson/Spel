@@ -12,12 +12,40 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Recourses/LoginCity.png" />
+            <Image url="@Recourses/City.png" />
          </image>
       </ImageView>
-      <Button fx:id="inn" layoutX="252.0" layoutY="274.0" mnemonicParsing="false" onAction="#goToInn" prefHeight="53.0" prefWidth="170.0" text="Inn" />
-      <Button fx:id="menu" layoutX="523.0" layoutY="452.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="128.0" prefWidth="170.0" text="Menu" />
-      <Button fx:id="shop" layoutX="671.0" layoutY="246.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="92.0" prefWidth="129.0" text="Shop" />
-      <Button fx:id="fight" layoutY="395.0" mnemonicParsing="false" onAction="#goToFight" prefHeight="205.0" prefWidth="199.0" text="Fight" />
+      <Button fx:id="inn" layoutX="252.0" layoutY="274.0" mnemonicParsing="false" onAction="#goToInn" prefHeight="53.0" prefWidth="170.0" text="Inn">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/House1.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="menu" layoutX="523.0" layoutY="452.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="128.0" prefWidth="170.0" text="Menu">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/House2.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="shop" layoutX="671.0" layoutY="246.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="92.0" prefWidth="129.0" text="Shop">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/House3.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="fight" layoutY="292.0" mnemonicParsing="false" onAction="#goToFight" prefHeight="304.0" prefWidth="205.0" text="Fight">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Fight.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
    </children>
 </AnchorPane>

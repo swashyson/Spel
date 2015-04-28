@@ -47,8 +47,8 @@ public class DataStorage {
         return heroName;
     }
 
-    public String getUserType() {
-        return heroName;
+    public int getUserType() {
+        return heroType;
     }
 
     public void setUserLevel(int heroLevel) {

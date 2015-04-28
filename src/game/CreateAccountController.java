@@ -50,11 +50,11 @@ public class CreateAccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
+        HoverMouse.inHover(create);
+        HoverMouse.outHover(create);
+        HoverMouse.inHover(back);
+        HoverMouse.outHover(back);
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     @FXML
@@ -108,24 +108,6 @@ public class CreateAccountController implements Initializable {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
-    }
-
-    public void hoverIN(MouseEvent event) {
-
-        if (event.getSource().equals(create)) {
-            HoverMouse.inHover(create);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.inHover(back);
-        }
-    }
-
-    public void hoverOUT(MouseEvent event) {
-
-        if (event.getSource().equals(create)) {
-            HoverMouse.outHover(create);
-        } else if (event.getSource().equals(back)) {
-            HoverMouse.outHover(back);
-        }
     }
 
 }

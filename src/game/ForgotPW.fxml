@@ -21,7 +21,7 @@
          </image>
       </ImageView>
       <TextField fx:id="mail" layoutX="306.0" layoutY="112.0" prefHeight="25.0" prefWidth="190.0" promptText="Enter E-Mail" />
-      <Button fx:id="getItBack" layoutX="346.0" layoutY="173.0" mnemonicParsing="false" onAction="#getItBack" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="31.0" prefWidth="110.0" text="Get it back">
+      <Button fx:id="getItBack" layoutX="346.0" layoutY="173.0" mnemonicParsing="false" onAction="#getItBack" prefHeight="31.0" prefWidth="110.0" text="Get it back">
          <effect>
             <ImageInput>
                <source>
@@ -29,7 +29,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <Button fx:id="back" layoutX="346.0" layoutY="489.0" mnemonicParsing="false" onAction="#back" onMouseEntered="#hoverIN" onMouseExited="#hoverOUT" prefHeight="31.0" prefWidth="110.0" text="Back">
+      <Button fx:id="back" layoutX="346.0" layoutY="489.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="110.0" text="Back">
          <effect>
             <ImageInput>
                <source>
