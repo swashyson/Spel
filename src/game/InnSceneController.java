@@ -23,47 +23,52 @@ public class InnSceneController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @FXML
     private Button restoreHitpoint;
-    
+
     @FXML
     private Button restoreHealth;
-    
+
     @FXML
     private Button back;
-    
+
     @FXML
     private Label health;
 
-//    kunna restora hitpoints?
-//    @FXML
-//    private Label hitpoint;
-    
     private int currentHealth;
     private int maxHealth;
-    
-    
-//    kunna restora hitpoints?    
-//    private int currentHitpoint;
-//    private int maxHitpoint;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-    
-    public void back(ActionEvent event){
+        currentHealth = DataStorage.getInstance().getHeroCurrentHP();
+        maxHealth = DataStorage.getInstance().getHeroBaseHP();
+        // kan bugga något
+        // behöver nog någon sorts timer för att uppdatera kontinuerligt
+        // tills max health är uppnådd
+        if (currentHealth < maxHealth) {
+            currentHealth++;
+            health.setText(currentHealth + " / " + maxHealth);
+        } else {
+            health.setText(currentHealth + " / " + maxHealth);
+        }
+    }
+
+    public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
-    
-//    kunna restora hitpoints?    
-//    public void restoreHitpoint(ActionEvent event){
-//        
-//    }
-    
-    public void restoreHealthpoints(ActionEvent event){
-        
+
+    public void restoreHealthpoints(ActionEvent event) {
+        // dessa rader kan bugga, iom att vi inte har
+        // provat att använda mindre currentHP jämfört
+        // med maxHP
+        if (currentHealth < maxHealth) {
+            currentHealth = maxHealth;
+            health.setText(currentHealth + " / " + maxHealth);
+            System.out.println("Current health restored to maximum.");
+        }
+        else if(currentHealth == maxHealth){
+            System.out.println("Current health already restored to maximum");
+        }
     }
 }
