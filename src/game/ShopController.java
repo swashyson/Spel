@@ -40,7 +40,7 @@ public class ShopController implements Initializable {
     private Button armor1 = new Button();
     private Button armor2 = new Button();
     private Button armor3 = new Button();
-    
+
     Button[] array = new Button[6];
 
     @FXML
@@ -53,34 +53,55 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         array[0] = weapon1;
         array[1] = weapon2;
         array[2] = weapon3;
         array[3] = armor1;
         array[4] = armor2;
         array[5] = armor3;
-        
-        for(int i = 0; i < array.length; i++){
-        
+
+        for (int i = 0; i < array.length; i++) {
+
             HoverMouse.inHoverSize(array[i]);
             HoverMouse.outHoverSize(array[i]);
-            
-            
+
         }
-        
 
         if (DataStorage.getInstance().getUserType() == 1) {
-            Warrior();
+            warrior();
 
         } else if (DataStorage.getInstance().getUserType() == 2) {
+            bowman();
 
         } else if (DataStorage.getInstance().getUserType() == 3) {
-
+            wizard();
         }
     }
 
-    public void Warrior() {
+    public void warrior() {
+
+        createWeapon(weapon1, 50, 100, "Recourses/Sword1.png");
+        createWeapon(weapon2, 150, 100, "Recourses/Sword2.png");
+        createWeapon(weapon3, 250, 100, "Recourses/Sword3.png");
+        createWeapon(armor1, 400, 150, "Recourses/Armor1.png");
+        createWeapon(armor2, 500, 150, "Recourses/Armor2.png");
+        createWeapon(armor3, 600, 150, "Recourses/Armor3.png");
+
+    }
+
+    public void bowman() {
+
+        createWeapon(weapon1, 50, 100, "Recourses/Sword1.png");
+        createWeapon(weapon2, 150, 100, "Recourses/Sword2.png");
+        createWeapon(weapon3, 250, 100, "Recourses/Sword3.png");
+        createWeapon(armor1, 400, 150, "Recourses/Armor1.png");
+        createWeapon(armor2, 500, 150, "Recourses/Armor2.png");
+        createWeapon(armor3, 600, 150, "Recourses/Armor3.png");
+
+    }
+
+    public void wizard() {
 
         createWeapon(weapon1, 50, 100, "Recourses/Sword1.png");
         createWeapon(weapon2, 150, 100, "Recourses/Sword2.png");

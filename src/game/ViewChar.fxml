@@ -35,5 +35,6 @@
          </effect>
       </Button>
       <ImageView fx:id="imageView" fitHeight="339.0" fitWidth="232.0" layoutX="297.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="remove" layoutX="128.0" layoutY="318.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
    </children>
 </AnchorPane>

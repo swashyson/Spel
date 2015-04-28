@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -171,6 +172,42 @@ public class ViewCharController implements Initializable {
     public void changePic(String type) {
         javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("Recourses/" + type + ".png").toExternalForm());
         imageView.setImage(image);
+
+    }
+    public void resetPic(){
+        imageView.setImage(null);
+        
+    }
+
+    public void remove() {
+
+        try {
+
+            DBConnect.connect();
+            Connection c = DBConnect.getConnection();
+
+            Object name = list.getSelectionModel().getSelectedItem();
+            String stringName = (String) name;
+            int userID = DataStorage.getInstance().getUserID();
+            
+            int whatRow = list.getSelectionModel().getSelectedIndex();
+            System.out.println(whatRow);
+            
+            ObservableList<Object> OL = FXCollections.observableArrayList(getName);
+            OL.remove(whatRow);
+            
+            getName.remove(whatRow);
+            list.setItems(OL);
+            
+            DBConnect.CreateInsertStatement("delete from game.hero where heroName = '"+stringName+"' and userID = '"+userID+"';");
+            resetPic();
+            getStats.removeAll(getStats);
+            stats.setItems(null);
+            
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 

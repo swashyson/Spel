@@ -21,12 +21,31 @@ public class MenuController implements Initializable {
 
     @FXML
     Button backToCity;
+    Button logout;
+    Button changeCharacter;
+    
 
     @FXML
     public void goToCity(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
+
+    }
+    
+        @FXML
+    public void logout(ActionEvent event) {
+
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "Login");
+
+    }
+    
+        @FXML
+    public void goToCharacter(ActionEvent event) {
+
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "ViewChar");
 
     }
 
