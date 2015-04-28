@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class SwitchScene {
 

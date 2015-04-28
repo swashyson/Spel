@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 /**
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class LoginController implements Initializable {
 

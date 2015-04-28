@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class CreateAccountController implements Initializable {
 

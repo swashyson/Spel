@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  
 /**
  *
- * @author Mattias,Jonathan
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class DBConnect {
  
