@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.InnSceneController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.InnSceneController">
    <children>
-      <Label layoutX="120.0" layoutY="166.0" text="Current Health: " />
-      <Label fx:id="health" layoutX="236.0" layoutY="166.0" text="0 / 0" />
-      <Button fx:id="back" layoutX="274.0" layoutY="279.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <Button fx:id="restoreHealth" layoutX="315.0" layoutY="162.0" mnemonicParsing="false" onAction="#restoreHealthpoints" text="Restore Health Now" />
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/Rest.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="338.0" layoutY="158.0" text="Current Health: " textFill="WHITE" />
+      <Label fx:id="health" layoutX="437.0" layoutY="158.0" text="0 / 0" textFill="WHITE" />
+      <Button fx:id="back" layoutX="380.0" layoutY="549.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="restoreHealth" layoutX="339.0" layoutY="102.0" mnemonicParsing="false" onAction="#restoreHealthpoints" text="Restore Health Now" />
    </children>
 </AnchorPane>
