@@ -14,6 +14,8 @@
             <Image url="@Recourses/Inn.png" />
          </image>
       </ImageView>
-      <Button fx:id="backToCity" layoutX="370.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToCity" text="Option1" />
+      <Button fx:id="backToCity" layoutX="382.0" layoutY="172.0" mnemonicParsing="false" onAction="#goToCity" text="City" />
+      <Button fx:id="changeCharacter" layoutX="359.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToCharacter" text="Change char" />
+      <Button fx:id="logout" layoutX="374.0" layoutY="383.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
    </children>
 </AnchorPane>

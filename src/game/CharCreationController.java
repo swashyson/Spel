@@ -64,7 +64,7 @@ public class CharCreationController implements Initializable {
         }
     }
 
-    public void Create() {
+    public void Create(ActionEvent event) {
         try {
             DBConnect.connect();
             Connection c = DBConnect.getConnection();
@@ -75,11 +75,13 @@ public class CharCreationController implements Initializable {
                     + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2')");
             System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
                     + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2' )");
+
+            SwitchScene sc = new SwitchScene();
+            sc.change(event, "ViewChar");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,7 +91,7 @@ public class CharCreationController implements Initializable {
         HoverMouse.outHover(create);
         HoverMouse.inHover(back);
         HoverMouse.outHover(back);
-        
+
     }
 
 }
