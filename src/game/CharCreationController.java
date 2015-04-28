@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -35,6 +36,8 @@ public class CharCreationController implements Initializable {
     private Button create;
     @FXML
     private Button back;
+    @FXML
+    private Label fel;
 
     public int type;
 
@@ -65,19 +68,28 @@ public class CharCreationController implements Initializable {
     }
 
     public void Create(ActionEvent event) {
+
         try {
             DBConnect.connect();
             Connection c = DBConnect.getConnection();
 
             int userID = DataStorage.getInstance().getUserID();
 
-            DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                    + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2')");
-            System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, eqWeapon, eqArmour, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                    + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', null, null, '0', '10', '0', '10', '5', '2' )");
+            ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
 
-            SwitchScene sc = new SwitchScene();
-            sc.change(event, "ViewChar");
+            if (rs.next()) {
+
+                fel.setText("You already have a hero by this name");
+            } else {
+
+                DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2')", null, null);
+                System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2' )");
+
+                SwitchScene sc = new SwitchScene();
+                sc.change(event, "ViewChar");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -92,6 +104,9 @@ public class CharCreationController implements Initializable {
         HoverMouse.inHover(back);
         HoverMouse.outHover(back);
 
+    }
+    public void clickOnTextField(){
+        fel.setText(null);
     }
 
 }

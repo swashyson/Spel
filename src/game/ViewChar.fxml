@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -36,5 +37,10 @@
       </Button>
       <ImageView fx:id="imageView" fitHeight="339.0" fitWidth="232.0" layoutX="297.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="remove" layoutX="128.0" layoutY="318.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
+      <Label fx:id="fel" contentDisplay="CENTER" layoutX="202.0" layoutY="334.0" prefHeight="89.0" prefWidth="457.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
