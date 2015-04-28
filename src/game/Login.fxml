@@ -59,5 +59,9 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor></TextField>
       <TextField fx:id="password" layoutX="305.0" layoutY="423.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
+      <Label fx:id="fel" alignment="CENTER" layoutX="245.0" layoutY="330.0" prefHeight="45.0" prefWidth="282.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
     </children>
 </AnchorPane>
