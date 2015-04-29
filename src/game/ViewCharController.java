@@ -64,7 +64,6 @@ public class ViewCharController implements Initializable {
             Connection c = DBConnect.getConnection();
 
             
-            //int userID = DataStorage.getInstance().getUserID();
 
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
             System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
@@ -94,7 +93,6 @@ public class ViewCharController implements Initializable {
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            //int userID = DataStorage.getInstance().getUserID();
 
             DBConnect.connect();
             Connection c = DBConnect.getConnection();
@@ -144,6 +142,7 @@ public class ViewCharController implements Initializable {
             if (!stringName.equals("")) {
 
                 if (rs.next()) {
+                    int heroID = rs.getInt("idHero");
                     int heroType = rs.getInt("heroType");
                     int heroLevel = rs.getInt("heroLevel");
                     int heroGold = rs.getInt("heroGold");
@@ -162,7 +161,7 @@ public class ViewCharController implements Initializable {
                    // DataStorage.getInstance().setHeroBaseSpeed(heroBaseSpeed);
                    // DataStorage.getInstance().setHeroBaseDamage(heroBaseDamage);
                     
-                    Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP);
+                    Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP, heroID);
                     
                     
                     DataStorage.getInstance().setHero(hero);

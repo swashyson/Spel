@@ -5,7 +5,6 @@
  */
 package game;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -37,6 +36,7 @@ public class DataStorage {
     public void printAll(){
     
         System.out.println("UserID = " + hero.getUserID());
+        System.out.println("HeroID = " + hero.getHeroID());
         System.out.println("HeroName = " + hero.getName());
         System.out.println("HeroType = " + hero.getHeroType());
         System.out.println("HeroSpeed = " + hero.getSpeed());

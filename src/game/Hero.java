@@ -18,8 +18,9 @@ public class Hero extends Creature {
     private int heroBaseDamage;
     private int heroType;
     private int heroCurrentHP;
+    private final int heroID;
 
-    public Hero(String heroName, int heroBaseHp, int heroSpeed, int heroGold, int heroBaseDamage, int heroLevel, int heroEXP, int heroType, int heroCurrentHP) {
+    public Hero(String heroName, int heroBaseHp, int heroSpeed, int heroGold, int heroBaseDamage, int heroLevel, int heroEXP, int heroType, int heroCurrentHP, int heroID) {
 
         this.name = heroName;
         this.hp = heroBaseHp;
@@ -31,7 +32,12 @@ public class Hero extends Creature {
         this.heroBaseDamage = heroBaseDamage;
         this.heroType = heroType;
         this.heroCurrentHP = heroCurrentHP;
+        this.heroID = heroID;
 
+    }
+
+    public int getHeroID() {
+        return heroID;
     }
 
     public void setGold(int gold) {
@@ -101,10 +107,5 @@ public class Hero extends Creature {
         return heroBaseDamage;
     }
 
-    public void printAll() {
-
-        System.out.println("UserID = " + getUserID());
-
-    }
 
 }

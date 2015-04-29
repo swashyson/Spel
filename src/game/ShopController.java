@@ -55,6 +55,7 @@ public class ShopController implements Initializable {
         array[3] = armor1;
         array[4] = armor2;
         array[5] = armor3;
+        
 
         for (Button array1 : array) {
             HoverMouse.inHoverSize(array1);
