@@ -43,11 +43,11 @@ public class FightController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        heroEXP = DataStorage.getInstance().getHeroEXP();
+        heroEXP = DataStorage.getInstance().getHero().getEXP();
         XPBAR();
 
-        if (DataStorage.getInstance().getHeroType() == 1) {
-            
+        if (DataStorage.getInstance().getHero().getHeroType() == 1) {
+
             Warrior("Recourses/Warrior.png");
 
         }
@@ -65,10 +65,10 @@ public class FightController implements Initializable {
         ImageView warrior = new ImageView();
         Image warriorDisplay = new Image(getClass().getResourceAsStream(URL));
         warrior.setImage(warriorDisplay);
-        
+
         warrior.setY(500);
         warrior.setX(30);
-        
+
         pane.getChildren().add(warrior);
 
     }

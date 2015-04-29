@@ -4,11 +4,7 @@
  * and open the template in the editor.
  */
 package game;
-
-import java.awt.Font;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -47,7 +42,6 @@ public class LoginController implements Initializable {
 
         try {
             DBConnect.connect();
-            Connection c = DBConnect.getConnection();
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
             //System.out.println("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
 
@@ -57,7 +51,10 @@ public class LoginController implements Initializable {
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
-                DataStorage.getInstance().setUserID(ID);
+                
+                Hero.userID = ID;
+                
+                //DataStorage.getInstance().setUserID(ID);
 
                 DBConnect.close();
             } else {

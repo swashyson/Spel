@@ -18,9 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -44,6 +42,8 @@ public class ViewCharController implements Initializable {
 
     private ArrayList<String> getName = new ArrayList();
     private ArrayList getStats = new ArrayList();
+    
+    int userID = Hero.userID;
 
     @FXML
     public void back(ActionEvent event) {
@@ -63,7 +63,8 @@ public class ViewCharController implements Initializable {
             DBConnect.connect();
             Connection c = DBConnect.getConnection();
 
-            int userID = DataStorage.getInstance().getUserID();
+            
+            //int userID = DataStorage.getInstance().getUserID();
 
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
             System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
@@ -93,7 +94,7 @@ public class ViewCharController implements Initializable {
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            int userID = DataStorage.getInstance().getUserID();
+            //int userID = DataStorage.getInstance().getUserID();
 
             DBConnect.connect();
             Connection c = DBConnect.getConnection();
@@ -136,7 +137,7 @@ public class ViewCharController implements Initializable {
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            int userID = DataStorage.getInstance().getUserID();
+            //int userID = DataStorage.getInstance().getUserID();
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
             System.out.println("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
 
@@ -152,16 +153,20 @@ public class ViewCharController implements Initializable {
                     int heroBaseSpeed = rs.getInt("heroBaseSpeed");
                     int heroBaseDamage = rs.getInt("heroBaseDamage");
 
-                    DataStorage.getInstance().setHeroType(heroType);
-                    DataStorage.getInstance().setUserLevel(heroLevel);
-                    DataStorage.getInstance().setHeroGold(heroGold);
-                    DataStorage.getInstance().setHeroCurrentHP(heroCurrentHP);
-                    DataStorage.getInstance().setHeroEXP(heroEXP);
-                    DataStorage.getInstance().setHeroBaseHP(heroBaseHP);
-                    DataStorage.getInstance().setHeroBaseSpeed(heroBaseSpeed);
-                    DataStorage.getInstance().setHeroBaseDamage(heroBaseDamage);
+                   // DataStorage.getInstance().setHeroType(heroType);
+                   // DataStorage.getInstance().setUserLevel(heroLevel);
+                   // DataStorage.getInstance().setHeroGold(heroGold);
+                   // DataStorage.getInstance().setHeroCurrentHP(heroCurrentHP);
+                   // DataStorage.getInstance().setHeroEXP(heroEXP);
+                   // DataStorage.getInstance().setHeroBaseHP(heroBaseHP);
+                   // DataStorage.getInstance().setHeroBaseSpeed(heroBaseSpeed);
+                   // DataStorage.getInstance().setHeroBaseDamage(heroBaseDamage);
+                    
+                    Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP);
+                    
+                    
+                    DataStorage.getInstance().setHero(hero);
                 }
-                DataStorage.getInstance().printAll();
                 DBConnect.close();
 
                 SwitchScene sc = new SwitchScene();
@@ -195,7 +200,7 @@ public class ViewCharController implements Initializable {
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            int userID = DataStorage.getInstance().getUserID();
+            //int userID = DataStorage.getInstance().getUserID();
 
             int whatRow = list.getSelectionModel().getSelectedIndex();
             System.out.println(whatRow);

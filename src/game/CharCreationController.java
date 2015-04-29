@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -71,9 +70,10 @@ public class CharCreationController implements Initializable {
 
         try {
             DBConnect.connect();
-            Connection c = DBConnect.getConnection();
 
-            int userID = DataStorage.getInstance().getUserID();
+            int userID = Hero.userID;
+            //int userID = DataStorage.getInstance().getUserID();
+            
 
             ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
 
@@ -97,7 +97,7 @@ public class CharCreationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(DataStorage.getInstance().getUserID());
+        //System.out.println(DataStorage.getInstance().getUserID());
 
         HoverMouse.inHover(create);
         HoverMouse.outHover(create);

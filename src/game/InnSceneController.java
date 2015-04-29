@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+//import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
@@ -23,14 +23,14 @@ public class InnSceneController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML
-    private Button restoreHitpoint;
+    //@FXML
+    //private Button restoreHitpoint;
 
-    @FXML
-    private Button restoreHealth;
+    //@FXML
+    //private Button restoreHealth;
 
-    @FXML
-    private Button back;
+    //@FXML
+    //private Button back;
 
     @FXML
     private Label health;
@@ -40,9 +40,9 @@ public class InnSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentHealth = DataStorage.getInstance().getHeroCurrentHP();
-        maxHealth = DataStorage.getInstance().getHeroBaseHP();
-        // kan bugga något
+        currentHealth = DataStorage.getInstance().getHero().getHeroCurrentHP();
+        maxHealth = DataStorage.getInstance().getHero().getHp();
+         //kan bugga något
         // behöver nog någon sorts timer för att uppdatera kontinuerligt
         // tills max health är uppnådd
         if (currentHealth < maxHealth) {

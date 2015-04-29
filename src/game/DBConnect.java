@@ -49,10 +49,6 @@ public class DBConnect {
 
     }
 
-    public static String getURL() {
-
-        return URL;
-    }
 
     public static Connection getConnection() {
         return c;

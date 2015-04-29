@@ -22,6 +22,7 @@ public class CityController implements Initializable {
     Button shop;
     @FXML
     Button menu;
+    
 
     @FXML
     public void goToMenu(ActionEvent event) {
@@ -62,7 +63,9 @@ public class CityController implements Initializable {
         HoverMouse.outHover(shop);
         HoverMouse.inHover(menu);
         HoverMouse.outHover(menu);
-
+        
+        
+        DataStorage.getInstance().printAll();
     }
 
     public void warrior() {

@@ -8,18 +8,13 @@ package game;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,12 +29,12 @@ public class ShopController implements Initializable {
     @FXML
     private AnchorPane pane;
 
-    private Button weapon1 = new Button();
-    private Button weapon2 = new Button();
-    private Button weapon3 = new Button();
-    private Button armor1 = new Button();
-    private Button armor2 = new Button();
-    private Button armor3 = new Button();
+    private final Button weapon1 = new Button();
+    private final Button weapon2 = new Button();
+    private final Button weapon3 = new Button();
+    private final Button armor1 = new Button();
+    private final Button armor2 = new Button();
+    private final Button armor3 = new Button();
 
     Button[] array = new Button[6];
 
@@ -61,20 +56,18 @@ public class ShopController implements Initializable {
         array[4] = armor2;
         array[5] = armor3;
 
-        for (int i = 0; i < array.length; i++) {
-
-            HoverMouse.inHoverSize(array[i]);
-            HoverMouse.outHoverSize(array[i]);
-
+        for (Button array1 : array) {
+            HoverMouse.inHoverSize(array1);
+            HoverMouse.outHoverSize(array1);
         }
 
-        if (DataStorage.getInstance().getUserType() == 1) {
+        if (DataStorage.getInstance().getHero().getHeroType() == 1) {
             warrior();
 
-        } else if (DataStorage.getInstance().getUserType() == 2) {
+        } else if (DataStorage.getInstance().getHero().getHeroType() == 2) {
             bowman();
 
-        } else if (DataStorage.getInstance().getUserType() == 3) {
+        } else if (DataStorage.getInstance().getHero().getHeroType() == 3) {
             wizard();
         }
     }

@@ -6,9 +6,6 @@
 package game;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,7 +37,6 @@ public class CreateAccountController implements Initializable {
     private String typeName;
     private String typePassword;
     private String typeMail;
-    private int surrogateKey = 5;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,7 +66,6 @@ public class CreateAccountController implements Initializable {
     public void create(ActionEvent event)  {
 
         DBConnect.connect();
-        Connection c = DBConnect.getConnection();
         typeName = name.getText();
         typePassword = password.getText();
         typeMail = mail.getText();
