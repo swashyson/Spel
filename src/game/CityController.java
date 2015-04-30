@@ -1,6 +1,7 @@
 package game;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +23,10 @@ public class CityController implements Initializable {
     Button shop;
     @FXML
     Button menu;
-    
+
+    private Weapon weapon;
+    private boolean hasWeapon = false;
+    private int weaponID;
 
     @FXML
     public void goToMenu(ActionEvent event) {
@@ -63,12 +67,50 @@ public class CityController implements Initializable {
         HoverMouse.outHover(shop);
         HoverMouse.inHover(menu);
         HoverMouse.outHover(menu);
-        
-        
-        DataStorage.getInstance().printAll();
+
+        DataStorage.getInstance().printHero();
+
+        checkWeapon();
     }
 
     public void warrior() {
+
+    }
+
+    public void checkWeapon() {
+
+        DBConnect.connect();
+
+        int heroID = DataStorage.getInstance().getHero().getHeroID();
+
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_weapon where hero_idHero = '" + heroID + "';");
+        try {
+            if (rs.next()) {
+                weaponID = rs.getInt("weapon_weaponID");
+                hasWeapon = true;
+                System.err.println(weaponID);
+            }
+            ResultSet check = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '"+ weaponID +"';");
+            System.out.println("select * from game.weapon where weaponID = '"+ weaponID +"';");
+            if (check.next()) {
+
+                String weaponName = check.getString("weaponName");
+                int weaponMinDamage = check.getInt("weaponMinDamage");
+                int weaponMaxDamage = check.getInt("weaponMaxDamage");
+                int weaponSpeed = check.getInt("weaponSpeed");
+                int weaponlevel = check.getInt("weaponLevel");
+                int weaponType = check.getInt("weaponType");
+
+                weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
+                DataStorage.getInstance().setWeapon(weapon);
+
+                System.out.println(weapon);
+
+                System.out.println(weapon);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 
