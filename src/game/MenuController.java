@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
- *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class MenuController implements Initializable {
@@ -23,7 +22,6 @@ public class MenuController implements Initializable {
     Button backToCity;
     Button logout;
     Button changeCharacter;
-    
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -32,26 +30,28 @@ public class MenuController implements Initializable {
         sc.change(event, "City");
 
     }
-    
-        @FXML
+
+    @FXML
     public void logout(ActionEvent event) {
 
+        DBConnect.saveToDB();
         SwitchScene sc = new SwitchScene();
-        sc.change(event, "Login");
+        sc.change (event, "Login");
 
     }
-    
-        @FXML
-    public void goToCharacter(ActionEvent event) {
 
+    @FXML
+        public void goToCharacter(ActionEvent event) {
+        DBConnect.saveToDB();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ViewChar");
 
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+        public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
     }
 
 }

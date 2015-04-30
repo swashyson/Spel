@@ -15,6 +15,7 @@ public class Hero extends Creature {
     private int heroLevel;
     private int heroGold;
     private int heroEXP;
+    private int heroSpeed;
     private int heroBaseDamage;
     private int heroType;
     private int heroCurrentHP;
@@ -27,13 +28,20 @@ public class Hero extends Creature {
         this.speed = heroSpeed;
         this.heroGold = heroGold;
         this.heroLevel = heroLevel;
-        this.speed = heroLevel;
         this.heroEXP = heroEXP;
         this.heroBaseDamage = heroBaseDamage;
         this.heroType = heroType;
         this.heroCurrentHP = heroCurrentHP;
         this.heroID = heroID;
 
+    }
+
+    public int getHeroSpeed() {
+        return heroSpeed;
+    }
+
+    public void setHeroSpeed(int speed) {
+        this.speed = speed;
     }
 
     public int getHeroID() {
@@ -106,6 +114,5 @@ public class Hero extends Creature {
     public int getBaseDamage() {
         return heroBaseDamage;
     }
-
 
 }
