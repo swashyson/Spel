@@ -69,6 +69,7 @@ public class DBConnect {
            
             label.setText(Medelande);
             System.out.println("Fel");
+            ex.printStackTrace();
         }
     }
 
