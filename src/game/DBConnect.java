@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
- 
+
 /**
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
@@ -49,7 +49,6 @@ public class DBConnect {
 
     }
 
-
     public static Connection getConnection() {
         return c;
     }
@@ -64,24 +63,36 @@ public class DBConnect {
         }
         return rs;
     }
+
     public static void CreateInsertStatement(String commando, Label label, String Medelande) {
         try {
             Statement st = c.createStatement();
             st.execute(commando);
         } catch (Exception ex) {
-           
+
             label.setText(Medelande);
             System.out.println("Fel");
         }
     }
 
-    public static void createAlterStatement(String commando) {
+
+    public static void saveToDB() {
+        connect();
         try {
             Statement st = c.createStatement();
-            st.execute(commando);
+            st.execute("UPDATE game.hero "
+                    + "SET heroLevel = '" + DataStorage.getInstance().getHero().getLevel() + "', "
+                    + "heroGold ='" + DataStorage.getInstance().getHero().getGold() + "',  "
+                    + "heroEXP ='" + DataStorage.getInstance().getHero().getEXP() + "',    "
+                    + "heroCurrentHP ='" + DataStorage.getInstance().getHero().getHeroCurrentHP() + "',  "
+                    + "heroBaseSpeed ='" + DataStorage.getInstance().getHero().getHeroSpeed() + "',  "
+                    + "heroBaseDamage ='" + DataStorage.getInstance().getHero().getBaseDamage() + "' "
+                    + "WHERE idHERO = '" + DataStorage.getInstance().getHero().getUserID() + "'");
         } catch (Exception ex) {
             ex.printStackTrace();
 
         }
+        close();
+
     }
 }
