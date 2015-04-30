@@ -34,6 +34,9 @@ public class InnSceneController implements Initializable {
 
     @FXML
     private Label health;
+    
+    @FXML
+    private Label fel;
 
     private int currentHealth;
     private int maxHealth;
@@ -48,8 +51,12 @@ public class InnSceneController implements Initializable {
         if (currentHealth < maxHealth) {
             currentHealth++;
             health.setText(currentHealth + " / " + maxHealth);
-        } else {
+            System.out.println("Current health: " + currentHealth + " / " + maxHealth);
+        } else if(currentHealth == maxHealth){
+            currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
+            System.out.println("Current health restored to maximum");
+//            fel.setText("Your health is full.");
         }
     }
 
@@ -69,6 +76,7 @@ public class InnSceneController implements Initializable {
         }
         else if(currentHealth == maxHealth){
             System.out.println("Current health already restored to maximum");
+            fel.setText("Your health is full.");
         }
     }
 }
