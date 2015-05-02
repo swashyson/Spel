@@ -72,6 +72,15 @@ public class DBConnect {
             ex.printStackTrace();
         }
     }
+        public static void CreateAlterStatement(String commando) {
+        try {
+            Statement st = c.createStatement();
+            st.execute(commando);
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+    }
 
 
     public static void saveToDB() {
