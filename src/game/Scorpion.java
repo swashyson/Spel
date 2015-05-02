@@ -11,18 +11,29 @@ package game;
  */
 public class Scorpion extends Enemy{
 
-    public Scorpion(Hero hero) {
-        super(hero);
-    }
-
     @Override
-    public void specialAttack1() {
+    protected void specialAttack1() {
         
     }
 
     @Override
-    public void specialAttack2() {
+    protected void specialAttack2() {
         
+    }
+
+    @Override
+    protected Enemy attack(Hero hero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected int getMaxDmg() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected int getMinDmg() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -14,19 +14,13 @@ public abstract class Enemy extends Creature{
     protected int maxDamage;
     protected int minDamage;
     
-    protected Enemy(Hero hero){
-        
-    }
+    protected abstract Enemy attack(Hero hero);
     
-    protected int getMaxDmg(){
-        return maxDamage;
-    }
+    protected abstract int getMaxDmg();
     
-    protected int getMinDmg(){
-        return minDamage;
-    }
+    protected abstract int getMinDmg();
     
-    public abstract void specialAttack1();
-    public abstract void specialAttack2();
+    protected abstract void specialAttack1();
+    protected abstract void specialAttack2();
     
 }
