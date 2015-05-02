@@ -40,10 +40,9 @@ public class ViewCharController implements Initializable {
     @FXML
     private Label fel;
 
-    private ArrayList<String> getName = new ArrayList();
-    private ArrayList getStats = new ArrayList();
-    
-    int userID = Hero.userID;
+    private final ArrayList<String> getName = new ArrayList();
+    private final ArrayList getStats = new ArrayList();
+    private final int userID = Hero.userID;
 
     @FXML
     public void back(ActionEvent event) {
@@ -74,6 +73,8 @@ public class ViewCharController implements Initializable {
             }
             ObservableList<String> OL = FXCollections.observableArrayList(getName);
             list.setItems(OL);
+            
+            System.out.println("Antalet Gubbar = " + getName.size());
 
             DBConnect.close();
 
@@ -88,6 +89,8 @@ public class ViewCharController implements Initializable {
         try {
 
             resetText();
+            
+            System.out.println("Rad ID = " + list.getSelectionModel().getSelectedIndex());
 
             getStats.removeAll(getStats);
 
@@ -151,15 +154,6 @@ public class ViewCharController implements Initializable {
                     int heroBaseHP = rs.getInt("heroBaseHP");
                     int heroBaseSpeed = rs.getInt("heroBaseSpeed");
                     int heroBaseDamage = rs.getInt("heroBaseDamage");
-
-                   // DataStorage.getInstance().setHeroType(heroType);
-                   // DataStorage.getInstance().setUserLevel(heroLevel);
-                   // DataStorage.getInstance().setHeroGold(heroGold);
-                   // DataStorage.getInstance().setHeroCurrentHP(heroCurrentHP);
-                   // DataStorage.getInstance().setHeroEXP(heroEXP);
-                   // DataStorage.getInstance().setHeroBaseHP(heroBaseHP);
-                   // DataStorage.getInstance().setHeroBaseSpeed(heroBaseSpeed);
-                   // DataStorage.getInstance().setHeroBaseDamage(heroBaseDamage);
                     
                     Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP, heroID);
                     
@@ -195,14 +189,13 @@ public class ViewCharController implements Initializable {
         try {
 
             DBConnect.connect();
-            Connection c = DBConnect.getConnection();
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            //int userID = DataStorage.getInstance().getUserID();
+            System.out.println("Försöker ta väck " + stringName +"...");
 
             int whatRow = list.getSelectionModel().getSelectedIndex();
-            System.out.println(whatRow);
+            System.out.println("Rad du har markerat = " + whatRow);
 
             ObservableList<Object> OL = FXCollections.observableArrayList(getName);
             OL.remove(whatRow);
@@ -210,13 +203,15 @@ public class ViewCharController implements Initializable {
             getName.remove(whatRow);
             list.setItems(OL);
 
-            DBConnect.CreateInsertStatement("delete from game.hero where heroName = '" + stringName + "' and userID = '" + userID + "';", null, null);
+            
+            DBConnect.CreateInsertStatement("delete from game.hero where heroName = '" + stringName + "' and userID = '" + userID + "';", fel, "You must select a hero"); // fel i databasen
             resetPic();
             getStats.removeAll(getStats);
             stats.setItems(null);
 
         } catch (Exception ex) {
             fel.setText("You must select a hero");
+            ex.printStackTrace();
         }
 
     }

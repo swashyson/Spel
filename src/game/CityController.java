@@ -1,6 +1,7 @@
 package game;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +23,7 @@ public class CityController implements Initializable {
     Button shop;
     @FXML
     Button menu;
-    
+
 
     @FXML
     public void goToMenu(ActionEvent event) {
@@ -63,9 +64,9 @@ public class CityController implements Initializable {
         HoverMouse.outHover(shop);
         HoverMouse.inHover(menu);
         HoverMouse.outHover(menu);
-        
-        
-        DataStorage.getInstance().printAll();
+
+        DataStorage.getInstance().printHero();
+
     }
 
     public void warrior() {

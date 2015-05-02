@@ -8,10 +8,7 @@ package game;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Label;
 
 /**
@@ -72,6 +69,16 @@ public class DBConnect {
 
             label.setText(Medelande);
             System.out.println("Fel");
+            ex.printStackTrace();
+        }
+    }
+        public static void CreateAlterStatement(String commando) {
+        try {
+            Statement st = c.createStatement();
+            st.execute(commando);
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
         }
     }
 

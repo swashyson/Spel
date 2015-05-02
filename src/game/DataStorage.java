@@ -5,7 +5,6 @@
  */
 package game;
 
-
 /**
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
@@ -14,6 +13,7 @@ public class DataStorage {
 
     private static DataStorage myDataStorage;
     private Hero hero;
+    private Weapon weapon;
 
     public static DataStorage getInstance() {
         if (myDataStorage == null) {
@@ -33,8 +33,20 @@ public class DataStorage {
 
         return hero;
     }
-    public void printAll(){
-    
+
+    public void setWeapon(Weapon weapon) {
+
+        System.out.println("Du har sparat ett vapen");
+        this.weapon = weapon;
+    }
+
+    public Weapon getWeapon() {
+
+        return weapon;
+    }
+
+    public void printHero() {
+
         System.out.println("UserID = " + hero.getUserID());
         System.out.println("HeroID = " + hero.getHeroID());
         System.out.println("HeroName = " + hero.getName());
@@ -46,8 +58,6 @@ public class DataStorage {
         System.out.println("HeroEXP = " + hero.getEXP());
         System.out.println("HeroHP = " + hero.getHp());
         System.out.println("HeroCurrentHP = " + hero.getHeroCurrentHP());
-        
-    }
-    
 
+    }
 }
