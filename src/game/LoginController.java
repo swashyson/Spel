@@ -20,8 +20,8 @@ import javafx.scene.control.TextField;
  */
 public class LoginController implements Initializable {
 
-    @FXML
-    private Label label;
+   // @FXML
+   // private Label label;
     @FXML
     private Label fel;
     @FXML

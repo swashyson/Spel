@@ -6,7 +6,6 @@
 package game;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -33,7 +32,7 @@ public class ShopController implements Initializable {
     @FXML
     private AnchorPane pane;
 
-    private Button weapon1 = new Button();
+    private final Button weapon1 = new Button();
     private final Button weapon2 = new Button();
     private final Button weapon3 = new Button();
     private final Button armor1 = new Button();
@@ -44,7 +43,7 @@ public class ShopController implements Initializable {
     private boolean hasWeapon = false;
     private int weaponID;
 
-    Button[] array = new Button[6];
+    private final Button[] array = new Button[6];
 
     @FXML
     public void goToCity(ActionEvent event) {

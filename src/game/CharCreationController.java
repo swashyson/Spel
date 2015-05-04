@@ -6,7 +6,6 @@
 package game;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
