@@ -99,10 +99,10 @@ public class ForgotPWController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        HoverMouse.inHover(getItBack);
-        HoverMouse.outHover(getItBack);
-        HoverMouse.inHover(back);
-        HoverMouse.outHover(back);
+        HoverMouse.getInstance().inHover(getItBack);
+        HoverMouse.getInstance().outHover(getItBack);
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
     }
 
 }

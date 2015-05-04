@@ -1,6 +1,7 @@
 package game;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,12 @@ public class CityController implements Initializable {
     @FXML
     Button menu;
 
+    private Weapon weapon;
+    private int weaponID;
+    private Armor armor;
+    private int armorID;
+
+    int heroID = DataStorage.getInstance().getHero().getHeroID();
 
     @FXML
     public void goToMenu(ActionEvent event) {
@@ -55,20 +62,90 @@ public class CityController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        HoverMouse.inHover(fight);
-        HoverMouse.outHover(fight);
-        HoverMouse.inHover(inn);
-        HoverMouse.outHover(inn);
-        HoverMouse.inHover(shop);
-        HoverMouse.outHover(shop);
-        HoverMouse.inHover(menu);
-        HoverMouse.outHover(menu);
+        HoverMouse.getInstance().inHover(fight);
+        HoverMouse.getInstance().outHover(fight);
+        HoverMouse.getInstance().inHover(inn);
+        HoverMouse.getInstance().outHover(inn);
+        HoverMouse.getInstance().inHover(shop);
+        HoverMouse.getInstance().outHover(shop);
+        HoverMouse.getInstance().inHover(menu);
+        HoverMouse.getInstance().outHover(menu);
 
         DataStorage.getInstance().printHero();
+
+        checkWeapon();
+        checkArmor();
 
     }
 
     public void warrior() {
+
+    }
+
+    public void checkWeapon() {
+
+        DBConnect.connect();
+
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_weapon where hero_idHero = '" + heroID + "';");
+        try {
+            if (rs.next()) {
+                weaponID = rs.getInt("weapon_weaponID");
+            }
+            ResultSet check = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '" + weaponID + "';");
+            System.out.println("select * from game.weapon where weaponID = '" + weaponID + "';");
+            if (check.next()) {
+
+                String weaponName = check.getString("weaponName");
+                int weaponMinDamage = check.getInt("weaponMinDamage");
+                int weaponMaxDamage = check.getInt("weaponMaxDamage");
+                int weaponSpeed = check.getInt("weaponSpeed");
+                int weaponlevel = check.getInt("weaponLevel");
+                int weaponType = check.getInt("weaponType");
+
+                weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
+                DataStorage.getInstance().setWeapon(weapon);
+
+                System.out.println(weapon);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            DBConnect.close();
+        }
+
+    }
+
+    public void checkArmor() {
+
+        DBConnect.connect();
+
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_armor where hero_idHero = '" + heroID + "';");
+        try {
+            if (rs.next()) {
+                armorID = rs.getInt("armor_armorID");
+            }
+            ResultSet check = DBConnect.CreateSelectStatement("select * from game.armor where armorID = '" + armorID + "';");
+            System.out.println("select * from game.armor where armorID = '" + armorID + "';");
+            if (check.next()) {
+
+                String armorName = check.getString("armorName");
+                int localArmor = check.getInt("armor");
+                int armorType = check.getInt("armorType");
+                int armorLevel = check.getInt("armorLevel");
+                int armorSpeed = check.getInt("armorSpeed");
+
+                armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
+                DataStorage.getInstance().setArmor(armor);
+
+                System.out.println(armor);
+
+                DBConnect.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            DBConnect.close();
+        }
 
     }
 

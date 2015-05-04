@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -23,5 +24,27 @@
                </source>
             </ImageInput>
          </effect></Button>
+      <ListView fx:id="current" layoutX="166.0" layoutY="378.0" prefHeight="168.0" prefWidth="234.0">
+         <effect>
+            <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="#790000" />
+               </light>
+            </Lighting>
+         </effect></ListView>
+      <ListView fx:id="buy" layoutX="423.0" layoutY="378.0" prefHeight="168.0" prefWidth="240.0">
+         <effect>
+            <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="#7c0000" />
+               </light>
+            </Lighting>
+         </effect></ListView>
    </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ public class DataStorage {
     private static DataStorage myDataStorage;
     private Hero hero;
     private Weapon weapon;
+    private Armor armor;
 
     public static DataStorage getInstance() {
         if (myDataStorage == null) {
@@ -43,6 +44,17 @@ public class DataStorage {
     public Weapon getWeapon() {
 
         return weapon;
+    }
+
+    public void setArmor(Armor armor) {
+
+        System.out.println("Du har sparat en armor");
+        this.armor = armor;
+    }
+
+    public Armor getArmor() {
+
+        return armor;
     }
 
     public void printHero() {

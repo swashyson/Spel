@@ -72,7 +72,8 @@ public class DBConnect {
             ex.printStackTrace();
         }
     }
-        public static void CreateAlterStatement(String commando) {
+
+    public static void CreateAlterStatement(String commando) {
         try {
             Statement st = c.createStatement();
             st.execute(commando);
@@ -81,7 +82,6 @@ public class DBConnect {
             ex.printStackTrace();
         }
     }
-
 
     public static void saveToDB() {
         connect();
@@ -95,11 +95,16 @@ public class DBConnect {
                     + "heroBaseSpeed ='" + DataStorage.getInstance().getHero().getHeroSpeed() + "',  "
                     + "heroBaseDamage ='" + DataStorage.getInstance().getHero().getBaseDamage() + "' "
                     + "WHERE idHERO = '" + DataStorage.getInstance().getHero().getUserID() + "'");
+
+            DataStorage.getInstance().setArmor(null);
+            DataStorage.getInstance().setWeapon(null);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
 
+        } finally {
+            close();
         }
-        close();
 
     }
 }

@@ -32,12 +32,12 @@ public class SelectOrCreateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        HoverMouse.inHover(create);
-        HoverMouse.outHover(create);
-        HoverMouse.inHover(choose);
-        HoverMouse.outHover(choose);
-        HoverMouse.inHover(back);
-        HoverMouse.outHover(back);
+        HoverMouse.getInstance().inHover(create);
+        HoverMouse.getInstance().outHover(create);
+        HoverMouse.getInstance().inHover(choose);
+        HoverMouse.getInstance().outHover(choose);
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
     }
 
     @FXML
