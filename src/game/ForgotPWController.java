@@ -33,7 +33,7 @@ public class ForgotPWController implements Initializable {
     @FXML
     private TextField mail;
 
-    String typegetItBack;
+    private String typegetItBack;
 
     @FXML
     public void getItBack(ActionEvent event) {

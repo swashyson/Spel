@@ -1,7 +1,6 @@
 package game;
 
 import java.net.URL;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

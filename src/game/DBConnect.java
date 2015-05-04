@@ -17,16 +17,16 @@ import javafx.scene.control.Label;
  */
 public class DBConnect {
 
-    private static String URL;
+    //private static String URL;
     private static Connection c;
 
     public static void connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            String URLC = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=root";
-            Connection cc = DriverManager.getConnection(URLC);
+            String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=root";
+            Connection cc = DriverManager.getConnection(URL);
 
-            URL = URLC;
+            //URL = URLC;
             c = cc;
 
         } catch (Exception ex) {
