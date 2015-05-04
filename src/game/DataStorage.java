@@ -9,6 +9,8 @@ package game;
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
+
+//
 public class DataStorage {
 
     private static DataStorage myDataStorage;
