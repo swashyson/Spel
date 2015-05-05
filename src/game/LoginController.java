@@ -84,14 +84,14 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        HoverMouse.inHover(createAccount);
-        HoverMouse.outHover(createAccount);
-        HoverMouse.inHover(login);
-        HoverMouse.outHover(login);
-        HoverMouse.inHover(forgot);
-        HoverMouse.outHover(forgot);
+        HoverMouse.getInstance().inHover(createAccount);
+        HoverMouse.getInstance().outHover(createAccount);
+        HoverMouse.getInstance().inHover(login);
+        HoverMouse.getInstance().outHover(login);
+        HoverMouse.getInstance().inHover(forgot);
+        HoverMouse.getInstance().outHover(forgot);
         
-        HoverMouse.ClickEffect(login);
+        HoverMouse.getInstance().ClickEffect(login);
 
     }
 

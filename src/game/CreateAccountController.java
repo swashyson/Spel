@@ -41,10 +41,10 @@ public class CreateAccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        HoverMouse.inHover(create);
-        HoverMouse.outHover(create);
-        HoverMouse.inHover(back);
-        HoverMouse.outHover(back);
+        HoverMouse.getInstance().inHover(create);
+        HoverMouse.getInstance().outHover(create);
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
 
     }
 

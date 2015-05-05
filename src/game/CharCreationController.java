@@ -48,19 +48,19 @@ public class CharCreationController implements Initializable {
     @FXML
     public void Select(ActionEvent event) {
         if (event.getSource().equals(hero1)) {
-            HoverMouse.inClick(hero1);
-            HoverMouse.outClick(hero2);
-            HoverMouse.outClick(hero3);
+            HoverMouse.getInstance().inClick(hero1);
+            HoverMouse.getInstance().outClick(hero2);
+            HoverMouse.getInstance().outClick(hero3);
             type = 1;
         } else if (event.getSource().equals(hero2)) {
-            HoverMouse.inClick(hero2);
-            HoverMouse.outClick(hero1);
-            HoverMouse.outClick(hero3);
+            HoverMouse.getInstance().inClick(hero2);
+            HoverMouse.getInstance().outClick(hero1);
+            HoverMouse.getInstance().outClick(hero3);
             type = 2;
         } else if (event.getSource().equals(hero3)) {
-            HoverMouse.inClick(hero3);
-            HoverMouse.outClick(hero2);
-            HoverMouse.outClick(hero1);
+            HoverMouse.getInstance().inClick(hero3);
+            HoverMouse.getInstance().outClick(hero2);
+            HoverMouse.getInstance().outClick(hero1);
             type = 3;
         }
     }
@@ -71,8 +71,6 @@ public class CharCreationController implements Initializable {
             DBConnect.connect();
 
             int userID = Hero.userID;
-            //int userID = DataStorage.getInstance().getUserID();
-            
 
             ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
 
@@ -91,6 +89,8 @@ public class CharCreationController implements Initializable {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            DBConnect.close();
         }
     }
 
@@ -98,13 +98,14 @@ public class CharCreationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //System.out.println(DataStorage.getInstance().getUserID());
 
-        HoverMouse.inHover(create);
-        HoverMouse.outHover(create);
-        HoverMouse.inHover(back);
-        HoverMouse.outHover(back);
+        HoverMouse.getInstance().inHover(create);
+        HoverMouse.getInstance().outHover(create);
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
 
     }
-    public void clickOnTextField(){
+
+    public void clickOnTextField() {
         fel.setText(null);
     }
 

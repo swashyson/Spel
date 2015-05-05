@@ -52,10 +52,10 @@ public class ViewCharController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        HoverMouse.inHover(play);
-        HoverMouse.outHover(play);
-        HoverMouse.inHover(back);
-        HoverMouse.outHover(back);
+        HoverMouse.getInstance().inHover(play);
+        HoverMouse.getInstance().outHover(play);
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
 
         try {
             DBConnect.connect();
