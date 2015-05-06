@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="game.ForgotPWController">
+  <children>
+    <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Recourses/BackGround.png" />
+      </image>
+    </ImageView>
+    <TextField fx:id="mail" layoutX="305.0" layoutY="194.0" prefHeight="25.0" prefWidth="190.0" promptText="Enter E-Mail" />
+    <Button fx:id="getItBack" layoutX="345.0" layoutY="435.0" mnemonicParsing="false" onAction="#getItBack" prefHeight="31.0" prefWidth="110.0" text="Get it back">
+      <effect>
+        <ImageInput>
+          <source>
+            <Image url="@Recourses/return.png" />
+          </source>
+        </ImageInput>
+      </effect>
+    </Button>
+    <Button fx:id="back" layoutX="345.0" layoutY="489.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="110.0" text="Back">
+      <effect>
+        <ImageInput>
+          <source>
+            <Image url="@Recourses/Back.png" />
+          </source>
+        </ImageInput>
+      </effect>
+    </Button>
+    <TextField fx:id="name" layoutX="300.0" layoutY="115.0" prefWidth="200.0" promptText="Enter Login Name" />
+  </children>
+</AnchorPane>
