@@ -41,3 +41,46 @@
          </effect></Button>
    </children>
 </AnchorPane>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.SelectOrCreateController">
+   <children>
+      <ImageView fitHeight="606.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/BackGround.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="create" layoutX="57.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="502.0" prefWidth="301.0" text="Create Character">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/CreateChar.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="choose" layoutX="443.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="502.0" prefWidth="301.0" text="Choose Character">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/chooseChar.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="back" layoutX="345.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="33.0" prefWidth="110.0" text="Back">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Back.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+   </children>
+</AnchorPane>
