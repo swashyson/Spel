@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.InnSceneController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/Rest.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="281.0" layoutY="183.0" text="Current Health: " textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="health" layoutX="462.0" layoutY="183.0" text="0 / 0" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Button fx:id="back" layoutX="380.0" layoutY="549.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="restoreHealth" layoutX="339.0" layoutY="102.0" mnemonicParsing="false" onAction="#restoreHealthpoints" text="Restore Health Now" />
+      <Label fx:id="fel" layoutX="319.0" layoutY="266.0" prefHeight="34.0" prefWidth="162.0" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

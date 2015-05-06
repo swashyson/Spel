@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game;
 
 import javafx.event.ActionEvent;
@@ -15,17 +14,17 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class SwitchScene {
-    
-        public void change(ActionEvent event, String destination) {
+
+    public void change(ActionEvent event, String destination) {
 
         try {
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(destination +".fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(destination + ".fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
@@ -34,7 +33,5 @@ public class SwitchScene {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
-    
 }

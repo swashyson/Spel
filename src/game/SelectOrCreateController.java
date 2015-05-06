@@ -9,18 +9,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class SelectOrCreateController implements Initializable {
 
@@ -36,40 +31,31 @@ public class SelectOrCreateController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        HoverMouse.getInstance().inHover(create);
+        HoverMouse.getInstance().outHover(create);
+        HoverMouse.getInstance().inHover(choose);
+        HoverMouse.getInstance().outHover(choose);
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
+
+        SwitchScene SC = new SwitchScene();
+
         if (event.getSource().equals(create)) {
 
-            switchScene(event, "CharCreation.fxml");
+            SC.change(event, "CharCreation");
 
         } else if (event.getSource().equals(choose)) {
 
-            switchScene(event, "ViewChar.fxml");
+            SC.change(event, "ViewChar");
 
         } else if (event.getSource().equals(back)) {
 
-            switchScene(event, "Login.fxml");
-
-        }
-
-    }
-
-    public void switchScene(ActionEvent event, String Destination) {
-
-        try {
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Destination));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception ex) {
+            SC.change(event, "Login");
 
         }
 

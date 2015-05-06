@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.MenuController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/Inn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backToCity" layoutX="382.0" layoutY="172.0" mnemonicParsing="false" onAction="#goToCity" text="City" />
+      <Button fx:id="changeCharacter" layoutX="359.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToCharacter" text="Change char" />
+      <Button fx:id="logout" layoutX="374.0" layoutY="383.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+   </children>
+</AnchorPane>
