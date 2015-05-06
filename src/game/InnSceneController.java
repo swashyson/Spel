@@ -25,16 +25,13 @@ public class InnSceneController implements Initializable {
      */
     //@FXML
     //private Button restoreHitpoint;
-
     //@FXML
     //private Button restoreHealth;
-
     //@FXML
     //private Button back;
-
     @FXML
     private Label health;
-    
+
     @FXML
     private Label fel;
 
@@ -45,14 +42,14 @@ public class InnSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         currentHealth = DataStorage.getInstance().getHero().getHeroCurrentHP();
         maxHealth = DataStorage.getInstance().getHero().getHp();
-         //kan bugga något
+        //kan bugga något
         // behöver nog någon sorts timer för att uppdatera kontinuerligt
         // tills max health är uppnådd
         if (currentHealth < maxHealth) {
             currentHealth++;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health: " + currentHealth + " / " + maxHealth);
-        } else if(currentHealth == maxHealth){
+        } else if (currentHealth == maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health restored to maximum");
@@ -73,8 +70,7 @@ public class InnSceneController implements Initializable {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health restored to maximum.");
-        }
-        else if(currentHealth == maxHealth){
+        } else if (currentHealth == maxHealth) {
             System.out.println("Current health already restored to maximum");
             fel.setText("Your health is full.");
         }

@@ -49,38 +49,27 @@ public class Hero extends Creature {
     }
 
     public void setGold(int gold) {
-
         this.heroGold = gold;
-
     }
 
     public int getGold() {
-
         return heroGold;
-
     }
 
     public void setLevel(int level) {
-
         this.heroLevel = level;
-
     }
 
     public int getLevel() {
-
         return heroLevel;
-
     }
 
     public void setEXP(int EXP) {
-
         this.heroEXP = EXP;
     }
 
     public int getEXP() {
-
         return heroEXP;
-
     }
 
     public void setUserID(int userID) {

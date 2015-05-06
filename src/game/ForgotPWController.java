@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
+
 /**
  * FXML Controller class
  *
@@ -38,7 +39,7 @@ public class ForgotPWController implements Initializable {
     private Button back;
     @FXML
     private TextField mail;
-    @FXML 
+    @FXML
     private TextField name;
 
     String userMail;
@@ -46,10 +47,9 @@ public class ForgotPWController implements Initializable {
     String userPassword;
     SendMail s;
 
-    
     @FXML
-    public void getItBack(ActionEvent event)throws Exception{
-this.s = new SendMail();
+    public void getItBack(ActionEvent event) throws Exception {
+        this.s = new SendMail();
 //        try {
 //            DBConnect.connect();
 //            Connection c = DBConnect.getConnection();
@@ -80,9 +80,8 @@ this.s = new SendMail();
     }
 
    //** public void sendMail() {
-
-        ////////////////////Man måste ha en Mail hanterar program för att få det till att funka... detta var ju lätt...///////////////////////////
-        //////////////////// Behöver två nya libraries///// JAVAX-MAIL-API-1.5.3.jar/////////JAVAX.MAIL-1.5.3.jar////////////
+    ////////////////////Man måste ha en Mail hanterar program för att få det till att funka... detta var ju lätt...///////////////////////////
+    //////////////////// Behöver två nya libraries///// JAVAX-MAIL-API-1.5.3.jar/////////JAVAX.MAIL-1.5.3.jar////////////
 //        try {
 //
 //            String to = typegetItBack;
@@ -106,15 +105,14 @@ this.s = new SendMail();
 //            ex.printStackTrace();
 //        }
 //    }
-
     @FXML
     public void back(ActionEvent event) {
-        
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

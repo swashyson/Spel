@@ -9,16 +9,16 @@ package game;
  *
  * @author Mohini
  */
-public class Spider extends Enemy{
+public class Spider extends Enemy {
 
     @Override
     protected void specialAttack1() {
-        
+
     }
 
     @Override
     protected void specialAttack2() {
-        
+
     }
 
     @Override
@@ -35,5 +35,5 @@ public class Spider extends Enemy{
     protected int getMinDmg() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

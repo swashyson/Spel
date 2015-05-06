@@ -26,7 +26,8 @@ public abstract class Creature {
     public int getSpeed() {
         return speed;
     }
-    public void setHp(int hp){
+
+    public void setHp(int hp) {
         this.hp = hp;
     }
 

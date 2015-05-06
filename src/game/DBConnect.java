@@ -98,7 +98,7 @@ public class DBConnect {
 
             DataStorage.getInstance().setArmor(null);
             DataStorage.getInstance().setWeapon(null);
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
 

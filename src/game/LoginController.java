@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package game;
+
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -21,7 +22,7 @@ import javafx.scene.control.TextField;
 public class LoginController implements Initializable {
 
    // @FXML
-   // private Label label;
+    // private Label label;
     @FXML
     private Label fel;
     @FXML
@@ -37,8 +38,6 @@ public class LoginController implements Initializable {
 
     @FXML
     public void logIn(ActionEvent event) {
-        
-        
 
         try {
             DBConnect.connect();
@@ -51,11 +50,10 @@ public class LoginController implements Initializable {
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
-                
-                Hero.userID = ID;
-                
-                //DataStorage.getInstance().setUserID(ID);
 
+                Hero.userID = ID;
+
+                //DataStorage.getInstance().setUserID(ID);
                 DBConnect.close();
             } else {
                 fel.setText("Wrong username/password");
@@ -90,7 +88,7 @@ public class LoginController implements Initializable {
         HoverMouse.getInstance().outHover(login);
         HoverMouse.getInstance().inHover(forgot);
         HoverMouse.getInstance().outHover(forgot);
-        
+
         HoverMouse.getInstance().ClickEffect(login);
 
     }

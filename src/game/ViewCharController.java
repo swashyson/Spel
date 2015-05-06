@@ -69,7 +69,7 @@ public class ViewCharController implements Initializable {
             }
             ObservableList<String> OL = FXCollections.observableArrayList(getName);
             list.setItems(OL);
-            
+
             System.out.println("Antalet Gubbar = " + getName.size());
 
             DBConnect.close();
@@ -85,7 +85,7 @@ public class ViewCharController implements Initializable {
         try {
 
             resetText();
-            
+
             System.out.println("Rad ID = " + list.getSelectionModel().getSelectedIndex());
 
             getStats.removeAll(getStats);
@@ -148,10 +148,9 @@ public class ViewCharController implements Initializable {
                     int heroBaseHP = rs.getInt("heroBaseHP");
                     int heroBaseSpeed = rs.getInt("heroBaseSpeed");
                     int heroBaseDamage = rs.getInt("heroBaseDamage");
-                    
+
                     Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP, heroID);
-                    
-                    
+
                     DataStorage.getInstance().setHero(hero);
                 }
                 DBConnect.close();
@@ -186,7 +185,7 @@ public class ViewCharController implements Initializable {
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            System.out.println("Försöker ta väck " + stringName +"...");
+            System.out.println("Försöker ta väck " + stringName + "...");
 
             int whatRow = list.getSelectionModel().getSelectedIndex();
             System.out.println("Rad du har markerat = " + whatRow);
@@ -197,7 +196,6 @@ public class ViewCharController implements Initializable {
             getName.remove(whatRow);
             list.setItems(OL);
 
-            
             DBConnect.CreateInsertStatement("delete from game.hero where heroName = '" + stringName + "' and userID = '" + userID + "';", fel, "You must select a hero"); // fel i databasen
             resetPic();
             getStats.removeAll(getStats);

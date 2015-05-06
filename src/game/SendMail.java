@@ -4,20 +4,24 @@
  * and open the template in the editor.
  */
 package game;
+
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+
 /**
  *
  * @author Jonni
  */
 public class SendMail {
+
     private static final String SMTP_HOST_NAME = "smtp.gmail.com";
-         private static final String SMTP_PORT = "465";
-          private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-    public void Send(String email,String pword)throws Exception{
-            // Get system properties
-        String adress = "LandOfThiralia@gmail.com"; 
+    private static final String SMTP_PORT = "465";
+    private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+    public void Send(String email, String pword) throws Exception {
+        // Get system properties
+        String adress = "LandOfThiralia@gmail.com";
         String pass = "Thiralia";
         Properties props = System.getProperties();
 
@@ -31,30 +35,26 @@ public class SendMail {
         props.put("mail.smtp.socketFactory.port", SMTP_PORT);
         props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
         props.put("mail.smtp.socketFactory.fallback", "false");
-            Session session;
-            session = Session.getInstance(props, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(adress, pass);
-                }}
-                    
-                    );
-            session.setDebug(true);
-        
+        Session session;
+        session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(adress, pass);
+            }
+        }
+        );
+        session.setDebug(true);
+
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(adress));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
         message.setSubject("Password Retrival");
-        message.setText("You'r password are "+ pword);
-        
+        message.setText("You'r password are " + pword);
+
         Transport transport = session.getTransport("smtp");
-                transport.connect( "smtp.gmail.com",465,adress,pass); //host, 25, "myemailhere", "mypasshere");
-                message.saveChanges();
-                transport.sendMessage(message,message.getAllRecipients());
-    //Transport.send(message);
-        }
+        transport.connect("smtp.gmail.com", 465, adress, pass); //host, 25, "myemailhere", "mypasshere");
+        message.saveChanges();
+        transport.sendMessage(message, message.getAllRecipients());
+        //Transport.send(message);
+    }
 }
-    
-    
-        
-    

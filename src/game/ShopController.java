@@ -309,7 +309,6 @@ public class ShopController implements Initializable {
     }
 
     public void startMethod() {
-        
 
         removeWeapon();
         removeArmor();

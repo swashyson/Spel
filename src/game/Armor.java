@@ -61,7 +61,8 @@ public class Armor extends Item {
     public int getArmorSpeed() {
         return armorSpeed;
     }
-    public int getArmorID(){
+
+    public int getArmorID() {
         return armorID;
     }
 

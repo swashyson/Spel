@@ -10,41 +10,44 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.ShopController">
-   <children>
-      <ImageView fitHeight="616.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Recourses/Shop.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="backToCity" layoutX="356.0" layoutY="558.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="32.0" prefWidth="109.0" text="City">
-         <effect>
-            <ImageInput>
-               <source>
-                  <Image url="@Recourses/CityButton.png" />
-               </source>
-            </ImageInput>
-         </effect></Button>
-      <ListView fx:id="current" layoutX="166.0" layoutY="378.0" prefHeight="168.0" prefWidth="234.0">
-         <effect>
-            <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant color="#790000" />
-               </light>
-            </Lighting>
-         </effect></ListView>
-      <ListView fx:id="buy" layoutX="423.0" layoutY="378.0" prefHeight="168.0" prefWidth="240.0">
-         <effect>
-            <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant color="#7c0000" />
-               </light>
-            </Lighting>
-         </effect></ListView>
-   </children>
+    <children>
+        <ImageView fitHeight="616.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/Shop.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="backToCity" layoutX="356.0" layoutY="558.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="32.0" prefWidth="109.0" text="City">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/CityButton.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <ListView fx:id="current" layoutX="166.0" layoutY="378.0" prefHeight="168.0" prefWidth="234.0">
+            <effect>
+                <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant color="#790000" />
+                    </light>
+                </Lighting>
+            </effect>
+        </ListView>
+        <ListView fx:id="buy" layoutX="423.0" layoutY="378.0" prefHeight="168.0" prefWidth="240.0">
+            <effect>
+                <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant color="#7c0000" />
+                    </light>
+                </Lighting>
+            </effect>
+        </ListView>
+    </children>
 </AnchorPane>

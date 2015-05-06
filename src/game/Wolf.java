@@ -9,16 +9,16 @@ package game;
  *
  * @author Mohini
  */
-public class Wolf extends Enemy{
+public class Wolf extends Enemy {
 
     @Override
     protected void specialAttack1() {
-        
+
     }
 
     @Override
     protected void specialAttack2() {
-        
+
     }
 
     @Override
@@ -35,5 +35,5 @@ public class Wolf extends Enemy{
     protected int getMinDmg() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

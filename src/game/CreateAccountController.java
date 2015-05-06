@@ -63,14 +63,14 @@ public class CreateAccountController implements Initializable {
 
     }
 
-    public void create(ActionEvent event)  {
+    public void create(ActionEvent event) {
 
         DBConnect.connect();
         typeName = name.getText();
         typePassword = password.getText();
         typeMail = mail.getText();
         if (!typeMail.contains("@")) {
-            
+
             fel.setText("Not a valid mail");
             return;
         }
