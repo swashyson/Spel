@@ -13,7 +13,7 @@ import javax.mail.internet.*;
  */
 public class SendMail {
     private static final String SMTP_HOST_NAME = "smtp.gmail.com";
-         private static final String SMTP_PORT = "465";
+         private static final String SMTP_PORT = "587";
           private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
     public void Send(String email,String pword)throws Exception{
             // Get system properties
