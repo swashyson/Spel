@@ -22,7 +22,6 @@ import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 
 /**
  * FXML Controller class
@@ -54,7 +53,12 @@ public class ShopController implements Initializable {
 
     private final Button[] array = new Button[6];
     private final ArrayList<Object> currentItems = new ArrayList();
-    private final ArrayList<Object> buyItems = new ArrayList();
+   // private final ArrayList<Object> buyItems = new ArrayList();
+
+    private final int getclass = DataStorage.getInstance().getHero().getHeroType();
+    private final int[] warriorAdaper = {1, 2, 3};
+    private final int[] rangerAdapter = {4, 5, 6};
+    private final int[] mageAdapter = {7, 8, 9};
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -67,7 +71,7 @@ public class ShopController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        startMethod();
+        startMethodWithBinds();
 
         int i = 1;
         for (Button array1 : array) {
@@ -76,51 +80,29 @@ public class ShopController implements Initializable {
             i = i + 1;
         }
 
-        if (DataStorage.getInstance().getHero().getHeroType() == 1) {
-            warrior();
+        if (getclass == 1) {
+            spawnItems("Sword1", "Sword2", "Sword3", "Armor1", "Armor2", "Armor3");
 
-        } else if (DataStorage.getInstance().getHero().getHeroType() == 2) {
-            bowman();
+        } else if (getclass == 2) {
+            spawnItems("Bow1", "Bow2", "Bow3", "Armor1", "Armor2", "Armor3");
 
-        } else if (DataStorage.getInstance().getHero().getHeroType() == 3) {
-            wizard();
+        } else if (getclass == 3) {
+            spawnItems("Staff1", "Staff2", "Staff3", "Armor1", "Armor2", "Armor3");
         }
     }
 
-    public void warrior() {
+    public void spawnItems(String itemName1, String itemName2, String itemName3, String itemName4, String itemName5, String itemName6) {
 
-        createItem(weapon1, 50, 100, "Recourses/Sword1.png");
-        createItem(weapon2, 150, 100, "Recourses/Sword2.png");
-        createItem(weapon3, 250, 100, "Recourses/Sword3.png");
-        createItem(armor1, 400, 150, "Recourses/Armor1.png");
-        createItem(armor2, 500, 150, "Recourses/Armor2.png");
-        createItem(armor3, 600, 150, "Recourses/Armor3.png");
-
-    }
-
-    public void bowman() {
-
-        createItem(weapon1, 50, 100, "Recourses/Sword1.png");
-        createItem(weapon2, 150, 100, "Recourses/Sword2.png");
-        createItem(weapon3, 250, 100, "Recourses/Sword3.png");
-        createItem(armor1, 400, 150, "Recourses/Armor1.png");
-        createItem(armor2, 500, 150, "Recourses/Armor2.png");
-        createItem(armor3, 600, 150, "Recourses/Armor3.png");
+        createDisplayItem(weapon1, 50, 100, "Recourses/" + itemName1 + ".png");
+        createDisplayItem(weapon2, 150, 100, "Recourses/" + itemName2 + ".png");
+        createDisplayItem(weapon3, 250, 100, "Recourses/" + itemName3 + ".png");
+        createDisplayItem(armor1, 400, 150, "Recourses/" + itemName4 + ".png");
+        createDisplayItem(armor2, 500, 150, "Recourses/" + itemName5 + ".png");
+        createDisplayItem(armor3, 600, 150, "Recourses/" + itemName6 + ".png");
 
     }
 
-    public void wizard() {
-
-        createItem(weapon1, 50, 100, "Recourses/Sword1.png");
-        createItem(weapon2, 150, 100, "Recourses/Sword2.png");
-        createItem(weapon3, 250, 100, "Recourses/Sword3.png");
-        createItem(armor1, 400, 150, "Recourses/Armor1.png");
-        createItem(armor2, 500, 150, "Recourses/Armor2.png");
-        createItem(armor3, 600, 150, "Recourses/Armor3.png");
-
-    }
-
-    public void createItem(Button item, int x, int y, String URL) {
+    public void createDisplayItem(Button item, int x, int y, String URL) {
 
         item.setLayoutX(x);
         item.setLayoutY(y);
@@ -136,91 +118,77 @@ public class ShopController implements Initializable {
 
     public void buyWeapon(Button button, int weaponID) {
 
-        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-
-                try {
-
-                    System.out.println("Buy Weapon");
-                    DBConnect.connect();
-
-                    ResultSet rs = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '" + weaponID + "'");
-
-                    if (rs.next()) {
-
-                        String weaponName = rs.getString("weaponName");
-                        int weaponMinDamage = rs.getInt("weaponMinDamage");
-                        int weaponMaxDamage = rs.getInt("weaponMaxDamage");
-                        int weaponSpeed = rs.getInt("weaponSpeed");
-                        int weaponlevel = rs.getInt("weaponLevel");
-                        int weaponType = rs.getInt("weaponType");
-
-                        if (levelReq(weaponlevel) == true) {
-
-                            weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
-                            setWeaponToHero(weapon, weapon1);
-                            removeWeapon();
-                            listViewGetCurrentItems();
-
-                        } else {
-                            System.out.println("Du är för låg level blabla");
-                        }
+        button.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                
+                DBConnect.connect();
+                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '" + weaponID + "'");
+                
+                if (rs.next()) {
+                    
+                    String weaponName = rs.getString("weaponName");
+                    int weaponMinDamage = rs.getInt("weaponMinDamage");
+                    int weaponMaxDamage = rs.getInt("weaponMaxDamage");
+                    int weaponSpeed = rs.getInt("weaponSpeed");
+                    int weaponlevel = rs.getInt("weaponLevel");
+                    int weaponType = rs.getInt("weaponType");
+                    
+                    if (levelReq(weaponlevel) == true) {
+                        
+                        weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
+                        setWeaponToHero(weapon, weapon1);
+                        removeWeaponRequest();
+                        listViewGetCurrentItems();
+                        
+                    } else {
+                        System.out.println("Du är för låg level blabla");
                     }
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                } finally {
-                    DBConnect.close();
                 }
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                DBConnect.close();
             }
-
         });
 
     }
 
     public void buyArmor(Button button, int armorID) {
 
-        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-
-                try {
-
-                    System.out.println("Buy Armor");
-                    DBConnect.connect();
-
-                    ResultSet rs = DBConnect.CreateSelectStatement("select * from game.armor where armorID = '" + armorID + "'");
-
-                    if (rs.next()) {
-
-                        String armorName = rs.getString("armorName");
-                        int localArmor = rs.getInt("armor");
-                        int armorType = rs.getInt("armorType");
-                        int armorLevel = rs.getInt("armorLevel");
-                        int armorSpeed = rs.getInt("armorSpeed");
-
-                        if (levelReq(armorLevel) == true) {
-
-                            armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
-                            setArmorToHero(armor, armor1);
-
-                            removeArmor();
-                            listViewGetCurrentItems();
-                        } else {
-                            System.out.println("Du är för låg level blabla");
-                        }
-
+        button.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                
+                System.out.println("Buy Armor");
+                DBConnect.connect();
+                
+                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.armor where armorID = '" + armorID + "'");
+                
+                if (rs.next()) {
+                    
+                    String armorName = rs.getString("armorName");
+                    int localArmor = rs.getInt("armor");
+                    int armorType = rs.getInt("armorType");
+                    int armorLevel = rs.getInt("armorLevel");
+                    int armorSpeed = rs.getInt("armorSpeed");
+                    
+                    if (levelReq(armorLevel) == true) {
+                        
+                        armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
+                        setArmorToHero(armor, armor1);
+                        
+                        removeArmorRequest();
+                        listViewGetCurrentItems();
+                    } else {
+                        System.out.println("Du är för låg level blabla");
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                } finally {
-                    DBConnect.close();
-                }
-            }
 
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                DBConnect.close();
+            }
         });
 
     }
@@ -237,6 +205,7 @@ public class ShopController implements Initializable {
             ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_weapon where hero_idHero = '" + heroID + "';");
             if (rs.next()) {
                 DBConnect.CreateAlterStatement("UPDATE game.hero_has_weapon SET weapon_weaponID='" + LocalWeaponID + "' WHERE hero_idHero='" + heroID + "';");
+                System.out.println("Du har lyckats alter statement i mysql för att lägga till ett vapen");
 
             } else {
                 DBConnect.CreateInsertStatement("INSERT INTO game.hero_has_weapon (hero_idHero, weapon_weaponID) VALUES ('" + heroID + "', '" + LocalWeaponID + "');", null, null); //fel label och fel text = null null
@@ -264,6 +233,7 @@ public class ShopController implements Initializable {
             ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_armor where hero_idHero = '" + heroID + "';");
             if (rs.next()) {
                 DBConnect.CreateAlterStatement("UPDATE game.hero_has_armor SET armor_armorID='" + localArmorID + "' WHERE hero_idHero='" + heroID + "';");
+                System.out.println("Du har lyckats alter statement i mysql för att lägga till en armor");
 
             } else {
                 DBConnect.CreateInsertStatement("INSERT INTO game.hero_has_armor (hero_idHero, armor_armorID) VALUES ('" + heroID + "', '" + localArmorID + "');", null, null); //fel label och fel text = null null
@@ -308,18 +278,19 @@ public class ShopController implements Initializable {
         }
     }
 
-    public void startMethod() {
+    public void startMethodWithBinds() {
 
-        removeWeapon();
-        removeArmor();
+        removeWeaponRequest();
+        removeArmorRequest();
 
-        buyWeapon(weapon1, 1); // du måste ha värden för vapen i din databas, första vapnet id = 1
-        buyWeapon(weapon2, 2); // id = 2
-        buyWeapon(weapon3, 3);
-
-        buyArmor(armor1, 1);
-        buyArmor(armor2, 2);
-        buyArmor(armor3, 3);
+        int gettingArray[] = getAdapter();
+        
+        buyWeapon(weapon1, 0 + gettingArray[0]); // du måste ha värden för vapen i din databas, första vapnet id = 1
+        buyWeapon(weapon2, 0 + gettingArray[1]); // id = 2
+        buyWeapon(weapon3, 0 + gettingArray[2]);
+        buyArmor(armor1, 0 + gettingArray[0]);
+        buyArmor(armor2, 0 + gettingArray[1]);
+        buyArmor(armor3, 0 + + gettingArray[2]);
 
         array[0] = weapon1;
         array[1] = weapon2;
@@ -361,19 +332,21 @@ public class ShopController implements Initializable {
 
     }
 
-    public void removeWeapon() {
+    public void removeWeaponRequest() {
 
-        removeWeapon(weapon1, weapon1, weapon1, 1);
-        removeWeapon(weapon1, weapon2, weapon2, 2);
-        removeWeapon(weapon1, weapon2, weapon3, 3);
+        int gettingArray[] = getAdapter();
+        removeWeapon(weapon1, weapon1, weapon1, 0 + gettingArray[0]);
+        removeWeapon(weapon1, weapon2, weapon2, 0 + gettingArray[1]);
+        removeWeapon(weapon1, weapon2, weapon3, 0 + gettingArray[2]);
 
     }
 
-    public void removeArmor() {
+    public void removeArmorRequest() {
 
-        removeArmor(armor1, armor1, armor1, 1);
-        removeArmor(armor1, armor2, armor2, 2);
-        removeArmor(armor1, armor2, armor3, 3);
+        int gettingArray[] = getAdapter();
+        removeArmor(armor1, armor1, armor1, 0 + gettingArray[0]);
+        removeArmor(armor1, armor2, armor2, 0 + gettingArray[1]);
+        removeArmor(armor1, armor2, armor3, 0 + gettingArray[2]);
 
     }
 
@@ -383,6 +356,18 @@ public class ShopController implements Initializable {
             return false;
         }
         return true;
+
+    }
+
+    public int[] getAdapter() {
+        if (getclass == 1) {
+            return warriorAdaper;
+        } else if (getclass == 2) {
+            return rangerAdapter;
+        } else if (getclass == 3) {
+            return mageAdapter;
+        }
+        return null;
 
     }
 }

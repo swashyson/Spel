@@ -33,7 +33,7 @@
                 </ImageInput>
             </effect>
         </Button>
-        <Button fx:id="shop" layoutX="671.0" layoutY="246.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="92.0" prefWidth="129.0" text="Shop">
+        <Button fx:id="shop" layoutX="673.0" layoutY="246.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="92.0" prefWidth="127.0" text="Shop">
             <effect>
                 <ImageInput>
                     <source>
@@ -42,7 +42,7 @@
                 </ImageInput>
             </effect>
         </Button>
-        <Button fx:id="fight" layoutY="292.0" mnemonicParsing="false" onAction="#goToFight" prefHeight="304.0" prefWidth="205.0" text="Fight">
+        <Button fx:id="fight" layoutY="302.0" mnemonicParsing="false" onAction="#goToFight" prefHeight="296.0" prefWidth="205.0" text="Fight">
             <effect>
                 <ImageInput>
                     <source>

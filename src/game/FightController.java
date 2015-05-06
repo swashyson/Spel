@@ -48,7 +48,15 @@ public class FightController implements Initializable {
 
         if (DataStorage.getInstance().getHero().getHeroType() == 1) {
 
-            Warrior("Recourses/Warrior.png");
+            spawnHero("Recourses/WarriorChar.png");
+
+        } else if (DataStorage.getInstance().getHero().getHeroType() == 2) {
+            
+            spawnHero("Recourses/RangerChar.png");
+
+        } else if (DataStorage.getInstance().getHero().getHeroType() == 3) {
+            
+            spawnHero("Recourses/MageChar.png");
 
         }
     }
@@ -60,16 +68,16 @@ public class FightController implements Initializable {
 
     }
 
-    public void Warrior(String URL) {
+    public void spawnHero(String URL) {
 
-        ImageView warrior = new ImageView();
+        ImageView hero = new ImageView();
         Image warriorDisplay = new Image(getClass().getResourceAsStream(URL));
-        warrior.setImage(warriorDisplay);
+        hero.setImage(warriorDisplay);
 
-        warrior.setY(500);
-        warrior.setX(30);
+        hero.setY(500);
+        hero.setX(30);
 
-        pane.getChildren().add(warrior);
+        pane.getChildren().add(hero);
 
     }
 
