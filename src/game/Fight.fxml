@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.FightController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/Fightscene.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="backToCity" layoutX="382.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToCity" text="City" />
+        <ImageView fx:id="XP" fitHeight="11.0" fitWidth="1.0" layoutX="17.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/1XP.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="800.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/XpBAR.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

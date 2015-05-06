@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.CreateAccountController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/BackGround.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="310.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="310.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="310.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="name" layoutX="315.0" layoutY="102.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
+        <TextField fx:id="password" layoutX="315.0" layoutY="194.0" prefHeight="25.0" prefWidth="190.0" promptText="Password" />
+        <Button fx:id="create" layoutX="355.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="111.0" text="Create">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Create.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Button fx:id="back" layoutX="355.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="111.0" text="Back">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Back.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <TextField fx:id="mail" layoutX="315.0" layoutY="288.0" prefHeight="25.0" prefWidth="190.0" promptText="E-Mail" />
+        <Label fx:id="fel" contentDisplay="CENTER" layoutX="282.0" layoutY="25.0" prefHeight="53.0" prefWidth="257.0" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
