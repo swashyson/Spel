@@ -4,17 +4,11 @@
  * and open the template in the editor.
  */
 package game;
-
-import java.awt.Font;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,12 +16,14 @@ import javafx.scene.control.TextField;
 
 /**
  *
- * @author Mattias
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class LoginController implements Initializable {
 
+   // @FXML
+   // private Label label;
     @FXML
-    private Label label;
+    private Label fel;
     @FXML
     private Button createAccount;
     @FXML
@@ -39,11 +35,13 @@ public class LoginController implements Initializable {
     @FXML
     private TextField password;
 
+    @FXML
     public void logIn(ActionEvent event) {
+        
+        
 
         try {
             DBConnect.connect();
-            Connection c = DBConnect.getConnection();
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
             //System.out.println("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
 
@@ -53,11 +51,14 @@ public class LoginController implements Initializable {
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
-                DataStorage.getInstance().setUserID(ID);
+                
+                Hero.userID = ID;
+                
+                //DataStorage.getInstance().setUserID(ID);
 
                 DBConnect.close();
             } else {
-                System.out.println("Fel användarnamn/lösenord");
+                fel.setText("Wrong username/password");
             }
 
         } catch (Exception ex) {
@@ -65,12 +66,14 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
     public void createAccount(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "CreateAccount");
     }
 
+    @FXML
     public void forgot(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
@@ -80,6 +83,15 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        HoverMouse.getInstance().inHover(createAccount);
+        HoverMouse.getInstance().outHover(createAccount);
+        HoverMouse.getInstance().inHover(login);
+        HoverMouse.getInstance().outHover(login);
+        HoverMouse.getInstance().inHover(forgot);
+        HoverMouse.getInstance().outHover(forgot);
+        
+        HoverMouse.getInstance().ClickEffect(login);
 
     }
 

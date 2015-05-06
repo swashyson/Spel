@@ -5,27 +5,18 @@
  */
 package game;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author gul_h_000
+ * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
+
+//
 public class DataStorage {
 
     private static DataStorage myDataStorage;
-    private int userID;
-    private String heroName;
-    private int heroType;
-    private int heroLevel;
-    private int eqWeapon;
-    private int eqArmour;
-    private int heroGold;
-    private int heroCurrentHP;
-    private int heroEXP;
-    private int heroBaseHP;
-    private int heroBaseSpeed;
-    private int heroBaseDamage;
+    private Hero hero;
+    private Weapon weapon;
+    private Armor armor;
 
     public static DataStorage getInstance() {
         if (myDataStorage == null) {
@@ -35,114 +26,52 @@ public class DataStorage {
         return myDataStorage;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setHero(Hero hero) {
+
+        System.out.println("Du har sparat en Hero i datastorage");
+        this.hero = hero;
     }
 
-    public int getUserID() {
-        return userID;
+    public Hero getHero() {
+
+        return hero;
     }
 
-    public String getUserName() {
-        return heroName;
+    public void setWeapon(Weapon weapon) {
+
+        System.out.println("Du har sparat ett vapen");
+        this.weapon = weapon;
     }
 
-    public String getUserType() {
-        return heroName;
+    public Weapon getWeapon() {
+
+        return weapon;
     }
 
-    public void setUserLevel(int heroLevel) {
-        this.heroLevel = heroLevel;
+    public void setArmor(Armor armor) {
+
+        System.out.println("Du har sparat en armor");
+        this.armor = armor;
     }
 
-    public int getUserLevel() {
-        return heroLevel;
+    public Armor getArmor() {
+
+        return armor;
     }
 
-    public void setEqWeapon(int eqWeapon) {
-        this.eqWeapon = eqWeapon;
-    }
+    public void printHero() {
 
-    public int getEqWeapon() {
-        return eqWeapon;
-    }
+        System.out.println("UserID = " + hero.getUserID());
+        System.out.println("HeroID = " + hero.getHeroID());
+        System.out.println("HeroName = " + hero.getName());
+        System.out.println("HeroType = " + hero.getHeroType());
+        System.out.println("HeroSpeed = " + hero.getSpeed());
+        System.out.println("HeroGold = " + hero.getGold());
+        System.out.println("HeroBaseDamage = " + hero.getBaseDamage());
+        System.out.println("HeroLevel = " + hero.getLevel());
+        System.out.println("HeroEXP = " + hero.getEXP());
+        System.out.println("HeroHP = " + hero.getHp());
+        System.out.println("HeroCurrentHP = " + hero.getHeroCurrentHP());
 
-    public void setEqArmour(int eqArmour) {
-        this.eqArmour = eqArmour;
     }
-
-    public int getEqArmour() {
-        return eqArmour;
-    }
-
-    public void setHeroGold(int heroGold) {
-        this.heroGold = heroGold;
-    }
-
-    public int getHeroGold() {
-        return heroGold;
-    }
-
-    public void setHeroCurrentHP(int heroCurrentHP) {
-        this.heroCurrentHP = heroCurrentHP;
-    }
-
-    public int getHeroCurrentHP() {
-        return heroCurrentHP;
-    }
-
-    public void setHeroEXP(int heroEXP) {
-        this.heroEXP = heroEXP;
-    }
-
-    public int getHeroEXP() {
-        return heroEXP;
-    }
-
-    public void setHeroBaseHP(int heroBaseHP) {
-        this.heroBaseHP = heroBaseHP;
-    }
-
-    public int getHeroBaseHP() {
-        return heroBaseHP;
-    }
-
-    public void setHeroBaseSpeed(int heroBaseSpeed) {
-        this.heroBaseSpeed = heroBaseSpeed;
-    }
-
-    public int getHeroBaseSpeed() {
-        return heroBaseSpeed;
-    }
-
-    public void setHeroBaseDamage(int heroBaseDamage) {
-        this.heroBaseDamage = heroBaseDamage;
-    }
-
-    public int getHeroBaseDamage() {
-        return heroBaseDamage;
-    }
-
-    public void setHeroType(int heroType) {
-        this.heroType = heroType;
-    }
-
-    public int getHeroType() {
-        return heroType;
-    }
-
-    public void printAll() {
-        System.out.println("userID = " + userID);
-        System.out.println("heroType = " + heroType);
-        System.out.println("heroLevel = " + heroLevel);
-        System.out.println("eqWeapon = " + eqWeapon);
-        System.out.println("eqArmour = " + eqArmour);
-        System.out.println("heroGold = " + heroGold);
-        System.out.println("heroCurrentHP = " + heroCurrentHP);
-        System.out.println("heroEXP = " + heroEXP);
-        System.out.println("heroBaseHP = " + heroBaseHP);
-        System.out.println("heroBaseSpeed= " + heroBaseSpeed);
-        System.out.println("heroBaseDamage = " + heroBaseDamage);
-    }
-
 }
