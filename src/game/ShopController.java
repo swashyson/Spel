@@ -51,14 +51,13 @@ public class ShopController implements Initializable {
     private Weapon weapon;
     private Armor armor;
 
+    private ArrayList<Weapon> weaponList;
+    private ArrayList<Armor> armorList;
+
     private final Button[] array = new Button[6];
     private final ArrayList<Object> currentItems = new ArrayList();
-   // private final ArrayList<Object> buyItems = new ArrayList();
 
     private final int getclass = DataStorage.getInstance().getHero().getHeroType();
-    private final int[] warriorAdaper = {1, 2, 3};
-    private final int[] rangerAdapter = {4, 5, 6};
-    private final int[] mageAdapter = {7, 8, 9};
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -81,13 +80,13 @@ public class ShopController implements Initializable {
         }
 
         if (getclass == 1) {
-            spawnItems("Sword1", "Sword2", "Sword3", "Armor1", "Armor2", "Armor3");
+            spawnItems("Sword1", "Sword2", "Sword3", "Armor1O", "Armor2O", "Armor3O");
 
         } else if (getclass == 2) {
-            spawnItems("Bow1", "Bow2", "Bow3", "Armor1", "Armor2", "Armor3");
+            spawnItems("Bow1", "Bow2", "Bow3", "Armor1O", "Armor2O", "Armor3O");
 
         } else if (getclass == 3) {
-            spawnItems("Staff1", "Staff2", "Staff3", "Armor1", "Armor2", "Armor3");
+            spawnItems("Staff1", "Staff2", "Staff3", "Armor1O", "Armor2O", "Armor3O");
         }
     }
 
@@ -116,35 +115,48 @@ public class ShopController implements Initializable {
 
     }
 
-    public void buyWeapon(Button button, int weaponID) {
+    public void buyWeapon(Button button, int buttonID) {
 
         button.setOnMouseClicked((MouseEvent event) -> {
             try {
-                
+                weaponList = new ArrayList();
                 DBConnect.connect();
-                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '" + weaponID + "'");
-                
-                if (rs.next()) {
-                    
+                ResultSet rs = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';");
+
+                while (rs.next()) {
+
                     String weaponName = rs.getString("weaponName");
                     int weaponMinDamage = rs.getInt("weaponMinDamage");
                     int weaponMaxDamage = rs.getInt("weaponMaxDamage");
                     int weaponSpeed = rs.getInt("weaponSpeed");
                     int weaponlevel = rs.getInt("weaponLevel");
                     int weaponType = rs.getInt("weaponType");
-                    
-                    if (levelReq(weaponlevel) == true) {
-                        
-                        weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
-                        setWeaponToHero(weapon, weapon1);
-                        removeWeaponRequest();
-                        listViewGetCurrentItems();
-                        
-                    } else {
-                        System.out.println("Du är för låg level blabla");
-                    }
+                    int weaponID = rs.getInt("weaponID");
+
+                    weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
+                    weaponList.add(weapon);
+
                 }
-                
+                if (buttonID == 1 && levelReq(weaponList.get(0).getWeaponLevel()) == true) {
+                    setWeaponToHero(weaponList.get(0));
+                    removeWeapon(button, button, button, buttonID);
+
+                } else if (buttonID == 2 && levelReq(weaponList.get(1).getWeaponLevel()) == true) {
+
+                    setWeaponToHero(weaponList.get(1));
+                    removeWeapon(button, button, button, buttonID);
+                    removeWeaponRequest();
+                } else if (buttonID == 3 && levelReq(weaponList.get(2).getWeaponLevel()) == true) {
+
+                    setWeaponToHero(weaponList.get(2));
+                    removeWeapon(button, button, button, buttonID);
+                    removeWeaponRequest();
+                }
+                else{
+                    System.out.println("För låg level blablabla");
+                }
+                listViewGetCurrentItems();
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             } finally {
@@ -154,36 +166,47 @@ public class ShopController implements Initializable {
 
     }
 
-    public void buyArmor(Button button, int armorID) {
+    public void buyArmor(Button button, int buttonID) {
 
         button.setOnMouseClicked((MouseEvent event) -> {
             try {
-                
-                System.out.println("Buy Armor");
+                armorList = new ArrayList();
                 DBConnect.connect();
-                
-                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.armor where armorID = '" + armorID + "'");
-                
-                if (rs.next()) {
-                    
+                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.armor where armorType = '" + getclass + "'");
+
+                while (rs.next()) {
+
                     String armorName = rs.getString("armorName");
                     int localArmor = rs.getInt("armor");
                     int armorType = rs.getInt("armorType");
                     int armorLevel = rs.getInt("armorLevel");
                     int armorSpeed = rs.getInt("armorSpeed");
-                    
-                    if (levelReq(armorLevel) == true) {
-                        
-                        armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
-                        setArmorToHero(armor, armor1);
-                        
-                        removeArmorRequest();
-                        listViewGetCurrentItems();
-                    } else {
-                        System.out.println("Du är för låg level blabla");
-                    }
+                    int armorID = rs.getInt("armorID");
+
+                    armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
+                    armorList.add(armor);
 
                 }
+                if (buttonID == 4 && levelReq(armorList.get(0).getArmorLevel()) == true) {
+                    setArmorToHero(armorList.get(0));
+                    removeArmor(button, button, button, buttonID);
+
+                } else if (buttonID == 5 && levelReq(armorList.get(1).getArmorLevel()) == true) {
+                    setArmorToHero(armorList.get(1));
+                    removeArmor(button, button, button, buttonID);
+                    removeArmorRequest();
+
+                } else if (buttonID == 6 && levelReq(armorList.get(2).getArmorLevel()) == true) {
+                    setArmorToHero(armorList.get(2));
+                    removeArmor(button, button, button, buttonID);
+                    removeArmorRequest();
+                }
+                else{
+                    System.out.println("Du är för låg level");
+                }
+                
+                listViewGetCurrentItems();
+                
             } catch (Exception ex) {
                 ex.printStackTrace();
             } finally {
@@ -193,7 +216,7 @@ public class ShopController implements Initializable {
 
     }
 
-    public void setWeaponToHero(Weapon armor, Button button) {
+    public void setWeaponToHero(Weapon weapon) {
 
         DBConnect.connect();
 
@@ -221,7 +244,7 @@ public class ShopController implements Initializable {
 
     }
 
-    public void setArmorToHero(Armor armor, Button button) {
+    public void setArmorToHero(Armor armor) {
 
         DBConnect.connect();
 
@@ -248,32 +271,49 @@ public class ShopController implements Initializable {
         }
     }
 
-    public void removeWeapon(Button button, Button button2, Button button3, int WeaponID) {
+    public void removeWeapon(Button button, Button button2, Button button3, int ButtonID) {
 
         if (DataStorage.getInstance().getWeapon() != null) {
 
             System.out.println("Du har ett vapen");
 
-            if (DataStorage.getInstance().getWeapon().getWeaponID() == WeaponID) {
+            if (ButtonID == 1) {
+
+                button.setVisible(false);
+
+            } else if (ButtonID == 2) {
+
+                button.setVisible(false);
+                button2.setVisible(false);
+
+            } else if (ButtonID == 3) {
                 button.setVisible(false);
                 button2.setVisible(false);
                 button3.setVisible(false);
-
             }
         }
     }
 
-    public void removeArmor(Button button, Button button2, Button button3, int armorID) {
+    public void removeArmor(Button button, Button button2, Button button3, int ButtonID) {
 
         if (DataStorage.getInstance().getArmor() != null) {
 
             System.out.println("Du har en armor");
 
-            if (DataStorage.getInstance().getArmor().getArmorID() == armorID) {
+            if (ButtonID == 4) {
+
+                button.setVisible(false);
+
+            } else if (ButtonID == 5) {
+
+                button.setVisible(false);
+                button2.setVisible(false);
+
+            } else if (ButtonID == 6) {
+
                 button.setVisible(false);
                 button2.setVisible(false);
                 button3.setVisible(false);
-
             }
         }
     }
@@ -283,14 +323,12 @@ public class ShopController implements Initializable {
         removeWeaponRequest();
         removeArmorRequest();
 
-        int gettingArray[] = getAdapter();
-        
-        buyWeapon(weapon1, 0 + gettingArray[0]); // du måste ha värden för vapen i din databas, första vapnet id = 1
-        buyWeapon(weapon2, 0 + gettingArray[1]); // id = 2
-        buyWeapon(weapon3, 0 + gettingArray[2]);
-        buyArmor(armor1, 0 + gettingArray[0]);
-        buyArmor(armor2, 0 + gettingArray[1]);
-        buyArmor(armor3, 0 + + gettingArray[2]);
+        buyWeapon(weapon1, 1);
+        buyWeapon(weapon2, 2);
+        buyWeapon(weapon3, 3);
+        buyArmor(armor1, 4);
+        buyArmor(armor2, 5);
+        buyArmor(armor3, 6);
 
         array[0] = weapon1;
         array[1] = weapon2;
@@ -333,41 +371,82 @@ public class ShopController implements Initializable {
     }
 
     public void removeWeaponRequest() {
+        if (DataStorage.getInstance().getWeapon() != null) {
+            DBConnect.connect();
+            ResultSet RS = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';");
+            int heroWeaponID = DataStorage.getInstance().getWeapon().getWeaponID();
 
-        int gettingArray[] = getAdapter();
-        removeWeapon(weapon1, weapon1, weapon1, 0 + gettingArray[0]);
-        removeWeapon(weapon1, weapon2, weapon2, 0 + gettingArray[1]);
-        removeWeapon(weapon1, weapon2, weapon3, 0 + gettingArray[2]);
+            int counter = 0;
 
+            try {
+                while (RS.next()) {
+                    int databaseWeaponID = RS.getInt("weaponID");
+                    if (heroWeaponID >= databaseWeaponID) {
+                        counter = counter + 1;
+                        System.out.println(counter);
+
+                        if (counter == 1) {
+                            weapon1.setVisible(false);
+
+                        } else if (counter == 2) {
+                            weapon2.setVisible(false);
+
+                        } else if (counter == 3) {
+                            weapon3.setVisible(false);
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                DBConnect.close();
+            }
+
+        }
     }
 
     public void removeArmorRequest() {
+        if (DataStorage.getInstance().getArmor() != null) {
+            DBConnect.connect();
+            ResultSet RS = DBConnect.CreateSelectStatement("select * from armor where armortype = '" + getclass + "';");
+            int heroArmorID = DataStorage.getInstance().getArmor().getArmorID();
 
-        int gettingArray[] = getAdapter();
-        removeArmor(armor1, armor1, armor1, 0 + gettingArray[0]);
-        removeArmor(armor1, armor2, armor2, 0 + gettingArray[1]);
-        removeArmor(armor1, armor2, armor3, 0 + gettingArray[2]);
+            int counter = 0;
 
+            try {
+                while (RS.next()) {
+                    int databaseArmorID = RS.getInt("ArmorID");
+                    if (heroArmorID >= databaseArmorID) {
+                        counter = counter + 1;
+                        System.out.println(counter);
+
+                        if (counter == 1) {
+                            armor1.setVisible(false);
+
+                        } else if (counter == 2) {
+                            armor2.setVisible(false);
+
+                        } else if (counter == 3) {
+                            armor3.setVisible(false);
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                DBConnect.close();
+            }
+
+        }
     }
 
     public boolean levelReq(int itemLevel) {
 
-        if (DataStorage.getInstance().getHero().getLevel() < itemLevel) {
-            return false;
+        if (DataStorage.getInstance().getHero().getLevel() >= itemLevel) {
+            return true;
         }
-        return true;
+        return false;
 
     }
 
-    public int[] getAdapter() {
-        if (getclass == 1) {
-            return warriorAdaper;
-        } else if (getclass == 2) {
-            return rangerAdapter;
-        } else if (getclass == 3) {
-            return mageAdapter;
-        }
-        return null;
-
-    }
 }

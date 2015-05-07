@@ -11,10 +11,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
@@ -29,12 +26,13 @@ public class HoverMouse {
     private static HoverMouse hoverMouse;
 
     private final static ArrayList<Object> buyItems = new ArrayList();
-    private final static int lowerWeaponRange = 1;
-    private final static int midWeaponRange = 3;
-    private final static int higherWeaponRange = 6;
 
     private int getclass;
-    private int globalAdaper;
+
+    private Weapon weapon;
+    private Armor armor;
+    ArrayList<Weapon> weaponList;
+    ArrayList<Armor> armorList;
 
     public static HoverMouse getInstance() {
         if (hoverMouse == null) {
@@ -61,53 +59,52 @@ public class HoverMouse {
             button.setScaleX(2);
             button.setScaleY(2);
             DBConnect.connect();
-            
+
             try {
                 getclass = DataStorage.getInstance().getHero().getHeroType();
-                getSetAdapter();
-                
-                if (ID >= lowerWeaponRange && ID <= midWeaponRange) {
-                    ResultSet rs = DBConnect.CreateSelectStatement("select * from weapon where weaponID = '" + (ID + globalAdaper) + "';");
-                    if (rs.next()) {
-                        
+                weaponList = new ArrayList<>();
+                armorList = new ArrayList<>();
+
+                if (ID >= 1 && ID <= 3) {   //OM DET ÄR ETT VAPEN MED ANDRA ORD
+                    ResultSet rs = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';");
+                    while (rs.next()) {
+
                         String weaponName = rs.getString("weaponName");
                         int weaponMinDamage = rs.getInt("weaponMinDamage");
                         int weaponMaxDamage = rs.getInt("weaponMaxDamage");
                         int weaponSpeed = rs.getInt("weaponSpeed");
                         int weaponLevel = rs.getInt("weaponLevel");
-                        
-                        buyItems.add("Weapon Stats");
-                        buyItems.add("Name: " + weaponName);
-                        buyItems.add("Weapon Min Damage: " + weaponMinDamage);
-                        buyItems.add("Weapon Max Damage: " + weaponMaxDamage);
-                        buyItems.add("Weapon Speed: " + weaponSpeed);
-                        buyItems.add("Weapon Level: " + weaponLevel);
-                        
+                        int weaponID = rs.getInt("WeaponID");
+                        int weaponType = rs.getInt("WeaponType");
+
+                        weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponLevel, weaponType);
+                        weaponList.add(weapon); // lägger till alla vapen från databasen i en arraylista
+                    }
+
+                    ifArmorOrWeapon(ID, list);
+
+                } else if (ID >= 4 && ID < 7) { // ARMOR
+                    ResultSet rs = DBConnect.CreateSelectStatement("select * from armor where armortype = '" + getclass + "';");
+
+                    while (rs.next()) {
+
+                        String armorName = rs.getString("armorName");
+                        int armorSpeed = rs.getInt("armorSpeed");
+                        int armorLevel = rs.getInt("armorLevel");
+                        int armorType = rs.getInt("armorType");
+                        int armorValue = rs.getInt("armor");
+                        int armorID = rs.getInt("armorID");
+
+                        armor = new Armor(armorName, armorID, armorValue, armorType, armorLevel, armorSpeed);
+                        armorList.add(armor);
                     }
                     
-                } else if (ID > midWeaponRange && ID <= higherWeaponRange) {
-                    
-                    int localAdapter = 3;
-                    ResultSet rs2 = DBConnect.CreateSelectStatement("select * from armor where armorID = '" + (ID + globalAdaper - localAdapter) + "';");
-                    
-                    if (rs2.next()) {
-                        String armorName = rs2.getString("armorName");
-                        int armor = rs2.getInt("armor");
-                        int armorLevel = rs2.getInt("armorLevel");
-                        int armorSpeed = rs2.getInt("armorSpeed");
-                        buyItems.add("Armor Stats");
-                        buyItems.add("Name" + armorName);
-                        buyItems.add("Armor Value: " + armor);
-                        buyItems.add("Armor Speed: " + armorSpeed);
-                        buyItems.add("Armor Level: " + armorLevel);
-                    }
+                    ifArmorOrWeapon(ID, list);
+
                 }
-                //System.out.println(ID);
-                ObservableList<Object> OL = FXCollections.observableArrayList(buyItems);
-                list.setItems(OL);
-                
+
                 DBConnect.close();
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -118,7 +115,7 @@ public class HoverMouse {
         button.setOnMouseExited((MouseEvent e) -> {
             button.setScaleX(1);
             button.setScaleY(1);
-            
+
             buyItems.removeAll(buyItems);
             ObservableList<Object> OL = FXCollections.observableArrayList(buyItems);
             list.setItems(OL);
@@ -132,7 +129,7 @@ public class HoverMouse {
             button.setScaleY(1.2);
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(500), temp
-                            -> handeClickEffect(button)));
+                    -> handeClickEffect(button)));
             timeline.play();
         });
 
@@ -153,17 +150,47 @@ public class HoverMouse {
         button.blendModeProperty().setValue(BlendMode.SRC_OVER);
     }
 
-    public void getSetAdapter() {
-        if (getclass == 1) {
-            globalAdaper = 0;
+    public void buyWeaponsAdd(ListView list, int index) {
+        buyItems.add("Weapon Stats");
+        buyItems.add("Name: " + weaponList.get(index).getName());
+        buyItems.add("Weapon Min Damage: " + weaponList.get(index).getWeaponMinDamage());
+        buyItems.add("Weapon Max Damage: " + weaponList.get(index).getWeaponMaxDamage());
+        buyItems.add("Weapon Speed: " + weaponList.get(index).getWeaponSpeed());
+        ObservableList<Object> OL = FXCollections.observableArrayList(buyItems);
+        list.setItems(OL);
+    }
 
-        } else if (getclass == 2) {
-            globalAdaper = 3;
-            System.out.println("Ranger");
+    public void buyArmorsAdd(ListView list, int index) {
+        buyItems.add("Armor Stats");
+        buyItems.add("Armor Name: " + armorList.get(index).getName());
+        buyItems.add("Armor Value: " + armorList.get(index).getArmor());
+        buyItems.add("Armor Speed: " + armorList.get(index).getArmorSpeed());
+        buyItems.add("Armor Level: " + armorList.get(index).getArmorLevel());
+        ObservableList<Object> OL = FXCollections.observableArrayList(buyItems);
+        list.setItems(OL);
+    }
 
-        } else if (getclass == 3) {
-            globalAdaper = 6;
+    public void ifArmorOrWeapon(int ID, ListView list) {
 
+        if (ID == 1) {
+            buyWeaponsAdd(list, 0);
+
+        } else if (ID == 2) {
+
+            buyWeaponsAdd(list, 1);
+        } else if (ID == 3) {
+
+            buyWeaponsAdd(list, 2);
+        } else if (ID == 4) {
+
+            buyArmorsAdd(list, 0);
+        } else if (ID == 5) {
+
+            buyArmorsAdd(list, 1);
+        } else if (ID == 6) {
+
+            buyArmorsAdd(list, 2);
         }
     }
+
 }
