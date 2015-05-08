@@ -30,10 +30,20 @@ public class FightController implements Initializable {
     @FXML
     private AnchorPane pane;
 
+    @FXML
+
     private int heroEXP;
+    public int timerCounter = 0;
+
+    private Hero heroChar;
+    private Enemy enemy;
+
+    AnchorPane creaturePane;
 
     @FXML
     public void goToCity(ActionEvent event) {
+
+        heroChar.heroTimeStop();
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -42,23 +52,12 @@ public class FightController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        heroEXP = DataStorage.getInstance().getHero().getEXP();
+        createEnemy();
+        loadStatsFromDataStorage();
+        fight();
         XPBAR();
+        whatHeroToLoad();
 
-        if (DataStorage.getInstance().getHero().getHeroType() == 1) {
-
-            spawnHero("Recourses/WarriorChar.png");
-
-        } else if (DataStorage.getInstance().getHero().getHeroType() == 2) {
-            
-            spawnHero("Recourses/RangerChar.png");
-
-        } else if (DataStorage.getInstance().getHero().getHeroType() == 3) {
-            
-            spawnHero("Recourses/MageChar.png");
-
-        }
     }
 
     public void XPBAR() {
@@ -68,20 +67,95 @@ public class FightController implements Initializable {
 
     }
 
-    public void spawnHero(String URL) {
+    public void spawnCreature(String URL, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY) {
 
         ImageView hero = new ImageView();
-        Image warriorDisplay = new Image(getClass().getResourceAsStream(URL));
-        hero.setImage(warriorDisplay);
+        Image heroDisplay = new Image(getClass().getResourceAsStream(URL));
+        hero.setImage(heroDisplay);
 
-        hero.setY(500);
-        hero.setX(30);
-
-        pane.getChildren().add(hero);
+        createCreaturePane(hero, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY);
+        pane.getChildren().add(creaturePane);
 
     }
 
-    public void CreateChar() {
+    public void loadStatsFromDataStorage() {
+
+        heroChar = DataStorage.getInstance().getHero();
+        heroEXP = DataStorage.getInstance().getHero().getEXP();
+
+    }
+
+    public void loadStatsFromDataBase() {
+
+        //Ladda in enemy
+    }
+
+    public void fight() {
+        heroChar.fightMonster(heroChar, enemy);
+        heroChar.heroTimeStart();
+
+    }
+
+    public void createEnemy() {
+
+        // Ska vara en random generator här beroende på vilken lvl osv man är
+        enemy = new Bear();
+        spawnCreature("Recourses/Bear.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
+
+    }
+
+    public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY) {
+
+        creaturePane = new AnchorPane();
+        creaturePane.prefWidth(creaturePaneWitdh);
+        creaturePane.prefHeight(creaturePaneHeight); //Storlek på pane
+        creaturePane.setLayoutX(creaturePaneX);
+        creaturePane.setLayoutY(creaturePaneY);
+
+        ImageView hpBar = new ImageView();
+        Image imageHealth = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
+        hpBar.setImage(imageHealth);
+
+        creaturePane.getChildren().add(hpBar);
+        creaturePane.getChildren().add(creature);
+
+        hpBar.setScaleX(healthPaneScaler());
+        hpBar.setX(healthPaneScaler() / 2);
+
+    }
+
+    public int healthPaneScaler() {
+
+        int currentHP = DataStorage.getInstance().getHero().getHeroCurrentHP();
+        int maxHP = DataStorage.getInstance().getHero().getHp();
+        int maxImageView = 50;
+
+        int calculate;
+
+        calculate = (currentHP * maxImageView) / maxHP; // Fullt fungerande, bara till alla kalla metoden varje tick
+        return calculate;
+    }
+
+    public void healthPaneSetPosX() {
+
+        //Ska flytta scaleX hit från createCreaturePan
+    }
+
+    public void whatHeroToLoad() {
+
+        if (DataStorage.getInstance().getHero().getHeroType() == 1) {
+
+            spawnCreature("Recourses/WarriorChar.png", 40, 60, 30, 500);
+
+        } else if (DataStorage.getInstance().getHero().getHeroType() == 2) {
+
+            spawnCreature("Recourses/RangerChar.png", 40, 60, 30, 500);
+
+        } else if (DataStorage.getInstance().getHero().getHeroType() == 3) {
+
+            spawnCreature("Recourses/MageChar.png", 40, 60, 30, 500);
+
+        }
 
     }
 

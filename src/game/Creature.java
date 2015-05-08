@@ -15,6 +15,7 @@ public abstract class Creature {
     protected int hp;
     protected int speed;
 
+
     public String getName() {
         return name;
     }
@@ -25,6 +26,10 @@ public abstract class Creature {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public void setHp(int hp) {

@@ -92,7 +92,7 @@ public class DBConnect {
                     + "heroGold ='" + DataStorage.getInstance().getHero().getGold() + "',  "
                     + "heroEXP ='" + DataStorage.getInstance().getHero().getEXP() + "',    "
                     + "heroCurrentHP ='" + DataStorage.getInstance().getHero().getHeroCurrentHP() + "',  "
-                    + "heroBaseSpeed ='" + DataStorage.getInstance().getHero().getHeroSpeed() + "',  "
+                    + "heroBaseSpeed ='" + DataStorage.getInstance().getHero().getSpeed() + "',  "
                     + "heroBaseDamage ='" + DataStorage.getInstance().getHero().getBaseDamage() + "' "
                     + "WHERE idHERO = '" + DataStorage.getInstance().getHero().getUserID() + "'");
 
