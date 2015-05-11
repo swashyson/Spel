@@ -110,15 +110,17 @@ public class Hero extends Creature {
 
     public void basicAttack(Weapon weapon, Enemy enemy) {
 
+        enemy.setHp(enemy.getHp()- getWeaponRandomDamage());
         System.out.println("You damaged enemy with a attack that damaged " + (getBaseDamage() + getWeaponRandomDamage()) + "To ");
+        heroTimeStop();
     }
 
     public int getWeaponRandomDamage() {
 
-        if (DataStorage.getInstance().getWeapon() != null) {
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
             Random rand = new Random();
-            int minDamage = DataStorage.getInstance().getWeapon().getWeaponMinDamage();
-            int maxDamage = DataStorage.getInstance().getWeapon().getWeaponMaxDamage();
+            int minDamage = HeroDataStorage.getInstance().getWeapon().getWeaponMinDamage();
+            int maxDamage = HeroDataStorage.getInstance().getWeapon().getWeaponMaxDamage();
             int R = rand.nextInt(maxDamage - minDamage) + minDamage;
             return R;
         }
@@ -126,9 +128,9 @@ public class Hero extends Creature {
     }
 
     public int getWeaponSpeed() {
-        if (DataStorage.getInstance().getWeapon() != null) {
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
 
-            int Speed = DataStorage.getInstance().getWeapon().getWeaponSpeed();
+            int Speed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
             return Speed;
         }
         return 0;
@@ -140,7 +142,7 @@ public class Hero extends Creature {
 
             @Override
             public void run() {;                                                //Attack!;
-                basicAttack(DataStorage.getInstance().getWeapon(), enemy); // måste få in värderna från enemy
+                basicAttack(HeroDataStorage.getInstance().getWeapon(), enemy); // måste få in värderna från enemy
             }
         }, 3000 - speed - getWeaponSpeed() * 2, 3000 - speed * -getWeaponSpeed() - 2); //Time tick speeden, desto snabbare speed man har desto snabbare slår man helt enkelt
         //Beräknar med basic speed och weaponSpeed, och en konstant * (multiplier*2)

@@ -40,8 +40,8 @@ public class InnSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentHealth = DataStorage.getInstance().getHero().getHeroCurrentHP();
-        maxHealth = DataStorage.getInstance().getHero().getHp();
+        currentHealth = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
+        maxHealth = HeroDataStorage.getInstance().getHero().getHp();
         //kan bugga något
         // behöver nog någon sorts timer för att uppdatera kontinuerligt
         // tills max health är uppnådd

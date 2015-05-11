@@ -29,7 +29,7 @@ public class CityController implements Initializable {
     private Armor armor;
     private int armorID;
 
-    int heroID = DataStorage.getInstance().getHero().getHeroID();
+    int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
     @FXML
     public void goToMenu(ActionEvent event) {
@@ -71,7 +71,7 @@ public class CityController implements Initializable {
         HoverMouse.getInstance().inHover(menu);
         HoverMouse.getInstance().outHover(menu);
 
-        DataStorage.getInstance().printHero();
+        HeroDataStorage.getInstance().printHero();
 
         checkWeapon();
         checkArmor();
@@ -103,7 +103,7 @@ public class CityController implements Initializable {
                 int weaponType = check.getInt("weaponType");
 
                 weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
-                DataStorage.getInstance().setWeapon(weapon);
+                HeroDataStorage.getInstance().setWeapon(weapon);
 
                 System.out.println(weapon);
             }
@@ -135,7 +135,7 @@ public class CityController implements Initializable {
                 int armorSpeed = check.getInt("armorSpeed");
 
                 armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
-                DataStorage.getInstance().setArmor(armor);
+                HeroDataStorage.getInstance().setArmor(armor);
 
                 System.out.println(armor);
 

@@ -10,16 +10,16 @@ package game;
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 //
-public class DataStorage {
+public class HeroDataStorage {
 
-    private static DataStorage myDataStorage;
+    private static HeroDataStorage myDataStorage;
     private Hero hero;
     private Weapon weapon;
     private Armor armor;
 
-    public static DataStorage getInstance() {
+    public static HeroDataStorage getInstance() {
         if (myDataStorage == null) {
-            myDataStorage = new DataStorage();
+            myDataStorage = new HeroDataStorage();
         }
 
         return myDataStorage;

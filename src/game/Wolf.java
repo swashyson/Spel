@@ -10,7 +10,13 @@ package game;
  * @author Mohini
  */
 public class Wolf extends Enemy {
-
+    public Wolf(String name,int hp, int maxDamage, int minDamage, int speed){
+        this.name = name;
+        this.hp = hp;
+        this.maxDamage = maxDamage;
+        this.minDamage = minDamage;
+        this.speed = speed;
+    }
     @Override
     protected void specialAttack1() {
 

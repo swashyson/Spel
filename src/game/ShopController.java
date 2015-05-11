@@ -57,7 +57,7 @@ public class ShopController implements Initializable {
     private final Button[] array = new Button[6];
     private final ArrayList<Object> currentItems = new ArrayList();
 
-    private final int getclass = DataStorage.getInstance().getHero().getHeroType();
+    private final int getclass = HeroDataStorage.getInstance().getHero().getHeroType();
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -220,9 +220,9 @@ public class ShopController implements Initializable {
 
         DBConnect.connect();
 
-        DataStorage.getInstance().setWeapon(weapon);
-        int LocalWeaponID = DataStorage.getInstance().getWeapon().getWeaponID();
-        int heroID = DataStorage.getInstance().getHero().getHeroID();
+        HeroDataStorage.getInstance().setWeapon(weapon);
+        int LocalWeaponID = HeroDataStorage.getInstance().getWeapon().getWeaponID();
+        int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
         try {
             ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_weapon where hero_idHero = '" + heroID + "';");
@@ -248,9 +248,9 @@ public class ShopController implements Initializable {
 
         DBConnect.connect();
 
-        DataStorage.getInstance().setArmor(armor);
-        int localArmorID = DataStorage.getInstance().getArmor().getArmorID();
-        int heroID = DataStorage.getInstance().getHero().getHeroID();
+        HeroDataStorage.getInstance().setArmor(armor);
+        int localArmorID = HeroDataStorage.getInstance().getArmor().getArmorID();
+        int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
         try {
             ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_armor where hero_idHero = '" + heroID + "';");
@@ -273,7 +273,7 @@ public class ShopController implements Initializable {
 
     public void removeWeapon(Button button, Button button2, Button button3, int ButtonID) {
 
-        if (DataStorage.getInstance().getWeapon() != null) {
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
 
             System.out.println("Du har ett vapen");
 
@@ -296,7 +296,7 @@ public class ShopController implements Initializable {
 
     public void removeArmor(Button button, Button button2, Button button3, int ButtonID) {
 
-        if (DataStorage.getInstance().getArmor() != null) {
+        if (HeroDataStorage.getInstance().getArmor() != null) {
 
             System.out.println("Du har en armor");
 
@@ -343,23 +343,23 @@ public class ShopController implements Initializable {
 
     public void listViewGetCurrentItems() {
 
-        if (DataStorage.getInstance().getWeapon() != null) {
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
             currentItems.add("Your Weapon");
             currentItems.add("____________________________________");
-            currentItems.add("Weapon Name: " + DataStorage.getInstance().getWeapon().getName());
-            currentItems.add("Weapon Min Damage: " + DataStorage.getInstance().getWeapon().getWeaponMinDamage());
-            currentItems.add("Weapon Max Damage: " + DataStorage.getInstance().getWeapon().getWeaponMaxDamage());
-            currentItems.add("Weapon Speed: " + DataStorage.getInstance().getWeapon().getWeaponSpeed());
+            currentItems.add("Weapon Name: " + HeroDataStorage.getInstance().getWeapon().getName());
+            currentItems.add("Weapon Min Damage: " + HeroDataStorage.getInstance().getWeapon().getWeaponMinDamage());
+            currentItems.add("Weapon Max Damage: " + HeroDataStorage.getInstance().getWeapon().getWeaponMaxDamage());
+            currentItems.add("Weapon Speed: " + HeroDataStorage.getInstance().getWeapon().getWeaponSpeed());
         } else {
             currentItems.add("You dont have a weapon");
         }
-        if (DataStorage.getInstance().getArmor() != null) {
+        if (HeroDataStorage.getInstance().getArmor() != null) {
 
             currentItems.add("Your Armor");
             currentItems.add("____________________________________");
-            currentItems.add("Armor Name: " + DataStorage.getInstance().getArmor().getName());
-            currentItems.add("Armor Value: " + DataStorage.getInstance().getArmor().getArmor());
-            currentItems.add("Armor Speed: " + DataStorage.getInstance().getArmor().getArmorSpeed());
+            currentItems.add("Armor Name: " + HeroDataStorage.getInstance().getArmor().getName());
+            currentItems.add("Armor Value: " + HeroDataStorage.getInstance().getArmor().getArmor());
+            currentItems.add("Armor Speed: " + HeroDataStorage.getInstance().getArmor().getArmorSpeed());
 
         } else {
             currentItems.add("You dont have a armor set");
@@ -371,10 +371,10 @@ public class ShopController implements Initializable {
     }
 
     public void removeWeaponRequest() {
-        if (DataStorage.getInstance().getWeapon() != null) {
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
             DBConnect.connect();
             ResultSet RS = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';");
-            int heroWeaponID = DataStorage.getInstance().getWeapon().getWeaponID();
+            int heroWeaponID = HeroDataStorage.getInstance().getWeapon().getWeaponID();
 
             int counter = 0;
 
@@ -406,10 +406,10 @@ public class ShopController implements Initializable {
     }
 
     public void removeArmorRequest() {
-        if (DataStorage.getInstance().getArmor() != null) {
+        if (HeroDataStorage.getInstance().getArmor() != null) {
             DBConnect.connect();
             ResultSet RS = DBConnect.CreateSelectStatement("select * from armor where armortype = '" + getclass + "';");
-            int heroArmorID = DataStorage.getInstance().getArmor().getArmorID();
+            int heroArmorID = HeroDataStorage.getInstance().getArmor().getArmorID();
 
             int counter = 0;
 
@@ -442,7 +442,7 @@ public class ShopController implements Initializable {
 
     public boolean levelReq(int itemLevel) {
 
-        if (DataStorage.getInstance().getHero().getLevel() >= itemLevel) {
+        if (HeroDataStorage.getInstance().getHero().getLevel() >= itemLevel) {
             return true;
         }
         return false;

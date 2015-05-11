@@ -61,7 +61,7 @@ public class HoverMouse {
             DBConnect.connect();
 
             try {
-                getclass = DataStorage.getInstance().getHero().getHeroType();
+                getclass = HeroDataStorage.getInstance().getHero().getHeroType();
                 weaponList = new ArrayList<>();
                 armorList = new ArrayList<>();
 

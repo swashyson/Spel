@@ -88,16 +88,16 @@ public class DBConnect {
         try {
             Statement st = c.createStatement();
             st.execute("UPDATE game.hero "
-                    + "SET heroLevel = '" + DataStorage.getInstance().getHero().getLevel() + "', "
-                    + "heroGold ='" + DataStorage.getInstance().getHero().getGold() + "',  "
-                    + "heroEXP ='" + DataStorage.getInstance().getHero().getEXP() + "',    "
-                    + "heroCurrentHP ='" + DataStorage.getInstance().getHero().getHeroCurrentHP() + "',  "
-                    + "heroBaseSpeed ='" + DataStorage.getInstance().getHero().getSpeed() + "',  "
-                    + "heroBaseDamage ='" + DataStorage.getInstance().getHero().getBaseDamage() + "' "
-                    + "WHERE idHERO = '" + DataStorage.getInstance().getHero().getUserID() + "'");
+                    + "SET heroLevel = '" + HeroDataStorage.getInstance().getHero().getLevel() + "', "
+                    + "heroGold ='" + HeroDataStorage.getInstance().getHero().getGold() + "',  "
+                    + "heroEXP ='" + HeroDataStorage.getInstance().getHero().getEXP() + "',    "
+                    + "heroCurrentHP ='" + HeroDataStorage.getInstance().getHero().getHeroCurrentHP() + "',  "
+                    + "heroBaseSpeed ='" + HeroDataStorage.getInstance().getHero().getSpeed() + "',  "
+                    + "heroBaseDamage ='" + HeroDataStorage.getInstance().getHero().getBaseDamage() + "' "
+                    + "WHERE idHERO = '" + HeroDataStorage.getInstance().getHero().getUserID() + "'");
 
-            DataStorage.getInstance().setArmor(null);
-            DataStorage.getInstance().setWeapon(null);
+            HeroDataStorage.getInstance().setArmor(null);
+            HeroDataStorage.getInstance().setWeapon(null);
 
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -34,7 +34,8 @@ public class FightController implements Initializable {
 
     private int heroEXP;
     public int timerCounter = 0;
-
+    public String[] fightOrder;
+    private Enemy[] enemys;  
     private Hero heroChar;
     private Enemy enemy;
 
@@ -53,7 +54,7 @@ public class FightController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createEnemy();
-        loadStatsFromDataStorage();
+        loadHeroStatsFromDataStorage();
         fight();
         XPBAR();
         whatHeroToLoad();
@@ -72,20 +73,21 @@ public class FightController implements Initializable {
         ImageView hero = new ImageView();
         Image heroDisplay = new Image(getClass().getResourceAsStream(URL));
         hero.setImage(heroDisplay);
-
-        createCreaturePane(hero, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY);
-        pane.getChildren().add(creaturePane);
-
-    }
-
-    public void loadStatsFromDataStorage() {
-
-        heroChar = DataStorage.getInstance().getHero();
-        heroEXP = DataStorage.getInstance().getHero().getEXP();
+        
+            createCreaturePane(hero, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY);
+            pane.getChildren().add(creaturePane);
+        
 
     }
 
-    public void loadStatsFromDataBase() {
+    public void loadHeroStatsFromDataStorage() {
+
+        heroChar = HeroDataStorage.getInstance().getHero();
+        heroEXP = HeroDataStorage.getInstance().getHero().getEXP();
+
+    }
+
+    public void loadEnemyStatsFromDataBase() {
 
         //Ladda in enemy
     }
@@ -99,9 +101,9 @@ public class FightController implements Initializable {
     public void createEnemy() {
 
         // Ska vara en random generator här beroende på vilken lvl osv man är
-        enemy = new Bear();
+        enemy = new Bear("Bear",1,1,1,1);
         spawnCreature("Recourses/Bear.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
-
+        
     }
 
     public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY) {
@@ -126,8 +128,8 @@ public class FightController implements Initializable {
 
     public int healthPaneScaler() {
 
-        int currentHP = DataStorage.getInstance().getHero().getHeroCurrentHP();
-        int maxHP = DataStorage.getInstance().getHero().getHp();
+        int currentHP = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
+        int maxHP = HeroDataStorage.getInstance().getHero().getHp();
         int maxImageView = 50;
 
         int calculate;
@@ -143,15 +145,15 @@ public class FightController implements Initializable {
 
     public void whatHeroToLoad() {
 
-        if (DataStorage.getInstance().getHero().getHeroType() == 1) {
+        if (HeroDataStorage.getInstance().getHero().getHeroType() == 1) {
 
             spawnCreature("Recourses/WarriorChar.png", 40, 60, 30, 500);
 
-        } else if (DataStorage.getInstance().getHero().getHeroType() == 2) {
+        } else if (HeroDataStorage.getInstance().getHero().getHeroType() == 2) {
 
             spawnCreature("Recourses/RangerChar.png", 40, 60, 30, 500);
 
-        } else if (DataStorage.getInstance().getHero().getHeroType() == 3) {
+        } else if (HeroDataStorage.getInstance().getHero().getHeroType() == 3) {
 
             spawnCreature("Recourses/MageChar.png", 40, 60, 30, 500);
 

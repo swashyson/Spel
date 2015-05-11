@@ -151,7 +151,7 @@ public class ViewCharController implements Initializable {
 
                     Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP, heroID);
 
-                    DataStorage.getInstance().setHero(hero);
+                    HeroDataStorage.getInstance().setHero(hero);
                 }
                 DBConnect.close();
 
