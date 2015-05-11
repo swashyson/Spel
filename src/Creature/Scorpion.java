@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
+package Creature;
 
 import Creature.Enemy;
+import Creature.Enemy;
+import game.Hero;
+import game.Hero;
 
 /**
  *

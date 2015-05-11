@@ -5,6 +5,8 @@
  */
 package game;
 
+import Creature.Scorpion;
+import Creature.Wolf;
 import DataStorage.HeroDataStorage;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -19,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import Creature.*;
+import DataStorage.EnemyDataStorage;
 
 /**
  * FXML Controller class
@@ -127,6 +131,12 @@ public class ViewCharController implements Initializable {
 
     @FXML
     public void play(ActionEvent event) {
+        loadHero();
+        loadenemys();
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "City");
+    }
+    public void loadHero(){
         try {
 
             DBConnect.connect();
@@ -156,8 +166,7 @@ public class ViewCharController implements Initializable {
                 }
                 DBConnect.close();
 
-                SwitchScene sc = new SwitchScene();
-                sc.change(event, "City");
+                
 
             } else {
                 fel.setText("You must select a hero");
@@ -165,8 +174,47 @@ public class ViewCharController implements Initializable {
         } catch (Exception ex) {
             fel.setText("You must select a hero");
         }
+        
     }
-
+    public void loadenemys(){
+        try {
+            DBConnect.connect();
+            ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
+            if(getCreature.next()){
+                String enemyName = getCreature.getString("enemyName");
+                int enemyHp = getCreature.getInt("enemyBaseHP");
+                int enemyMaxDamage = getCreature.getInt("enemyBaseMaxDamage");
+                int enemyMinDamage = getCreature.getInt("enemyBaseMinDamage");
+                int enemySpeed = getCreature.getInt("enemyBaseSpeed");
+                
+                switch (enemyName) {
+                    case "Bear":
+                        Bear bear = new Bear(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        EnemyDataStorage.getInstance().setBear(bear);
+                        break;
+                    case "Scorpion":
+                        Scorpion scorpion = new Scorpion(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        EnemyDataStorage.getInstance().setScorpion(scorpion);
+                        break;
+                    case "Snake":
+                        Snake snake = new Snake(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        EnemyDataStorage.getInstance().setSnake(snake);
+                        break;
+                    case "spider":
+                        Spider spider = new Spider(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        EnemyDataStorage.getInstance().setSpider(spider);
+                        break;
+                    case "Wolf":
+                        Wolf wolf = new Wolf(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        EnemyDataStorage.getInstance().setWolf(wolf);
+                        break;
+                }
+            }
+            DBConnect.close();
+        } catch (Exception ex) {
+            fel.setText("Error when loading enemys");
+        }
+    }
     public void changePic(String type) {
         javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("Recourses/" + type + ".png").toExternalForm());
         imageView.setImage(image);
