@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
+package Creature;
+
+import game.Hero;
+import Creature.Enemy;
 
 /**
  *
  * @author Mohini
  */
-public class Bear extends Enemy {
-    
-    public Bear(String name,int hp, int maxDamage, int minDamage, int speed){
+public class Spider extends Enemy {
+    public Spider(String name,int hp, int maxDamage, int minDamage, int speed){
         this.name = name;
         this.hp = hp;
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
         this.speed = speed;
-                
     }
     @Override
     protected void specialAttack1() {

@@ -5,6 +5,8 @@
  */
 package game;
 
+import Creature.Enemy;
+
 /**
  *
  * @author Mohini

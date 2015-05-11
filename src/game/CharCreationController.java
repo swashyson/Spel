@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 /**
  * FXML Controller class
  *
@@ -38,7 +37,7 @@ public class CharCreationController implements Initializable {
     private Label fel;
 
     public int type;
-
+    Hero hero;
     @FXML
     public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();
@@ -66,11 +65,11 @@ public class CharCreationController implements Initializable {
     }
 
     public void Create(ActionEvent event) {
-
+             
         try {
             DBConnect.connect();
 
-            int userID = Hero.userID;
+            int userID = hero.getUserID();
 
             ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
 

@@ -1,10 +1,17 @@
+package game;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
 
+
+
+import Creature.Creature;
+import Creature.Enemy;
+import DataStorage.HeroDataStorage;
+import Items.Weapon;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -110,7 +117,7 @@ public class Hero extends Creature {
 
     public void basicAttack(Weapon weapon, Enemy enemy) {
 
-        enemy.setHp(enemy.getHp()- getWeaponRandomDamage());
+        //enemy.setHp(enemy.getHp());
         System.out.println("You damaged enemy with a attack that damaged " + (getBaseDamage() + getWeaponRandomDamage()) + "To ");
         heroTimeStop();
     }

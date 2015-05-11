@@ -5,6 +5,9 @@
  */
 package game;
 
+import Items.Weapon;
+import Items.Armor;
+import DataStorage.HeroDataStorage;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javafx.animation.KeyFrame;

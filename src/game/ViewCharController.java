@@ -5,6 +5,7 @@
  */
 package game;
 
+import DataStorage.HeroDataStorage;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -38,10 +39,10 @@ public class ViewCharController implements Initializable {
     private ImageView imageView;
     @FXML
     private Label fel;
-
+    Hero hero;
     private final ArrayList<String> getName = new ArrayList();
     private final ArrayList getStats = new ArrayList();
-    private final int userID = Hero.userID;
+    private final int userID = hero.userID;
 
     @FXML
     public void back(ActionEvent event) {
@@ -149,9 +150,9 @@ public class ViewCharController implements Initializable {
                     int heroBaseSpeed = rs.getInt("heroBaseSpeed");
                     int heroBaseDamage = rs.getInt("heroBaseDamage");
 
-                    Hero hero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP, heroID);
+                    Hero newHero = new Hero(stringName, heroBaseHP, heroBaseSpeed, heroGold, heroBaseDamage, heroLevel, heroEXP, heroType, heroCurrentHP, heroID);
 
-                    HeroDataStorage.getInstance().setHero(hero);
+                    HeroDataStorage.getInstance().setHero(newHero);
                 }
                 DBConnect.close();
 

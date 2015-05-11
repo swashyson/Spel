@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
+package DataStorage;
+
+import Items.Armor;
+import game.Hero;
+import Items.Weapon;
 
 /**
  *

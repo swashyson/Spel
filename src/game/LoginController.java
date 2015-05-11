@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 /**
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
@@ -35,7 +34,7 @@ public class LoginController implements Initializable {
     private TextField name;
     @FXML
     private TextField password;
-
+    Hero hero;
     @FXML
     public void logIn(ActionEvent event) {
 
@@ -50,7 +49,7 @@ public class LoginController implements Initializable {
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
-
+                
                 Hero.userID = ID;
 
                 //DataStorage.getInstance().setUserID(ID);

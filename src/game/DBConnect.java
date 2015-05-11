@@ -5,6 +5,7 @@
  */
 package game;
 
+import DataStorage.HeroDataStorage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
