@@ -5,9 +5,12 @@
  */
 package game;
 
-import Creature.Enemy;
-import Creature.Bear;
+
+import Creature.Scorpion;
+import Creature.Wolf;
+import Creature.*;
 import DataStorage.HeroDataStorage;
+import DataStorage.EnemyDataStorage;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -42,10 +45,14 @@ public class FightController implements Initializable {
     private int heroEXP;
     public int timerCounter = 0;
     public String[] fightOrder;
-    private Enemy[] enemys;  
     private Hero heroChar;
     private Enemy enemy;
-
+    private Enemy[] enemys;
+    private Bear bear;
+    private Scorpion scorpion;
+    private Snake snake;
+    private Spider spider;
+    private Wolf wolf;
     AnchorPane creaturePane1;
     AnchorPane creaturePane2;
     AnchorPane creaturePane3;
@@ -62,11 +69,13 @@ public class FightController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         createEnemy();
         loadHeroStatsFromDataStorage();
         XPBAR();
         whatHeroToLoad();
         fight();
+        
 
     }
 
@@ -85,6 +94,8 @@ public class FightController implements Initializable {
         
             createCreaturePane(creature, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY);
             pane.getChildren().add(creaturePane1);
+            pane.getChildren().add(creaturePane2);
+            pane.getChildren().add(creaturePane3);
         
 
     }
@@ -96,9 +107,13 @@ public class FightController implements Initializable {
 
     }
 
-    public void loadEnemyStatsFromDataBase() {
+    public void loadEnemyStatsFromDataStorage() {
 
-        //Ladda in enemy
+       bear = EnemyDataStorage.getInstance().getBear();
+       scorpion = EnemyDataStorage.getInstance().getScorpion();
+       snake = EnemyDataStorage.getInstance().getSnake();
+       spider = EnemyDataStorage.getInstance().getspider();
+       wolf = EnemyDataStorage.getInstance().getWolf();
     }
 
     public void fight() {
@@ -112,20 +127,40 @@ public class FightController implements Initializable {
         // Ska vara en random generator här beroende på vilken lvl osv man är
         
         Random rand = new Random();
-        int numberCreature = rand.nextInt(1)+2;
+        int numberCreature = rand.nextInt(2)+1;
         System.out.print("antal djur" + numberCreature);
-        for(int i =1; i <=numberCreature;i++){
-            int whatCreature = rand.nextInt(1)+1;
+        for(int i =0; i <numberCreature;i++){
+            int whatCreature = rand.nextInt(4)+1;
             
-            for(int a = 1; a <= whatCreature; a++){
-                if(a == 1 ){
+            
+                if(whatCreature == 1 ){
                     enemy = new Bear("Bear",1,1,1,1);
+                    spawnCreature("Recourses/Bear.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
+                    System.out.printf("skapar en " + whatCreature);
+                }
+                else if(whatCreature == 2 ){
+                    enemy = new Scorpion("Scorpion",1,1,1,1);
+                    spawnCreature("Recourses/Warrior.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
+                    System.out.printf("skapar en " + whatCreature);
+                }
+                else if(whatCreature == 3 ){
+                    enemy = new Snake("Snake",1,1,1,1);
+                    spawnCreature("Recourses/RangerChar.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
+                    System.out.printf("skapar en " + whatCreature);
+                }
+                else if(whatCreature == 4 ){
+                    enemy = new Spider("Spider",1,1,1,1);
+                    spawnCreature("Recourses/Bear.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
+                    System.out.printf("skapar en " + whatCreature);
+                }
+                else if(whatCreature == 5 ){
+                    enemy = new Wolf("Wolf",1,1,1,1);
                     spawnCreature("Recourses/Bear.png", 40, 60, 730, 500); // spawna en fiende på dessa positionerna med en pane
                     System.out.printf("skapar en " + whatCreature);
                 }
         }
         
-        }
+        
     }
 
     public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY) {
@@ -153,7 +188,7 @@ public class FightController implements Initializable {
             creaturePane2.prefWidth(creaturePaneWitdh);
             creaturePane2.prefHeight(creaturePaneHeight); //Storlek på pane
             creaturePane2.setLayoutX(creaturePaneX);
-            creaturePane2.setLayoutY(creaturePaneY);
+            creaturePane2.setLayoutY(creaturePaneY+ 100);
             ImageView hpBarCreature2 = new ImageView();
             Image imageHealthCreature2 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
             hpBarCreature2.setImage(imageHealthCreature2);
@@ -168,7 +203,7 @@ public class FightController implements Initializable {
             creaturePane3.prefWidth(creaturePaneWitdh);
             creaturePane3.prefHeight(creaturePaneHeight); //Storlek på pane
             creaturePane3.setLayoutX(creaturePaneX);
-            creaturePane3.setLayoutY(creaturePaneY);
+            creaturePane3.setLayoutY(creaturePaneY+200);
             ImageView hpBarCreature3 = new ImageView();
             Image imageHealthCreature3 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
             hpBarCreature3.setImage(imageHealthCreature3);

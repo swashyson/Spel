@@ -7,6 +7,8 @@ package Creature;
 
 import Creature.Enemy;
 import Creature.Enemy;
+import Creature.Enemy;
+import game.Hero;
 import game.Hero;
 import game.Hero;
 
