@@ -5,6 +5,7 @@
  */
 package game;
 
+import Creature.Hero;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -50,7 +51,7 @@ public class LoginController implements Initializable {
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
                 
-                Hero.userID = ID;
+                hero.setUserID(ID);
 
                 //DataStorage.getInstance().setUserID(ID);
                 DBConnect.close();

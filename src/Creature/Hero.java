@@ -1,4 +1,4 @@
-package game;
+package Creature;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,7 +22,7 @@ import java.util.TimerTask;
  */
 public class Hero extends Creature {
 
-    static int userID;
+    private int userID;
     private int heroLevel;
     private int heroGold;
     private int heroEXP;

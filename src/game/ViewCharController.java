@@ -5,6 +5,7 @@
  */
 package game;
 
+import Creature.Hero;
 import Creature.Scorpion;
 import Creature.Wolf;
 import DataStorage.HeroDataStorage;
@@ -46,7 +47,7 @@ public class ViewCharController implements Initializable {
     Hero hero;
     private final ArrayList<String> getName = new ArrayList();
     private final ArrayList getStats = new ArrayList();
-    private final int userID = hero.userID;
+    private final int userID = hero.getUserID();
 
     @FXML
     public void back(ActionEvent event) {

@@ -6,6 +6,7 @@
 package game;
 
 
+import Creature.Hero;
 import Creature.Scorpion;
 import Creature.Wolf;
 import Creature.*;

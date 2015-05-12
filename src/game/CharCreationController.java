@@ -5,6 +5,7 @@
  */
 package game;
 
+import Creature.Hero;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;

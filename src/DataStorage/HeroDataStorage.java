@@ -6,7 +6,7 @@
 package DataStorage;
 
 import Items.Armor;
-import game.Hero;
+import Creature.Hero;
 import Items.Weapon;
 
 /**
