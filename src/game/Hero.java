@@ -1,4 +1,4 @@
-package Creature;
+package game;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,6 +9,8 @@ package Creature;
 
 
 import Creature.Creature;
+import Creature.Creature;
+import Creature.Enemy;
 import Creature.Enemy;
 import DataStorage.HeroDataStorage;
 import Items.Weapon;

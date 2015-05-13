@@ -5,7 +5,6 @@
  */
 package game;
 
-import Creature.Hero;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -15,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import DataStorage.*;
 /**
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
@@ -51,9 +51,9 @@ public class LoginController implements Initializable {
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
                 
-                hero.setUserID(ID);
+           
 
-                //DataStorage.getInstance().setUserID(ID);
+                HeroDataStorage.getInstance().setuserID(ID);
                 DBConnect.close();
             } else {
                 fel.setText("Wrong username/password");

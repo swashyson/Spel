@@ -5,10 +5,9 @@
  */
 package game;
 
-import Creature.Hero;
 import Creature.Scorpion;
 import Creature.Wolf;
-import DataStorage.HeroDataStorage;
+import DataStorage.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class ViewCharController implements Initializable {
     Hero hero;
     private final ArrayList<String> getName = new ArrayList();
     private final ArrayList getStats = new ArrayList();
-    private final int userID = hero.getUserID();
+    private final int userID = HeroDataStorage.getInstance().getuserID();
 
     @FXML
     public void back(ActionEvent event) {
@@ -133,7 +132,7 @@ public class ViewCharController implements Initializable {
     @FXML
     public void play(ActionEvent event) {
         loadHero();
-        loadenemys();
+        loadEnemysToDataStorage();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
@@ -144,7 +143,6 @@ public class ViewCharController implements Initializable {
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            //int userID = DataStorage.getInstance().getUserID();
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
             System.out.println("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
 
@@ -177,7 +175,7 @@ public class ViewCharController implements Initializable {
         }
         
     }
-    public void loadenemys(){
+    public void loadEnemysToDataStorage(){
         try {
             DBConnect.connect();
             ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");

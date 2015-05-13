@@ -6,12 +6,8 @@
 package game;
 
 
-import Creature.Hero;
-import Creature.Scorpion;
-import Creature.Wolf;
 import Creature.*;
-import DataStorage.HeroDataStorage;
-import DataStorage.EnemyDataStorage;
+import DataStorage.*;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -134,22 +130,29 @@ public class FightController implements Initializable {
             int whatCreature = rand.nextInt(4)+1;
             
             
-                if(whatCreature == 1 ){
-                    enemy = new Bear("Bear",1,1,1,1);
-                }
-                else if(whatCreature == 2 ){
-                    enemy = new Scorpion("Scorpion",1,1,1,1);
-                }
-                else if(whatCreature == 3 ){
-                    enemy = new Snake("Snake",1,1,1,1);
-                }
-                else if(whatCreature == 4 ){
-                    enemy = new Spider("Spider",1,1,1,1);
-                }
-                else if(whatCreature == 5 ){
-                    enemy = new Wolf("Wolf",1,1,1,1);
-                }
-                enemys[i] = enemy;
+            if(whatCreature == 1 ){
+                enemy = new Bear("Bear",1,1,1,1);
+            }
+            else if(whatCreature == 2 ){
+                enemy = new Scorpion("Scorpion",1,1,1,1);
+            }
+            else if(whatCreature == 3 ){
+                enemy = new Snake("Snake",1,1,1,1);
+            }
+            else if(whatCreature == 4 ){
+                enemy = new Spider("Spider",1,1,1,1);
+            }
+            else if(whatCreature == 5 ){
+                enemy = new Wolf("Wolf",1,1,1,1);
+            }
+            switch(i){
+                case 0: FightDataStorage.getInstance().setEnemy1(enemy);
+                    break;
+                case 1: FightDataStorage.getInstance().setEnemy2(enemy);
+                    break;
+                case 2: FightDataStorage.getInstance().setEnemy3(enemy);
+                    break;
+            }
         }
         
         
@@ -160,7 +163,7 @@ public class FightController implements Initializable {
         creaturePane1 =  new AnchorPane();
         creaturePane2 =  new AnchorPane();
         creaturePane3 =  new AnchorPane();
-        for(int i = 0; i < enemys.length;i++){
+        
         if(creaturePane1.getChildren().isEmpty()){
         creaturePane1.prefWidth(creaturePaneWitdh);
         creaturePane1.prefHeight(creaturePaneHeight); //Storlek på pane
@@ -207,7 +210,7 @@ public class FightController implements Initializable {
             hpBarCreature3.setScaleX(healthPaneScaler());
             hpBarCreature3.setX(healthPaneScaler() / 2);
         }
-        }
+        
     }
 
     public int healthPaneScaler() {
