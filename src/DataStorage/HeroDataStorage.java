@@ -6,7 +6,7 @@
 package DataStorage;
 
 import Items.Armor;
-import Creature.Hero;
+import game.Hero;
 import Items.Weapon;
 
 /**
@@ -16,17 +16,18 @@ import Items.Weapon;
 //
 public class HeroDataStorage {
 
-    private static HeroDataStorage myDataStorage;
+    private static HeroDataStorage heroDataStorage ;
     private Hero hero;
     private Weapon weapon;
     private Armor armor;
+    private int userID;
 
     public static HeroDataStorage getInstance() {
-        if (myDataStorage == null) {
-            myDataStorage = new HeroDataStorage();
+        if (heroDataStorage  == null) {
+            heroDataStorage  = new HeroDataStorage();
         }
 
-        return myDataStorage;
+        return heroDataStorage ;
     }
 
     public void setHero(Hero hero) {
@@ -61,6 +62,12 @@ public class HeroDataStorage {
 
         return armor;
     }
+    public void setuserID(int userID){
+        this.userID = userID;        
+    }
+    public int getuserID(){
+        return userID;
+    } 
 
     public void printHero() {
 

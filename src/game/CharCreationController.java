@@ -5,7 +5,7 @@
  */
 package game;
 
-import Creature.Hero;
+import DataStorage.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -70,7 +70,7 @@ public class CharCreationController implements Initializable {
         try {
             DBConnect.connect();
 
-            int userID = hero.getUserID();
+            int userID = HeroDataStorage.getInstance().getuserID();
 
             ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
 

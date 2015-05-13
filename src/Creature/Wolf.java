@@ -5,6 +5,7 @@
  */
 package Creature;
 
+import game.Hero;
 import Creature.Enemy;
 import Creature.Enemy;
 import Creature.Enemy;

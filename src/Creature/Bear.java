@@ -5,6 +5,8 @@
  */
 package Creature;
 
+import game.Hero;
+
 /**
  *
  * @author Mohini
