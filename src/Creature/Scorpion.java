@@ -37,14 +37,14 @@ public class Scorpion extends Enemy {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    protected int getMaxDmg() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public int getMaxDmg() {
+        return maxDamage;
     }
 
-    @Override
-    protected int getMinDmg() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public int getMinDmg() {
+        return minDamage;
     }
 
 }

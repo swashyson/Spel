@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import Creature.*;
-import DataStorage.EnemyDataStorage;
+import DataStorage.EnemyBaseDataStorage;
 
 /**
  * FXML Controller class
@@ -179,7 +179,7 @@ public class ViewCharController implements Initializable {
         try {
             DBConnect.connect();
             ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
-            if(getCreature.next()){
+            while(getCreature.next()){
                 String enemyName = getCreature.getString("enemyName");
                 int enemyHp = getCreature.getInt("enemyBaseHP");
                 int enemyMaxDamage = getCreature.getInt("enemyBaseMaxDamage");
@@ -189,23 +189,23 @@ public class ViewCharController implements Initializable {
                 switch (enemyName) {
                     case "Bear":
                         Bear bear = new Bear(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
-                        EnemyDataStorage.getInstance().setBear(bear);
+                        EnemyBaseDataStorage.getInstance().setBear(bear);
                         break;
                     case "Scorpion":
                         Scorpion scorpion = new Scorpion(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
-                        EnemyDataStorage.getInstance().setScorpion(scorpion);
+                        EnemyBaseDataStorage.getInstance().setScorpion(scorpion);
                         break;
                     case "Snake":
                         Snake snake = new Snake(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
-                        EnemyDataStorage.getInstance().setSnake(snake);
+                        EnemyBaseDataStorage.getInstance().setSnake(snake);
                         break;
-                    case "spider":
+                    case "Spider":
                         Spider spider = new Spider(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
-                        EnemyDataStorage.getInstance().setSpider(spider);
+                        EnemyBaseDataStorage.getInstance().setSpider(spider);
                         break;
                     case "Wolf":
                         Wolf wolf = new Wolf(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
-                        EnemyDataStorage.getInstance().setWolf(wolf);
+                        EnemyBaseDataStorage.getInstance().setWolf(wolf);
                         break;
                 }
             }

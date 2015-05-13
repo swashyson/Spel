@@ -15,8 +15,8 @@ import Creature.Wolf;
  *
  * @author Jonni
  */
-public class EnemyDataStorage {
-    private static EnemyDataStorage enemyDataStorage;
+public class EnemyBaseDataStorage {
+    private static EnemyBaseDataStorage enemyDataStorage;
     private Bear bear;
     private Scorpion scorpion;
     private Snake snake;
@@ -24,9 +24,9 @@ public class EnemyDataStorage {
     private Wolf wolf;
     
 
-    public static EnemyDataStorage getInstance() {
+    public static EnemyBaseDataStorage getInstance() {
         if (enemyDataStorage == null) {
-            enemyDataStorage = new EnemyDataStorage();
+            enemyDataStorage = new EnemyBaseDataStorage();
         }
         
         return enemyDataStorage;
@@ -56,7 +56,7 @@ public class EnemyDataStorage {
         this.spider = spider;
     }
     
-    public Spider getspider(){
+    public Spider getSpider(){
         return spider;
     }
     public void setWolf(Wolf wolf){

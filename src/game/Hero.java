@@ -8,11 +8,9 @@ package game;
 
 
 
-import Creature.Creature;
-import Creature.Creature;
-import Creature.Enemy;
-import Creature.Enemy;
-import DataStorage.HeroDataStorage;
+
+import Creature.*;
+import DataStorage.*;
 import Items.Weapon;
 import java.util.Random;
 import java.util.Timer;
@@ -111,17 +109,34 @@ public class Hero extends Creature {
         return heroBaseDamage;
     }
 
-    public void fightMonster(Hero hero, Enemy enemy) {
-
-        System.out.println("Select Monster"); //Lägga in denna i heroTimeStart och byta plats på dom
+    public void fightMonster(Hero hero, int i) {
+        
+        if(i == 1){
+            int startHp = FightDataStorage.getInstance().getEnemy1().getHp();
+            int dmg = getWeaponRandomDamage();
+            int newHp = startHp - dmg;
+            FightDataStorage.getInstance().getEnemy1().setHp(newHp);
+            System.err.println(newHp);
+        }
+        else if(i == 2){
+            int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
+            int dmg = getWeaponRandomDamage();
+            int newHp = startHp - dmg;
+            FightDataStorage.getInstance().getEnemy2().setHp(newHp);
+        }
+        else if(i == 3){
+            int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
+            int dmg = getWeaponRandomDamage();
+            int newHp = startHp - dmg;
+            FightDataStorage.getInstance().getEnemy2().setHp(newHp);
+        }
+        
 
     }
 
-    public void basicAttack(Weapon weapon, Enemy enemy) {
+    public void basicAttack(Weapon weapon, int i ) {
 
-        //enemy.setHp(enemy.getHp());
-        System.out.println("You damaged enemy with a attack that damaged " + (getBaseDamage() + getWeaponRandomDamage()) + "To ");
-        heroTimeStop();
+        
     }
 
     public int getWeaponRandomDamage() {
@@ -151,7 +166,7 @@ public class Hero extends Creature {
 
             @Override
             public void run() {;                                                //Attack!;
-                basicAttack(HeroDataStorage.getInstance().getWeapon(), enemy); // måste få in värderna från enemy
+                basicAttack(HeroDataStorage.getInstance().getWeapon(), 1); // måste få in värderna från enemy
             }
         }, 3000 - speed - getWeaponSpeed() * 2, 3000 - speed * -getWeaponSpeed() - 2); //Time tick speeden, desto snabbare speed man har desto snabbare slår man helt enkelt
         //Beräknar med basic speed och weaponSpeed, och en konstant * (multiplier*2)

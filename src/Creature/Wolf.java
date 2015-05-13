@@ -33,18 +33,18 @@ public class Wolf extends Enemy {
     }
 
     @Override
-    protected Enemy attack(Hero hero) {
+    public Enemy attack(Hero hero) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    protected int getMaxDmg() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getMaxDmg() {
+        return maxDamage;
     }
 
     @Override
-    protected int getMinDmg() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getMinDmg() {
+        return minDamage;
     }
 
 }
