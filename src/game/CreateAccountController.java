@@ -75,7 +75,7 @@ public class CreateAccountController implements Initializable {
         typeQuestion = question.getText();
         typeAnswer = answer.getText();
         
-        System.out.println("INSERT INTO game.login (userName, userPassword, userEmail)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "''" + typeAnswer + "')");
+        System.out.println("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')");
         DBConnect.CreateInsertStatement("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')", fel, "User already exists");
         System.out.println("Account skapat");
         DBConnect.close();

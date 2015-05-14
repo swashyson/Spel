@@ -17,6 +17,8 @@ public class FightDataStorage {
     private Enemy enemy1;
     private Enemy enemy2;
     private Enemy enemy3;
+    
+    private String EnemyID;
 
     public static FightDataStorage getInstance() {
         if (fightDataStorage  == null) {
@@ -43,5 +45,11 @@ public class FightDataStorage {
     }
     public Enemy getEnemy3(){
         return enemy3;
+    }
+    public void setEnemyID(String EnemyID){
+        this.EnemyID = EnemyID;
+    }
+    public String getEnemyID(){
+        return EnemyID;
     }
 }

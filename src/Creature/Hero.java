@@ -5,11 +5,6 @@ package Creature;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
-
-import Creature.*;
 import DataStorage.*;
 import Items.Weapon;
 import java.util.Random;
@@ -30,9 +25,7 @@ public class Hero extends Creature {
     private int heroType;
     private int heroCurrentHP;
     private final int heroID;
-
     private Timer timer;
-    private Enemy enemy;
 
     public Hero(String heroName, int heroBaseHp, int heroSpeed, int heroGold, int heroBaseDamage, int heroLevel, int heroEXP, int heroType, int heroCurrentHP, int heroID) {
 
@@ -110,33 +103,38 @@ public class Hero extends Creature {
     }
 
     public void fightMonster(Hero hero, int i) {
-        
-        if(i == 1){
+
+        if (i == 1) {
             int startHp = FightDataStorage.getInstance().getEnemy1().getHp();
             int dmg = getWeaponRandomDamage();
             int newHp = startHp - dmg;
             FightDataStorage.getInstance().getEnemy1().setHp(newHp);
             System.err.println(newHp);
-        }
-        else if(i == 2){
+        } else if (i == 2) {
+            int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
+            int dmg = getWeaponRandomDamage();
+            int newHp = startHp - dmg;
+            FightDataStorage.getInstance().getEnemy2().setHp(newHp);
+        } else if (i == 3) {
             int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
             int dmg = getWeaponRandomDamage();
             int newHp = startHp - dmg;
             FightDataStorage.getInstance().getEnemy2().setHp(newHp);
         }
-        else if(i == 3){
-            int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
-            int dmg = getWeaponRandomDamage();
-            int newHp = startHp - dmg;
-            FightDataStorage.getInstance().getEnemy2().setHp(newHp);
-        }
-        
 
     }
 
-    public void basicAttack(Weapon weapon, int i ) {
+    public void basicAttack(Weapon weapon) {
 
-        
+        switch (FightDataStorage.getInstance().getEnemyID()) {
+            case "1":
+                FightDataStorage.getInstance().getEnemy1().setHp(30);
+                break;
+            case "2":
+                FightDataStorage.getInstance().getEnemy1().setHp(10);
+                break;
+        }
+
     }
 
     public int getWeaponRandomDamage() {
@@ -161,14 +159,15 @@ public class Hero extends Creature {
     }
 
     public void heroTimeStart() {
-        timer = new Timer();
+
+        timer = new Timer(); 
         timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {;                                                //Attack!;
-                basicAttack(HeroDataStorage.getInstance().getWeapon(), 1); // måste få in värderna från enemy
+                basicAttack(HeroDataStorage.getInstance().getWeapon()); // måste få in värderna från enemy
             }
-        }, 3000 - speed - getWeaponSpeed() * 2, 3000 - speed * -getWeaponSpeed() - 2); //Time tick speeden, desto snabbare speed man har desto snabbare slår man helt enkelt
+        }, 3000 - speed - getWeaponSpeed() * 2, 3000 - speed - getWeaponSpeed() * 2); //Time tick speeden, desto snabbare speed man har desto snabbare slår man helt enkelt
         //Beräknar med basic speed och weaponSpeed, och en konstant * (multiplier*2)
         //Dubbelt för att den ska loopas i onändlighet
     }

@@ -5,9 +5,9 @@
  */
 package game;
 
-import Items.Weapon;
-import Items.Armor;
 import DataStorage.HeroDataStorage;
+import Items.Armor;
+import Items.Weapon;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javafx.animation.KeyFrame;
@@ -17,7 +17,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
@@ -36,6 +38,8 @@ public class HoverMouse {
     private Armor armor;
     ArrayList<Weapon> weaponList;
     ArrayList<Armor> armorList;
+    
+    private String attackSelect;
 
     public static HoverMouse getInstance() {
         if (hoverMouse == null) {
@@ -101,7 +105,7 @@ public class HoverMouse {
                         armor = new Armor(armorName, armorID, armorValue, armorType, armorLevel, armorSpeed);
                         armorList.add(armor);
                     }
-                    
+
                     ifArmorOrWeapon(ID, list);
 
                 }

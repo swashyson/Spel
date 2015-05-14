@@ -5,14 +5,16 @@
  */
 package game;
 
-
-import Creature.Hero;
 import Creature.*;
+import Creature.Hero;
 import DataStorage.*;
 import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,19 +22,21 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
-public class FightController implements Initializable,MouseListener {
+public class FightController implements Initializable {
 
     @FXML
     Button backToCity;
@@ -54,15 +58,24 @@ public class FightController implements Initializable,MouseListener {
     private Snake snake;
     private Spider spider;
     private Wolf wolf;
-    AnchorPane creaturePane1;
-    AnchorPane creaturePane2;
-    AnchorPane creaturePane3;
-    int attacking;
+    private AnchorPane creaturePane1 = new AnchorPane();
+    private AnchorPane creaturePane2 = new AnchorPane();
+    private AnchorPane creaturePane3 = new AnchorPane();
+    private AnchorPane creaturePane4;
+
+    private ImageView hpBarCreature1 = new ImageView();
+    private ImageView hpBarCreature2 = new ImageView();
+    private ImageView hpBarCreature3 = new ImageView();
+    private String attackSelect;
+
+    private Timeline timeline;
 
     @FXML
     public void goToCity(ActionEvent event) {
 
         heroChar.heroTimeStop();
+        stopWorldTime();
+        attackSelect = null;
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -71,14 +84,15 @@ public class FightController implements Initializable,MouseListener {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         loadEnemyStatsFromDataStorage();
-        createEnemy();
+
         loadHeroStatsFromDataStorage();
         XPBAR();
         whatHeroToLoad();
-        
-
+        createEnemy();
+        selectEnemy();
+        worldTime();
     }
 
     public void XPBAR() {
@@ -88,17 +102,13 @@ public class FightController implements Initializable,MouseListener {
 
     }
 
-    public void spawnCreature(String URL, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY) {
+    public void spawnCreature(String URL, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY, String ID) {
 
         ImageView creature = new ImageView();
         Image creatureDisplay = new Image(getClass().getResourceAsStream(URL));
         creature.setImage(creatureDisplay);
-        
-            createCreaturePane(creature, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY);
-            pane.getChildren().add(creaturePane1);
-            pane.getChildren().add(creaturePane2);
-            pane.getChildren().add(creaturePane3);
-        
+
+        createCreaturePane(creature, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY, ID);
 
     }
 
@@ -111,26 +121,11 @@ public class FightController implements Initializable,MouseListener {
 
     public void loadEnemyStatsFromDataStorage() {
 
-       bear = EnemyBaseDataStorage.getInstance().getBear();
-       scorpion = EnemyBaseDataStorage.getInstance().getScorpion();
-       snake = EnemyBaseDataStorage.getInstance().getSnake();
-       spider = EnemyBaseDataStorage.getInstance().getSpider();
-       wolf = EnemyBaseDataStorage.getInstance().getWolf();
-    }
-
-    public void fight() {
-        System.err.println("is pressed");
-        if(creaturePane1.isPressed()){
-            attacking = 1;
-        } else if(creaturePane2.isPressed()){
-            attacking = 2;
-        } else if(creaturePane3.isPressed()){
-            attacking = 3;
-        }
-        if(attacking != 0){
-        heroChar.fightMonster(heroChar, attacking);
-        }
-
+        bear = EnemyBaseDataStorage.getInstance().getBear();
+        scorpion = EnemyBaseDataStorage.getInstance().getScorpion();
+        snake = EnemyBaseDataStorage.getInstance().getSnake();
+        spider = EnemyBaseDataStorage.getInstance().getSpider();
+        wolf = EnemyBaseDataStorage.getInstance().getWolf();
     }
 
     public void createEnemy() {
@@ -140,106 +135,101 @@ public class FightController implements Initializable,MouseListener {
         Random rand = new Random();
         int numberCreature = rand.nextInt(2) + 1;
         System.out.print("antal djur" + numberCreature);
-        for(int i =0; i <numberCreature;i++){
-            int whatCreature = rand.nextInt(4)+1;
-            
-            
-            if(whatCreature == 1 ){
-                enemy = new Bear(EnemyBaseDataStorage.getInstance().getBear().getName(),EnemyBaseDataStorage.getInstance().getBear().getHp(),EnemyBaseDataStorage.getInstance().getBear().getMaxDmg(),EnemyBaseDataStorage.getInstance().getBear().getMinDmg(),EnemyBaseDataStorage.getInstance().getBear().getSpeed());
+        for (int i = 0; i < numberCreature; i++) {
+            int whatCreature = rand.nextInt(4) + 1;
+
+            if (whatCreature == 1) {
+                enemy = new Bear(EnemyBaseDataStorage.getInstance().getBear().getName(), EnemyBaseDataStorage.getInstance().getBear().getHp(), EnemyBaseDataStorage.getInstance().getBear().getMaxDmg(), EnemyBaseDataStorage.getInstance().getBear().getMinDmg(), EnemyBaseDataStorage.getInstance().getBear().getSpeed());
+                pic = "Recourses/Bear.png";
+            } else if (whatCreature == 2) {
+                enemy = new Scorpion(EnemyBaseDataStorage.getInstance().getScorpion().getName(), EnemyBaseDataStorage.getInstance().getScorpion().getHp(), EnemyBaseDataStorage.getInstance().getScorpion().getMaxDmg(), EnemyBaseDataStorage.getInstance().getScorpion().getMinDmg(), EnemyBaseDataStorage.getInstance().getScorpion().getSpeed());
+                pic = "Recourses/Bear.png";
+            } else if (whatCreature == 3) {
+                enemy = new Snake(EnemyBaseDataStorage.getInstance().getSnake().getName(), EnemyBaseDataStorage.getInstance().getSnake().getHp(), EnemyBaseDataStorage.getInstance().getSnake().getMaxDmg(), EnemyBaseDataStorage.getInstance().getSnake().getMinDmg(), EnemyBaseDataStorage.getInstance().getSnake().getSpeed());
+                pic = "Recourses/Bear.png";
+            } else if (whatCreature == 4) {
+                enemy = new Spider(EnemyBaseDataStorage.getInstance().getSpider().getName(), EnemyBaseDataStorage.getInstance().getSpider().getHp(), EnemyBaseDataStorage.getInstance().getSpider().getMaxDmg(), EnemyBaseDataStorage.getInstance().getSpider().getMinDmg(), EnemyBaseDataStorage.getInstance().getSpider().getSpeed());
+                pic = "Recourses/Bear.png";
+            } else if (whatCreature == 5) {
+                enemy = new Wolf(EnemyBaseDataStorage.getInstance().getWolf().getName(), EnemyBaseDataStorage.getInstance().getWolf().getHp(), EnemyBaseDataStorage.getInstance().getWolf().getMaxDmg(), EnemyBaseDataStorage.getInstance().getWolf().getMinDmg(), EnemyBaseDataStorage.getInstance().getWolf().getSpeed());
                 pic = "Recourses/Bear.png";
             }
-            else if(whatCreature == 2 ){
-                enemy = new Scorpion(EnemyBaseDataStorage.getInstance().getScorpion().getName(),EnemyBaseDataStorage.getInstance().getScorpion().getHp(),EnemyBaseDataStorage.getInstance().getScorpion().getMaxDmg(),EnemyBaseDataStorage.getInstance().getScorpion().getMinDmg(),EnemyBaseDataStorage.getInstance().getScorpion().getSpeed());
-                pic = "Recourses/Bear.png";
-            }
-            else if(whatCreature == 3 ){
-                enemy = new Snake(EnemyBaseDataStorage.getInstance().getSnake().getName(),EnemyBaseDataStorage.getInstance().getSnake().getHp(),EnemyBaseDataStorage.getInstance().getSnake().getMaxDmg(),EnemyBaseDataStorage.getInstance().getSnake().getMinDmg(),EnemyBaseDataStorage.getInstance().getSnake().getSpeed());
-                pic = "Recourses/Bear.png";
-            }
-            else if(whatCreature == 4 ){
-                enemy = new Spider(EnemyBaseDataStorage.getInstance().getSpider().getName(),EnemyBaseDataStorage.getInstance().getSpider().getHp(),EnemyBaseDataStorage.getInstance().getSpider().getMaxDmg(),EnemyBaseDataStorage.getInstance().getSpider().getMinDmg(),EnemyBaseDataStorage.getInstance().getSpider().getSpeed());
-                pic = "Recourses/Bear.png";
-            }
-            else if(whatCreature == 5 ){
-                enemy = new Wolf(EnemyBaseDataStorage.getInstance().getWolf().getName(),EnemyBaseDataStorage.getInstance().getWolf().getHp(),EnemyBaseDataStorage.getInstance().getWolf().getMaxDmg(),EnemyBaseDataStorage.getInstance().getWolf().getMinDmg(),EnemyBaseDataStorage.getInstance().getWolf().getSpeed());
-                pic = "Recourses/Bear.png";
-            }
-            switch(i){
-                case 0: FightDataStorage.getInstance().setEnemy1(enemy);
-                        spawnCreature(pic, 40, 60, 730, 500);
+            switch (i) {
+                case 0:
+                    pane.getChildren().add(creaturePane2);
+                    FightDataStorage.getInstance().setEnemy1(enemy);
+                    spawnCreature(pic, 40, 60, 730, 500, "1");
                     break;
-                case 1: FightDataStorage.getInstance().setEnemy2(enemy);
-                        spawnCreature(pic, 40, 60, 730, 400);
+                case 1:
+                    pane.getChildren().add(creaturePane3);
+                    FightDataStorage.getInstance().setEnemy2(enemy);
+                    spawnCreature(pic, 40, 60, 730, 400, "2");
                     break;
-                case 2: FightDataStorage.getInstance().setEnemy3(enemy);
-                        spawnCreature(pic, 40, 60, 730, 300);
+                case 2:
+                    FightDataStorage.getInstance().setEnemy3(enemy);
+                    spawnCreature(pic, 40, 60, 730, 300, "3");
                     break;
             }
         }
-        
-        
+
     }
 
-    public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY) {
+    public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY, String ID) {
 
-        creaturePane1 =  new AnchorPane();
-        creaturePane2 =  new AnchorPane();
-        creaturePane3 =  new AnchorPane();
-        System.err.println(FightDataStorage.getInstance().getEnemy1());
-        if(FightDataStorage.getInstance().getEnemy1() != null)
-        {
-            
-            if(creaturePane1.getChildren().isEmpty()){
-            creaturePane1.prefWidth(creaturePaneWitdh);
-            creaturePane1.prefHeight(creaturePaneHeight); //Storlek på pane
-            creaturePane1.setLayoutX(creaturePaneX);
-            creaturePane1.setLayoutY(creaturePaneY);
-            ImageView hpBarCreature1 = new ImageView();
-            Image imageHealthCreature1 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
-            hpBarCreature1.setImage(imageHealthCreature1);
-
-            creaturePane1.getChildren().add(hpBarCreature1);
-            creaturePane1.getChildren().add(creature);
-
-            hpBarCreature1.setScaleX(healthPaneScaler());
-            hpBarCreature1.setX(healthPaneScaler() / 2);
+        switch (ID) {
+            case "0": {
+                creaturePane1.setPrefWidth(creaturePaneWitdh);
+                creaturePane1.setPrefHeight(creaturePaneHeight); //Storlek på pane
+                creaturePane1.setLayoutX(creaturePaneX);
+                creaturePane1.setLayoutY(creaturePaneY);
+                hpBarCreature1 = new ImageView();
+                Image imageHealthCreature1 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
+                hpBarCreature1.setImage(imageHealthCreature1);
+                creaturePane1.setId(ID);
+                creaturePane1.getChildren().add(hpBarCreature1);
+                creaturePane1.getChildren().add(creature);
+                hpBarCreature1.setScaleX(healthPaneHeroScaler());
+                hpBarCreature1.setX(healthPaneHeroScaler() / 2);
+                System.out.println("Creature pane 0, Hero");
+                break;
+            }
+            case "1": {
+                creaturePane2.setPrefWidth(creaturePaneWitdh);
+                creaturePane2.setPrefHeight(creaturePaneHeight); //Storlek på pane
+                creaturePane2.setLayoutX(creaturePaneX);
+                creaturePane2.setLayoutY(creaturePaneY);
+                hpBarCreature2 = new ImageView();
+                Image imageHealthCreature1 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
+                hpBarCreature2.setImage(imageHealthCreature1);
+                creaturePane2.setId(ID);
+                creaturePane2.getChildren().add(hpBarCreature2);
+                creaturePane2.getChildren().add(creature);
+                hpBarCreature2.setScaleX(healthPaneCreatureScaler());
+                hpBarCreature2.setX(healthPaneCreatureScaler() / 2);
+                System.out.println("Creature pane 1, Enemy");
+                break;
+            }
+            case "2": {
+                creaturePane3.setPrefWidth(creaturePaneWitdh);
+                creaturePane3.setPrefHeight(creaturePaneHeight); //Storlek på pane
+                creaturePane3.setLayoutX(creaturePaneX);
+                creaturePane3.setLayoutY(creaturePaneY);
+                hpBarCreature3 = new ImageView();
+                Image imageHealthCreature1 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
+                hpBarCreature3.setImage(imageHealthCreature1);
+                creaturePane3.setId(ID);
+                creaturePane3.getChildren().add(hpBarCreature3);
+                creaturePane3.getChildren().add(creature);
+                hpBarCreature3.setScaleX(healthPaneCreatureScaler());
+                hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
+                System.out.println("Creature pane 2, Enemy");
+                break;
+            }
         }
-        }
-        else if(creaturePane2.getChildren().isEmpty()){
-            
-            creaturePane2.prefWidth(creaturePaneWitdh);
-            creaturePane2.prefHeight(creaturePaneHeight); //Storlek på pane
-            creaturePane2.setLayoutX(creaturePaneX);
-            creaturePane2.setLayoutY(creaturePaneY+ 100);
-            ImageView hpBarCreature2 = new ImageView();
-            Image imageHealthCreature2 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
-            hpBarCreature2.setImage(imageHealthCreature2);
 
-            creaturePane2.getChildren().add(hpBarCreature2);
-            creaturePane2.getChildren().add(creature);
-
-            hpBarCreature2.setScaleX(healthPaneScaler());
-            hpBarCreature2.setX(healthPaneScaler() / 2);
-        }
-        else if(creaturePane3.getChildren().isEmpty()){
-            creaturePane3.prefWidth(creaturePaneWitdh);
-            creaturePane3.prefHeight(creaturePaneHeight); //Storlek på pane
-            creaturePane3.setLayoutX(creaturePaneX);
-            creaturePane3.setLayoutY(creaturePaneY+200);
-            ImageView hpBarCreature3 = new ImageView();
-            Image imageHealthCreature3 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
-            hpBarCreature3.setImage(imageHealthCreature3);
-
-            creaturePane3.getChildren().add(hpBarCreature3);
-            creaturePane3.getChildren().add(creature);
-
-            hpBarCreature3.setScaleX(healthPaneScaler());
-            hpBarCreature3.setX(healthPaneScaler() / 2);
-        }
-        
     }
 
-    public int healthPaneScaler() {
+    public int healthPaneHeroScaler() {
 
         int currentHP = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
         int maxHP = HeroDataStorage.getInstance().getHero().getHp();
@@ -251,55 +241,110 @@ public class FightController implements Initializable,MouseListener {
         return calculate;
     }
 
-    public void healthPaneSetPosX() {
+    public int healthPaneCreatureScaler() {
 
-        //Ska flytta scaleX hit från createCreaturePan
+        if (attackSelect == null) {
+            return 50;
+        }
+        if (attackSelect.equals("1")) {
+
+            System.out.println("Enemy1 Set hp: 30");
+            return 30;
+        }
+        if (attackSelect.equals("2")) {
+
+            System.out.println("Enemy2 Set hp : 10");
+            return 10;
+        }
+        return 0;
+    }
+
+    public void healthPaneScaleInGame() {
+
+        if (attackSelect.equals("1")) {
+            hpBarCreature2.setScaleX(healthPaneCreatureScaler());
+            hpBarCreature2.setX(healthPaneCreatureScaler() / 2);
+        } else if (attackSelect.equals("2")) {
+            hpBarCreature3.setScaleX(healthPaneCreatureScaler());
+            hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
+        }
     }
 
     public void whatHeroToLoad() {
 
         if (HeroDataStorage.getInstance().getHero().getHeroType() == 1) {
 
-            spawnCreature("Recourses/WarriorChar.png", 40, 60, 30, 500);
+            pane.getChildren().add(creaturePane1);
+            spawnCreature("Recourses/WarriorChar.png", 40, 60, 30, 500, "0");
 
         } else if (HeroDataStorage.getInstance().getHero().getHeroType() == 2) {
-
-            spawnCreature("Recourses/RangerChar.png", 40, 60, 30, 500);
+            pane.getChildren().add(creaturePane1);
+            spawnCreature("Recourses/RangerChar.png", 40, 60, 30, 500, "0");
 
         } else if (HeroDataStorage.getInstance().getHero().getHeroType() == 3) {
-
-            spawnCreature("Recourses/MageChar.png", 40, 60, 30, 500);
+            pane.getChildren().add(creaturePane1);
+            spawnCreature("Recourses/MageChar.png", 40, 60, 30, 500, "0");
 
         }
 
     }
 
-    @Override
-    public void mouseClicked(java.awt.event.MouseEvent e) { 
-            fight();
+    public void selectEnemy() {
+
+        attackSelect = selectEnemy(creaturePane1, creaturePane2, creaturePane3); // första är den som selectas
+        attackSelect = selectEnemy(creaturePane2, creaturePane3, creaturePane1);
+        attackSelect = selectEnemy(creaturePane3, creaturePane2, creaturePane1);
+
+    }
+
+    public void worldTime() {
+        timeline = new Timeline(new KeyFrame(
+                Duration.millis(2000),
+                ae -> handleWorldTime()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    public void handleWorldTime() {
+
+        System.out.println("World time Tick tack");
+        if (attackSelect != null) {
+
+            if (attackSelect.equals("1")) {
+
+                FightDataStorage.getInstance().getEnemy1();
+                FightDataStorage.getInstance().setEnemyID("1");
+
+            } else if (attackSelect.equals("2")) {
+
+                FightDataStorage.getInstance().getEnemy2();
+                FightDataStorage.getInstance().setEnemyID("2");
+
+            }
+
         }
+        healthPaneScaleInGame();
 
-    @Override
-    public void mousePressed(java.awt.event.MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void mouseReleased(java.awt.event.MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void stopWorldTime() {
+
+        timeline.stop();
     }
 
-    @Override
-    public void mouseEntered(java.awt.event.MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String selectEnemy(AnchorPane pane, AnchorPane pane2, AnchorPane pane3) {
+        pane.setOnMouseClicked((MouseEvent e) -> {
+            pane.blendModeProperty().set(BlendMode.HARD_LIGHT);
+            pane2.blendModeProperty().set(BlendMode.SRC_OVER);
+            pane3.blendModeProperty().set(BlendMode.SRC_OVER);
+            attackSelect = pane.getId();
+            Attack();
+            System.out.println(attackSelect);
+        });
+        return attackSelect;
     }
 
-    @Override
-    public void mouseExited(java.awt.event.MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Attack() {
+        heroChar.heroTimeStart();
     }
-        
-    
-
-    
 }
