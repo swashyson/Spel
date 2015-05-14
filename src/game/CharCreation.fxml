@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.CharCreationController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/BackGround.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="302.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="name" layoutX="307.0" layoutY="14.0" onMouseClicked="#clickOnTextField" prefHeight="25.0" prefWidth="190.0" promptText="Hero Name" />
+        <Button fx:id="hero1" layoutX="55.0" layoutY="51.0" mnemonicParsing="false" onAction="#Select" prefHeight="500.0" prefWidth="200.0" text="Hero1">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Melee.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Button fx:id="hero2" layoutX="302.0" layoutY="51.0" mnemonicParsing="false" onAction="#Select" prefHeight="500.0" prefWidth="200.0" text="Hero2">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/range.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Button fx:id="hero3" layoutX="556.0" layoutY="51.0" mnemonicParsing="false" onAction="#Select" prefHeight="500.0" prefWidth="200.0" text="Hero3">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Mage.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Button fx:id="create" layoutX="248.0" layoutY="558.0" mnemonicParsing="false" onAction="#Create" prefHeight="31.0" prefWidth="108.0" text="Create">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Create.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Button fx:id="back" layoutX="448.0" layoutY="558.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="108.0" text="Back">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Back.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Label fx:id="fel" alignment="CENTER" layoutX="200.0" layoutY="493.0" prefHeight="65.0" prefWidth="404.0" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
