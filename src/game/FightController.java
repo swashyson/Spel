@@ -73,7 +73,6 @@ public class FightController implements Initializable {
     @FXML
     public void goToCity(ActionEvent event) {
 
-        heroChar.heroTimeStop();
         stopWorldTime();
         attackSelect = null;
 
@@ -248,12 +247,10 @@ public class FightController implements Initializable {
         }
         if (attackSelect.equals("1")) {
 
-            System.out.println("Enemy1 Set hp: 30");
             return 30;
         }
-        if (attackSelect.equals("2")) {
+        if (attackSelect.equals("2")) { //Procent beräkningar
 
-            System.out.println("Enemy2 Set hp : 10");
             return 10;
         }
         return 0;
@@ -305,7 +302,7 @@ public class FightController implements Initializable {
 
     public void worldTime() {
         timeline = new Timeline(new KeyFrame(
-                Duration.millis(2000),
+                Duration.millis(100),
                 ae -> handleWorldTime()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -313,7 +310,6 @@ public class FightController implements Initializable {
 
     public void handleWorldTime() {
 
-        System.out.println("World time Tick tack");
         if (attackSelect != null) {
 
             if (attackSelect.equals("1")) {
@@ -330,6 +326,7 @@ public class FightController implements Initializable {
 
         }
         healthPaneScaleInGame();
+        KillEnemyDisplay();
 
     }
 
@@ -351,6 +348,33 @@ public class FightController implements Initializable {
     }
 
     public void Attack() {
-        heroChar.heroTimeStart();
+        heroChar.heroAttack();
+    }
+
+    public void KillEnemyDisplay() {
+
+        try {
+            if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
+
+                creaturePane2.setVisible(false);
+            } else if (FightDataStorage.getInstance().getEnemy2() != null) {
+                if (FightDataStorage.getInstance().getEnemy2().getHp() <= 0) {
+
+                    creaturePane3.setVisible(false);
+                }
+            }
+            if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() == null && creaturePane2.isVisible() == false) {
+                System.out.println("Victory");
+                stopWorldTime();
+            }
+            else if(DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() != null && creaturePane2.isVisible() == false && creaturePane3.isVisible() == false){
+            
+                System.out.println("Victory");
+                stopWorldTime();
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

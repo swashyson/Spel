@@ -25,7 +25,6 @@ public class Hero extends Creature {
     private int heroType;
     private int heroCurrentHP;
     private final int heroID;
-    private Timer timer;
 
     public Hero(String heroName, int heroBaseHp, int heroSpeed, int heroGold, int heroBaseDamage, int heroLevel, int heroEXP, int heroType, int heroCurrentHP, int heroID) {
 
@@ -102,37 +101,19 @@ public class Hero extends Creature {
         return heroBaseDamage;
     }
 
-    public void fightMonster(Hero hero, int i) {
-
-        if (i == 1) {
-            int startHp = FightDataStorage.getInstance().getEnemy1().getHp();
-            int dmg = getWeaponRandomDamage();
-            int newHp = startHp - dmg;
-            FightDataStorage.getInstance().getEnemy1().setHp(newHp);
-            System.err.println(newHp);
-        } else if (i == 2) {
-            int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
-            int dmg = getWeaponRandomDamage();
-            int newHp = startHp - dmg;
-            FightDataStorage.getInstance().getEnemy2().setHp(newHp);
-        } else if (i == 3) {
-            int startHp = FightDataStorage.getInstance().getEnemy2().getHp();
-            int dmg = getWeaponRandomDamage();
-            int newHp = startHp - dmg;
-            FightDataStorage.getInstance().getEnemy2().setHp(newHp);
-        }
-
-    }
-
     public void basicAttack(Weapon weapon) {
 
-        switch (FightDataStorage.getInstance().getEnemyID()) {
-            case "1":
-                FightDataStorage.getInstance().getEnemy1().setHp(30);
-                break;
-            case "2":
-                FightDataStorage.getInstance().getEnemy1().setHp(10);
-                break;
+        try {
+            switch (FightDataStorage.getInstance().getEnemyID()) {
+                case "1":
+                    FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    break;
+                case "2":
+                    FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    break;
+            }
+        } catch (Exception ex) {
+            System.out.println("First Select doesent count");
         }
 
     }
@@ -158,22 +139,14 @@ public class Hero extends Creature {
         return 0;
     }
 
-    public void heroTimeStart() {
+    public void heroAttack() {
 
-        timer = new Timer(); 
-        timer.scheduleAtFixedRate(new TimerTask() {
-
-            @Override
-            public void run() {;                                                //Attack!;
-                basicAttack(HeroDataStorage.getInstance().getWeapon()); // måste få in värderna från enemy
-            }
-        }, 3000 - speed - getWeaponSpeed() * 2, 3000 - speed - getWeaponSpeed() * 2); //Time tick speeden, desto snabbare speed man har desto snabbare slår man helt enkelt
-        //Beräknar med basic speed och weaponSpeed, och en konstant * (multiplier*2)
-        //Dubbelt för att den ska loopas i onändlighet
-    }
-
-    public void heroTimeStop() {
-        timer.cancel();
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
+            basicAttack(HeroDataStorage.getInstance().getWeapon());
+        }
+        else{
+            basicAttack(null);
+        }
     }
 
 }
