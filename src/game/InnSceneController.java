@@ -50,6 +50,9 @@ public class InnSceneController implements Initializable {
         currentHealth = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
         maxHealth = HeroDataStorage.getInstance().getHero().getHp();
         
+        health.setText(currentHealth + " / " + maxHealth);
+        
+        //tiden för att HP:n ska gå mot max är något som kan modifieras senare
         timeLine = new Timeline(new KeyFrame(Duration.millis(1000), ae -> handleTime()));
         timeLine.setCycleCount(Animation.INDEFINITE);
         timeLine.play();
@@ -62,11 +65,13 @@ public class InnSceneController implements Initializable {
             System.out.println("Current health: " + currentHealth + " / " + maxHealth);
             HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
             System.out.println("current health in InnSceneController: " + currentHealth);
+            saveHPToDataBase();
         } else if (currentHealth == maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health restored to maximum");
             timeLine.stop();
+            saveHPToDataBase();
             fel.setText("Your health is full.");
         }
     }
@@ -80,10 +85,25 @@ public class InnSceneController implements Initializable {
         if (currentHealth < maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
+            saveHPToDataBase();
             System.out.println("Current health restored to maximum.");
         } else if (currentHealth == maxHealth) {
             System.out.println("Current health already restored to maximum");
             fel.setText("Your health is full.");
         }
+    }
+    
+    public void saveHPToDataBase(){
+        
+        int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
+        
+        DBConnect.connect();
+        try {
+            DBConnect.CreateAlterStatement("UPDATE `game`.`hero` SET `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
+            System.out.println("UPDATE `game`.`hero` SET `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        DBConnect.close();
     }
 }
