@@ -8,11 +8,15 @@ package game;
 import DataStorage.HeroDataStorage;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 //import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -38,35 +42,41 @@ public class InnSceneController implements Initializable {
 
     private int currentHealth;
     private int maxHealth;
+    
+    private Timeline timeLine;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentHealth = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
         maxHealth = HeroDataStorage.getInstance().getHero().getHp();
-        //kan bugga något
-        // behöver nog någon sorts timer för att uppdatera kontinuerligt
-        // tills max health är uppnådd
+        
+        timeLine = new Timeline(new KeyFrame(Duration.millis(1000), ae -> handleTime()));
+        timeLine.setCycleCount(Animation.INDEFINITE);
+        timeLine.play();
+    }
+
+    public void handleTime(){
         if (currentHealth < maxHealth) {
             currentHealth++;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health: " + currentHealth + " / " + maxHealth);
+            HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
+            System.out.println("current health in InnSceneController: " + currentHealth);
         } else if (currentHealth == maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health restored to maximum");
-//            fel.setText("Your health is full.");
+            timeLine.stop();
+            fel.setText("Your health is full.");
         }
     }
-
+    
     public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
 
-    public void restoreHealthpoints(ActionEvent event) {
-        // dessa rader kan bugga, iom att vi inte har
-        // provat att använda mindre currentHP jämfört
-        // med maxHP
+    public void restoreHealthpointsNow(ActionEvent event) {
         if (currentHealth < maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
