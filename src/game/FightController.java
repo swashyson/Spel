@@ -56,11 +56,13 @@ public class FightController implements Initializable {
     private AnchorPane creaturePane1 = new AnchorPane();
     private AnchorPane creaturePane2 = new AnchorPane();
     private AnchorPane creaturePane3 = new AnchorPane();
-    private AnchorPane creaturePane4;
+    private AnchorPane creaturePane4 = new AnchorPane();
 
     private ImageView hpBarCreature1 = new ImageView();
     private ImageView hpBarCreature2 = new ImageView();
     private ImageView hpBarCreature3 = new ImageView();
+    private ImageView hpBarCreature4 = new ImageView();
+
     private String attackSelect;
     private ArrayList<String> attackOrder = new ArrayList();
 
@@ -131,7 +133,7 @@ public class FightController implements Initializable {
         Random rand = new Random();
         numberCreature = rand.nextInt(2) + 1;
         System.out.print("antal djur" + numberCreature);
-        for (int i = 0; i < numberCreature; i++) {
+        for (int i = 0; i <= numberCreature; i++) {
             int whatCreature = rand.nextInt(4) + 1;
 
             if (whatCreature == 1) {
@@ -162,6 +164,7 @@ public class FightController implements Initializable {
                     spawnCreature(pic, 40, 60, 730, 400, "2");
                     break;
                 case 2:
+                    pane.getChildren().add(creaturePane4);
                     FightDataStorage.getInstance().setEnemy3(enemy);
                     spawnCreature(pic, 40, 60, 730, 300, "3");
                     break;
@@ -221,6 +224,22 @@ public class FightController implements Initializable {
                 System.out.println("Creature pane 2, Enemy");
                 break;
             }
+            case "3": {
+                creaturePane4.setPrefWidth(creaturePaneWitdh);
+                creaturePane4.setPrefHeight(creaturePaneHeight); //Storlek på pane
+                creaturePane4.setLayoutX(creaturePaneX);
+                creaturePane4.setLayoutY(creaturePaneY);
+                hpBarCreature4 = new ImageView();
+                Image imageHealthCreature1 = new Image(getClass().getResourceAsStream("Recourses/HealthBar.png"));
+                hpBarCreature4.setImage(imageHealthCreature1);
+                creaturePane4.setId(ID);
+                creaturePane4.getChildren().add(hpBarCreature4);
+                creaturePane4.getChildren().add(creature);
+                hpBarCreature4.setScaleX(healthPaneCreatureScaler());
+                hpBarCreature4.setX(healthPaneCreatureScaler() / 2);
+                System.out.println("Creature pane 3, Enemy");
+                break;
+            }
         }
 
     }
@@ -264,6 +283,17 @@ public class FightController implements Initializable {
 
             return calculate;
         }
+        if (attackSelect.equals("3")) { //Procent beräkningar
+
+            int hp = FightDataStorage.getInstance().getEnemy3().getHp();
+            int maxHp = FightDataStorage.getInstance().getEnemy3().getMaxHp();
+            int maxImageView = 50;
+            int calculate;
+
+            calculate = (hp * maxImageView) / maxHp;
+
+            return calculate;
+        }
         return 0;
     }
 
@@ -276,6 +306,9 @@ public class FightController implements Initializable {
             } else if (attackSelect.equals("2")) {
                 hpBarCreature3.setScaleX(healthPaneCreatureScaler());
                 hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
+            } else if (attackSelect.equals("3")) {
+                hpBarCreature4.setScaleX(healthPaneCreatureScaler());
+                hpBarCreature4.setX(healthPaneCreatureScaler() / 2);
             } else if (attackSelect == null) {
                 System.out.println("Null");
             }
@@ -305,9 +338,10 @@ public class FightController implements Initializable {
 
     public void selectEnemy() {
 
-        attackSelect = selectEnemy(creaturePane1, creaturePane2, creaturePane3); // första är den som selectas
-        attackSelect = selectEnemy(creaturePane2, creaturePane3, creaturePane1);
-        attackSelect = selectEnemy(creaturePane3, creaturePane2, creaturePane1);
+        attackSelect = selectEnemy(creaturePane1, creaturePane2, creaturePane3, creaturePane4); // första är den som selectas
+        attackSelect = selectEnemy(creaturePane2, creaturePane3, creaturePane1, creaturePane4);
+        attackSelect = selectEnemy(creaturePane3, creaturePane2, creaturePane1, creaturePane4);
+        attackSelect = selectEnemy(creaturePane4, creaturePane2, creaturePane1, creaturePane3);
 
     }
 
@@ -333,11 +367,12 @@ public class FightController implements Initializable {
         timeline.stop();
     }
 
-    public String selectEnemy(AnchorPane pane, AnchorPane pane2, AnchorPane pane3) {
+    public String selectEnemy(AnchorPane pane, AnchorPane pane2, AnchorPane pane3, AnchorPane pane4) {
         pane.setOnMouseClicked((MouseEvent e) -> {
             pane.blendModeProperty().set(BlendMode.HARD_LIGHT);
             pane2.blendModeProperty().set(BlendMode.SRC_OVER);
             pane3.blendModeProperty().set(BlendMode.SRC_OVER);
+            pane4.blendModeProperty().set(BlendMode.SRC_OVER);
             attackSelect = pane.getId();
             if (attackOrder.get(0).equals("Hero")) {
                 selectEnemyToAttack();
@@ -370,11 +405,22 @@ public class FightController implements Initializable {
                     creaturePane3.setVisible(false);
                 }
             }
+            if (FightDataStorage.getInstance().getEnemy3() != null) {
+                if (FightDataStorage.getInstance().getEnemy3().getHp() <= 0) {
+
+                    creaturePane4.setVisible(false);
+                }
+            }
             if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() == null && creaturePane2.isVisible() == false) {
                 System.out.println("Victory");
                 stopWorldTime();
             }
             if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() != null && creaturePane2.isVisible() == false && creaturePane3.isVisible() == false) {
+
+                System.out.println("Victory");
+                stopWorldTime();
+            }
+            if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() != null && DataStorage.FightDataStorage.getInstance().getEnemy3() != null && creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && creaturePane4.isVisible() == false) {
 
                 System.out.println("Victory");
                 stopWorldTime();
@@ -392,31 +438,42 @@ public class FightController implements Initializable {
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-        int enemy2Speed =0;
+        int enemy2Speed = 0;
         int enemy2StartSpeed = 0;
-        if(FightDataStorage.getInstance().getEnemy2() != null){
-        enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
-        enemy2StartSpeed= FightDataStorage.getInstance().getEnemy2().getSpeed();
+        int enemy3Speed = 0;
+        int enemy3StartSpeed = 0;
+        if (FightDataStorage.getInstance().getEnemy2() != null) {
+            enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
+            enemy2StartSpeed = FightDataStorage.getInstance().getEnemy2().getSpeed();
+        }
+        if (FightDataStorage.getInstance().getEnemy3() != null) {
+            enemy3Speed = FightDataStorage.getInstance().getEnemy3().getSpeed();
+            enemy3StartSpeed = FightDataStorage.getInstance().getEnemy3().getSpeed();
         }
         for (int i = 0; i < 500; i++) {
-            if (heroSpeed >= enemy1Speed && heroSpeed >= enemy2Speed) {
+            if (heroSpeed >= enemy1Speed && heroSpeed >= enemy2Speed && heroSpeed >= enemy3Speed) {
 
                 attackOrder.add("Hero");
                 heroSpeed = heroSpeed - 1;
             }
-            if (enemy1Speed > heroSpeed && enemy1Speed >= enemy2Speed) {
+            if (enemy1Speed > heroSpeed && enemy1Speed >= enemy2Speed && enemy1Speed >= enemy3Speed) {
 
                 attackOrder.add("Enemy1");
                 enemy1Speed = enemy1Speed - 1;
             }
-            if (enemy2Speed > heroSpeed && enemy2Speed > enemy1Speed) {
+            if (enemy2Speed > heroSpeed && enemy2Speed > enemy1Speed && enemy2Speed >= enemy3Speed) {
 
                 attackOrder.add("Enemy2");
                 enemy2Speed = enemy2Speed - 1;
             }
+            if (enemy3Speed > heroSpeed && enemy3Speed > enemy1Speed && enemy3Speed > enemy2Speed) {
+
+                attackOrder.add("Enemy3");
+                enemy3Speed = enemy3Speed - 1;
+            }
             System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
 
-            if (heroSpeed == 0 ) {
+            if (heroSpeed == 0) {
 
                 heroSpeed = heroStartSpeed;
             }
@@ -428,6 +485,10 @@ public class FightController implements Initializable {
 
                 enemy2Speed = enemy2StartSpeed;
             }
+            if (enemy3Speed == 0) {
+
+                enemy3Speed = enemy3StartSpeed;
+            }
         }
 
     }
@@ -437,11 +498,17 @@ public class FightController implements Initializable {
 
             attackOrder.remove(0);
             System.out.println(FightDataStorage.getInstance().getEnemy1().getName() + " Skadade dig");
+            
         }
-        if (attackOrder.get(0).equals("Enemy2") && numberCreature == 2 && creaturePane3.isVisible() == true) {
+        if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
             attackOrder.remove(0);
             System.out.println(FightDataStorage.getInstance().getEnemy2().getName() + " Skadade dig");
+        }
+        if (attackOrder.get(0).equals("Enemy3") && creaturePane4.isVisible() == true) {
+
+            attackOrder.remove(0);
+            System.out.println(FightDataStorage.getInstance().getEnemy3().getName() + " Skadade dig");
         }
     }
 
@@ -454,6 +521,7 @@ public class FightController implements Initializable {
 
                     if (attackOrder.get(i).equals("Enemy1")) {
                         attackOrder.remove(i);
+                        return;
                     }
                 }
                 if (creaturePane3.isVisible() == false) {
@@ -461,11 +529,20 @@ public class FightController implements Initializable {
                     if (attackOrder.get(i).equals("Enemy2")) {
 
                         attackOrder.remove(i);
+                        return;
+                    }
+                }
+                if (creaturePane4.isVisible() == false) {
+
+                    if (attackOrder.get(i).equals("Enemy3")) {
+
+                        attackOrder.remove(i);
+                        return;
                     }
                 }
             }
         } catch (Exception ex) {
-            System.out.println("Array out of bounds (Alla fiender är döda)");
+            System.err.println("ALLVARLIGT FUCKING FEL");
         }
     }
 
@@ -482,6 +559,11 @@ public class FightController implements Initializable {
 
                 FightDataStorage.getInstance().getEnemy2();
                 FightDataStorage.getInstance().setEnemyID("2");
+
+            } else if (attackSelect.equals("3")) {
+
+                FightDataStorage.getInstance().getEnemy3();
+                FightDataStorage.getInstance().setEnemyID("3");
 
             }
 
