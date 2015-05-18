@@ -32,40 +32,50 @@ public class Bear extends Enemy {
     protected void specialAttack2(Hero hero) {
 
     }
-   
-    
-    public void attack(Hero hero) {
-        Random whatAttack = new Random();
-        int attack = whatAttack.nextInt(9) + 1;
-        if(attack != 10){
-        hero.setHp(hero.getHp() - getDmg());
-        }
-        else{
-            Random whatSpecialAttack = new Random();
-            int specialAttack = whatSpecialAttack.nextInt(1)+1;
-            if(specialAttack == 1){
-                specialAttack1(hero);
-            }else {
-                specialAttack2(hero);
-            }
-        }
-    }
 
+//    public void attack(Hero hero) {
+//        Random whatAttack = new Random();
+//        int attack = whatAttack.nextInt(9) + 1;
+//        if (attack != 10) {
+//            hero.setHp(hero.getHp() - getDmg());
+//        } else {
+//            Random whatSpecialAttack = new Random();
+//            int specialAttack = whatSpecialAttack.nextInt(1) + 1;
+//            if (specialAttack == 1) {
+//                specialAttack1(hero);
+//            } else {
+//                specialAttack2(hero);
+//            }
+//        }
+//    }
+    @Override
     public int getMaxDmg() {
         return maxDamage;
     }
 
-    
-    
+    @Override
     public int getMinDmg() {
         return minDamage;
     }
-    
-    public int getDmg(){
+
+    public int getDmg() {
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
         int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
+
+        return dmg;
+    }
+
+    public int basicAttack() {
+
+        Random rand = new Random();
+        int minDmg = this.minDamage;
+        int maxDmg = this.maxDamage;
+        
+        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
+
+        System.out.println("Bear skadade dig med " + dmg);
         
         return dmg;
     }
