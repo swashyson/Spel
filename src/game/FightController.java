@@ -81,15 +81,14 @@ public class FightController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        worldTime();
         loadEnemyStatsFromDataStorage();
-
         loadHeroStatsFromDataStorage();
         XPBAR();
         whatHeroToLoad();
         createEnemy();
-        selectEnemy();
-        worldTime();
         calculateAttackOrder();
+        selectEnemy();
     }
 
     public void XPBAR() {
@@ -245,11 +244,25 @@ public class FightController implements Initializable {
         }
         if (attackSelect.equals("1")) {
 
-            return 30;
+            int hp = FightDataStorage.getInstance().getEnemy1().getHp();
+            int maxHp = FightDataStorage.getInstance().getEnemy1().getMaxHp();
+            int maxImageView = 50;
+            int calculate;
+
+            calculate = (hp * maxImageView) / maxHp;
+
+            return calculate;
         }
         if (attackSelect.equals("2")) { //Procent beräkningar
 
-            return 10;
+            int hp = FightDataStorage.getInstance().getEnemy2().getHp();
+            int maxHp = FightDataStorage.getInstance().getEnemy2().getMaxHp();
+            int maxImageView = 50;
+            int calculate;
+
+            calculate = (hp * maxImageView) / maxHp;
+
+            return calculate;
         }
         return 0;
     }
@@ -308,21 +321,6 @@ public class FightController implements Initializable {
 
     public void handleWorldTime() {
 
-        if (attackSelect != null) {
-
-            if (attackSelect.equals("1")) {
-
-                FightDataStorage.getInstance().getEnemy1();
-                FightDataStorage.getInstance().setEnemyID("1");
-
-            } else if (attackSelect.equals("2")) {
-
-                FightDataStorage.getInstance().getEnemy2();
-                FightDataStorage.getInstance().setEnemyID("2");
-
-            }
-
-        }
         healthPaneScaleInGame(); //Scala hpBar med worldtime
         KillEnemyDisplay(); //Kolla om fienden är död
         checkIfEnemysTurn(); //Kolla om det är fienden tur, isf attakera heron
@@ -342,6 +340,7 @@ public class FightController implements Initializable {
             pane3.blendModeProperty().set(BlendMode.SRC_OVER);
             attackSelect = pane.getId();
             if (attackOrder.get(0).equals("Hero")) {
+                selectEnemyToAttack();
                 heroAttack();
                 attackOrder.remove(0); // kolla om det är heros tur, ta väck honom i ordningen
             } else {
@@ -393,29 +392,31 @@ public class FightController implements Initializable {
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-
-        int enemy2Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-        int enemy2StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-
+        int enemy2Speed =0;
+        int enemy2StartSpeed = 0;
+        if(FightDataStorage.getInstance().getEnemy2() != null){
+        enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
+        enemy2StartSpeed= FightDataStorage.getInstance().getEnemy2().getSpeed();
+        }
         for (int i = 0; i < 500; i++) {
-            if (heroSpeed >= enemy1Speed) {
+            if (heroSpeed >= enemy1Speed && heroSpeed >= enemy2Speed) {
 
                 attackOrder.add("Hero");
                 heroSpeed = heroSpeed - 1;
             }
-            if (enemy1Speed >= heroSpeed) {
+            if (enemy1Speed > heroSpeed && enemy1Speed >= enemy2Speed) {
 
                 attackOrder.add("Enemy1");
                 enemy1Speed = enemy1Speed - 1;
             }
-            if (enemy2Speed >= heroSpeed && numberCreature == 2) {
+            if (enemy2Speed > heroSpeed && enemy2Speed > enemy1Speed) {
 
                 attackOrder.add("Enemy2");
                 enemy2Speed = enemy2Speed - 1;
             }
-            //System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
+            System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
 
-            if (heroSpeed == 0) {
+            if (heroSpeed == 0 ) {
 
                 heroSpeed = heroStartSpeed;
             }
@@ -423,7 +424,7 @@ public class FightController implements Initializable {
 
                 enemy1Speed = enemy1StartSpeed;
             }
-            if (enemy2Speed == 0 && numberCreature == 2) {
+            if (enemy2Speed == 0) {
 
                 enemy2Speed = enemy2StartSpeed;
             }
@@ -465,6 +466,25 @@ public class FightController implements Initializable {
             }
         } catch (Exception ex) {
             System.out.println("Array out of bounds (Alla fiender är döda)");
+        }
+    }
+
+    public void selectEnemyToAttack() {
+
+        if (attackSelect != null) {
+
+            if (attackSelect.equals("1")) {
+
+                FightDataStorage.getInstance().getEnemy1();
+                FightDataStorage.getInstance().setEnemyID("1");
+
+            } else if (attackSelect.equals("2")) {
+
+                FightDataStorage.getInstance().getEnemy2();
+                FightDataStorage.getInstance().setEnemyID("2");
+
+            }
+
         }
     }
 

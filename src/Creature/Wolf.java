@@ -14,13 +14,15 @@ import Creature.Enemy;
  * @author Mohini
  */
 public class Wolf extends Enemy {
-    public Wolf(String name,int hp, int maxDamage, int minDamage, int speed){
+
+    public Wolf(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
         this.hp = hp;
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
         this.speed = speed;
     }
+
     @Override
     protected void specialAttack1() {
 
@@ -44,6 +46,10 @@ public class Wolf extends Enemy {
     @Override
     public int getMinDmg() {
         return minDamage;
+    }
+
+    public void setmaxHp(int maxHP) {
+        this.maxHp = hp;
     }
 
 }
