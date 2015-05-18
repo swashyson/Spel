@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.ForgotPWController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/BackGround.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="username" layoutX="306.0" layoutY="112.0" prefHeight="25.0" prefWidth="190.0" promptText="Enter username" />
+        <Button fx:id="getQuestion" layoutX="346.0" layoutY="157.0" mnemonicParsing="false" onAction="#getQuestion" prefHeight="31.0" prefWidth="110.0" text="getQuestion">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/return.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+        <Button fx:id="back" layoutX="346.0" layoutY="489.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="110.0" text="Back">
+            <effect>
+                <ImageInput>
+                    <source>
+                        <Image url="@Recourses/Back.png" />
+                    </source>
+                </ImageInput>
+            </effect>
+        </Button>
+      <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="300.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="secretQuestion" layoutX="306.0" layoutY="207.0" prefHeight="25.0" prefWidth="190.0" promptText="Secret question" />
+      <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="301.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="secretAnswer" editable="false" layoutX="305.0" layoutY="254.0" prefHeight="25.0" prefWidth="190.0" promptText="Secret answer" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="295.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Recourses/TextField.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="password" layoutX="300.0" layoutY="364.0" prefHeight="25.0" prefWidth="190.0" promptText="here is your password" />
+      <Button fx:id="getPassword" layoutX="340.0" layoutY="306.0" mnemonicParsing="false" onAction="#getPassword" prefHeight="31.0" prefWidth="110.0" text="getPassword">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/return.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+    </children>
+</AnchorPane>
