@@ -5,6 +5,7 @@
  */
 package Creature;
 
+import DataStorage.HeroDataStorage;
 import java.util.Random;
 
 /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -7,7 +7,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
- 
+
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.ForgotPWController">
     <children>
         <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
@@ -45,12 +45,12 @@
          </image>
       </ImageView>
       <TextField fx:id="secretQuestion" layoutX="306.0" layoutY="207.0" prefHeight="25.0" prefWidth="190.0" promptText="Secret question" />
-      <TextField fx:id="secretAnswer" layoutX="305.0" layoutY="254.0" prefHeight="25.0" prefWidth="190.0" promptText="Secret answer" />
-      <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="73.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="301.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Recourses/TextField.png" />
          </image>
       </ImageView>
+      <TextField fx:id="secretAnswer" editable="false" layoutX="305.0" layoutY="254.0" prefHeight="25.0" prefWidth="190.0" promptText="Secret answer" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="295.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Recourses/TextField.png" />
