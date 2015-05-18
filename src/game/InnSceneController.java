@@ -43,22 +43,28 @@ public class InnSceneController implements Initializable {
     private int currentHealth;
     private int maxHealth;
     
+    private int heroGold;
+    private int restoreHealthCost = 15; //enkelt att modifiera senare...
+
     private Timeline timeLine;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentHealth = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
         maxHealth = HeroDataStorage.getInstance().getHero().getHp();
+        heroGold = HeroDataStorage.getInstance().getHero().getGold();
+
+        System.out.println("Amount of gold: " + heroGold);
         
         health.setText(currentHealth + " / " + maxHealth);
-        
+
         //tiden för att HP:n ska gå mot max är något som kan modifieras senare
         timeLine = new Timeline(new KeyFrame(Duration.millis(1000), ae -> handleTime()));
         timeLine.setCycleCount(Animation.INDEFINITE);
         timeLine.play();
     }
 
-    public void handleTime(){
+    public void handleTime() {
         if (currentHealth < maxHealth) {
             currentHealth++;
             health.setText(currentHealth + " / " + maxHealth);
@@ -72,35 +78,41 @@ public class InnSceneController implements Initializable {
             System.out.println("Current health restored to maximum");
             timeLine.stop();
             saveHPToDataBase();
-            fel.setText("Your health is full.");
+            fel.setText("Your health is now full.");
         }
     }
-    
+
     public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
 
     public void restoreHealthpointsNow(ActionEvent event) {
-        if (currentHealth < maxHealth) {
-            currentHealth = maxHealth;
-            health.setText(currentHealth + " / " + maxHealth);
-            saveHPToDataBase();
-            System.out.println("Current health restored to maximum.");
+        if (currentHealth < maxHealth /*&& heroGold > restoreHealthCost*/) {
+            if (heroGold < restoreHealthCost) {
+                //Möjligtvis switcha bilder på knappen istället för att ändra en label.
+                fel.setText("Not enough money...");
+            } else {
+                currentHealth = maxHealth;
+                heroGold = heroGold - restoreHealthCost;
+                health.setText(currentHealth + " / " + maxHealth);
+                saveHPToDataBase();
+                System.out.println("Current health restored to maximum.");
+            }
         } else if (currentHealth == maxHealth) {
             System.out.println("Current health already restored to maximum");
-            fel.setText("Your health is full.");
+            fel.setText("Your health is now full.");
         }
     }
-    
-    public void saveHPToDataBase(){
-        
+
+    public void saveHPToDataBase() {
+
         int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
-        
+
         DBConnect.connect();
         try {
-            DBConnect.CreateAlterStatement("UPDATE `game`.`hero` SET `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
-            System.out.println("UPDATE `game`.`hero` SET `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
+            DBConnect.CreateAlterStatement("UPDATE `game`.`hero` SET `heroGold`='" + heroGold + "', `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
+            System.out.println("UPDATE `game`.`hero` SET `heroGold`='" + heroGold + "', `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
         } catch (Exception e) {
             e.printStackTrace();
         }
