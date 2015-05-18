@@ -8,6 +8,7 @@ package Creature;
 import Creature.Enemy;
 import Creature.Enemy;
 import Creature.Enemy;
+import java.util.Random;
 
 /**
  *
@@ -22,18 +23,18 @@ public class Wolf extends Enemy {
         this.speed = speed;
     }
     @Override
-    protected void specialAttack1() {
+    protected void specialAttack1(Hero hero) {
 
     }
 
     @Override
-    protected void specialAttack2() {
+    protected void specialAttack2(Hero hero) {
 
     }
 
-    @Override
-    public Enemy attack(Hero hero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void attack(Hero hero) {
+        
+        hero.setHp(hero.getHp() - getDmg());
     }
 
     @Override
@@ -44,6 +45,14 @@ public class Wolf extends Enemy {
     @Override
     public int getMinDmg() {
         return minDamage;
+    }
+     public int getDmg(){
+        Random rand = new Random();
+        int minDmg = this.minDamage;
+        int maxDmg = this.maxDamage;
+        int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
+        
+        return dmg;
     }
 
 }
