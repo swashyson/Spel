@@ -15,6 +15,7 @@ public class Snake extends Enemy {
     public Snake(String name,int hp, int maxDamage, int minDamage, int speed){
         this.name = name;
         this.hp = hp;
+        this.maxHp = hp;
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
         this.speed = speed;
@@ -43,5 +44,6 @@ public class Snake extends Enemy {
     public int getMinDmg() {
         return minDamage;
     }
+    
 
 }
