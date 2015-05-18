@@ -111,6 +111,9 @@ public class Hero extends Creature {
                 case "2":
                     FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - getWeaponRandomDamage() - heroBaseDamage);
                     break;
+                case "3":
+                    FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    break;
                 case "null":
                     System.out.println("Select");
             }

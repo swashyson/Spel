@@ -5,6 +5,8 @@
  */
 package Creature;
 
+import java.util.Random;
+
 /**
  *
  * @author Mohini
@@ -22,25 +24,50 @@ public class Bear extends Enemy {
     }
 
     @Override
-    protected void specialAttack1() {
+    protected void specialAttack1(Hero hero) {
 
     }
 
     @Override
-    protected void specialAttack2() {
+    protected void specialAttack2(Hero hero) {
 
     }
-
-    public Enemy attack(Hero hero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
+    
+    public void attack(Hero hero) {
+        Random whatAttack = new Random();
+        int attack = whatAttack.nextInt(9) + 1;
+        if(attack != 10){
+        hero.setHp(hero.getHp() - getDmg());
+        }
+        else{
+            Random whatSpecialAttack = new Random();
+            int specialAttack = whatSpecialAttack.nextInt(1)+1;
+            if(specialAttack == 1){
+                specialAttack1(hero);
+            }else {
+                specialAttack2(hero);
+            }
+        }
     }
 
     public int getMaxDmg() {
         return maxDamage;
     }
 
+    
+    
     public int getMinDmg() {
         return minDamage;
+    }
+    
+    public int getDmg(){
+        Random rand = new Random();
+        int minDmg = this.minDamage;
+        int maxDmg = this.maxDamage;
+        int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
+        
+        return dmg;
     }
 
 }
