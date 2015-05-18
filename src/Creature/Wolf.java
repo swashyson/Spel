@@ -15,13 +15,15 @@ import java.util.Random;
  * @author Mohini
  */
 public class Wolf extends Enemy {
-    public Wolf(String name,int hp, int maxDamage, int minDamage, int speed){
+
+    public Wolf(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
         this.hp = hp;
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
         this.speed = speed;
     }
+
     @Override
     protected void specialAttack1(Hero hero) {
 
@@ -53,6 +55,10 @@ public class Wolf extends Enemy {
         int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
         
         return dmg;
+    }
+
+    public void setmaxHp(int maxHP) {
+        this.maxHp = hp;
     }
 
 }

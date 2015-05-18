@@ -15,6 +15,8 @@ public abstract class Enemy extends Creature {
 
     protected int maxDamage;
     protected int minDamage;
+    
+    
 
     protected abstract void attack(Hero hero);
 

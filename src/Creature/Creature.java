@@ -14,6 +14,7 @@ public abstract class Creature {
     protected String name;
     protected int hp;
     protected int speed;
+    protected int maxHp;
 
 
     public String getName() {
@@ -34,6 +35,9 @@ public abstract class Creature {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+    public int getMaxHp(){
+        return maxHp;
     }
 
 }

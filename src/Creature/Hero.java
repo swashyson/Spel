@@ -111,6 +111,11 @@ public class Hero extends Creature {
                 case "2":
                     FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - getWeaponRandomDamage() - heroBaseDamage);
                     break;
+                case "3":
+                    FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    break;
+                case "null":
+                    System.out.println("Select");
             }
         } catch (Exception ex) {
             System.out.println("First Select doesent count");
@@ -143,8 +148,7 @@ public class Hero extends Creature {
 
         if (HeroDataStorage.getInstance().getWeapon() != null) {
             basicAttack(HeroDataStorage.getInstance().getWeapon());
-        }
-        else{
+        } else {
             basicAttack(null);
         }
     }
