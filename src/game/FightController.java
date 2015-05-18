@@ -495,7 +495,9 @@ public class FightController implements Initializable {
 
     public void checkIfEnemysTurn() {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
-
+            
+            
+            System.err.println("");
             attackOrder.remove(0);
             System.out.println(FightDataStorage.getInstance().getEnemy1().getName() + " Skadade dig");
             

@@ -33,16 +33,19 @@ public class Scorpion extends Enemy {
 
     }
 
+
     public void attack(Hero hero) {
         hero.setHp(hero.getHp() - getDmg());
     }
 
     
+    @Override
     public int getMaxDmg() {
         return maxDamage;
     }
 
     
+    @Override
     public int getMinDmg() {
         return minDamage;
     }

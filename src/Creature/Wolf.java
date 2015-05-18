@@ -34,6 +34,7 @@ public class Wolf extends Enemy {
 
     }
 
+    
     public void attack(Hero hero) {
         
         hero.setHp(hero.getHp() - getDmg());

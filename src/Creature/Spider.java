@@ -31,6 +31,7 @@ public class Spider extends Enemy {
 
     }
 
+   
     public void attack(Hero hero) {
         hero.setHp(hero.getHp() - getDmg());
     }

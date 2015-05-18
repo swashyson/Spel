@@ -5,6 +5,7 @@
  */
 package Creature;
 
+import DataStorage.HeroDataStorage;
 import java.util.Random;
 
 /**
@@ -34,10 +35,12 @@ public class Bear extends Enemy {
     }
    
     
-    public void attack(Hero hero) {
+    
+    public void attack(Hero hero)  {
+        System.err.println("Hejheron har "+HeroDataStorage.getInstance().getHero().getHeroCurrentHP());
         Random whatAttack = new Random();
         int attack = whatAttack.nextInt(9) + 1;
-        if(attack != 10){
+        if(attack <= 10){
         hero.setHp(hero.getHp() - getDmg());
         }
         else{
@@ -49,14 +52,17 @@ public class Bear extends Enemy {
                 specialAttack2(hero);
             }
         }
+        System.err.println("Hejheron har "+HeroDataStorage.getInstance().getHero().getHeroCurrentHP());
     }
 
+    @Override
     public int getMaxDmg() {
         return maxDamage;
     }
 
     
     
+    @Override
     public int getMinDmg() {
         return minDamage;
     }
