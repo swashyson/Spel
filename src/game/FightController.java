@@ -393,29 +393,31 @@ public class FightController implements Initializable {
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-
-        int enemy2Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-        int enemy2StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
-
+        int enemy2Speed =0;
+        int enemy2StartSpeed = 0;
+        if(FightDataStorage.getInstance().getEnemy2() != null){
+        enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
+        enemy2StartSpeed= FightDataStorage.getInstance().getEnemy2().getSpeed();
+        }
         for (int i = 0; i < 500; i++) {
-            if (heroSpeed >= enemy1Speed) {
+            if (heroSpeed >= enemy1Speed && heroSpeed >= enemy2Speed) {
 
                 attackOrder.add("Hero");
                 heroSpeed = heroSpeed - 1;
             }
-            if (enemy1Speed >= heroSpeed) {
+            if (enemy1Speed > heroSpeed && enemy1Speed >= enemy2Speed) {
 
                 attackOrder.add("Enemy1");
                 enemy1Speed = enemy1Speed - 1;
             }
-            if (enemy2Speed >= heroSpeed && numberCreature == 2) {
+            if (enemy2Speed > heroSpeed && enemy2Speed > enemy1Speed) {
 
                 attackOrder.add("Enemy2");
                 enemy2Speed = enemy2Speed - 1;
             }
-            //System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
+            System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
 
-            if (heroSpeed == 0) {
+            if (heroSpeed == 0 ) {
 
                 heroSpeed = heroStartSpeed;
             }
@@ -423,7 +425,7 @@ public class FightController implements Initializable {
 
                 enemy1Speed = enemy1StartSpeed;
             }
-            if (enemy2Speed == 0 && numberCreature == 2) {
+            if (enemy2Speed == 0) {
 
                 enemy2Speed = enemy2StartSpeed;
             }
