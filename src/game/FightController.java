@@ -66,10 +66,10 @@ public class FightController implements Initializable {
 
     private String attackSelect;
     private ArrayList<String> attackOrder = new ArrayList();
-    
+
     private Timeline timeline;
     private int numberCreature;
-    
+
     private String[] enemyValue;
 
     @FXML
@@ -134,9 +134,9 @@ public class FightController implements Initializable {
         // Ska vara en random generator här beroende på vilken lvl osv man är
         String pic = "";
         Random rand = new Random();
-        numberCreature = rand.nextInt(2) + 1;
+        numberCreature = rand.nextInt(3) + 1;
         System.out.print("antal djur" + numberCreature);
-        for (int i = 0; i <= numberCreature; i++) {
+        for (int i = 1; i <= numberCreature; i++) {
             int whatCreature = rand.nextInt(5) + 1;
 
             if (whatCreature == 1) {
@@ -156,17 +156,17 @@ public class FightController implements Initializable {
                 pic = "Recourses/Wolf.png";
             }
             switch (i) {
-                case 0:
+                case 1:
                     pane.getChildren().add(creaturePane2);
                     FightDataStorage.getInstance().setEnemy1(enemy);
                     spawnCreature(pic, 40, 60, 730, 500, "1");
                     break;
-                case 1:
+                case 2:
                     pane.getChildren().add(creaturePane3);
                     FightDataStorage.getInstance().setEnemy2(enemy);
                     spawnCreature(pic, 40, 60, 730, 400, "2");
                     break;
-                case 2:
+                case 3:
                     pane.getChildren().add(creaturePane4);
                     FightDataStorage.getInstance().setEnemy3(enemy);
                     spawnCreature(pic, 40, 60, 730, 300, "3");
@@ -175,8 +175,9 @@ public class FightController implements Initializable {
         }
 
     }
-    public void getEnemyValue(int i){
-        
+
+    public void getEnemyValue(int i) {
+
     }
 
     public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY, String ID) {
@@ -318,11 +319,11 @@ public class FightController implements Initializable {
             } else if (attackSelect == null) {
                 System.out.println("Null");
             }
-            
+
             hpBarCreature1.setScaleX(healthPaneHeroScaler());
             hpBarCreature1.setX(healthPaneHeroScaler() / 2);
         } catch (Exception ex) {
-            System.out.println("Kan inte ladda innan world time startats");
+            //System.out.println("Kan inte ladda innan world time startats");
         }
     }
 
@@ -365,7 +366,7 @@ public class FightController implements Initializable {
     public void handleWorldTime() {
 
         healthPaneScaleInGame(); //Scala hpBar med worldtime
-        KillEnemyDisplay(); //Kolla om fienden är död
+        //KillEnemyDisplay(); //Kolla om fienden är död
         checkIfEnemysTurn(); //Kolla om det är fienden tur, isf attakera heron
         removeDeadEnemysFromArrayList();
 
@@ -386,6 +387,8 @@ public class FightController implements Initializable {
             if (attackOrder.get(0).equals("Hero")) {
                 selectEnemyToAttack();
                 heroAttack();
+                KillEnemyDisplay();
+                checkIfEnemyIsDead();
                 attackOrder.remove(0); // kolla om det är heros tur, ta väck honom i ordningen
             } else {
                 System.out.println("Det är inte din tur idiot");
@@ -404,45 +407,64 @@ public class FightController implements Initializable {
     public void KillEnemyDisplay() {
 
         try {
-            if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
 
-                creaturePane2.setVisible(false);
-            }
-            if (FightDataStorage.getInstance().getEnemy2() != null) {
+            if (numberCreature == 3) {
+
+                if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
+
+                    creaturePane2.setVisible(false);
+                }
                 if (FightDataStorage.getInstance().getEnemy2().getHp() <= 0) {
 
                     creaturePane3.setVisible(false);
                 }
-            }
-            if (FightDataStorage.getInstance().getEnemy3() != null) {
                 if (FightDataStorage.getInstance().getEnemy3().getHp() <= 0) {
 
                     creaturePane4.setVisible(false);
                 }
-            }
-            if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() == null && creaturePane2.isVisible() == false) {
-                System.out.println("Victory");
-                stopWorldTime();
-            }
-            if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() != null && creaturePane2.isVisible() == false && creaturePane3.isVisible() == false) {
+            } else if (numberCreature == 2) {
+                if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
 
-                System.out.println("Victory");
-                stopWorldTime();
-            }
-            if (DataStorage.FightDataStorage.getInstance().getEnemy1() != null && DataStorage.FightDataStorage.getInstance().getEnemy2() != null && DataStorage.FightDataStorage.getInstance().getEnemy3() != null && creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && creaturePane4.isVisible() == false) {
+                    creaturePane2.setVisible(false);
+                }
+                if (FightDataStorage.getInstance().getEnemy2().getHp() <= 0) {
 
-                System.out.println("Victory");
-                stopWorldTime();
+                    creaturePane3.setVisible(false);
+                }
+            } else if (numberCreature == 1) {
+
+                if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
+
+                    creaturePane2.setVisible(false);
+                }
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
-    public void killHero(){
-        if(heroChar.getHeroCurrentHP() <= 0){
-        
+
+    public void checkIfEnemyIsDead() {
+
+        if (creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && creaturePane4.isVisible() == false && numberCreature == 3) {
+
+            System.out.println("Victory");
+            stopWorldTime();
+        } else if (creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && numberCreature == 2) {
+
+            System.out.println("Victory");
+            stopWorldTime();
+        } else if (creaturePane2.isVisible() == false && numberCreature == 1) {
+
+            System.out.println("Victory");
+            stopWorldTime();
+        }
+    }
+
+    public void killHero() {
+        if (heroChar.getHeroCurrentHP() <= 0) {
+
             creaturePane1.setVisible(false);
             stopWorldTime();
             System.out.println("You dead mofo");
@@ -489,7 +511,7 @@ public class FightController implements Initializable {
                 attackOrder.add("Enemy3");
                 enemy3Speed = enemy3Speed - 1;
             }
-            System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
+            //System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
 
             if (heroSpeed == 0) {
 
@@ -515,7 +537,7 @@ public class FightController implements Initializable {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 1);
-           // System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+            // System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
@@ -616,17 +638,17 @@ public class FightController implements Initializable {
 
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - EnemyBaseDataStorage.getInstance().getSnake().basicAttack());
             attackOrder.remove(0);
-            
+
         } else if (enemyType.equals(enemy4)) {
 
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - EnemyBaseDataStorage.getInstance().getSpider().basicAttack());
             attackOrder.remove(0);
-            
+
         } else if (enemyType.equals(enemy5)) {
 
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - EnemyBaseDataStorage.getInstance().getWolf().basicAttack());
             attackOrder.remove(0);
-            
+
         }
         killHero();
     }
