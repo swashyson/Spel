@@ -34,8 +34,9 @@ public class Wolf extends Enemy {
 
     }
 
+    
     public void attack(Hero hero) {
-        
+
         hero.setHp(hero.getHp() - getDmg());
     }
 
@@ -48,17 +49,23 @@ public class Wolf extends Enemy {
     public int getMinDmg() {
         return minDamage;
     }
-     public int getDmg(){
+
+    public int getDmg() {
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
         int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
-        
+
         return dmg;
     }
 
     public void setmaxHp(int maxHP) {
         this.maxHp = hp;
+    }
+
+    public int basicAttack() {
+
+        return 1;
     }
 
 }

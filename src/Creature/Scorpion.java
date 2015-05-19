@@ -15,7 +15,8 @@ import java.util.Random;
  * @author Mohini
  */
 public class Scorpion extends Enemy {
-    public Scorpion(String name,int hp, int maxDamage, int minDamage, int speed){
+
+    public Scorpion(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
@@ -23,6 +24,7 @@ public class Scorpion extends Enemy {
         this.minDamage = minDamage;
         this.speed = speed;
     }
+
     @Override
     protected void specialAttack1(Hero hero) {
 
@@ -33,26 +35,31 @@ public class Scorpion extends Enemy {
 
     }
 
+
     public void attack(Hero hero) {
         hero.setHp(hero.getHp() - getDmg());
     }
 
-    
     public int getMaxDmg() {
         return maxDamage;
     }
 
-    
     public int getMinDmg() {
         return minDamage;
     }
-    public int getDmg(){
+
+    public int getDmg() {
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
         int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
-        
+
         return dmg;
+    }
+
+    public int basicAttack() {
+
+        return 1;
     }
 
 }
