@@ -67,7 +67,7 @@ public class InnSceneController implements Initializable {
         
         try {
             System.out.println("calling soundmanager to play backgroundsound for the innscenecontroller");
-            soundManager.playInnBackgroundSound();
+            soundManager.playBackgroundSound("Inn");
         } catch (Exception e) {
             e.printStackTrace();
         }

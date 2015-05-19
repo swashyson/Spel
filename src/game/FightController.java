@@ -103,6 +103,9 @@ public class FightController implements Initializable {
         selectEnemy();
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
+        
+        startSound();
+        
     }
 
     public void XPBAR() {
@@ -133,7 +136,7 @@ public class FightController implements Initializable {
         creature.setImage(creatureDisplay);
 
         createCreaturePane(creature, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY, ID);
-
+        
     }
 
     public void loadHeroStatsFromDataStorage() {
@@ -699,6 +702,16 @@ public class FightController implements Initializable {
     public void getGold(){  // for guld efter att man har dödat alla enemys
         int gold =numberCreature * 10 * HeroDataStorage.getInstance().getHero().getLevel();
         HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold()+ gold);
+    }
+
+    private void startSound() {
+        try {
+            System.out.println("connecting to soundmanager, trying to start Fight sound.");
+            soundManager.playBackgroundSound("Fight");
+        } catch (Exception e) {
+            System.out.println("failed to start fightsound");
+            e.printStackTrace();
+        }
     }
 }
 

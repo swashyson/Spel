@@ -102,7 +102,7 @@ public class ShopController implements Initializable {
         
         try {
             System.out.println("calling soundmanager to play backgroundsound for the shopcontroller");
-            soundManager.playShopBackgroundSound();
+            soundManager.playBackgroundSound("Shop");
         } catch (Exception e) {
             e.printStackTrace();
         }

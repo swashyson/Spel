@@ -18,89 +18,63 @@ import javafx.scene.media.MediaPlayer;
  */
 public class SoundManager {
 
-    private boolean muteUnMute; // checka av i varje metod om detta är sant eller inte
-
+    private boolean muteUnMute;
+    
     private MediaPlayer fightBackgroundSound;
-//    private Media fightBackSoundFile = new Media(getClass().getResource("/Music/FightingSound.mp3").toString());
+    private Media mediaFile;
 
-    //one individual background sound per scene.
-    public void playFightingBackgroundSound() { //ha någon sorts input, string?
-        System.out.println("you've arrived in playFightinBackgroundSound");
-//        Media fightBackSoundFile = new Media(getClass().getResource("FightingSound.mp3").toString());
-//        try {
-//            fightBackgroundSound = new MediaPlayer(fightBackSoundFile);
-//            fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
-//            fightBackgroundSound.setVolume(0.7);
-////            fightBackgroundSound.play();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            System.exit(0);
-//            e.printStackTrace();
-//        }
+    public void playBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
 
-        String mediaFile = "src/game/Resources/FightingSound.mp3";
-        try {
-            Media media = new Media(Paths.get(mediaFile).toUri().toString());
-            AudioClip audioClip = new AudioClip(media.getSource());
-            audioClip.play();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (newBackgroundSound == "Fight") {
+
+            try {
+                mediaFile = new Media(getClass().getResource("Recourses/FightingSound.mp3").toString());
+
+                System.out.println(mediaFile);
+                fightBackgroundSound = new MediaPlayer(mediaFile);
+                fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
+                fightBackgroundSound.setVolume(0.5);
+                fightBackgroundSound.play();
+//            fightBackgroundSound.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (newBackgroundSound == "Inn") {
+            try {
+                mediaFile = new Media(getClass().getResource(null).toString());
+
+                System.out.println(mediaFile);
+                fightBackgroundSound = new MediaPlayer(mediaFile);
+                fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
+                fightBackgroundSound.setVolume(0.5);
+                fightBackgroundSound.play();
+//            fightBackgroundSound.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (newBackgroundSound == "Shop") {
+            try {
+                mediaFile = new Media(getClass().getResource(null).toString());
+
+                System.out.println(mediaFile);
+                fightBackgroundSound = new MediaPlayer(mediaFile);
+                fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
+                fightBackgroundSound.setVolume(0.5);
+                fightBackgroundSound.play();
+//            fightBackgroundSound.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void playInnBackgroundSound() {
-        //sätt ett lugnt ljud här
-        System.out.println("you've arrived in playInnBackgroundSound");
-    }
-
-    public void playShopBackgroundSound() {
-        System.out.println("you've arrived in playShopBackgroundSound");
-    }
-
-    public void playCityBackgroundSound() { // ha ljud i city?
-        System.out.println("you've arrived in playCityBackgroundSound");
-    }
-
-    public void playShortSound() {
-
-    }
-
-//    public void playBackgroundSound(String newBackgroundSound){ //ha någon sorts input, string?
-//        
-//        if(newBackgroundSound == "fight"){
-//            fightBackgroundSound = new MediaPlayer(fightBackSoundFile);
-//            fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
-////            fightBackgroundSound.play();
-//        }
-//        
-//        //kolla om muteUmMute är satt som try
-//        //kolla om newBackgroundSound har ett visst namn, spela upp motsvarande ljud.
-//        //använd if-satser
-//        
-//        //kolla om muteUnMute är falskt
-//        
-//        
-//        
-//    }
-//    
-//    
-//    //plays individual sounds, f.ex. when the hero attacks one sound appears
-//    public void playIndividualSound(String newIndividualSound){ // ha någon sorts input, string?
-//        
-//        //kolla om muteUnMute är sant
-//        //kolla om newIndividualSound har ett visst namn, spela upp motsvarande ljud
-//        //använd if-satser
-//        
-//        //kolla om muteUnMute är falskt
-//    }
-//    
     public void stopTheSound(String stopSound) {
         //läs av parametern och stäng av det specifika ljudet.
 
         System.out.println("Stop sound in: " + stopSound);
 
         if (stopSound == "Fight") {
-//            fightBackgroundSound.stop();
+            fightBackgroundSound.stop();
         } else if (stopSound == "Shop") {
 
         } else if (stopSound == "Inn") {
