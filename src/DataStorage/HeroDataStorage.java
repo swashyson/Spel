@@ -87,22 +87,4 @@ public class HeroDataStorage {
 
     }
 
-
-    public int getExpToLevelUp() {
-        return expToLevelUp;
-    }
-
-
-    public void setExpToLevelUp() {
-        this.expToLevelUp =  getExpToNextLevel() - hero.getEXP();
-    }
-
-
-    public int getExpToNextLevel() {
-        return expToNextLevel;
-    }
-
-    public void setExpToNextLevel() {
-        this.expToNextLevel = hero.getLevel() * 2; 
-    }
 }

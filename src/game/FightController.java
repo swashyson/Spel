@@ -89,16 +89,31 @@ public class FightController implements Initializable {
         worldTime();
         loadEnemyStatsFromDataStorage();
         loadHeroStatsFromDataStorage();
-        XPBAR();
         whatHeroToLoad();
+        XPBAR();
         createEnemy();
         calculateAttackOrder();
         selectEnemy();
+
+        System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
     }
 
     public void XPBAR() {
 
-        XP.setScaleX(heroEXP);
+        int maxXpWidth = 763;
+        int currentXP = HeroDataStorage.getInstance().getHero().getEXP();
+        int heroExpToLevel = HeroDataStorage.getInstance().getHero().getLevel() * 95;
+
+        int calculate;
+
+        if (currentXP >= heroExpToLevel) {
+
+            HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
+            HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
+            XPBAR();
+        }
+
+        XP.setScaleX((HeroDataStorage.getInstance().getHero().getEXP() * maxXpWidth) / heroExpToLevel);
         XP.setX(XP.getScaleX() / 2);
 
     }
@@ -450,14 +465,17 @@ public class FightController implements Initializable {
         if (creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && creaturePane4.isVisible() == false && numberCreature == 3) {
 
             System.out.println("Victory");
+            victory();
             stopWorldTime();
         } else if (creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && numberCreature == 2) {
 
             System.out.println("Victory");
+            victory();
             stopWorldTime();
         } else if (creaturePane2.isVisible() == false && numberCreature == 1) {
 
             System.out.println("Victory");
+            victory();
             stopWorldTime();
         }
     }
@@ -652,14 +670,11 @@ public class FightController implements Initializable {
         }
         killHero();
     }
+    public void victory() {
 
-    public void levelUp() {
+        int exp = numberCreature * 50;
 
-        if (HeroDataStorage.getInstance().getHero().getEXP() >= HeroDataStorage.getInstance().getExpToNextLevel()) {
-
-            HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
-        } else {
-            System.out.println("You need" + HeroDataStorage.getInstance().getExpToLevelUp() + "experience to next level");
-        }
+        HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + exp);
+        XPBAR();
     }
 }
