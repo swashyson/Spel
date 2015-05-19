@@ -5,9 +5,7 @@
  */
 package Creature;
 
-import Creature.Enemy;
-import Creature.Enemy;
-import Creature.Enemy;
+import DataStorage.HeroDataStorage;
 import java.util.Random;
 
 /**
@@ -18,9 +16,10 @@ public class Wolf extends Enemy {
 
     public Wolf(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
-        this.hp = hp;
-        this.maxDamage = maxDamage;
-        this.minDamage = minDamage;
+        this.hp = (hp * HeroDataStorage.getInstance().getHero().getLevel());
+        this.maxHp = this.hp;
+        this.maxDamage = maxDamage*(HeroDataStorage.getInstance().getHero().getLevel());
+        this.minDamage = minDamage*(HeroDataStorage.getInstance().getHero().getLevel());
         this.speed = speed;
     }
 
@@ -32,12 +31,6 @@ public class Wolf extends Enemy {
     @Override
     protected void specialAttack2(Hero hero) {
 
-    }
-
-    
-    public void attack(Hero hero) {
-
-        hero.setHp(hero.getHp() - getDmg());
     }
 
     @Override
@@ -59,13 +52,17 @@ public class Wolf extends Enemy {
         return dmg;
     }
 
-    public void setmaxHp(int maxHP) {
-        this.maxHp = hp;
-    }
-
     public int basicAttack() {
 
-        return 1;
+        Random rand = new Random();
+        int minDmg = this.minDamage;
+        int maxDmg = this.maxDamage;
+        
+        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
+
+        System.out.println("Wolf skadade dig med " + dmg);
+        
+        return dmg;
     }
 
 }
