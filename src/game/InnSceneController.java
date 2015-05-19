@@ -47,6 +47,8 @@ public class InnSceneController implements Initializable {
     private int restoreHealthCost = 15; //enkelt att modifiera senare...
 
     private Timeline timeLine;
+    
+    SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,6 +64,13 @@ public class InnSceneController implements Initializable {
         timeLine = new Timeline(new KeyFrame(Duration.millis(1000), ae -> handleTime()));
         timeLine.setCycleCount(Animation.INDEFINITE);
         timeLine.play();
+        
+        try {
+            System.out.println("calling soundmanager to play backgroundsound for the innscenecontroller");
+            soundManager.playInnBackgroundSound();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleTime() {
@@ -85,6 +94,8 @@ public class InnSceneController implements Initializable {
     public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
+        
+        soundManager.stopTheSound("Inn");
     }
 
     public void restoreHealthpointsNow(ActionEvent event) {

@@ -62,11 +62,15 @@ public class ShopController implements Initializable {
 
     private final int getclass = HeroDataStorage.getInstance().getHero().getHeroType();
 
+    SoundManager soundManager = new SoundManager();
+    
     @FXML
     public void goToCity(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
+        
+        soundManager.stopTheSound("Shop");
 
     }
 
@@ -91,6 +95,14 @@ public class ShopController implements Initializable {
         } else if (getclass == 3) {
             spawnItems("Staff1", "Staff2", "Staff3", "Armor1O", "Armor2O", "Armor3O");
         }
+        
+        try {
+            System.out.println("calling soundmanager to play backgroundsound for the shopcontroller");
+            soundManager.playShopBackgroundSound();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 
     public void spawnItems(String itemName1, String itemName2, String itemName3, String itemName4, String itemName5, String itemName6) {

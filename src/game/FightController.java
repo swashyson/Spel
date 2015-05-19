@@ -69,6 +69,8 @@ public class FightController implements Initializable {
     private Timeline timeline;
     private int numberCreature;
 
+    SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
+
     @FXML
     public void goToCity(ActionEvent event) {
 
@@ -77,6 +79,8 @@ public class FightController implements Initializable {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
+        
+        soundManager.stopTheSound("Fight");
 
     }
 
@@ -91,6 +95,13 @@ public class FightController implements Initializable {
         createEnemy();
         calculateAttackOrder();
         selectEnemy();
+
+        try {
+            System.out.println("calling soundmanager to play backgroundsound for the fightcontroller");
+            soundManager.playFightingBackgroundSound();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void XPBAR() {
@@ -495,12 +506,11 @@ public class FightController implements Initializable {
 
     public void checkIfEnemysTurn() {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
-            
-            
+
             System.err.println("");
             attackOrder.remove(0);
             System.out.println(FightDataStorage.getInstance().getEnemy1().getName() + " Skadade dig");
-            
+
         }
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
