@@ -312,7 +312,7 @@ public class FightController implements Initializable {
             } else if (attackSelect == null) {
                 System.out.println("Null");
             }
-            
+
             hpBarCreature1.setScaleX(healthPaneHeroScaler());
             hpBarCreature1.setX(healthPaneHeroScaler() / 2);
         } catch (Exception ex) {
@@ -432,11 +432,12 @@ public class FightController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
-    public void killHero(){
-        if(heroChar.getHeroCurrentHP() <= 0){
-        
+
+    public void killHero() {
+        if (heroChar.getHeroCurrentHP() <= 0) {
+
             creaturePane1.setVisible(false);
             stopWorldTime();
             System.out.println("You dead mofo");
@@ -610,18 +611,28 @@ public class FightController implements Initializable {
 
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - EnemyBaseDataStorage.getInstance().getSnake().basicAttack());
             attackOrder.remove(0);
-            
+
         } else if (enemyType.equals(enemy4)) {
 
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - EnemyBaseDataStorage.getInstance().getSpider().basicAttack());
             attackOrder.remove(0);
-            
+
         } else if (enemyType.equals(enemy5)) {
 
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - EnemyBaseDataStorage.getInstance().getWolf().basicAttack());
             attackOrder.remove(0);
-            
+
         }
         killHero();
+    }
+
+    public void levelUp() {
+
+        if (HeroDataStorage.getInstance().getHero().getEXP() >= HeroDataStorage.getInstance().getExpToNextLevel()) {
+
+            HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
+        } else {
+            System.out.println("You need" + HeroDataStorage.getInstance().getExpToLevelUp() + "experience to next level");
+        }
     }
 }

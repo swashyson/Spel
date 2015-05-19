@@ -491,7 +491,7 @@ public class ShopController implements Initializable {
         felText.setText("You seem to lack either experience or gold");
         FadeTransition ft = new FadeTransition(Duration.millis(4000), felText);
         ft.setFromValue(1.0);
-        ft.setToValue(0.1);
+        ft.setToValue(0.-1);
         ft.play();
     }
 }

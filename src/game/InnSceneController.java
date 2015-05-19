@@ -72,6 +72,7 @@ public class InnSceneController implements Initializable {
             HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
             System.out.println("current health in InnSceneController: " + currentHealth);
             saveHPToDataBase();
+            
         } else if (currentHealth == maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
