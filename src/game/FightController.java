@@ -509,53 +509,66 @@ public class FightController implements Initializable {
             enemy3StartSpeed = FightDataStorage.getInstance().getEnemy3().getSpeed();
         }
         for (int i = 0; i < 500; i++) {
+            if( numberCreature ==3){
             if (heroSpeed >= enemy1Speed && heroSpeed >= enemy2Speed && heroSpeed >= enemy3Speed) {
 
                 attackOrder.add("Hero");
+                
                 heroSpeed = heroSpeed - 1;
             }
             if (enemy1Speed > heroSpeed && enemy1Speed >= enemy2Speed && enemy1Speed >= enemy3Speed) {
 
                 attackOrder.add("Enemy1");
+                
                 enemy1Speed = enemy1Speed - 1;
             }
             if (enemy2Speed > heroSpeed && enemy2Speed > enemy1Speed && enemy2Speed >= enemy3Speed) {
 
                 attackOrder.add("Enemy2");
+                
                 enemy2Speed = enemy2Speed - 1;
             }
             if (enemy3Speed > heroSpeed && enemy3Speed > enemy1Speed && enemy3Speed > enemy2Speed) {
 
                 attackOrder.add("Enemy3");
+                
                 enemy3Speed = enemy3Speed - 1;
             }
             //System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
 
             if (heroSpeed == 0) {
-
-                heroSpeed = heroStartSpeed;
+                    heroSpeed = heroStartSpeed;
+                    enemy1Speed = enemy1StartSpeed;
+                    enemy2Speed = enemy2StartSpeed;
+                    enemy3Speed = enemy3StartSpeed;
+                }
             }
-            if (enemy1Speed == 0) {
+//            if (enemy1Speed == heroSpeed && enemy1Speed == enemy2Speed && enemy1Speed == enemy3Speed) {
+//
+//                
+//            }
+//            if (enemy2Speed == heroSpeed && enemy2Speed == enemy1Speed && enemy2Speed == enemy3Speed) {
+//
+//                
+//            }
+//            if (enemy3Speed == heroSpeed && enemy3Speed == enemy1Speed && enemy3Speed == enemy2Speed) {
+//
+//               
+//            }
+            //System.out.println(attackOrder.get(i)); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså...
 
-                enemy1Speed = enemy1StartSpeed;
-            }
-            if (enemy2Speed == 0) {
-
-                enemy2Speed = enemy2StartSpeed;
-            }
-            if (enemy3Speed == 0) {
-
-                enemy3Speed = enemy3StartSpeed;
-            }
+            
+            
         }
-
+        System.out.println(attackOrder.toString()); // Hela metoden är bara alfa, inte alls klar, är inte så jävla vass på matte asså..
     }
 
     public void checkIfEnemysTurn() {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 1);
-            // System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+            attackOrder.remove(0);
+           System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
