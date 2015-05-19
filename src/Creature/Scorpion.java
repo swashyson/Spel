@@ -5,9 +5,8 @@
  */
 package Creature;
 
-import Creature.Enemy;
-import Creature.Enemy;
-import Creature.Enemy;
+
+import DataStorage.HeroDataStorage;
 import java.util.Random;
 
 /**
@@ -17,10 +16,10 @@ import java.util.Random;
 public class Scorpion extends Enemy {
     public Scorpion(String name,int hp, int maxDamage, int minDamage, int speed){
         this.name = name;
-        this.hp = hp;
-        this.maxHp = hp;
-        this.maxDamage = maxDamage;
-        this.minDamage = minDamage;
+        this.hp = (hp * HeroDataStorage.getInstance().getHero().getLevel());
+        this.maxHp = this.hp;
+        this.maxDamage = maxDamage*(HeroDataStorage.getInstance().getHero().getLevel());
+        this.minDamage = minDamage*(HeroDataStorage.getInstance().getHero().getLevel());
         this.speed = speed;
     }
     @Override

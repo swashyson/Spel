@@ -8,6 +8,7 @@ package game;
 import Creature.*;
 import Creature.Hero;
 import DataStorage.*;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -65,9 +66,11 @@ public class FightController implements Initializable {
 
     private String attackSelect;
     private ArrayList<String> attackOrder = new ArrayList();
-
+    
     private Timeline timeline;
     private int numberCreature;
+    
+    private String[] enemyValue;
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -131,10 +134,10 @@ public class FightController implements Initializable {
         // Ska vara en random generator här beroende på vilken lvl osv man är
         String pic = "";
         Random rand = new Random();
-        numberCreature = rand.nextInt(2) + 1;
+        numberCreature = rand.nextInt(3) + 1;
         System.out.print("antal djur" + numberCreature);
         for (int i = 0; i <= numberCreature; i++) {
-            int whatCreature = rand.nextInt(4) + 1;
+            int whatCreature = rand.nextInt(5) + 1;
 
             if (whatCreature == 1) {
                 enemy = new Bear(EnemyBaseDataStorage.getInstance().getBear().getName(), EnemyBaseDataStorage.getInstance().getBear().getHp(), EnemyBaseDataStorage.getInstance().getBear().getMaxDmg(), EnemyBaseDataStorage.getInstance().getBear().getMinDmg(), EnemyBaseDataStorage.getInstance().getBear().getSpeed());
@@ -171,6 +174,9 @@ public class FightController implements Initializable {
             }
         }
 
+    }
+    public void getEnemyValue(int i){
+        
     }
 
     public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY, String ID) {
@@ -496,8 +502,6 @@ public class FightController implements Initializable {
     public void checkIfEnemysTurn() {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
             
-            
-            System.err.println("");
             attackOrder.remove(0);
             System.out.println(FightDataStorage.getInstance().getEnemy1().getName() + " Skadade dig");
             
