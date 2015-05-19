@@ -652,4 +652,14 @@ public class FightController implements Initializable {
         }
         killHero();
     }
+
+    public void levelUp() {
+
+        if (HeroDataStorage.getInstance().getHero().getEXP() >= HeroDataStorage.getInstance().getExpToNextLevel()) {
+
+            HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
+        } else {
+            System.out.println("You need" + HeroDataStorage.getInstance().getExpToLevelUp() + "experience to next level");
+        }
+    }
 }
