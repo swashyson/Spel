@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +42,8 @@ public class FightController implements Initializable {
 
     @FXML
     private AnchorPane pane;
+    @FXML
+    private Label levelLabel;
 
     @FXML
 
@@ -108,6 +111,7 @@ public class FightController implements Initializable {
 
         XP.setScaleX((HeroDataStorage.getInstance().getHero().getEXP() * maxXpWidth) / heroExpToLevel);
         XP.setX(XP.getScaleX() / 2);
+        levelLabel.setText("You´r level are " + HeroDataStorage.getInstance().getHero().getLevel());
 
         if (currentXP >= heroExpToLevel) {
 
@@ -683,5 +687,12 @@ public class FightController implements Initializable {
 
         HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + exp);
         XPBAR();
+        getGold();
+        System.err.println(HeroDataStorage.getInstance().getHero().getGold());
+    }
+    public void getGold(){  // for guld efter att man har dödat alla enemys
+        int gold =numberCreature * 10 * HeroDataStorage.getInstance().getHero().getLevel();
+        HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold()+ gold);
     }
 }
+
