@@ -17,17 +17,14 @@ import javafx.scene.media.MediaPlayer;
  * @author Mohini
  */
 public class SoundManager {
-    
-    
-    
+
     private boolean muteUnMute; // checka av i varje metod om detta är sant eller inte
-    
+
     private MediaPlayer fightBackgroundSound;
 //    private Media fightBackSoundFile = new Media(getClass().getResource("/Music/FightingSound.mp3").toString());
-    
-    
+
     //one individual background sound per scene.
-    public void playFightingBackgroundSound(){ //ha någon sorts input, string?
+    public void playFightingBackgroundSound() { //ha någon sorts input, string?
         System.out.println("you've arrived in playFightinBackgroundSound");
 //        Media fightBackSoundFile = new Media(getClass().getResource("FightingSound.mp3").toString());
 //        try {
@@ -40,33 +37,34 @@ public class SoundManager {
 //            System.exit(0);
 //            e.printStackTrace();
 //        }
-        
+
         String mediaFile = "src/game/Resources/FightingSound.mp3";
-        
-        Media media = new Media(Paths.get(mediaFile).toUri().toString());
-        AudioClip audioClip = new AudioClip(media.getSource());
-        audioClip.play();
-        
+        try {
+            Media media = new Media(Paths.get(mediaFile).toUri().toString());
+            AudioClip audioClip = new AudioClip(media.getSource());
+            audioClip.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    public void playInnBackgroundSound(){
+
+    public void playInnBackgroundSound() {
         //sätt ett lugnt ljud här
         System.out.println("you've arrived in playInnBackgroundSound");
     }
-    
-    public void playShopBackgroundSound(){
+
+    public void playShopBackgroundSound() {
         System.out.println("you've arrived in playShopBackgroundSound");
     }
-    
-    public void playCityBackgroundSound(){ // ha ljud i city?
+
+    public void playCityBackgroundSound() { // ha ljud i city?
         System.out.println("you've arrived in playCityBackgroundSound");
     }
-    
-    public void playShortSound(){
-        
+
+    public void playShortSound() {
+
     }
-        
-        
+
 //    public void playBackgroundSound(String newBackgroundSound){ //ha någon sorts input, string?
 //        
 //        if(newBackgroundSound == "fight"){
@@ -96,23 +94,21 @@ public class SoundManager {
 //        //kolla om muteUnMute är falskt
 //    }
 //    
-    public void stopTheSound(String stopSound){
+    public void stopTheSound(String stopSound) {
         //läs av parametern och stäng av det specifika ljudet.
-        
+
         System.out.println("Stop sound in: " + stopSound);
-        
-        if(stopSound == "Fight"){
+
+        if (stopSound == "Fight") {
 //            fightBackgroundSound.stop();
-        }
-        else if(stopSound == "Shop"){
-            
-        }
-        else if(stopSound == "Inn"){
-            
+        } else if (stopSound == "Shop") {
+
+        } else if (stopSound == "Inn") {
+
         }
     }
-    
-    public void muteSounds(boolean muteUnMute){
+
+    public void muteSounds(boolean muteUnMute) {
         this.muteUnMute = muteUnMute;
 //        if(muteUnMute == true){
 //            //sätt alla ljud som stop
@@ -121,5 +117,5 @@ public class SoundManager {
 //            //referera till
 //        }
     }
-    
+
 }

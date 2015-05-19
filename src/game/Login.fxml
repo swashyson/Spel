@@ -66,5 +66,6 @@
                 <Font size="20.0" />
             </font>
         </Label>
+      <Button layoutX="472.0" layoutY="563.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
     </children>
 </AnchorPane>

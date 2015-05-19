@@ -80,6 +80,11 @@ public class LoginController implements Initializable {
 
     }
 
+    @FXML
+    public void exit(ActionEvent event){
+        System.exit(0);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
