@@ -373,8 +373,9 @@ public class ShopController implements Initializable {
     }
 
     public void listViewGetCurrentItems() {
-
+        currentItems.add("Herolevel: " + HeroDataStorage.getInstance().getHero().getLevel());
         currentItems.add("GoldStash: " + HeroDataStorage.getInstance().getHero().getGold() + " goldcoins");
+        
         if (HeroDataStorage.getInstance().getWeapon() != null) {
 
             currentItems.add("Your Weapon:");
