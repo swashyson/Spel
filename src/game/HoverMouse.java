@@ -83,8 +83,9 @@ public class HoverMouse {
                         int weaponLevel = rs.getInt("weaponLevel");
                         int weaponID = rs.getInt("WeaponID");
                         int weaponType = rs.getInt("WeaponType");
+                         int weaponGold = rs.getInt("WeaponGold");
 
-                        weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponLevel, weaponType);
+                        weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponLevel, weaponType, weaponGold);
                         weaponList.add(weapon); // lägger till alla vapen från databasen i en arraylista
                     }
 
@@ -101,8 +102,8 @@ public class HoverMouse {
                         int armorType = rs.getInt("armorType");
                         int armorValue = rs.getInt("armor");
                         int armorID = rs.getInt("armorID");
-
-                        armor = new Armor(armorName, armorID, armorValue, armorType, armorLevel, armorSpeed);
+                        int armorGold = rs.getInt("armorGold");
+                        armor = new Armor(armorName, armorID, armorValue, armorType, armorLevel, armorSpeed, armorGold);
                         armorList.add(armor);
                     }
 
@@ -159,10 +160,12 @@ public class HoverMouse {
 
     public void buyWeaponsAdd(ListView list, int index) {
         buyItems.add("Weapon Stats");
-        buyItems.add("Name: " + weaponList.get(index).getName());
-        buyItems.add("Weapon Min Damage: " + weaponList.get(index).getWeaponMinDamage());
-        buyItems.add("Weapon Max Damage: " + weaponList.get(index).getWeaponMaxDamage());
+        buyItems.add("Weapon name: " + weaponList.get(index).getName());
+        buyItems.add("Weapon MinDamage: " + weaponList.get(index).getWeaponMinDamage());
+        buyItems.add("Weapon MaxDamage: " + weaponList.get(index).getWeaponMaxDamage());
         buyItems.add("Weapon Speed: " + weaponList.get(index).getWeaponSpeed());
+        buyItems.add("Price: " + weaponList.get(index).getWeaponGold());
+        
         ObservableList<Object> OL = FXCollections.observableArrayList(buyItems);
         list.setItems(OL);
     }
@@ -173,6 +176,8 @@ public class HoverMouse {
         buyItems.add("Armor Value: " + armorList.get(index).getArmor());
         buyItems.add("Armor Speed: " + armorList.get(index).getArmorSpeed());
         buyItems.add("Armor Level: " + armorList.get(index).getArmorLevel());
+        buyItems.add("Price:: " + armorList.get(index).getArmorGold());
+        
         ObservableList<Object> OL = FXCollections.observableArrayList(buyItems);
         list.setItems(OL);
     }

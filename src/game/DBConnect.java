@@ -95,7 +95,7 @@ public class DBConnect {
                     + "heroCurrentHP ='" + HeroDataStorage.getInstance().getHero().getHeroCurrentHP() + "',  "
                     + "heroBaseSpeed ='" + HeroDataStorage.getInstance().getHero().getSpeed() + "',  "
                     + "heroBaseDamage ='" + HeroDataStorage.getInstance().getHero().getBaseDamage() + "' "
-                    + "WHERE idHERO = '" + HeroDataStorage.getInstance().getHero().getUserID() + "'");
+                    + "WHERE idHERO = '" + HeroDataStorage.getInstance().getHero().getHeroID() + "'");
 
             HeroDataStorage.getInstance().setArmor(null);
             HeroDataStorage.getInstance().setWeapon(null);

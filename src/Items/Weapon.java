@@ -19,8 +19,10 @@ public class Weapon extends Item {
     private int weaponSpeed;
     private int weaponLevel;
     private int weaponType;
+    
+    private int weaponGold;
 
-    public Weapon(String name, int weaponID, int weaponMinDamage, int weaponMaxDamage, int weaponSpeed, int weaponLevel, int weaponType) {
+    public Weapon(String name, int weaponID, int weaponMinDamage, int weaponMaxDamage, int weaponSpeed, int weaponLevel, int weaponType, int weaponGold) {
         super(name);
         this.weaponID = weaponID;
         this.weaponMinDamage = weaponMinDamage;
@@ -28,6 +30,7 @@ public class Weapon extends Item {
         this.weaponSpeed = weaponSpeed;
         this.weaponLevel = weaponLevel;
         this.weaponType = weaponType;
+        this.weaponGold = weaponGold;
     }
 
     public int getWeaponID() {
@@ -72,6 +75,20 @@ public class Weapon extends Item {
 
     public void setWeaponType(int weaponType) {
         this.weaponType = weaponType;
+    }
+
+    /**
+     * @return the weaponGold
+     */
+    public int getWeaponGold() {
+        return weaponGold;
+    }
+
+    /**
+     * @param weaponGold the weaponGold to set
+     */
+    public void setWeaponGold(int weaponGold) {
+        this.weaponGold = weaponGold;
     }
 
 }

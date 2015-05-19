@@ -18,15 +18,19 @@ public class Armor extends Item {
     private int armorType;
     private int armorLevel;
     private int armorSpeed;
+    private int armorGold;
 
-    public Armor(String name, int armorID, int armor, int armorType, int armorLevel, int armorSpeed) {
+    public Armor(String name, int armorID, int armor, int armorType, int armorLevel, int armorSpeed, int armorGold) {
         super(name);
         this.armorID = armorID;
         this.armor = armor;
         this.armorType = armorType;
         this.armorLevel = armorLevel;
         this.armorSpeed = armorSpeed;
+        this.armorGold = armorGold;
     }
+
+ 
 
     public void setArmor(int armor) {
         this.armor = armor;
@@ -66,6 +70,20 @@ public class Armor extends Item {
 
     public int getArmorID() {
         return armorID;
+    }
+
+    /**
+     * @return the armorGold
+     */
+    public int getArmorGold() {
+        return armorGold;
+    }
+
+    /**
+     * @param armorGold the armorGold to set
+     */
+    public void setArmorGold(int armorGold) {
+        this.armorGold = armorGold;
     }
 
 }
