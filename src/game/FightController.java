@@ -491,7 +491,6 @@ public class FightController implements Initializable {
             enemy3StartSpeed = FightDataStorage.getInstance().getEnemy3().getSpeed();
         }
         for (int i = 0; i < 500; i++) {
-            if( numberCreature ==3){
             if (heroSpeed >= enemy1Speed && heroSpeed >= enemy2Speed && heroSpeed >= enemy3Speed) {
 
                 attackOrder.add("Hero");
@@ -524,7 +523,7 @@ public class FightController implements Initializable {
                     enemy2Speed = enemy2StartSpeed;
                     enemy3Speed = enemy3StartSpeed;
                 }
-            }
+            
 //            if (enemy1Speed == heroSpeed && enemy1Speed == enemy2Speed && enemy1Speed == enemy3Speed) {
 //
 //                
@@ -549,19 +548,16 @@ public class FightController implements Initializable {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 1);
-            attackOrder.remove(0);
-           System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+           //System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 2);
-            attackOrder.remove(0);
             //System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy3") && creaturePane4.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 3);
-            attackOrder.remove(0);
             //System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
 
