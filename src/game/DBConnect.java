@@ -24,7 +24,7 @@ public class DBConnect {
     public static void connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=";
+            String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=root";
             Connection cc = DriverManager.getConnection(URL);
 
             //URL = URLC;
@@ -95,7 +95,7 @@ public class DBConnect {
                     + "heroCurrentHP ='" + HeroDataStorage.getInstance().getHero().getHeroCurrentHP() + "',  "
                     + "heroBaseSpeed ='" + HeroDataStorage.getInstance().getHero().getSpeed() + "',  "
                     + "heroBaseDamage ='" + HeroDataStorage.getInstance().getHero().getBaseDamage() + "' "
-                    + "WHERE idHERO = '" + HeroDataStorage.getInstance().getHero().getUserID() + "'");
+                    + "WHERE idHERO = '" + HeroDataStorage.getInstance().getHero().getHeroID() + "'");
 
             HeroDataStorage.getInstance().setArmor(null);
             HeroDataStorage.getInstance().setWeapon(null);

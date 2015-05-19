@@ -16,13 +16,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import DataStorage.*;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
+
 /**
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
 public class LoginController implements Initializable {
 
-   // @FXML
+    // @FXML
     // private Label label;
     @FXML
     private Label fel;
@@ -37,6 +40,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField password;
     Hero hero;
+
     @FXML
     public void logIn(ActionEvent event) {
 
@@ -51,13 +55,15 @@ public class LoginController implements Initializable {
                 SwitchScene sc = new SwitchScene();
                 sc.change(event, "SelectOrCreate");
                 ID = rs.getInt("userID");
-                
-           
 
                 HeroDataStorage.getInstance().setuserID(ID);
                 DBConnect.close();
             } else {
                 fel.setText("Wrong username/password");
+                FadeTransition ft = new FadeTransition(Duration.millis(4000), fel);
+                ft.setFromValue(1.0);
+                ft.setToValue(0.1);
+                ft.play();
             }
 
         } catch (Exception ex) {

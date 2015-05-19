@@ -14,7 +14,8 @@ import java.util.Random;
  * @author Mohini
  */
 public class Spider extends Enemy {
-    public Spider(String name,int hp, int maxDamage, int minDamage, int speed){
+
+    public Spider(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
         this.hp = (hp * HeroDataStorage.getInstance().getHero().getLevel());
         this.maxHp = this.hp;
@@ -22,6 +23,7 @@ public class Spider extends Enemy {
         this.minDamage = minDamage*(HeroDataStorage.getInstance().getHero().getLevel());
         this.speed = speed;
     }
+
     @Override
     protected void specialAttack1(Hero hero) {
 
@@ -46,13 +48,19 @@ public class Spider extends Enemy {
     public int getMinDmg() {
         return minDamage;
     }
-     public int getDmg(){
+
+    public int getDmg() {
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
         int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
-        
+
         return dmg;
+    }
+
+    public int basicAttack() {
+
+        return 1;
     }
 
 }
