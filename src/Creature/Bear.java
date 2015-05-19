@@ -16,10 +16,10 @@ public class Bear extends Enemy {
 
     public Bear(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
-        this.hp = hp;
-        this.maxHp = hp;
-        this.maxDamage = maxDamage;
-        this.minDamage = minDamage;
+        this.hp = (hp * HeroDataStorage.getInstance().getHero().getLevel());
+        this.maxHp = this.hp;
+        this.maxDamage = maxDamage*(HeroDataStorage.getInstance().getHero().getLevel());
+        this.minDamage = minDamage*(HeroDataStorage.getInstance().getHero().getLevel());
         this.speed = speed;
 
     }
@@ -33,45 +33,27 @@ public class Bear extends Enemy {
     protected void specialAttack2(Hero hero) {
 
     }
-   
-    
-    
-    public void attack(Hero hero)  {
-        System.err.println("Hejheron har "+HeroDataStorage.getInstance().getHero().getHeroCurrentHP());
-        Random whatAttack = new Random();
-        int attack = whatAttack.nextInt(9) + 1;
-        if(attack <= 10){
-        hero.setHp(hero.getHp() - getDmg());
-        }
-        else{
-            Random whatSpecialAttack = new Random();
-            int specialAttack = whatSpecialAttack.nextInt(1)+1;
-            if(specialAttack == 1){
-                specialAttack1(hero);
-            }else {
-                specialAttack2(hero);
-            }
-        }
-        System.err.println("Hejheron har "+HeroDataStorage.getInstance().getHero().getHeroCurrentHP());
-    }
+
 
     @Override
     public int getMaxDmg() {
         return maxDamage;
     }
 
-    
-    
     @Override
     public int getMinDmg() {
         return minDamage;
     }
-    
-    public int getDmg(){
+
+    public int basicAttack() {
+
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
-        int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
+        
+        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
+
+        System.out.println("Bear skadade dig med " + dmg);
         
         return dmg;
     }

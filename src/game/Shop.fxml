@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
@@ -50,5 +51,10 @@
                 </Lighting>
             </effect>
         </ListView>
+      <Label fx:id="felText" alignment="CENTER" layoutX="110.0" layoutY="27.0" prefHeight="32.0" prefWidth="603.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

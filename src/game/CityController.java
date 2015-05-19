@@ -104,8 +104,9 @@ public class CityController implements Initializable {
                 int weaponSpeed = check.getInt("weaponSpeed");
                 int weaponlevel = check.getInt("weaponLevel");
                 int weaponType = check.getInt("weaponType");
-
-                weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
+                int weaponGold = check.getInt("weaponGold");
+                
+                weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType, weaponGold);
                 HeroDataStorage.getInstance().setWeapon(weapon);
 
                 System.out.println(weapon);
@@ -136,8 +137,8 @@ public class CityController implements Initializable {
                 int armorType = check.getInt("armorType");
                 int armorLevel = check.getInt("armorLevel");
                 int armorSpeed = check.getInt("armorSpeed");
-
-                armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
+                 int armorGold = check.getInt("armorGold");
+                armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed, armorGold);
                 HeroDataStorage.getInstance().setArmor(armor);
 
                 System.out.println(armor);

@@ -32,7 +32,9 @@ public class FightDataStorage {
         this.enemy1 = enemy;
     }
     public Enemy getEnemy1(){
+        
         return enemy1;
+        
     }
     public void setEnemy2(Enemy enemy){
         this.enemy2 = enemy;

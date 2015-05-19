@@ -5,7 +5,8 @@
  */
 package Creature;
 
-import Creature.Enemy;
+
+import DataStorage.HeroDataStorage;
 import java.util.Random;
 
 /**
@@ -13,14 +14,16 @@ import java.util.Random;
  * @author Mohini
  */
 public class Spider extends Enemy {
-    public Spider(String name,int hp, int maxDamage, int minDamage, int speed){
+
+    public Spider(String name, int hp, int maxDamage, int minDamage, int speed) {
         this.name = name;
-        this.hp = hp;
-        this.maxHp = hp;
-        this.maxDamage = maxDamage;
-        this.minDamage = minDamage;
+        this.hp = (hp * HeroDataStorage.getInstance().getHero().getLevel());
+        this.maxHp = this.hp;
+        this.maxDamage = maxDamage*(HeroDataStorage.getInstance().getHero().getLevel());
+        this.minDamage = minDamage*(HeroDataStorage.getInstance().getHero().getLevel());
         this.speed = speed;
     }
+
     @Override
     protected void specialAttack1(Hero hero) {
 
@@ -32,10 +35,7 @@ public class Spider extends Enemy {
     }
 
    
-    public void attack(Hero hero) {
-        hero.setHp(hero.getHp() - getDmg());
-    }
-
+    
     @Override
     public int getMaxDmg() {
         return maxDamage;
@@ -45,11 +45,16 @@ public class Spider extends Enemy {
     public int getMinDmg() {
         return minDamage;
     }
-     public int getDmg(){
+
+    public int basicAttack() {
+
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
-        int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
+        
+        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
+
+        System.out.println("Spider skadade dig med " + dmg);
         
         return dmg;
     }

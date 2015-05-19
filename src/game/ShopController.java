@@ -12,19 +12,21 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -33,6 +35,8 @@ import javafx.scene.layout.AnchorPane;
  */
 public class ShopController implements Initializable {
 
+    @FXML
+    private Label felText;
     @FXML
     private Button backToCity;
 
@@ -147,28 +151,39 @@ public class ShopController implements Initializable {
                     int weaponlevel = rs.getInt("weaponLevel");
                     int weaponType = rs.getInt("weaponType");
                     int weaponID = rs.getInt("weaponID");
+                    int weaponGold = rs.getInt("weaponGold");
 
-                    weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType);
+                    weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType, weaponGold);
                     weaponList.add(weapon);
 
                 }
-                if (buttonID == 1 && levelReq(weaponList.get(0).getWeaponLevel()) == true) {
+                if (buttonID == 1 && levelReq(weaponList.get(0).getWeaponLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= weaponList.get(0).getWeaponGold()) {
+                    //tar väck guld
+                    HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() - weaponList.get(0).getWeaponGold());
+
                     setWeaponToHero(weaponList.get(0));
                     removeWeapon(button, button, button, buttonID);
 
-                } else if (buttonID == 2 && levelReq(weaponList.get(1).getWeaponLevel()) == true) {
+                } else if (buttonID == 2 && levelReq(weaponList.get(1).getWeaponLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= weaponList.get(0).getWeaponGold()) {
+                    //tar väck guld
+                    HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() - weaponList.get(1).getWeaponGold());
 
                     setWeaponToHero(weaponList.get(1));
                     removeWeapon(button, button, button, buttonID);
                     removeWeaponRequest();
-                } else if (buttonID == 3 && levelReq(weaponList.get(2).getWeaponLevel()) == true) {
+                } else if (buttonID == 3 && levelReq(weaponList.get(2).getWeaponLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= weaponList.get(0).getWeaponGold()) {
+                    //tar väck guld
+                    HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() - weaponList.get(2).getWeaponGold());
 
                     setWeaponToHero(weaponList.get(2));
                     removeWeapon(button, button, button, buttonID);
                     removeWeaponRequest();
-                }
-                else{
-                    System.out.println("För låg level blablabla");
+                } else {
+                    
+                    System.err.println("Not enough Gold or Experience!");
+                    
+                    
+                    messageFade();
                 }
                 listViewGetCurrentItems();
 
@@ -197,31 +212,44 @@ public class ShopController implements Initializable {
                     int armorLevel = rs.getInt("armorLevel");
                     int armorSpeed = rs.getInt("armorSpeed");
                     int armorID = rs.getInt("armorID");
+                    int armorGold = rs.getInt("armorGold");
 
-                    armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed);
+                    armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed, armorGold);
                     armorList.add(armor);
 
                 }
-                if (buttonID == 4 && levelReq(armorList.get(0).getArmorLevel()) == true) {
+                if (buttonID == 4 && levelReq(armorList.get(0).getArmorLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= armorList.get(0).getArmorGold()) {
+                    //tar väck guld
+                    HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() - armorList.get(0).getArmorGold());
+
                     setArmorToHero(armorList.get(0));
                     removeArmor(button, button, button, buttonID);
 
-                } else if (buttonID == 5 && levelReq(armorList.get(1).getArmorLevel()) == true) {
+                } else if (buttonID == 5 && levelReq(armorList.get(1).getArmorLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= armorList.get(1).getArmorGold()) {
+                    //tar väck guld 
+                    HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() - armorList.get(1).getArmorGold());
+
                     setArmorToHero(armorList.get(1));
                     removeArmor(button, button, button, buttonID);
                     removeArmorRequest();
 
-                } else if (buttonID == 6 && levelReq(armorList.get(2).getArmorLevel()) == true) {
+                } else if (buttonID == 6 && levelReq(armorList.get(2).getArmorLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= armorList.get(0).getArmorGold()) {
+                    //tar väck guld 
+                    HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() - armorList.get(1).getArmorGold());
+
                     setArmorToHero(armorList.get(2));
                     removeArmor(button, button, button, buttonID);
                     removeArmorRequest();
+
+                } else {
+
+                    System.out.println("Not enough gold or experience.");
+
+                 messageFade();
                 }
-                else{
-                    System.out.println("Du är för låg level");
-                }
-                
+
                 listViewGetCurrentItems();
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             } finally {
@@ -357,14 +385,19 @@ public class ShopController implements Initializable {
     }
 
     public void listViewGetCurrentItems() {
-
+        currentItems.add("Herolevel: " + HeroDataStorage.getInstance().getHero().getLevel());
+        currentItems.add("GoldStash: " + HeroDataStorage.getInstance().getHero().getGold() + " goldcoins");
+        
         if (HeroDataStorage.getInstance().getWeapon() != null) {
-            currentItems.add("Your Weapon");
+
+            currentItems.add("Your Weapon:");
             currentItems.add("____________________________________");
             currentItems.add("Weapon Name: " + HeroDataStorage.getInstance().getWeapon().getName());
             currentItems.add("Weapon Min Damage: " + HeroDataStorage.getInstance().getWeapon().getWeaponMinDamage());
             currentItems.add("Weapon Max Damage: " + HeroDataStorage.getInstance().getWeapon().getWeaponMaxDamage());
             currentItems.add("Weapon Speed: " + HeroDataStorage.getInstance().getWeapon().getWeaponSpeed());
+            //          currentItems.add("Weapon Cost: " + HeroDataStorage.getInstance().getWeapon().getWeaponGold());
+
         } else {
             currentItems.add("You dont have a weapon");
         }
@@ -375,6 +408,7 @@ public class ShopController implements Initializable {
             currentItems.add("Armor Name: " + HeroDataStorage.getInstance().getArmor().getName());
             currentItems.add("Armor Value: " + HeroDataStorage.getInstance().getArmor().getArmor());
             currentItems.add("Armor Speed: " + HeroDataStorage.getInstance().getArmor().getArmorSpeed());
+//            currentItems.add("Armor cost: " + HeroDataStorage.getInstance().getArmor().getArmorGold());
 
         } else {
             currentItems.add("You dont have a armor set");
@@ -464,4 +498,12 @@ public class ShopController implements Initializable {
 
     }
 
+    public void messageFade() {
+        
+        felText.setText("You seem to lack either experience or gold");
+        FadeTransition ft = new FadeTransition(Duration.millis(4000), felText);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.-1);
+        ft.play();
+    }
 }
