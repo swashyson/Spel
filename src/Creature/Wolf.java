@@ -33,12 +33,6 @@ public class Wolf extends Enemy {
 
     }
 
-    
-    public void attack(Hero hero) {
-
-        hero.setHp(hero.getHp() - getDmg());
-    }
-
     @Override
     public int getMaxDmg() {
         return maxDamage;
@@ -58,13 +52,17 @@ public class Wolf extends Enemy {
         return dmg;
     }
 
-    public void setmaxHp(int maxHP) {
-        this.maxHp = hp;
-    }
-
     public int basicAttack() {
 
-        return 1;
+        Random rand = new Random();
+        int minDmg = this.minDamage;
+        int maxDmg = this.maxDamage;
+        
+        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
+
+        System.out.println("Wolf skadade dig med " + dmg);
+        
+        return dmg;
     }
 
 }

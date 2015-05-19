@@ -134,7 +134,7 @@ public class FightController implements Initializable {
         // Ska vara en random generator här beroende på vilken lvl osv man är
         String pic = "";
         Random rand = new Random();
-        numberCreature = rand.nextInt(3) + 1;
+        numberCreature = rand.nextInt(2) + 1;
         System.out.print("antal djur" + numberCreature);
         for (int i = 0; i <= numberCreature; i++) {
             int whatCreature = rand.nextInt(5) + 1;
@@ -515,19 +515,19 @@ public class FightController implements Initializable {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 1);
-            System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+           // System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 2);
             attackOrder.remove(0);
-            System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+            //System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy3") && creaturePane4.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 3);
             attackOrder.remove(0);
-            System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+            //System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
 
     }

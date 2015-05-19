@@ -35,9 +35,7 @@ public class Snake extends Enemy {
     }
 
     
-    public void attack(Hero hero) {
-        hero.setHp(hero.getHp() - getDmg());
-    }
+   
 
     @Override
     public int getMaxDmg() {
@@ -49,18 +47,17 @@ public class Snake extends Enemy {
         return minDamage;
     }
 
-    public int getDmg() {
+    public int basicAttack() {
+
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
-        int dmg = rand.nextInt(maxDmg - minDmg) + minDmg;
+        
+        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
 
+        System.out.println("Snake skadade dig med " + dmg);
+        
         return dmg;
-    }
-
-    public int basicAttack() {
-
-        return 1;
     }
 
 }

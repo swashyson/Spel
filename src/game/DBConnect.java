@@ -24,7 +24,7 @@ public class DBConnect {
     public static void connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=root";
+            String URL = "jdbc:mysql://127.0.0.1:3306/game?user=root&password=";
             Connection cc = DriverManager.getConnection(URL);
 
             //URL = URLC;

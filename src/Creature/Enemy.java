@@ -18,11 +18,7 @@ public abstract class Enemy extends Creature {
     
     
 
-    //protected abstract void attack(Hero hero);
     
-    
-    
-    protected abstract void attack(Hero hero);
     protected abstract int getMaxDmg();
 
     protected abstract int getMinDmg();
