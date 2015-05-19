@@ -77,8 +77,6 @@ public class FightController implements Initializable {
 
     SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
 
-    private String[] enemyValue;
-
     @FXML
     public void goToCity(ActionEvent event) {
 
@@ -204,9 +202,7 @@ public class FightController implements Initializable {
     public void getEnemyValue(int i) {
 
     }
-    public void getEnemyValue(int i){
-        
-    }
+    
 
     public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY, String ID) {
 
@@ -491,16 +487,6 @@ public class FightController implements Initializable {
             victory();
             stopWorldTime();
         }
-    }
-
-    public void killHero() {
-        if (heroChar.getHeroCurrentHP() <= 0) {
-
-            creaturePane1.setVisible(false);
-            stopWorldTime();
-            System.out.println("You dead mofo");
-        }
-
     }
 
     public void killHero() {
