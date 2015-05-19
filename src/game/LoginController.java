@@ -62,7 +62,7 @@ public class LoginController implements Initializable {
                 fel.setText("Wrong username/password");
                 FadeTransition ft = new FadeTransition(Duration.millis(4000), fel);
                 ft.setFromValue(1.0);
-                ft.setToValue(0.1);
+                ft.setToValue(0.-1);
                 ft.play();
             }
 
