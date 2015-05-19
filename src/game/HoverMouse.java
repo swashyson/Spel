@@ -26,7 +26,7 @@ import javafx.util.Duration;
  *
  * @author Mattias, Jonathan, Johan, Fredrik, Mohini
  */
-public class HoverMouse {
+public class HoverMouse implements HoverMouseInterface{
 
     private static HoverMouse hoverMouse;
 
@@ -49,18 +49,21 @@ public class HoverMouse {
         return hoverMouse;
     }
 
+    @Override
     public void inHover(Button button) {
         button.setOnMouseEntered((MouseEvent e) -> {
             button.blendModeProperty().setValue(BlendMode.HARD_LIGHT);
         });
     }
 
+    @Override
     public void outHover(Button button) {
         button.setOnMouseExited((MouseEvent e) -> {
             button.blendModeProperty().setValue(BlendMode.SRC_OVER);
         });
     }
 
+    @Override
     public void inHoverSize(Button button, int ID, ListView list) {
         button.setOnMouseEntered((MouseEvent e) -> {
             button.setScaleX(2);
@@ -119,6 +122,7 @@ public class HoverMouse {
         });
     }
 
+    @Override
     public void outHoverSize(Button button, ListView list) {
         button.setOnMouseExited((MouseEvent e) -> {
             button.setScaleX(1);
@@ -131,6 +135,7 @@ public class HoverMouse {
 
     }
 
+    @Override
     public void ClickEffect(Button button) {
         button.setOnMouseClicked((MouseEvent e) -> {
             button.setScaleX(1.2);
@@ -143,6 +148,7 @@ public class HoverMouse {
 
     }
 
+    @Override
     public void handeClickEffect(Button button) {
 
         button.setScaleX(1);
@@ -150,14 +156,17 @@ public class HoverMouse {
 
     }
 
+    @Override
     public void inClick(Button button) {
         button.blendModeProperty().setValue(BlendMode.HARD_LIGHT);
     }
 
+    @Override
     public void outClick(Button button) {
         button.blendModeProperty().setValue(BlendMode.SRC_OVER);
     }
 
+    @Override
     public void buyWeaponsAdd(ListView list, int index) {
         buyItems.add("Weapon Stats");
         buyItems.add("Weapon name: " + weaponList.get(index).getName());
@@ -170,6 +179,7 @@ public class HoverMouse {
         list.setItems(OL);
     }
 
+    @Override
     public void buyArmorsAdd(ListView list, int index) {
         buyItems.add("Armor Stats");
         buyItems.add("Armor Name: " + armorList.get(index).getName());
@@ -182,6 +192,7 @@ public class HoverMouse {
         list.setItems(OL);
     }
 
+    @Override
     public void ifArmorOrWeapon(int ID, ListView list) {
 
         if (ID == 1) {
@@ -204,5 +215,7 @@ public class HoverMouse {
             buyArmorsAdd(list, 2);
         }
     }
+
+
 
 }
