@@ -21,8 +21,6 @@ public class HeroDataStorage {
     private Weapon weapon;
     private Armor armor;
     private int userID;
-    private int expToLevelUp;
-    private int expToNextLevel;
 
     public static HeroDataStorage getInstance() {
         if (heroDataStorage  == null) {
@@ -87,22 +85,4 @@ public class HeroDataStorage {
 
     }
 
-
-    public int getExpToLevelUp() {
-        return expToLevelUp;
-    }
-
-
-    public void setExpToLevelUp() {
-        this.expToLevelUp =  getExpToNextLevel() - hero.getEXP();
-    }
-
-
-    public int getExpToNextLevel() {
-        return expToNextLevel;
-    }
-
-    public void setExpToNextLevel() {
-        this.expToNextLevel = hero.getLevel() * 2; 
-    }
 }

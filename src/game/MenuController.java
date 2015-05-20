@@ -23,6 +23,7 @@ public class MenuController implements Initializable {
     Button backToCity;
     Button logout;
     Button changeCharacter;
+    Button settings;
     
     @FXML
     private Button mute;
@@ -46,6 +47,11 @@ public class MenuController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 
+    }
+    @FXML 
+    public void settings(ActionEvent event){
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "Settings");
     }
 
     @FXML

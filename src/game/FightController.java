@@ -69,7 +69,8 @@ public class FightController implements Initializable {
 
     private String attackSelect;
     private ArrayList<String> attackOrder = new ArrayList();
-    
+    private int currentXP;
+    private int heroExpToLevel;
     private Timeline timeline;
     private int numberCreature;
     
@@ -111,8 +112,8 @@ public class FightController implements Initializable {
     public void XPBAR() {
 
         int maxXpWidth = 763;
-        int currentXP = HeroDataStorage.getInstance().getHero().getEXP();
-        int heroExpToLevel = HeroDataStorage.getInstance().getHero().getLevel() * 95;
+        currentXP = HeroDataStorage.getInstance().getHero().getEXP();
+        heroExpToLevel = HeroDataStorage.getInstance().getHero().getLevel() * 100;
 
         int calculate;
 
@@ -121,10 +122,10 @@ public class FightController implements Initializable {
         levelLabel.setText("You´r level are " + HeroDataStorage.getInstance().getHero().getLevel());
 
         if (currentXP >= heroExpToLevel) {
-
-            HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
-            HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
+            heroLevelUp();
+            
             XPBAR();
+            
         }
 
     }
@@ -580,7 +581,6 @@ public class FightController implements Initializable {
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 2);
-            attackOrder.remove(0);
             //System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy3") && creaturePane4.isVisible() == true) {
@@ -692,7 +692,7 @@ public class FightController implements Initializable {
 
     public void victory() {
 
-        int exp = numberCreature * 50;
+        int exp = numberCreature * 10;
 
         HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + exp);
         XPBAR();
@@ -712,6 +712,12 @@ public class FightController implements Initializable {
             System.out.println("failed to start fightsound");
             e.printStackTrace();
         }
+    }
+    private void heroLevelUp(){
+        HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
+        HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
+        HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
+        HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
     }
 }
 

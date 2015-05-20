@@ -62,7 +62,7 @@ public class LoginController implements Initializable {
                 fel.setText("Wrong username/password");
                 FadeTransition ft = new FadeTransition(Duration.millis(4000), fel);
                 ft.setFromValue(1.0);
-                ft.setToValue(0.-1);
+                ft.setToValue(0. - 1);
                 ft.play();
             }
 
@@ -87,12 +87,21 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+    public void settings(ActionEvent event) {
+
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "Settings");
+
+    }
+    @FXML
     public void exit(ActionEvent event){
         System.exit(0);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        loadConfigFile();
 
         HoverMouse.getInstance().inHover(createAccount);
         HoverMouse.getInstance().outHover(createAccount);
@@ -103,6 +112,14 @@ public class LoginController implements Initializable {
 
         HoverMouse.getInstance().ClickEffect(login);
 
+    }
+
+    public void loadConfigFile() {
+
+        ConfigFile CF = new ConfigFile();
+        CF.readConfigFile();
+
+        //CF.setSound(0);
     }
 
 }
