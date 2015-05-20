@@ -39,7 +39,7 @@ public class LoginController implements Initializable {
     private TextField name;
     @FXML
     private TextField password;
-    Hero hero;
+//    private Hero hero;
 
     @FXML
     public void logIn(ActionEvent event) {

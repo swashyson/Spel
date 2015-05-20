@@ -36,8 +36,8 @@ public class HoverMouse implements HoverMouseInterface{
 
     private Weapon weapon;
     private Armor armor;
-    ArrayList<Weapon> weaponList;
-    ArrayList<Armor> armorList;
+    private ArrayList<Weapon> weaponList;
+    private ArrayList<Armor> armorList;
     
     private String attackSelect;
 

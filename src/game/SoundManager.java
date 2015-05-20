@@ -28,37 +28,27 @@ public class SoundManager {
     private Media defineShortSoundFile;
     private ConfigFile cF = new ConfigFile();
 
-    public void defineBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
+    //Läser av en textremsa som skickas från en annan klass. Därefter spelat motsvarande bakgrundsljud upp.
+    public void defineBackgroundSound(String newBackgroundSound) {
 
-        muteUnMute = cF.getSound(); // ha kvar???
+        muteUnMute = cF.getSound();
 
         if (newBackgroundSound == "Fight" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
-
             playBackgroundSound();
-
         } else if (newBackgroundSound == "Inn" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
-
             playBackgroundSound();
-
         } else if (newBackgroundSound == "Shop" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
-
             playBackgroundSound();
-
         } else if (newBackgroundSound == "City" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
-
             playBackgroundSound();
-
         }
     }
 
+    //Spelar upp själva ljudet och loopar det med ungefär 1 sekund innan den startar om.
     private void playBackgroundSound() {
         try {
             System.out.println(defineBackgroundSoundFile);
@@ -71,58 +61,29 @@ public class SoundManager {
         }
     }
 
+    //stänger av bakgrundsljudet som spelas.
     public void stopTheSound() {
-        //läs av parametern och stäng av det specifika ljudet.
         backgroundSound.stop();
     }
 
-    // ha kvar eller ta bort???
-    public void setMuteSounds(int muteUnMute) {
-        this.muteUnMute = muteUnMute;
-        System.out.println(muteUnMute);
-//        if(muteUnMute){
-//            //sätt alla ljud som stop
-//            muteUnMute = true;
-//        }
-//        else if(!muteUnMute){
-//            //referera till
-//            muteUnMute = false;
-//        }
-    }
-
-    // ha kvar eller ta bort???
-    public int getMuteSounds() {
-        return muteUnMute;
-    }
-
+    
+    //läser av en textremsa som skickas från andra klasser. därefter spelas ett kort ljud upp
     public void defineShortSound(String shortSound) {
 
         //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
         if (shortSound == "purchase" && muteUnMute == 1) {
-            try {
-                defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
-
-                playShortSound();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
+            playShortSound();
         } else if (shortSound == "button" && muteUnMute == 1) { // ska vi ha ljud till knapparna???
-            try {
-                defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
-
-                playShortSound();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
+            playShortSound();
         }
     }
 
+    //Spelar upp ett kort ljud utan att loopa det
     private void playShortSound() {
         try {
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
-
             System.out.println(defineShortSoundFile);
             shortSound = new MediaPlayer(defineShortSoundFile);
             shortSound.setVolume(0.5);

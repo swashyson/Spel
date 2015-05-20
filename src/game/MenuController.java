@@ -21,8 +21,11 @@ public class MenuController implements Initializable {
 
     @FXML
     Button backToCity;
+    @FXML
     Button logout;
+    @FXML
     Button changeCharacter;
+    @FXML
     Button settings;
     
 //    private boolean muteUnMute;

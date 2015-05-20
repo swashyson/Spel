@@ -44,7 +44,7 @@ public class ViewCharController implements Initializable {
     private ImageView imageView;
     @FXML
     private Label fel;
-    Hero hero;
+    private Hero hero;
     private final ArrayList<String> getName = new ArrayList();
     private final ArrayList getStats = new ArrayList();
     private final int userID = HeroDataStorage.getInstance().getuserID();
