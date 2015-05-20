@@ -62,27 +62,8 @@ public class ViewCharController implements Initializable {
         HoverMouse.getInstance().outHover(play);
         HoverMouse.getInstance().inHover(back);
         HoverMouse.getInstance().outHover(back);
-
-        try {
-            DBConnect.connect();
-
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
-            System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
-
-            while (rs.next()) {
-                String add = rs.getString("heroName");
-                getName.add(add);
-            }
-            ObservableList<String> OL = FXCollections.observableArrayList(getName);
-            list.setItems(OL);
-
-            System.out.println("Antalet Gubbar = " + getName.size());
-
-            DBConnect.close();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        listHeros();
+        
     }
 
     @FXML
@@ -176,7 +157,29 @@ public class ViewCharController implements Initializable {
         }
         
     }
-    public void loadEnemysToDataStorage(){
+    private void listHeros(){
+        try {
+            DBConnect.connect();
+
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
+            System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
+
+            while (rs.next()) {
+                String add = rs.getString("heroName");
+                getName.add(add);
+            }
+            ObservableList<String> OL = FXCollections.observableArrayList(getName);
+            list.setItems(OL);
+
+            System.out.println("Antalet Gubbar = " + getName.size());
+
+            DBConnect.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private void loadEnemysToDataStorage(){
         try {
             DBConnect.connect();
             ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
