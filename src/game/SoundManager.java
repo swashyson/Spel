@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  *
@@ -18,78 +19,117 @@ import javafx.scene.media.MediaPlayer;
  */
 public class SoundManager {
 
-    private boolean muteUnMute;
-    
-    private MediaPlayer fightBackgroundSound;
-    private Media mediaFile;
+    private int muteUnMute;
 
-    public void playBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
+    private MediaPlayer backgroundSound;
+    private Media defineBackgroundSoundFile;
 
-        if (newBackgroundSound == "Fight") {
+    private MediaPlayer shortSound;
+    private Media defineShortSoundFile;
+    private ConfigFile cF = new ConfigFile();
 
-            try {
-                mediaFile = new Media(getClass().getResource("Recourses/FightingSound.mp3").toString());
+    public void defineBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
 
-                System.out.println(mediaFile);
-                fightBackgroundSound = new MediaPlayer(mediaFile);
-                fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
-                fightBackgroundSound.setVolume(0.5);
-                fightBackgroundSound.play();
-//            fightBackgroundSound.play();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (newBackgroundSound == "Inn") {
-            try {
-                mediaFile = new Media(getClass().getResource(null).toString());
+        muteUnMute = cF.getSound(); // ha kvar???
 
-                System.out.println(mediaFile);
-                fightBackgroundSound = new MediaPlayer(mediaFile);
-                fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
-                fightBackgroundSound.setVolume(0.5);
-                fightBackgroundSound.play();
-//            fightBackgroundSound.play();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (newBackgroundSound == "Shop") {
-            try {
-                mediaFile = new Media(getClass().getResource(null).toString());
+        if (newBackgroundSound == "Fight" && muteUnMute == 1) {
 
-                System.out.println(mediaFile);
-                fightBackgroundSound = new MediaPlayer(mediaFile);
-                fightBackgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
-                fightBackgroundSound.setVolume(0.5);
-                fightBackgroundSound.play();
-//            fightBackgroundSound.play();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
+
+            playBackgroundSound();
+
+        } else if (newBackgroundSound == "Inn" && muteUnMute == 1) {
+
+            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
+
+            playBackgroundSound();
+
+        } else if (newBackgroundSound == "Shop" && muteUnMute == 1) {
+
+            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
+
+            playBackgroundSound();
+
+        } else if (newBackgroundSound == "City" && muteUnMute == 1) {
+
+            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
+
+            playBackgroundSound();
+
         }
     }
 
-    public void stopTheSound(String stopSound) {
+    private void playBackgroundSound() {
+        try {
+            System.out.println(defineBackgroundSoundFile);
+            backgroundSound = new MediaPlayer(defineBackgroundSoundFile);
+            backgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
+            backgroundSound.setVolume(0.5);
+            backgroundSound.setAutoPlay(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stopTheSound() {
         //läs av parametern och stäng av det specifika ljudet.
+        backgroundSound.stop();
+    }
 
-        System.out.println("Stop sound in: " + stopSound);
+    // ha kvar eller ta bort???
+    public void setMuteSounds(int muteUnMute) {
+        this.muteUnMute = muteUnMute;
+        System.out.println(muteUnMute);
+//        if(muteUnMute){
+//            //sätt alla ljud som stop
+//            muteUnMute = true;
+//        }
+//        else if(!muteUnMute){
+//            //referera till
+//            muteUnMute = false;
+//        }
+    }
 
-        if (stopSound == "Fight") {
-            fightBackgroundSound.stop();
-        } else if (stopSound == "Shop") {
+    // ha kvar eller ta bort???
+    public int getMuteSounds() {
+        return muteUnMute;
+    }
 
-        } else if (stopSound == "Inn") {
+    public void defineShortSound(String shortSound) {
 
+        //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
+        if (shortSound == "purchase" && muteUnMute == 1) {
+            try {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
+
+                playShortSound();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (shortSound == "button" && muteUnMute == 1) { // ska vi ha ljud till knapparna???
+            try {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
+
+                playShortSound();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void muteSounds(boolean muteUnMute) {
-        this.muteUnMute = muteUnMute;
-//        if(muteUnMute == true){
-//            //sätt alla ljud som stop
-//        }
-//        else if(muteUnMute == false){
-//            //referera till
-//        }
+    private void playShortSound() {
+        try {
+            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
+
+            System.out.println(defineShortSoundFile);
+            shortSound = new MediaPlayer(defineShortSoundFile);
+            shortSound.setVolume(0.5);
+            shortSound.setAutoPlay(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

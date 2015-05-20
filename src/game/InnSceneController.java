@@ -67,7 +67,7 @@ public class InnSceneController implements Initializable {
         
         try {
             System.out.println("calling soundmanager to play backgroundsound for the innscenecontroller");
-            soundManager.playBackgroundSound("Inn");
+//            soundManager.playBackgroundSound("Inn");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,14 +80,15 @@ public class InnSceneController implements Initializable {
             System.out.println("Current health: " + currentHealth + " / " + maxHealth);
             HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
             System.out.println("current health in InnSceneController: " + currentHealth);
-            saveHPToDataBase();
+//            saveHPToDataBase();
             
         } else if (currentHealth == maxHealth) {
             currentHealth = maxHealth;
             health.setText(currentHealth + " / " + maxHealth);
             System.out.println("Current health restored to maximum");
             timeLine.stop();
-            saveHPToDataBase();
+            HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
+//            saveHPToDataBase();
             fel.setText("Your health is now full.");
         }
     }
@@ -96,7 +97,9 @@ public class InnSceneController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
-        soundManager.stopTheSound("Inn");
+        soundManager.stopTheSound();
+        
+        timeLine.stop();
     }
 
     public void restoreHealthpointsNow(ActionEvent event) {
@@ -108,8 +111,11 @@ public class InnSceneController implements Initializable {
                 currentHealth = maxHealth;
                 heroGold = heroGold - restoreHealthCost;
                 health.setText(currentHealth + " / " + maxHealth);
-                saveHPToDataBase();
+                HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
+//                saveHPToDataBase();
                 System.out.println("Current health restored to maximum.");
+                
+                soundManager.defineShortSound("purchase");
             }
         } else if (currentHealth == maxHealth) {
             System.out.println("Current health already restored to maximum");
