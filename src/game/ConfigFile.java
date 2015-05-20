@@ -68,6 +68,7 @@ public class ConfigFile {
 
         } catch (EOFException ex) {
             System.out.println("Förstår inte config filen");
+            createConfigFile();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
