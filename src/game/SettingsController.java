@@ -50,7 +50,7 @@ public class SettingsController implements Initializable {
     } 
     
     public void loadSettings(){
-        cF.readConfigFile();
+        //cF.readConfigFile();
         if(cF.getSound() == 1)
         {
             cBSoundOn.selectedProperty().set(true);
