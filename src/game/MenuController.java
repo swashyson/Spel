@@ -23,6 +23,13 @@ public class MenuController implements Initializable {
     Button backToCity;
     Button logout;
     Button changeCharacter;
+    
+    @FXML
+    private Button mute;
+    
+    private boolean muteUnMute;
+    
+    SoundManager soundManager;
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -46,6 +53,31 @@ public class MenuController implements Initializable {
         DBConnect.saveToDB();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ViewChar");
+
+    }
+    
+    
+    // ha kvar eller ta bort????
+    @FXML
+    public void muteUnMute(ActionEvent event) {
+        
+        muteUnMute = soundManager.getMuteSounds();
+        System.out.println(muteUnMute);
+        
+        if(!muteUnMute){
+//            muteUnMute = false;
+//            System.out.println(muteUnMute);
+//            soundManager.setMuteSounds(muteUnMute);
+            soundManager.setMuteSounds(muteUnMute);
+            System.out.println(soundManager);
+        }
+        else if(muteUnMute){
+//            muteUnMute = true;
+//            System.out.println(muteUnMute);
+//            soundManager.setMuteSounds(muteUnMute);
+            soundManager.setMuteSounds(!muteUnMute);
+            System.out.println(muteUnMute);
+        }
 
     }
 

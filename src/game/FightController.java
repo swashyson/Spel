@@ -86,7 +86,7 @@ public class FightController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
         
-        soundManager.stopTheSound("Fight");
+        soundManager.stopTheSound(/*"Fight"*/);
 
     }
 
@@ -707,7 +707,7 @@ public class FightController implements Initializable {
     private void startSound() {
         try {
             System.out.println("connecting to soundmanager, trying to start Fight sound.");
-            soundManager.playBackgroundSound("Fight");
+            soundManager.defineBackgroundSound("Fight");
         } catch (Exception e) {
             System.out.println("failed to start fightsound");
             e.printStackTrace();

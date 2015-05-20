@@ -34,11 +34,15 @@ public class CityController implements Initializable {
 
     int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
+    SoundManager soundManager = new SoundManager();
+
     @FXML
     public void goToMenu(ActionEvent event) {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
+        
+        soundManager.stopTheSound();
     }
 
     @FXML
@@ -46,6 +50,8 @@ public class CityController implements Initializable {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
+        
+        soundManager.stopTheSound();
     }
 
     @FXML
@@ -53,6 +59,8 @@ public class CityController implements Initializable {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
+        
+        soundManager.stopTheSound();
     }
 
     @FXML
@@ -60,6 +68,8 @@ public class CityController implements Initializable {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
+        
+        soundManager.stopTheSound();
     }
 
     @Override
@@ -78,6 +88,14 @@ public class CityController implements Initializable {
 
         checkWeapon();
         checkArmor();
+
+        try{
+            soundManager.defineBackgroundSound("City");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
 
     }
 
@@ -105,7 +123,7 @@ public class CityController implements Initializable {
                 int weaponlevel = check.getInt("weaponLevel");
                 int weaponType = check.getInt("weaponType");
                 int weaponGold = check.getInt("weaponGold");
-                
+
                 weapon = new Weapon(weaponName, weaponID, weaponMinDamage, weaponMaxDamage, weaponSpeed, weaponlevel, weaponType, weaponGold);
                 HeroDataStorage.getInstance().setWeapon(weapon);
 
@@ -137,7 +155,7 @@ public class CityController implements Initializable {
                 int armorType = check.getInt("armorType");
                 int armorLevel = check.getInt("armorLevel");
                 int armorSpeed = check.getInt("armorSpeed");
-                 int armorGold = check.getInt("armorGold");
+                int armorGold = check.getInt("armorGold");
                 armor = new Armor(armorName, armorID, localArmor, armorType, armorLevel, armorSpeed, armorGold);
                 HeroDataStorage.getInstance().setArmor(armor);
 
