@@ -79,9 +79,11 @@ public class ConfigFile {
         switch (stringLastCharSound) {
             case "1":
                 System.out.println("Ljud på");
+                sound = 1;
                 break;
             case "0":
                 System.out.println("Ljud av");
+                sound = 0;
                 break;
             default:
                 System.out.println("Ljudet kan bara vara 0 eller 1");
@@ -95,8 +97,8 @@ public class ConfigFile {
         try (FileOutputStream FOS = new FileOutputStream(file);
                 DataOutputStream DOS = new DataOutputStream(FOS);) {
 
-            DOS.writeBytes("Sound: " + getSound());
-            System.out.println("Du har ändrat ljudet till : " + getSound());
+            DOS.writeBytes("Sound: " + sound);
+            System.out.println("Du har ändrat ljudet till : " + sound);
             readConfigFile();
 
         } catch (Exception ex) {
@@ -105,6 +107,7 @@ public class ConfigFile {
     }
 
     public int getSound() {
+        
         return sound;
     }
 }
