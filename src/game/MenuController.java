@@ -25,10 +25,7 @@ public class MenuController implements Initializable {
     Button changeCharacter;
     Button settings;
     
-    @FXML
-    private Button mute;
-    
-    private boolean muteUnMute;
+//    private boolean muteUnMute;
     
     SoundManager soundManager;
 
@@ -64,28 +61,28 @@ public class MenuController implements Initializable {
     
     
     // ha kvar eller ta bort????
-    @FXML
-    public void muteUnMute(ActionEvent event) {
-        
-        muteUnMute = soundManager.getMuteSounds();
-        System.out.println(muteUnMute);
-        
-        if(!muteUnMute){
-//            muteUnMute = false;
-//            System.out.println(muteUnMute);
+//    @FXML
+//    public void muteUnMute(ActionEvent event) {
+//        
+//        muteUnMute = soundManager.getMuteSounds();
+//        System.out.println(muteUnMute);
+//        
+//        if(!muteUnMute){
+////            muteUnMute = false;
+////            System.out.println(muteUnMute);
+////            soundManager.setMuteSounds(muteUnMute);
 //            soundManager.setMuteSounds(muteUnMute);
-            soundManager.setMuteSounds(muteUnMute);
-            System.out.println(soundManager);
-        }
-        else if(muteUnMute){
-//            muteUnMute = true;
+//            System.out.println(soundManager);
+//        }
+//        else if(muteUnMute){
+////            muteUnMute = true;
+////            System.out.println(muteUnMute);
+////            soundManager.setMuteSounds(muteUnMute);
+//            soundManager.setMuteSounds(!muteUnMute);
 //            System.out.println(muteUnMute);
-//            soundManager.setMuteSounds(muteUnMute);
-            soundManager.setMuteSounds(!muteUnMute);
-            System.out.println(muteUnMute);
-        }
-
-    }
+//        }
+//
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

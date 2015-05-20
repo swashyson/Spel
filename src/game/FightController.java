@@ -83,11 +83,11 @@ public class FightController implements Initializable {
 
         stopWorldTime();
         attackSelect = null;
-
+        soundManager.stopTheSound();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
         
-        soundManager.stopTheSound(/*"Fight"*/);
+        
 
     }
 

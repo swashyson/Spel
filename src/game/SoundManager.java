@@ -19,57 +19,43 @@ import javafx.util.Duration;
  */
 public class SoundManager {
 
-    private boolean muteUnMute;
+    private int muteUnMute;
 
     private MediaPlayer backgroundSound;
     private Media defineBackgroundSoundFile;
-    
+
     private MediaPlayer shortSound;
     private Media defineShortSoundFile;
+    private ConfigFile cF = new ConfigFile();
 
     public void defineBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
 
-        muteUnMute = getMuteSounds(); // ha kvar???
+        muteUnMute = cF.getSound(); // ha kvar???
 
-//        if(muteUnMute && !muteUnMute){
-//            muteUnMute = true;
-//        }
-        if (newBackgroundSound == "Fight" && !muteUnMute) {
+        if (newBackgroundSound == "Fight" && muteUnMute == 1) {
 
-            try {
-                defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
+            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
 
-                playBackgroundSound();
+            playBackgroundSound();
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (newBackgroundSound == "Inn" && !muteUnMute) {
-            try {
-                defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
+        } else if (newBackgroundSound == "Inn" && muteUnMute == 1) {
 
-                playBackgroundSound();
+            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (newBackgroundSound == "Shop" && !muteUnMute) {
-            try {
-                defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
+            playBackgroundSound();
 
-                playBackgroundSound();
+        } else if (newBackgroundSound == "Shop" && muteUnMute == 1) {
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (newBackgroundSound == "City" && !muteUnMute) {
-            try {
-                defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
+            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
 
-                playBackgroundSound();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            playBackgroundSound();
+
+        } else if (newBackgroundSound == "City" && muteUnMute == 1) {
+
+            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
+
+            playBackgroundSound();
+
         }
     }
 
@@ -85,13 +71,13 @@ public class SoundManager {
         }
     }
 
-    public void stopTheSound(/*String stopSound*/) {
+    public void stopTheSound() {
         //läs av parametern och stäng av det specifika ljudet.
         backgroundSound.stop();
     }
 
     // ha kvar eller ta bort???
-    public void setMuteSounds(boolean muteUnMute) {
+    public void setMuteSounds(int muteUnMute) {
         this.muteUnMute = muteUnMute;
         System.out.println(muteUnMute);
 //        if(muteUnMute){
@@ -105,14 +91,14 @@ public class SoundManager {
     }
 
     // ha kvar eller ta bort???
-    public boolean getMuteSounds() {
+    public int getMuteSounds() {
         return muteUnMute;
     }
 
     public void defineShortSound(String shortSound) {
 
         //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
-        if (shortSound == "purchase" && !muteUnMute) {
+        if (shortSound == "purchase" && muteUnMute == 1) {
             try {
                 defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
 
@@ -120,13 +106,13 @@ public class SoundManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-        } else if (shortSound == "button" && !muteUnMute) { // ska vi ha ljud till knapparna???
+
+        } else if (shortSound == "button" && muteUnMute == 1) { // ska vi ha ljud till knapparna???
             try {
                 defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
 
                 playShortSound();
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

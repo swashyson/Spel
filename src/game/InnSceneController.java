@@ -97,10 +97,7 @@ public class InnSceneController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
-        soundManager.stopTheSound("Inn");
-        
-        HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
-//        soundManager.stopTheSound(/*"Inn"*/);
+        soundManager.stopTheSound();
         
         timeLine.stop();
     }

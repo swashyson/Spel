@@ -34,7 +34,7 @@ public class CityController implements Initializable {
 
     int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
-    SoundManager soundManager = new SoundManager();
+    //SoundManager soundManager = new SoundManager();
 
     @FXML
     public void goToMenu(ActionEvent event) {
@@ -42,7 +42,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
         
-        soundManager.stopTheSound();
+        //soundManager.stopTheSound();
     }
 
     @FXML
@@ -51,7 +51,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
         
-        soundManager.stopTheSound();
+        //soundManager.stopTheSound();
     }
 
     @FXML
@@ -60,7 +60,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
         
-        soundManager.stopTheSound();
+        //soundManager.stopTheSound();
     }
 
     @FXML
@@ -69,7 +69,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
         
-        soundManager.stopTheSound();
+        //soundManager.stopTheSound();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class CityController implements Initializable {
         checkArmor();
 
         try{
-            soundManager.defineBackgroundSound("City");
+            //soundManager.defineBackgroundSound("City");
         }
         catch(Exception e){
             e.printStackTrace();
