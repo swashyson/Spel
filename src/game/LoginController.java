@@ -87,6 +87,13 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+    public void settings(ActionEvent event) {
+
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "Settings");
+
+    }
+    @FXML
     public void exit(ActionEvent event){
         System.exit(0);
     }
