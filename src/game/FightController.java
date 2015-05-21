@@ -290,6 +290,7 @@ public class FightController implements Initializable {
         int calculate;
 
         calculate = (currentHP * maxImageView) / maxHP; // Fullt fungerande, bara till alla kalla metoden varje tick
+        System.out.println("Calculate = " + calculate);
         return calculate;
     }
 
@@ -723,6 +724,7 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
         HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
         HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
+        HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
     }
 }

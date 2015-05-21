@@ -8,8 +8,6 @@ package Creature;
 import DataStorage.*;
 import Items.Weapon;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
@@ -135,14 +133,6 @@ public class Hero extends Creature {
         return 0;
     }
 
-    public int getWeaponSpeed() {
-        if (HeroDataStorage.getInstance().getWeapon() != null) {
-
-            int Speed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
-            return Speed;
-        }
-        return 0;
-    }
 
     public void heroAttack() {
 
