@@ -89,6 +89,9 @@ public class FightController implements Initializable {
     public void goToCity(ActionEvent event) {
 
         stopWorldTime();
+        FightDataStorage.getInstance().setEnemy1(null);
+        FightDataStorage.getInstance().setEnemy2(null);
+        FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
         if (cf.getSound() == 1) {
