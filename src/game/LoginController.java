@@ -39,7 +39,9 @@ public class LoginController implements Initializable {
     private TextField name;
     @FXML
     private TextField password;
-//    private Hero hero;
+    
+    ConfigFile cf = new ConfigFile();
+    SoundManager soundManager = new SoundManager();
 
     @FXML
     public void logIn(ActionEvent event) {
@@ -112,6 +114,14 @@ public class LoginController implements Initializable {
 
         HoverMouse.getInstance().ClickEffect(login);
 
+        //Kolla om det fungerar att ha ljudet över flera scener, annars får vi
+        //sätta på och stänga av ljudet i varje scen.
+        
+        if(cf.getSound() == 1){
+            soundManager.defineBackgroundSound("City");
+            System.out.println("Started backgroundsound - chirping birds - logincontroller");
+        }
+        
     }
 
     public void loadConfigFile() {

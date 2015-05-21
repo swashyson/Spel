@@ -70,21 +70,25 @@ public class FightController implements Initializable {
     private int heroExpToLevel;
     private Timeline timeline;
     private int numberCreature;
-    
+
     private String[] enemyValue;
 
     SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
+
+    private ConfigFile cf = new ConfigFile();
 
     @FXML
     public void goToCity(ActionEvent event) {
 
         stopWorldTime();
         attackSelect = null;
-        soundManager.stopTheSound();
+
+        if (cf.getSound() == 1) {
+            soundManager.stopTheSound();
+        }
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
-        
-        
 
     }
 
@@ -101,9 +105,11 @@ public class FightController implements Initializable {
         selectEnemy();
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
-        
-        startSound();
-        
+
+        if (cf.getSound() == 1) {
+            startSound();
+        }
+
     }
 
     public void XPBAR() {
@@ -120,9 +126,9 @@ public class FightController implements Initializable {
 
         if (currentXP >= heroExpToLevel) {
             heroLevelUp();
-            
+
             XPBAR();
-            
+
         }
 
     }
@@ -134,7 +140,7 @@ public class FightController implements Initializable {
         creature.setImage(creatureDisplay);
 
         createCreaturePane(creature, creaturePaneWitdh, creaturePaneHeight, creaturePaneX, creaturePaneY, ID);
-        
+
     }
 
     public void loadHeroStatsFromDataStorage() {
@@ -203,7 +209,6 @@ public class FightController implements Initializable {
     public void getEnemyValue(int i) {
 
     }
-    
 
     public void createCreaturePane(ImageView creature, int creaturePaneWitdh, int creaturePaneHeight, int creaturePaneX, int creaturePaneY, String ID) {
 
@@ -573,7 +578,7 @@ public class FightController implements Initializable {
         if (attackOrder.get(0).equals("Enemy1") && creaturePane2.isVisible() == true) {
 
             enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 1);
-           // System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
+            // System.out.println("Monster attakerade dig, nu har du " + heroChar.getHeroCurrentHP() + " HP");
         }
         if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
@@ -696,25 +701,28 @@ public class FightController implements Initializable {
         getGold();
         System.err.println(HeroDataStorage.getInstance().getHero().getGold());
     }
-    public void getGold(){  // for guld efter att man har dödat alla enemys
-        int gold =numberCreature * 10 * HeroDataStorage.getInstance().getHero().getLevel();
-        HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold()+ gold);
+
+    public void getGold() {  // for guld efter att man har dödat alla enemys
+        int gold = numberCreature * 10 * HeroDataStorage.getInstance().getHero().getLevel();
+        HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() + gold);
     }
 
     private void startSound() {
-        try {
-            System.out.println("connecting to soundmanager, trying to start Fight sound.");
+//        try {
+//            System.out.println("connecting to soundmanager, trying to start Fight sound.");
+        if (cf.getSound() == 1) {
             soundManager.defineBackgroundSound("Fight");
-        } catch (Exception e) {
-            System.out.println("failed to start fightsound");
-            e.printStackTrace();
         }
+//        } catch (Exception e) {
+//            System.out.println("failed to start fightsound");
+//            e.printStackTrace();
+//        }
     }
-    private void heroLevelUp(){
+
+    private void heroLevelUp() {
         HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
         HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
         HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
     }
 }
-

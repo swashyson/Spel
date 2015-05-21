@@ -63,7 +63,7 @@ public class ViewCharController implements Initializable {
         HoverMouse.getInstance().inHover(back);
         HoverMouse.getInstance().outHover(back);
         listHeros();
-        
+
     }
 
     @FXML
@@ -118,7 +118,8 @@ public class ViewCharController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
-    public void loadHero(){
+
+    public void loadHero() {
         try {
 
             DBConnect.connect();
@@ -147,17 +148,16 @@ public class ViewCharController implements Initializable {
                 }
                 DBConnect.close();
 
-                
-
             } else {
                 fel.setText("You must select a hero");
             }
         } catch (Exception ex) {
             fel.setText("You must select a hero");
         }
-        
+
     }
-    private void listHeros(){
+
+    private void listHeros() {
         try {
             DBConnect.connect();
 
@@ -179,36 +179,37 @@ public class ViewCharController implements Initializable {
             ex.printStackTrace();
         }
     }
-    private void loadEnemysToDataStorage(){
+
+    private void loadEnemysToDataStorage() {
         try {
             DBConnect.connect();
             ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
-            while(getCreature.next()){
+            while (getCreature.next()) {
                 String enemyName = getCreature.getString("enemyName");
                 int enemyHp = getCreature.getInt("enemyBaseHP");
                 int enemyMaxDamage = getCreature.getInt("enemyBaseMaxDamage");
                 int enemyMinDamage = getCreature.getInt("enemyBaseMinDamage");
                 int enemySpeed = getCreature.getInt("enemyBaseSpeed");
-                
+
                 switch (enemyName) {
                     case "Bear":
-                        Bear bear = new Bear(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        Bear bear = new Bear(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
                         EnemyBaseDataStorage.getInstance().setBear(bear);
                         break;
                     case "Scorpion":
-                        Scorpion scorpion = new Scorpion(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        Scorpion scorpion = new Scorpion(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
                         EnemyBaseDataStorage.getInstance().setScorpion(scorpion);
                         break;
                     case "Snake":
-                        Snake snake = new Snake(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        Snake snake = new Snake(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
                         EnemyBaseDataStorage.getInstance().setSnake(snake);
                         break;
                     case "Spider":
-                        Spider spider = new Spider(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        Spider spider = new Spider(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
                         EnemyBaseDataStorage.getInstance().setSpider(spider);
                         break;
                     case "Wolf":
-                        Wolf wolf = new Wolf(enemyName,enemyHp,enemyMaxDamage,enemyMinDamage,enemySpeed);
+                        Wolf wolf = new Wolf(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
                         EnemyBaseDataStorage.getInstance().setWolf(wolf);
                         break;
                 }
@@ -218,6 +219,7 @@ public class ViewCharController implements Initializable {
             fel.setText("Error when loading enemys");
         }
     }
+
     public void changePic(String type) {
         javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("Recourses/" + type + ".png").toExternalForm());
         imageView.setImage(image);
