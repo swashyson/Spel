@@ -8,8 +8,6 @@ package Creature;
 import DataStorage.*;
 import Items.Weapon;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
@@ -25,6 +23,8 @@ public class Hero extends Creature {
     private int heroType;
     private int heroCurrentHP;
     private final int heroID;
+
+    private int displayedDamage;
 
     public Hero(String heroName, int heroBaseHp, int heroSpeed, int heroGold, int heroBaseDamage, int heroLevel, int heroEXP, int heroType, int heroCurrentHP, int heroID) {
 
@@ -105,14 +105,18 @@ public class Hero extends Creature {
 
         try {
             switch (FightDataStorage.getInstance().getEnemyID()) {
+
                 case "1":
-                    FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    displayedDamage = getWeaponRandomDamage() + heroBaseDamage;
+                    FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
                     break;
                 case "2":
-                    FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    displayedDamage = getWeaponRandomDamage() + heroBaseDamage;
+                    FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
                     break;
                 case "3":
-                    FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - getWeaponRandomDamage() - heroBaseDamage);
+                    displayedDamage = getWeaponRandomDamage() + heroBaseDamage;
+                    FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
                     break;
                 case "null":
                     System.out.println("Select");
@@ -135,15 +139,6 @@ public class Hero extends Creature {
         return 0;
     }
 
-    public int getWeaponSpeed() {
-        if (HeroDataStorage.getInstance().getWeapon() != null) {
-
-            int Speed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
-            return Speed;
-        }
-        return 0;
-    }
-
     public void heroAttack() {
 
         if (HeroDataStorage.getInstance().getWeapon() != null) {
@@ -151,6 +146,12 @@ public class Hero extends Creature {
         } else {
             basicAttack(null);
         }
+    }
+
+    public int getDisplayedDamage() {
+
+        return displayedDamage;
+
     }
 
 }
