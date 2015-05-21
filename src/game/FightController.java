@@ -73,9 +73,13 @@ public class FightController implements Initializable {
 
     private String[] enemyValue;
 
-    SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
+    private SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
 
-    private ConfigFile cf = new ConfigFile();
+    private ConfigFile config = new ConfigFile();
+
+    private String fightBackgroundSound = "Fight";
+    private String levelUpSound = "level_up";
+    private String buttonClick = "button_click";
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -83,8 +87,9 @@ public class FightController implements Initializable {
         stopWorldTime();
         attackSelect = null;
 
-        if (cf.getSound() == 1) {
-            soundManager.stopTheSound();
+        if (config.getSound() == 1) {
+            soundManager.stopTheSound(fightBackgroundSound);
+            soundManager.defineShortSound(buttonClick);
         }
 
         SwitchScene sc = new SwitchScene();
@@ -106,8 +111,8 @@ public class FightController implements Initializable {
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
-        if (cf.getSound() == 1) {
-            startSound();
+        if (config.getSound() == 1) {
+            soundManager.defineBackgroundSound(fightBackgroundSound);;
         }
 
     }
@@ -707,22 +712,14 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() + gold);
     }
 
-    private void startSound() {
-//        try {
-//            System.out.println("connecting to soundmanager, trying to start Fight sound.");
-        if (cf.getSound() == 1) {
-            soundManager.defineBackgroundSound("Fight");
-        }
-//        } catch (Exception e) {
-//            System.out.println("failed to start fightsound");
-//            e.printStackTrace();
-//        }
-    }
-
     private void heroLevelUp() {
         HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
         HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
         HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
+
+        if (config.getSound() == 1) {
+            soundManager.defineShortSound(levelUpSound);
+        }
     }
 }

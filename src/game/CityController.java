@@ -35,11 +35,17 @@ public class CityController implements Initializable {
     private int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
     SoundManager soundManager = new SoundManager();
-    ConfigFile cf = new ConfigFile();
+    ConfigFile config = new ConfigFile();
+    
+    private String buttonClick = "button_click";
 
     @FXML
     public void goToMenu(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
 
@@ -49,6 +55,10 @@ public class CityController implements Initializable {
     @FXML
     public void goToInn(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
 
@@ -58,18 +68,30 @@ public class CityController implements Initializable {
     @FXML
     public void goToFight(ActionEvent event) {
 
+//        if (cf.getSound() == 1) {
+//            soundManager.stopTheSound("City");
+        
+//            soundManager.stopTheSound("City");
+//            System.out.println("stopped backgroundsound - chirping birds - citycontroller");
+//        }       
+        
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
 
-        if (cf.getSound() == 1) {
-            soundManager.stopTheSound();
-            System.out.println("stopped backgroundsound - chirping birds - citycontroller");
-        }
+
     }
 
     @FXML
     public void goToShop(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
 
@@ -93,11 +115,12 @@ public class CityController implements Initializable {
         checkWeapon();
         checkArmor();
 
-        try {
-            //soundManager.defineBackgroundSound("City");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            soundManager.defineBackgroundSound("City");
+//            System.out.println("Started backgroundsound - chirping birds - city controller");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 

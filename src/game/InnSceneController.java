@@ -28,7 +28,6 @@ public class InnSceneController implements Initializable {
     /**
      * Initializes the controller class.
      */
-
     //@FXML
     //private Button restoreHealth;
     //@FXML
@@ -48,8 +47,10 @@ public class InnSceneController implements Initializable {
     private Timeline timeLine;
 
     SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
+    private String purchaseSound = "purchase";
+    private String buttonClick = "button_click";
 
-    private ConfigFile cf = new ConfigFile();
+    private ConfigFile config = new ConfigFile();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,6 +88,11 @@ public class InnSceneController implements Initializable {
     }
 
     public void back(ActionEvent event) {
+
+        if (config.getSound() == 1) {
+            soundManager.defineShortSound(buttonClick);
+        }
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
@@ -95,7 +101,10 @@ public class InnSceneController implements Initializable {
     }
 
     public void restoreHealthpointsNow(ActionEvent event) {
-        if (currentHealth < maxHealth /*&& heroGold > restoreHealthCost*/) {
+        if (currentHealth < maxHealth) {
+            if (config.getSound() == 1) {
+                soundManager.defineShortSound(buttonClick);
+            }
             if (heroGold < restoreHealthCost) {
                 //Möjligtvis switcha bilder på knappen istället för att ändra en label.
                 fel.setText("Not enough money...");
@@ -106,8 +115,8 @@ public class InnSceneController implements Initializable {
                 HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
                 System.out.println("Current health restored to maximum.");
 
-                if (cf.getSound() == 1) {
-                    soundManager.defineShortSound("purchase");
+                if (config.getSound() == 1) {
+                    soundManager.defineShortSound(purchaseSound);
                 }
             }
         } else if (currentHealth == maxHealth) {
