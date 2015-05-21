@@ -26,10 +26,11 @@ public class SoundManager {
 
     private MediaPlayer shortSound;
     private Media defineShortSoundFile;
-    private ConfigFile cF = new ConfigFile();
+    private final ConfigFile cF = new ConfigFile();
 
     public void defineBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
-
+        try{
+        cF.readConfigFile();
         muteUnMute = cF.getSound(); // ha kvar???
 
         if (newBackgroundSound == "Fight" && muteUnMute == 1) {
@@ -57,6 +58,9 @@ public class SoundManager {
             playBackgroundSound();
 
         }
+        }catch(Exception ex){
+            
+        }
     }
 
     private void playBackgroundSound() {
@@ -74,25 +78,6 @@ public class SoundManager {
     public void stopTheSound() {
         //läs av parametern och stäng av det specifika ljudet.
         backgroundSound.stop();
-    }
-
-    // ha kvar eller ta bort???
-    public void setMuteSounds(int muteUnMute) {
-        this.muteUnMute = muteUnMute;
-        System.out.println(muteUnMute);
-//        if(muteUnMute){
-//            //sätt alla ljud som stop
-//            muteUnMute = true;
-//        }
-//        else if(!muteUnMute){
-//            //referera till
-//            muteUnMute = false;
-//        }
-    }
-
-    // ha kvar eller ta bort???
-    public int getMuteSounds() {
-        return muteUnMute;
     }
 
     public void defineShortSound(String shortSound) {
