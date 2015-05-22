@@ -49,6 +49,8 @@ public class FightController implements Initializable {
     private Label levelLabel;
     @FXML
     private Label fel;
+    @FXML
+    private Button special;
 
     private int heroEXP;
     public int timerCounter = 0;
@@ -88,6 +90,8 @@ public class FightController implements Initializable {
     private String fightBackgroundSound = "Fight";
     private String levelUpSound = "level_up";
     private String buttonClick = "button_click";
+
+    private int specialAttack = 0;
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -430,17 +434,17 @@ public class FightController implements Initializable {
             pane3.blendModeProperty().set(BlendMode.SRC_OVER);
             pane4.blendModeProperty().set(BlendMode.SRC_OVER);
             attackSelect = pane.getId();
-            if (attackOrder.get(0).equals("Hero") && fel.getText().equals("")) {
+            if (attackOrder.get(0).equals("Hero") && fel.getText().equals("") && specialAttack == 0) {
                 selectEnemyToAttack();
                 heroAttack();
-
                 damageLabelCheckEnemy();
-
                 KillEnemyDisplay();
                 healthPaneScaleInGame();
                 checkIfEnemyIsDead();
                 attackOrder.remove(0); // kolla om det är heros tur, ta väck honom i ordningen
 //                extendAttackOrder();
+            } else if (attackOrder.get(0).equals("Hero") && fel.getText().equals("") && specialAttack > 0) {
+                doSpecialAttack();
             } else {
                 System.out.println("Det är inte din tur idiot");
 
@@ -528,8 +532,18 @@ public class FightController implements Initializable {
 
     public void calculateAttackOrder() {
 
-        int heroSpeed = heroChar.getSpeed();
-        int heroStartSpeed = heroChar.getSpeed();
+        int heroWeaponSpeed = 0;
+        int heroArmorSpeed = 0;
+
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
+            heroWeaponSpeed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
+        }
+        if (HeroDataStorage.getInstance().getArmor() != null) {
+            heroArmorSpeed = HeroDataStorage.getInstance().getArmor().getArmorSpeed();
+        }
+
+        int heroSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+        int heroStartSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
@@ -683,31 +697,31 @@ public class FightController implements Initializable {
 
         if (enemyType.equals(enemy1)) {
 
-            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy2)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy3)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy4)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy5)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
@@ -767,8 +781,13 @@ public class FightController implements Initializable {
             checkWhoAttackDisplay(damageLabel, "Bear", "Scorpion", "Snake", "Spider", "Wolf", 3);
         }
 
-        damageLabel.textFillProperty().set(Color.WHITE);
+        damageLabel.textFillProperty().set(Color.WHITE); //Färg
         System.out.println("New damage");
+
+        if (specialAttack > 0 && attackOrder.get(0).equals("Hero")) {
+            System.out.println("test123");
+            damageLabel.textFillProperty().set(Color.RED);
+        }
 
         pane.getChildren().add(damageLabel);
 
@@ -854,5 +873,40 @@ public class FightController implements Initializable {
         damageLabel.setText(enemyType + getDamageString);
 
     }
-    
+
+    @FXML
+    public void handleSpecialAttack(ActionEvent event) {
+
+        if (event.getSource().equals(special)) {
+
+            Random rand = new Random();
+            specialAttack = rand.nextInt(3) + 1;
+
+        }
+    }
+
+    public void doSpecialAttack() {
+        //1//
+        if (specialAttack == 1) {
+            selectEnemyToAttack();
+            System.out.println("GOGO");
+            damageDisplay = heroChar.specialAttack1();
+
+            damageLabelCheckEnemy();
+            KillEnemyDisplay();
+            healthPaneScaleInGame();
+            checkIfEnemyIsDead();
+            attackOrder.remove(0);
+            specialAttack = 0;
+        } else if (specialAttack == 2) {
+
+            System.out.println("Attack not implemented yet");
+            
+        } else if (specialAttack == 3) {
+
+            System.out.println("Attack not implemented yet");
+            
+        }
+    }
+
 }

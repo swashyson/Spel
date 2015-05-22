@@ -107,15 +107,15 @@ public class Hero extends Creature {
             switch (FightDataStorage.getInstance().getEnemyID()) {
 
                 case "1":
-                    displayedDamage = getWeaponRandomDamage() + heroBaseDamage;
+                    displayedDamage = getWeaponRandomDamage();
                     FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
                     break;
                 case "2":
-                    displayedDamage = getWeaponRandomDamage() + heroBaseDamage;
+                    displayedDamage = getWeaponRandomDamage();
                     FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
                     break;
                 case "3":
-                    displayedDamage = getWeaponRandomDamage() + heroBaseDamage;
+                    displayedDamage = getWeaponRandomDamage();
                     FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
                     break;
                 case "null":
@@ -136,7 +136,8 @@ public class Hero extends Creature {
             int R = rand.nextInt(maxDamage - minDamage) + minDamage;
             return R;
         }
-        return 0;
+        
+        return heroBaseDamage;
     }
 
     public void heroAttack() {
@@ -152,6 +153,32 @@ public class Hero extends Creature {
 
         return displayedDamage;
 
+    }
+
+    public int specialAttack1() {
+
+        System.out.println("Massive BLOOOOOOOOW");
+        int massiveBlow = getWeaponRandomDamage() * 3;
+
+        switch (FightDataStorage.getInstance().getEnemyID()) {
+
+            case "1":
+                displayedDamage = massiveBlow;
+                FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
+                System.out.println(massiveBlow + "Damage with Massive blow");
+                break;
+            case "2":
+                displayedDamage = massiveBlow;
+                FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
+                break;
+            case "3":
+                displayedDamage = massiveBlow;
+                FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
+                break;
+            case "null":
+                System.out.println("Error");
+        }
+        return massiveBlow;
     }
 
 }
