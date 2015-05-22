@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -14,9 +15,37 @@
                 <Image url="@Recourses/Inn.png" />
             </image>
         </ImageView>
-        <Button fx:id="backToCity" layoutX="382.0" layoutY="172.0" mnemonicParsing="false" onAction="#goToCity" text="City" />
-        <Button fx:id="changeCharacter" layoutX="359.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToCharacter" text="Change char" />
-        <Button fx:id="logout" layoutX="374.0" layoutY="383.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
-      <Button fx:id="settings" layoutX="374.0" layoutY="448.0" mnemonicParsing="false" onAction="#settings" text="Settings" />
+        <Button fx:id="backToCity" layoutX="345.0" layoutY="171.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="25.0" prefWidth="112.0" text="City">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/CityButton.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <Button fx:id="changeCharacter" layoutX="294.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToCharacter" prefHeight="25.0" prefWidth="221.0" text="Change char">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/ChangeChar.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <Button fx:id="logout" layoutX="348.0" layoutY="373.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="112.0" text="Logout">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Logout.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="settings" layoutX="348.0" layoutY="463.0" mnemonicParsing="false" onAction="#settings" prefHeight="25.0" prefWidth="112.0" text="Settings">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Settings.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
     </children>
 </AnchorPane>

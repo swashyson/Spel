@@ -11,12 +11,19 @@
 
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.FightController">
     <children>
-        <ImageView fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="600.0" fitWidth="806.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Recourses/Fightscene.png" />
             </image>
         </ImageView>
-        <Button fx:id="backToCity" layoutX="382.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToCity" text="City" />
+        <Button fx:id="backToCity" layoutX="357.0" layoutY="513.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="25.0" prefWidth="110.0" text="City">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/CityButton.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
         <ImageView fx:id="XP" fitHeight="11.0" fitWidth="1.0" layoutX="17.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Recourses/1XP.png" />
