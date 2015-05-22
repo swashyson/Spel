@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -26,10 +27,15 @@
                 <Image url="@Recourses/XpBAR.png" />
             </image>
         </ImageView>
-      <Label fx:id="levelLabel" layoutX="323.0" layoutY="578.0" prefHeight="17.0" prefWidth="177.0" text="You´r Level" textFill="WHITE">
+      <Label fx:id="levelLabel" alignment="CENTER" layoutX="323.0" layoutY="578.0" prefHeight="17.0" prefWidth="177.0" text="You´r Level" textAlignment="CENTER" textFill="WHITE">
          <effect>
             <Blend />
          </effect>
+      </Label>
+      <Label fx:id="fel" alignment="CENTER" layoutX="227.0" layoutY="241.0" prefHeight="52.0" prefWidth="295.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
       </Label>
     </children>
 </AnchorPane>

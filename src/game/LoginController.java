@@ -39,11 +39,19 @@ public class LoginController implements Initializable {
     private TextField name;
     @FXML
     private TextField password;
-//    private Hero hero;
+    
+    ConfigFile config = new ConfigFile();
+    SoundManager soundManager = new SoundManager();
+    
+    private String buttonClick = "button_click";
 
     @FXML
     public void logIn(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         try {
             DBConnect.connect();
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
@@ -74,6 +82,10 @@ public class LoginController implements Initializable {
     @FXML
     public void createAccount(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "CreateAccount");
     }
@@ -81,6 +93,10 @@ public class LoginController implements Initializable {
     @FXML
     public void forgot(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ForgotPW");
 
@@ -89,6 +105,10 @@ public class LoginController implements Initializable {
     @FXML
     public void settings(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Settings");
 
@@ -112,6 +132,14 @@ public class LoginController implements Initializable {
 
         HoverMouse.getInstance().ClickEffect(login);
 
+        //Kolla om det fungerar att ha ljudet över flera scener, annars får vi
+        //sätta på och stänga av ljudet i varje scen.
+        
+//        if(cf.getSound() == 1){
+//            soundManager.defineBackgroundSound("City");
+//            System.out.println("Started backgroundsound - chirping birds - logincontroller");
+//        }
+        
     }
 
     public void loadConfigFile() {

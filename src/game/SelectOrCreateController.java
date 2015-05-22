@@ -29,6 +29,11 @@ public class SelectOrCreateController implements Initializable {
     @FXML
     private Button back;
 
+    private SoundManager soundManager = new SoundManager();
+    private ConfigFile config = new ConfigFile();
+
+    private String buttonClick = "button_click";
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

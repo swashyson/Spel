@@ -33,7 +33,7 @@ public class CreateAccountController implements Initializable {
     private Button create;
     @FXML
     private Button back;
-   
+
     @FXML
     private Label fel;
 
@@ -41,6 +41,11 @@ public class CreateAccountController implements Initializable {
     private String typePassword;
     private String typeQuestion;
     private String typeAnswer;
+
+    private SoundManager soundManager = new SoundManager();
+    private ConfigFile config = new ConfigFile();
+
+    private String buttonClick = "button_click";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,12 +74,16 @@ public class CreateAccountController implements Initializable {
 
     public void create(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         DBConnect.connect();
         typeName = name.getText();
         typePassword = password.getText();
         typeQuestion = question.getText();
         typeAnswer = answer.getText();
-        
+
         System.out.println("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')");
         DBConnect.CreateInsertStatement("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')", fel, "User already exists");
         System.out.println("Account skapat");
@@ -84,6 +93,10 @@ public class CreateAccountController implements Initializable {
 
     public void back(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
     }

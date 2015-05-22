@@ -34,17 +34,20 @@ public class SoundManager {
         cF.readConfigFile();
         muteUnMute = cF.getSound(); // ha kvar???
 
-        if (newBackgroundSound == "Fight" && muteUnMute == 1) {
-            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
+        if (newBackgroundSound == "Fight" /*&& muteUnMute == 1*/) {
+            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.wav").toString());
+            System.out.println("playing fighting sound");
             playBackgroundSound();
-        } else if (newBackgroundSound == "Inn" && muteUnMute == 1) {
-            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
-            playBackgroundSound();
-        } else if (newBackgroundSound == "Shop" && muteUnMute == 1) {
-            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
-            playBackgroundSound();
-        } else if (newBackgroundSound == "City" && muteUnMute == 1) {
+        } //        else if (newBackgroundSound == "Inn" && muteUnMute == 1) {
+        //            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
+        //            playBackgroundSound();
+        //        } else if (newBackgroundSound == "Shop" && muteUnMute == 1) {
+        //            defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
+        //            playBackgroundSound();
+        //        } 
+        else if (newBackgroundSound == "City" /*&& muteUnMute == 1*/) {
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
+            System.out.println("playing city sound");
             playBackgroundSound();
         }
         }catch(Exception ex){
@@ -66,8 +69,16 @@ public class SoundManager {
     }
 
     //stänger av bakgrundsljudet som spelas.
-    public void stopTheSound() {
-        backgroundSound.stop();
+    public void stopTheSound(String sound) {
+//    public void stopTheSound() {
+        if (sound == "City"/*||sound=="Fight"*/) {
+            System.out.println("Stopping: " + sound + " in soundManager");
+            backgroundSound.stop();
+            
+        } else if (sound == "Fight") {
+            System.out.println("Stopping: " + sound + " in soundManager");
+            backgroundSound.stop();
+        }
     }
 
     public void defineShortSound(String shortSound) {
@@ -75,17 +86,36 @@ public class SoundManager {
         //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
         if (shortSound == "purchase" && muteUnMute == 1) {
             defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
+            System.out.println("played purchase sound");
             playShortSound();
-        } else if (shortSound == "button" && muteUnMute == 1) { // ska vi ha ljud till knapparna???
+        } else if (shortSound == "button_click" && muteUnMute == 1) { // ska vi ha ljud till knapparna???
             defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
             playShortSound();
+        } else if (shortSound == "arrow_attack" && muteUnMute == 1) {
+            defineShortSoundFile = new Media(getClass().getResource("sounds/ArrowDamage.wav").toString());
+            playShortSound();
+        } else if (shortSound == "bear_attack" && muteUnMute == 1) {
+            defineShortSoundFile = new Media(getClass().getResource("sounds/BearAttack.wav").toString());
+            playShortSound();
+        } else if (shortSound == "snake_attack" && muteUnMute == 1) {
+            defineShortSoundFile = new Media(getClass().getResource("sounds/HissingSnake.wav").toString());
+            playShortSound();
+        }else if (shortSound == "error" && muteUnMute == 1){
+            defineShortSoundFile = new Media(getClass().getResource("sounds/error_sound.wav").toString());
+            playShortSound();
+        }else if (shortSound == "level_up" && muteUnMute == 1){
+            defineShortSoundFile = new Media(getClass().getResource("sounds/level_up.wav").toString());
+            playShortSound();
+        }else if(shortSound == "entrance" && muteUnMute == 1){
+            defineShortSoundFile = new Media(getClass().getResource("sounds/entranceBell.wav").toString());
+            playShortSound();
         }
+
     }
 
     //Spelar upp ett kort ljud utan att loopa det
     private void playShortSound() {
         try {
-            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
             System.out.println(defineShortSoundFile);
             shortSound = new MediaPlayer(defineShortSoundFile);
             shortSound.setVolume(0.5);

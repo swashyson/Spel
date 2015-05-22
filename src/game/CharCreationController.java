@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 /**
  * FXML Controller class
  *
@@ -40,35 +41,61 @@ public class CharCreationController implements Initializable {
 
     private int type;
     private Hero hero;
-    
+
+    private SoundManager soundManager = new SoundManager();
+    private ConfigFile config = new ConfigFile();
+
+    private String buttonClick = "button_click";
+
     @FXML
     public void back(ActionEvent event) {
+
+        if (config.getSound() == 1) {
+            soundManager.defineShortSound(buttonClick);
+        }
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "SelectOrCreate");
     }
 
     @FXML
     public void Select(ActionEvent event) {
+
         if (event.getSource().equals(hero1)) {
             HoverMouse.getInstance().inClick(hero1);
             HoverMouse.getInstance().outClick(hero2);
             HoverMouse.getInstance().outClick(hero3);
             type = 1;
+
+            if (config.getSound() == 1) {
+                soundManager.defineShortSound(buttonClick);
+            }
+
         } else if (event.getSource().equals(hero2)) {
             HoverMouse.getInstance().inClick(hero2);
             HoverMouse.getInstance().outClick(hero1);
             HoverMouse.getInstance().outClick(hero3);
             type = 2;
+
+            if (config.getSound() == 1) {
+                soundManager.defineShortSound(buttonClick);
+            }
+
         } else if (event.getSource().equals(hero3)) {
             HoverMouse.getInstance().inClick(hero3);
             HoverMouse.getInstance().outClick(hero2);
             HoverMouse.getInstance().outClick(hero1);
             type = 3;
+
+            if (config.getSound() == 1) {
+                soundManager.defineShortSound(buttonClick);
+            }
+
         }
     }
 
     public void Create(ActionEvent event) {
-             
+
         try {
             DBConnect.connect();
 
@@ -82,7 +109,7 @@ public class CharCreationController implements Initializable {
             } else {
 
                 DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2')",fel, "hej");
+                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2')", fel, "hej");
                 System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
                         + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2' )");
 

@@ -28,13 +28,18 @@ public class MenuController implements Initializable {
     @FXML
     Button settings;
     
-//    private boolean muteUnMute;
-    
-    SoundManager soundManager;
+    private SoundManager soundManager = new SoundManager();
+    private ConfigFile config = new ConfigFile();
+
+    private String buttonClick = "button_click";
 
     @FXML
     public void goToCity(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
 
@@ -43,6 +48,10 @@ public class MenuController implements Initializable {
     @FXML
     public void logout(ActionEvent event) {
 
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         DBConnect.saveToDB();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
@@ -50,12 +59,22 @@ public class MenuController implements Initializable {
     }
     @FXML 
     public void settings(ActionEvent event){
+        
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Settings");
     }
 
     @FXML
     public void goToCharacter(ActionEvent event) {
+        
+        if(config.getSound() == 1){
+            soundManager.defineShortSound(buttonClick);
+        }
+        
         DBConnect.saveToDB();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ViewChar");
