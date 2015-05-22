@@ -73,9 +73,9 @@ public class CreateAccountController implements Initializable {
     }
 
     public void create(ActionEvent event) {
-
+        try{
         soundManager.defineShortSound(buttonClick);
-
+        ResultSet rS ;
         DBConnect.connect();
         typeName = name.getText();
         typePassword = password.getText();
