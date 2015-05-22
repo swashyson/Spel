@@ -98,10 +98,11 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if (config.getSound() == 1) {
-            soundManager.stopTheSound(fightBackgroundSound);
-            soundManager.defineShortSound(buttonClick);
+        if(soundManager.getSoundOn() == true){
+        soundManager.stopTheSound();
+        soundManager.defineShortSound(buttonClick);
         }
+        
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -121,10 +122,9 @@ public class FightController implements Initializable {
         selectEnemy();
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
-
-        if (config.getSound() == 1) {
-            soundManager.defineBackgroundSound(fightBackgroundSound);;
-        }
+        
+        soundManager.defineBackgroundSound(fightBackgroundSound);;
+        
 
     }
 
