@@ -43,16 +43,13 @@ public class CharCreationController implements Initializable {
     private Hero hero;
 
     private SoundManager soundManager = new SoundManager();
-    private ConfigFile config = new ConfigFile();
 
     private String buttonClick = "button_click";
 
     @FXML
     public void back(ActionEvent event) {
 
-        if (config.getSound() == 1) {
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.defineShortSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "SelectOrCreate");
@@ -67,9 +64,7 @@ public class CharCreationController implements Initializable {
             HoverMouse.getInstance().outClick(hero3);
             type = 1;
 
-            if (config.getSound() == 1) {
-                soundManager.defineShortSound(buttonClick);
-            }
+            soundManager.defineShortSound(buttonClick);
 
         } else if (event.getSource().equals(hero2)) {
             HoverMouse.getInstance().inClick(hero2);
@@ -77,9 +72,7 @@ public class CharCreationController implements Initializable {
             HoverMouse.getInstance().outClick(hero3);
             type = 2;
 
-            if (config.getSound() == 1) {
-                soundManager.defineShortSound(buttonClick);
-            }
+            soundManager.defineShortSound(buttonClick);
 
         } else if (event.getSource().equals(hero3)) {
             HoverMouse.getInstance().inClick(hero3);
@@ -87,14 +80,14 @@ public class CharCreationController implements Initializable {
             HoverMouse.getInstance().outClick(hero1);
             type = 3;
 
-            if (config.getSound() == 1) {
-                soundManager.defineShortSound(buttonClick);
-            }
+            soundManager.defineShortSound(buttonClick);
 
         }
     }
 
     public void Create(ActionEvent event) {
+
+        soundManager.defineShortSound(buttonClick);
 
         try {
             DBConnect.connect();

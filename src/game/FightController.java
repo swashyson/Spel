@@ -83,8 +83,6 @@ public class FightController implements Initializable {
 
     private SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
 
-    private ConfigFile config = new ConfigFile();
-
     private String fightBackgroundSound = "Fight";
     private String levelUpSound = "level_up";
     private String buttonClick = "button_click";
@@ -98,11 +96,8 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if(soundManager.getSoundOn() == true){
         soundManager.stopTheSound();
         soundManager.defineShortSound(buttonClick);
-        }
-        
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -122,9 +117,8 @@ public class FightController implements Initializable {
         selectEnemy();
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
-        
+
         soundManager.defineBackgroundSound(fightBackgroundSound);;
-        
 
     }
 
@@ -738,9 +732,8 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
 
-        if (config.getSound() == 1) {
-            soundManager.defineShortSound(levelUpSound);
-        }
+        soundManager.defineShortSound(levelUpSound);
+
     }
 
     public void damageLabel(AnchorPane creaturePane) {
@@ -854,5 +847,5 @@ public class FightController implements Initializable {
         damageLabel.setText(enemyType + getDamageString);
 
     }
-    
+
 }
