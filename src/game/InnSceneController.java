@@ -49,8 +49,7 @@ public class InnSceneController implements Initializable {
     SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
     private String purchaseSound = "purchase";
     private String buttonClick = "button_click";
-
-    private ConfigFile config = new ConfigFile();
+    private String errorSound = "error";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,9 +88,7 @@ public class InnSceneController implements Initializable {
 
     public void back(ActionEvent event) {
 
-        if (config.getSound() == 1) {
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.defineShortSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -102,9 +99,9 @@ public class InnSceneController implements Initializable {
 
     public void restoreHealthpointsNow(ActionEvent event) {
         if (currentHealth < maxHealth) {
-            if (config.getSound() == 1) {
-                soundManager.defineShortSound(buttonClick);
-            }
+
+            soundManager.defineShortSound(purchaseSound);
+
             if (heroGold < restoreHealthCost) {
                 //Möjligtvis switcha bilder på knappen istället för att ändra en label.
                 fel.setText("Not enough money...");
@@ -115,13 +112,13 @@ public class InnSceneController implements Initializable {
                 HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
                 System.out.println("Current health restored to maximum.");
 
-                if (config.getSound() == 1) {
-                    soundManager.defineShortSound(purchaseSound);
-                }
+                soundManager.defineShortSound(purchaseSound);
+
             }
         } else if (currentHealth == maxHealth) {
             System.out.println("Current health already restored to maximum");
             fel.setText("Your health is now full.");
+            soundManager.defineShortSound(errorSound);
         }
     }
 }

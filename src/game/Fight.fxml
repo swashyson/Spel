@@ -44,5 +44,6 @@
             <Font size="33.0" />
          </font>
       </Label>
+      <Button fx:id="special" layoutX="349.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleSpecialAttack" text="Special Attack" />
     </children>
 </AnchorPane>

@@ -44,7 +44,6 @@ public class CreateAccountController implements Initializable {
     private String typeAnswer;
 
     private SoundManager soundManager = new SoundManager();
-    private ConfigFile config = new ConfigFile();
 
     private String buttonClick = "button_click";
 
@@ -75,11 +74,8 @@ public class CreateAccountController implements Initializable {
 
     public void create(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        try{
-        ResultSet rS ;
+        soundManager.defineShortSound(buttonClick);
+
         DBConnect.connect();
         typeName = name.getText();
         typePassword = password.getText();
@@ -106,10 +102,9 @@ public class CreateAccountController implements Initializable {
 
     public void back(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+        System.out.println("buttonclick");
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
     }
