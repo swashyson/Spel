@@ -127,9 +127,8 @@ public class SoundManager {
         try {
             System.out.println(defineShortSoundFile);
             shortSound = new MediaPlayer(defineShortSoundFile);
-            shortSound.setVolume(0.5);
-//            shortSound.setAutoPlay(true);
-            shortSound.play();
+            shortSound.setVolume(1.5);
+            shortSound.setAutoPlay(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
