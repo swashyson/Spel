@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.sql.ResultSet;
 
 /**
  * FXML Controller class
@@ -77,17 +78,29 @@ public class CreateAccountController implements Initializable {
         if(config.getSound() == 1){
             soundManager.defineShortSound(buttonClick);
         }
-        
+        try{
+        ResultSet rS ;
         DBConnect.connect();
         typeName = name.getText();
         typePassword = password.getText();
         typeQuestion = question.getText();
         typeAnswer = answer.getText();
 
-        System.out.println("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')");
-        DBConnect.CreateInsertStatement("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')", fel, "User already exists");
+        rS = DBConnect.CreateSelectStatement("select * from game.login where userName = '" + typeName + "'");
+        if(rS.next()){
+            fel.setText("That name is used");
+            
+        }else{
+            DBConnect.CreateInsertStatement("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')", fel, "User already exists");
         System.out.println("Account skapat");
-        DBConnect.close();
+        SwitchScene sc = new SwitchScene();
+                sc.change(event, "Login");
+        }
+        }catch(Exception ex){
+            fel.setText("fel");
+        } finally {
+            DBConnect.close();
+        }
 
     }
 
