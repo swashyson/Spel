@@ -66,8 +66,21 @@
                 <Font size="20.0" />
             </font>
         </Label>
-      <Button layoutX="472.0" layoutY="563.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
-      <Button layoutX="115.0" layoutY="563.0" mnemonicParsing="false" onAction="#settings" text="Settings" />
-      <Button layoutX="199.0" layoutY="563.0" mnemonicParsing="false" onAction="#openHelpFile" text="Help" />
+      <Button layoutX="472.0" layoutY="563.0" mnemonicParsing="false" onAction="#exit" text="Exit">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Exit.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button layoutX="115.0" layoutY="563.0" mnemonicParsing="false" onAction="#settings" text="Settings">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Settings.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
     </children>
 </AnchorPane>
