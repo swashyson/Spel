@@ -16,6 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import DataStorage.*;
+import java.awt.Desktop;
+import java.io.File;
+import java.nio.file.Path;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
 
@@ -147,7 +150,19 @@ public class LoginController implements Initializable {
         ConfigFile CF = new ConfigFile();
         CF.readConfigFile();
 
-        //CF.setSound(0);
+        
+    }
+    public void openHelpFile(){
+        try{
+        String fullPath = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+        String[] path = fullPath.split("dist");
+        File file = new File(path[0]+"src/game/helpFile/helpFile.pdf");
+        Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
+        }
+        catch(Exception ex){
+            fel.setText("Could not load help file" );
+            ex.printStackTrace();
+        }
     }
 
 }
