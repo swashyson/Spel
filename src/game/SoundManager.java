@@ -26,6 +26,7 @@ public class SoundManager {
 
     private MediaPlayer shortSound;
     private Media defineShortSoundFile;
+    
     private final ConfigFile cF = new ConfigFile();
 
     public void defineBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
