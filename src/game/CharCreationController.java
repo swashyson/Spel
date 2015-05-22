@@ -38,8 +38,9 @@ public class CharCreationController implements Initializable {
     @FXML
     private Label fel;
 
-    public int type;
-    Hero hero;
+    private int type;
+    private Hero hero;
+    
     @FXML
     public void back(ActionEvent event) {
         SwitchScene sc = new SwitchScene();

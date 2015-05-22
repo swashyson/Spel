@@ -19,20 +19,20 @@ import javafx.scene.control.Button;
 public class CityController implements Initializable {
 
     @FXML
-    Button fight;
+    private Button fight;
     @FXML
-    Button inn;
+    private Button inn;
     @FXML
-    Button shop;
+    private Button shop;
     @FXML
-    Button menu;
+    private Button menu;
 
     private Weapon weapon;
     private int weaponID;
     private Armor armor;
     private int armorID;
 
-    int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
+    private int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
     //SoundManager soundManager = new SoundManager();
 

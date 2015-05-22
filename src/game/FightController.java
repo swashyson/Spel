@@ -36,17 +36,14 @@ import javafx.util.Duration;
 public class FightController implements Initializable {
 
     @FXML
-    Button backToCity;
+    private Button backToCity;
     @FXML
     private ImageView XP;
-
     @FXML
     private AnchorPane pane;
     @FXML
     private Label levelLabel;
-
     @FXML
-
     private int heroEXP;
     public int timerCounter = 0;
     public String[] fightOrder;

@@ -123,17 +123,17 @@ public class InnSceneController implements Initializable {
         }
     }
 
-    public void saveHPToDataBase() {
-
-        int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
-
-        DBConnect.connect();
-        try {
-            DBConnect.CreateAlterStatement("UPDATE `game`.`hero` SET `heroGold`='" + heroGold + "', `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
-            System.out.println("UPDATE `game`.`hero` SET `heroGold`='" + heroGold + "', `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        DBConnect.close();
-    }
+//    public void saveHPToDataBase() {
+//
+//        int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
+//
+//        DBConnect.connect();
+//        try {
+//            DBConnect.CreateAlterStatement("UPDATE `game`.`hero` SET `heroGold`='" + heroGold + "', `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
+//            System.out.println("UPDATE `game`.`hero` SET `heroGold`='" + heroGold + "', `heroCurrentHP`='" + currentHealth + "' WHERE `idHero`='" + heroID + "';");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        DBConnect.close();
+//    }
 }

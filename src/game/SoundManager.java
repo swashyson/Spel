@@ -34,35 +34,24 @@ public class SoundManager {
         muteUnMute = cF.getSound(); // ha kvar???
 
         if (newBackgroundSound == "Fight" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
-
             playBackgroundSound();
-
         } else if (newBackgroundSound == "Inn" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
-
             playBackgroundSound();
-
         } else if (newBackgroundSound == "Shop" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource(null).toString());
-
             playBackgroundSound();
-
         } else if (newBackgroundSound == "City" && muteUnMute == 1) {
-
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
-
             playBackgroundSound();
-
         }
         }catch(Exception ex){
             
         }
     }
 
+    //Spelar upp själva ljudet och loopar det med ungefär 1 sekund innan den startar om.
     private void playBackgroundSound() {
         try {
             System.out.println(defineBackgroundSoundFile);
@@ -75,8 +64,8 @@ public class SoundManager {
         }
     }
 
+    //stänger av bakgrundsljudet som spelas.
     public void stopTheSound() {
-        //läs av parametern och stäng av det specifika ljudet.
         backgroundSound.stop();
     }
 
@@ -84,30 +73,18 @@ public class SoundManager {
 
         //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
         if (shortSound == "purchase" && muteUnMute == 1) {
-            try {
-                defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
-
-                playShortSound();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
+            playShortSound();
         } else if (shortSound == "button" && muteUnMute == 1) { // ska vi ha ljud till knapparna???
-            try {
-                defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
-
-                playShortSound();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
+            playShortSound();
         }
     }
 
+    //Spelar upp ett kort ljud utan att loopa det
     private void playShortSound() {
         try {
             defineBackgroundSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
-
             System.out.println(defineShortSoundFile);
             shortSound = new MediaPlayer(defineShortSoundFile);
             shortSound.setVolume(0.5);
