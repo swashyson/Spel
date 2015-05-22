@@ -25,7 +25,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Back.png" />
+                  <Image url="@Recourses/Back.png" />
                </source>
             </ImageInput>
          </effect></Button>

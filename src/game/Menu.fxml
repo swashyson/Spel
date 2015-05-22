@@ -19,7 +19,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/CityButton.png" />
+                  <Image url="@Recourses/CityButton.png" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -27,7 +27,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/ChangeChar.png" />
+                  <Image url="@Recourses/ChangeChar.png" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -35,7 +35,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Logout.png" />
+                  <Image url="@Recourses/Logout.png" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -43,7 +43,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Mohini/Documents/NetBeansProjects/Spel/src/game/Recourses/Settings.png" />
+                  <Image url="@Recourses/Settings.png" />
                </source>
             </ImageInput>
          </effect></Button>
