@@ -648,8 +648,8 @@ public class FightController implements Initializable {
 
     public void calculateAttackOrder() {
 
-        int heroSpeed = heroChar.getSpeed();
-        int heroStartSpeed = heroChar.getSpeed();
+        int heroWeaponSpeed = 0;
+        int heroArmorSpeed = 0;
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
@@ -657,6 +657,17 @@ public class FightController implements Initializable {
         int enemy2StartSpeed = 0;
         int enemy3Speed = 0;
         int enemy3StartSpeed = 0;
+
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
+            heroWeaponSpeed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
+        }
+        if (HeroDataStorage.getInstance().getArmor() != null) {
+            heroArmorSpeed = HeroDataStorage.getInstance().getArmor().getArmorSpeed();
+        }
+
+        int heroSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+        int heroStartSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+
         if (FightDataStorage.getInstance().getEnemy2() != null) {
             enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
             enemy2StartSpeed = FightDataStorage.getInstance().getEnemy2().getSpeed();
@@ -983,14 +994,14 @@ public class FightController implements Initializable {
 
         try {
 
-            if (FightDataStorage.getInstance().getEnemy1() != null) {
+            if (FightDataStorage.getInstance().getEnemy1() != null && creaturePane2.isVisible() == true) {
                 damageLabel(creaturePane2);
             }
 
-            if (FightDataStorage.getInstance().getEnemy2() != null) {
+            if (FightDataStorage.getInstance().getEnemy2() != null && creaturePane3.isVisible() == true) {
                 damageLabel(creaturePane3);
             }
-            if (FightDataStorage.getInstance().getEnemy3() != null) {
+            if (FightDataStorage.getInstance().getEnemy3() != null && creaturePane4.isVisible() == true) {
                 damageLabel(creaturePane4);
             }
 
