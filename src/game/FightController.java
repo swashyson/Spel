@@ -409,6 +409,18 @@ public class FightController implements Initializable {
         return 0;
     }
 
+    public int healthPaneCreatureScalerUpdateAll(int enemyHp, int enemyMaxHP) {
+
+        int hp = enemyHp;
+        int maxHp = enemyMaxHP;
+        int maxImageView = 50;
+        int calculate;
+
+        calculate = (hp * maxImageView) / maxHp;
+
+        return calculate;
+    }
+
     public void healthPaneScaleInGame() {
 
         try {
@@ -435,12 +447,12 @@ public class FightController implements Initializable {
     public void healthPaneScaleInGameUpdateAll() {
 
         try {
-            hpBarCreature2.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature2.setX(healthPaneCreatureScaler() / 2);
-            hpBarCreature3.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
-            hpBarCreature4.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature4.setX(healthPaneCreatureScaler() / 2);
+            hpBarCreature2.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy1().getHp(), FightDataStorage.getInstance().getEnemy1().getMaxHp()));
+            hpBarCreature2.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy1().getHp(), FightDataStorage.getInstance().getEnemy1().getMaxHp()) / 2);
+            hpBarCreature3.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy2().getHp(), FightDataStorage.getInstance().getEnemy2().getMaxHp()));
+            hpBarCreature3.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy2().getHp(), FightDataStorage.getInstance().getEnemy2().getMaxHp()) / 2);
+            hpBarCreature4.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy3().getHp(), FightDataStorage.getInstance().getEnemy3().getMaxHp()));
+            hpBarCreature4.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy3().getHp(), FightDataStorage.getInstance().getEnemy3().getMaxHp()) / 2);
         } catch (Exception ex) {
             System.out.println("Mer än fler enemys : Error :");
         }
@@ -781,7 +793,6 @@ public class FightController implements Initializable {
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
-            
 
         } else if (enemyType.equals(enemy2)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
