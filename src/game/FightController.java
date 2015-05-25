@@ -528,15 +528,15 @@ public class FightController implements Initializable {
         heroChar.heroAttack();
         System.out.println(attackOrder.size());
         System.out.println("Heron Lyckades Attakera");
-        
+
         Random randSpecial = new Random();
-        
+
         int value = randSpecial.nextInt(3) + 1;
-        if(value == 3){
-        
+        if (value == 3) {
+
             special.setVisible(true);
         }
-        
+
         soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
 //        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
     }
@@ -614,7 +614,7 @@ public class FightController implements Initializable {
 
             HeroDataStorage.getInstance().getHero().setGold(getGoldLost());
             System.out.println("You're dead mofo");
-            
+
             soundManager.defineSound(heroDeath);
 
         }
@@ -777,31 +777,32 @@ public class FightController implements Initializable {
 
         if (enemyType.equals(enemy1)) {
 
-            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
+            
 
         } else if (enemyType.equals(enemy2)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy3)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy4)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy5)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
@@ -815,10 +816,11 @@ public class FightController implements Initializable {
         soundManager.stopTheSound();
         soundManager.defineSound(applause);
         soundManager.randomizeSounds(victory, 0);
-        
+
         fightAgain.setVisible(true);
         backToCity.setVisible(true);
         victoryPicture.setVisible(true);
+        special.setVisible(false);
 
         HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + expGain());
         HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() + getGoldGained());
@@ -909,10 +911,10 @@ public class FightController implements Initializable {
                 = new TranslateTransition(Duration.millis(1000), damageLabel);
 
         Random randomXPos = new Random();
-        
+
         int randomNumber = randomXPos.nextInt(15 + 15) - 15;
         System.out.println(randomNumber);
-        
+
         move.setFromY(0);
         move.setToY(-20);
         move.setFromX(0);
@@ -1029,17 +1031,15 @@ public class FightController implements Initializable {
 
             System.out.println("You got attack " + specialAttack);
             special.setVisible(false);
-            
-            if(specialAttack == 1){
-            
+
+            if (specialAttack == 1) {
+
                 combatMessage1.setText("You got a strong attack");
-            }
-            else if(specialAttack == 2){
-            
+            } else if (specialAttack == 2) {
+
                 combatMessage1.setText("You got a double attack");
-            }
-            else if(specialAttack == 3){
-            
+            } else if (specialAttack == 3) {
+
                 combatMessage1.setText("You got a cleave attack");
             }
         }
@@ -1058,8 +1058,7 @@ public class FightController implements Initializable {
             checkIfEnemyIsDead();
             attackOrder.remove(0);
             specialAttack = 0;
-           
-            
+
         } else if (specialAttack == 2) {
 
             selectEnemyToAttack();
