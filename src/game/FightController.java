@@ -10,6 +10,7 @@ import Creature.Hero;
 import DataStorage.*;
 import java.lang.reflect.Array;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -178,6 +179,7 @@ public class FightController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadEnemysToDataStorage();
         changeBackGround();
         worldTime();
         loadEnemyStatsFromDataStorage();
@@ -866,6 +868,7 @@ public class FightController implements Initializable {
         combatMessage1.setText("Exp gained: " + Integer.toString(expGain()));
         combatMessage2.setText("Gold gained: " + Integer.toString(getGoldGained()));
 
+        DBConnect.saveToDB();
         stopWorldTime();
     }
 
@@ -904,7 +907,6 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
-
         soundManager.defineSound(levelUpSound);
 
     }
@@ -1141,4 +1143,44 @@ public class FightController implements Initializable {
         }
 
     }
+
+    private void loadEnemysToDataStorage() {
+        try {
+            DBConnect.connect();
+            ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
+            while (getCreature.next()) {
+                String enemyName = getCreature.getString("enemyName");
+                int enemyHp = getCreature.getInt("enemyBaseHP");
+                int enemyMaxDamage = getCreature.getInt("enemyBaseMaxDamage");
+                int enemyMinDamage = getCreature.getInt("enemyBaseMinDamage");
+                int enemySpeed = getCreature.getInt("enemyBaseSpeed");
+
+                switch (enemyName) {
+                    case "Bear":
+                        Bear bear = new Bear(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setBear(bear);
+                        break;
+                    case "Scorpion":
+                        Scorpion scorpion = new Scorpion(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setScorpion(scorpion);
+                        break;
+                    case "Snake":
+                        Snake snake = new Snake(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setSnake(snake);
+                        break;
+                    case "Spider":
+                        Spider spider = new Spider(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setSpider(spider);
+                        break;
+                    case "Wolf":
+                        Wolf wolf = new Wolf(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setWolf(wolf);
+                        break;
+                }
+            }
+            DBConnect.close();
+        } catch (Exception ex) {
+        }
+    }
+
 }

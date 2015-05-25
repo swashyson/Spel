@@ -20,6 +20,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.nio.file.Path;
 import javafx.animation.FadeTransition;
+import javafx.scene.control.PasswordField;
 import javafx.util.Duration;
 
 /**
@@ -45,7 +46,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField name;
     @FXML
-    private TextField password;
+    private PasswordField password;
 
     SoundManager soundManager = new SoundManager();
 
