@@ -171,7 +171,7 @@ public class ViewCharController implements Initializable {
         try {
             DBConnect.connect();
 
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "'");
             System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
 
             while (rs.next()) {
@@ -182,9 +182,8 @@ public class ViewCharController implements Initializable {
             list.setItems(OL);
 
             System.out.println("Antalet Gubbar = " + getName.size());
-
             DBConnect.close();
-
+           
         } catch (Exception ex) {
             ex.printStackTrace();
         }

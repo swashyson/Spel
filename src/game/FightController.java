@@ -197,7 +197,7 @@ public class FightController implements Initializable {
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
         soundManager.stopTheSound();
-        soundManager.defineSound(fightBackgroundSound);;
+        soundManager.defineSound(fightBackgroundSound);
 
     }
 
