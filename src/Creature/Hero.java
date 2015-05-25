@@ -134,7 +134,7 @@ public class Hero extends Creature {
             int minDamage = HeroDataStorage.getInstance().getWeapon().getWeaponMinDamage();
             int maxDamage = HeroDataStorage.getInstance().getWeapon().getWeaponMaxDamage();
             int R = rand.nextInt(maxDamage - minDamage) + minDamage;
-            return R;
+            return R + heroBaseDamage;
         }
 
         return heroBaseDamage;
@@ -206,4 +206,21 @@ public class Hero extends Creature {
         return dubbelAttack;
     }
 
+    public int specialAttack3() {
+        System.out.println("Cleave attack");
+        int cleaveAttack = getWeaponRandomDamage();
+
+        try {
+
+            displayedDamage = cleaveAttack;
+            FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
+            FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
+            FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
+
+        } catch (Exception ex) {
+            System.out.println("Dunk");
+        }
+        return cleaveAttack;
+
+    }
 }

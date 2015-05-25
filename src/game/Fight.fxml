@@ -41,7 +41,7 @@
       </Label>
       <Label fx:id="combatMessage1" alignment="CENTER" layoutX="254.0" layoutY="328.0" prefHeight="52.0" prefWidth="295.0" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="33.0" />
+            <Font size="16.0" />
          </font>
       </Label>
       <ImageView fx:id="defeatPicture" fitHeight="301.0" fitWidth="558.0" layoutX="201.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -82,6 +82,6 @@
             </ImageInput>
          </effect>
       </Button>
-      <Button fx:id="special" layoutX="339.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleSpecialAttack" text="Special Attack" />
+      <Button fx:id="special" layoutX="475.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleSpecialAttack" prefHeight="63.0" prefWidth="111.0" text="Special Attack" visible="false" />
     </children>
 </AnchorPane>

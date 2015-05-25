@@ -430,6 +430,20 @@ public class FightController implements Initializable {
         }
     }
 
+    public void healthPaneScaleInGameUpdateAll() {
+
+        try {
+            hpBarCreature2.setScaleX(healthPaneCreatureScaler());
+            hpBarCreature2.setX(healthPaneCreatureScaler() / 2);
+            hpBarCreature3.setScaleX(healthPaneCreatureScaler());
+            hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
+            hpBarCreature4.setScaleX(healthPaneCreatureScaler());
+            hpBarCreature4.setX(healthPaneCreatureScaler() / 2);
+        } catch (Exception ex) {
+            System.out.println("Mer än fler enemys : Error :");
+        }
+    }
+
     public void whatHeroToLoad() {
 
         if (HeroDataStorage.getInstance().getHero().getHeroType() == 1) {
@@ -491,9 +505,7 @@ public class FightController implements Initializable {
             if (attackOrder.get(0).equals("Hero") && combatMessage1.getText().equals("") && specialAttack == 0) {
                 selectEnemyToAttack();
                 heroAttack();
-
                 damageLabelCheckEnemy();
-
                 KillEnemyDisplay();
                 healthPaneScaleInGame();
                 checkIfEnemyIsDead();
@@ -514,6 +526,15 @@ public class FightController implements Initializable {
         heroChar.heroAttack();
         System.out.println(attackOrder.size());
         System.out.println("Heron Lyckades Attakera");
+        
+        Random randSpecial = new Random();
+        
+        int value = randSpecial.nextInt(3) + 1;
+        if(value == 3){
+        
+            special.setVisible(true);
+        }
+        
     }
 
     public void KillEnemyDisplay() {
@@ -831,7 +852,7 @@ public class FightController implements Initializable {
     private void heroLevelUp() {
         HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
         HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
-        HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 20);
+        HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
 
@@ -877,8 +898,15 @@ public class FightController implements Initializable {
         TranslateTransition move
                 = new TranslateTransition(Duration.millis(1000), damageLabel);
 
+        Random randomXPos = new Random();
+        
+        int randomNumber = randomXPos.nextInt(15 + 15) - 15;
+        System.out.println(randomNumber);
+        
         move.setFromY(0);
         move.setToY(-20);
+        move.setFromX(0);
+        move.setToX(randomNumber);
         move.setCycleCount(1);
         move.play();
 
@@ -911,6 +939,26 @@ public class FightController implements Initializable {
 
         } else if (attackSelect.equals("3")) {
             damageLabel(creaturePane4);
+        }
+    }
+
+    public void damageLabelCheckEnemyAll() {
+
+        try {
+
+            if (FightDataStorage.getInstance().getEnemy1() != null) {
+                damageLabel(creaturePane2);
+            }
+
+            if (FightDataStorage.getInstance().getEnemy2() != null) {
+                damageLabel(creaturePane3);
+            }
+            if (FightDataStorage.getInstance().getEnemy3() != null) {
+                damageLabel(creaturePane4);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("test");
         }
     }
 
@@ -969,6 +1017,21 @@ public class FightController implements Initializable {
             Random rand = new Random();
             specialAttack = rand.nextInt(3) + 1;
 
+            System.out.println("You got attack " + specialAttack);
+            special.setVisible(false);
+            
+            if(specialAttack == 1){
+            
+                combatMessage1.setText("You got a strong attack");
+            }
+            else if(specialAttack == 2){
+            
+                combatMessage1.setText("You got a double attack");
+            }
+            else if(specialAttack == 3){
+            
+                combatMessage1.setText("You got a cleave attack");
+            }
         }
     }
 
@@ -977,7 +1040,7 @@ public class FightController implements Initializable {
         if (specialAttack == 1) {
             selectEnemyToAttack();
             System.out.println("Special Attack 1");
-            damageDisplay = heroChar.specialAttack2();
+            damageDisplay = heroChar.specialAttack1();
 
             damageLabelCheckEnemy();
             KillEnemyDisplay();
@@ -985,24 +1048,19 @@ public class FightController implements Initializable {
             checkIfEnemyIsDead();
             attackOrder.remove(0);
             specialAttack = 0;
+           
+            
         } else if (specialAttack == 2) {
 
             selectEnemyToAttack();
-            System.out.println("Special Attack 2");
+            System.out.println("Special Attack 2 1/2");
             damageDisplay = heroChar.specialAttack2(); //2x
-
             damageLabelCheckEnemy();
-            KillEnemyDisplay();
-            healthPaneScaleInGame();
-            checkIfEnemyIsDead();
-            attackOrder.remove(0);
-            specialAttack = 0;
 
-            selectEnemyToAttack();
-            System.out.println("Special Attack 2");
+            System.out.println("Special Attack 2 2/2");
             damageDisplay = heroChar.specialAttack2(); //2x
-
             damageLabelCheckEnemy();
+
             KillEnemyDisplay();
             healthPaneScaleInGame();
             checkIfEnemyIsDead();
@@ -1013,11 +1071,11 @@ public class FightController implements Initializable {
 
             selectEnemyToAttack();
             System.out.println("Special Attack 3");
-            damageDisplay = heroChar.specialAttack2();
+            damageDisplay = heroChar.specialAttack3();
 
-            damageLabelCheckEnemy();
+            damageLabelCheckEnemyAll();
             KillEnemyDisplay();
-            healthPaneScaleInGame();
+            healthPaneScaleInGameUpdateAll();
             checkIfEnemyIsDead();
             attackOrder.remove(0);
             specialAttack = 0;
