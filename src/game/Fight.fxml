@@ -20,7 +20,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Hyypes/Desktop/Spel-master/src/game/Recourses/CityButton.png" />
+                  <Image url="@Recourses/CityButton.png" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -68,7 +68,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Hyypes/Desktop/Spel-master/src/game/Recourses/FightAgain.png" />
+                  <Image url="@Recourses/FightAgain.png" />
                </source>
             </ImageInput>
          </effect>
@@ -77,10 +77,11 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Hyypes/Desktop/Spel-master/src/game/Recourses/Revive.png" />
+                  <Image url="@Recourses/Revive.png" />
                </source>
             </ImageInput>
          </effect>
       </Button>
+      <Button fx:id="special" layoutX="339.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleSpecialAttack" text="Special Attack" />
     </children>
 </AnchorPane>

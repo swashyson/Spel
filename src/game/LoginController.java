@@ -39,6 +39,10 @@ public class LoginController implements Initializable {
     @FXML
     private Button forgot;
     @FXML
+    private Button settings;
+    @FXML
+    private Button exit;
+    @FXML
     private TextField name;
     @FXML
     private TextField password;
@@ -124,6 +128,10 @@ public class LoginController implements Initializable {
         HoverMouse.getInstance().outHover(login);
         HoverMouse.getInstance().inHover(forgot);
         HoverMouse.getInstance().outHover(forgot);
+        HoverMouse.getInstance().inHover(settings);
+        HoverMouse.getInstance().outHover(settings);
+        HoverMouse.getInstance().inHover(exit);
+        HoverMouse.getInstance().outHover(exit);
 
         HoverMouse.getInstance().ClickEffect(login);
 
@@ -134,17 +142,16 @@ public class LoginController implements Initializable {
         ConfigFile CF = new ConfigFile();
         CF.readConfigFile();
 
-        
     }
-    public void openHelpFile(){
-        try{
-        String fullPath = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
-        String[] path = fullPath.split("dist");
-        File file = new File(path[0]+"src/game/helpFile/helpFile.pdf");
-        Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
-        }
-        catch(Exception ex){
-            fel.setText("Could not load help file" );
+
+    public void openHelpFile() {
+        try {
+            String fullPath = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+            String[] path = fullPath.split("dist");
+            File file = new File(path[0] + "src/game/helpFile/helpFile.pdf");
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
+        } catch (Exception ex) {
+            fel.setText("Could not load help file");
             ex.printStackTrace();
         }
     }
