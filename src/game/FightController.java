@@ -182,6 +182,7 @@ public class FightController implements Initializable {
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
+        soundManager.stopTheSound();
         soundManager.defineSound(fightBackgroundSound);;
 
     }
@@ -592,6 +593,8 @@ public class FightController implements Initializable {
 
             HeroDataStorage.getInstance().getHero().setGold(getGoldLost());
             System.out.println("You're dead mofo");
+            
+            soundManager.defineSound(heroDeath);
 
         }
     }
@@ -789,7 +792,7 @@ public class FightController implements Initializable {
     public void victory() {
 
         soundManager.stopTheSound();
-        soundManager.defineSound(heroHurt);
+        soundManager.defineSound(applause);
         soundManager.randomizeSounds(victory, 0);
         
         fightAgain.setVisible(true);
