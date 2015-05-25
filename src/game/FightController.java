@@ -114,8 +114,7 @@ public class FightController implements Initializable {
     private String heroDeath = "heroDeath";
     private String enemyDeath = "enemy_death";
     private String victory = "victory";
-
-    private int specialAttack = 0;
+    private String applause = "applause";
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -143,10 +142,9 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if (soundManager.getSoundOn() == true) {
-            soundManager.stopTheSound();
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.stopTheSound();
+        soundManager.defineSound(buttonClick);
+
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(1);
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
@@ -162,10 +160,8 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if (soundManager.getSoundOn() == true) {
-            soundManager.stopTheSound();
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.stopTheSound();
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
@@ -792,6 +788,10 @@ public class FightController implements Initializable {
 
     public void victory() {
 
+        soundManager.stopTheSound();
+        soundManager.defineSound(heroHurt);
+        soundManager.randomizeSounds(victory, 0);
+        
         fightAgain.setVisible(true);
         backToCity.setVisible(true);
         victoryPicture.setVisible(true);
