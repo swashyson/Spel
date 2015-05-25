@@ -131,7 +131,7 @@ public class SoundManager {
                 System.out.println("played " + sound);
                 playShortSound();
             } else if (sound == "applause" && soundOn == true) {
-                defineShortSoundFile = new Media(getClass().getResource("sounds/applause.mp3").toString());
+                defineBackgroundSoundFile = new Media(getClass().getResource("sounds/applause.mp3").toString());
                 System.out.println("played " + sound);
                 playBackgroundSound();
             }
