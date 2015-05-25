@@ -423,6 +423,18 @@ public class FightController implements Initializable {
         return 0;
     }
 
+    public int healthPaneCreatureScalerUpdateAll(int enemyHp, int enemyMaxHP) {
+
+        int hp = enemyHp;
+        int maxHp = enemyMaxHP;
+        int maxImageView = 50;
+        int calculate;
+
+        calculate = (hp * maxImageView) / maxHp;
+
+        return calculate;
+    }
+
     public void healthPaneScaleInGame() {
 
         try {
@@ -449,12 +461,12 @@ public class FightController implements Initializable {
     public void healthPaneScaleInGameUpdateAll() {
 
         try {
-            hpBarCreature2.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature2.setX(healthPaneCreatureScaler() / 2);
-            hpBarCreature3.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
-            hpBarCreature4.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature4.setX(healthPaneCreatureScaler() / 2);
+            hpBarCreature2.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy1().getHp(), FightDataStorage.getInstance().getEnemy1().getMaxHp()));
+            hpBarCreature2.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy1().getHp(), FightDataStorage.getInstance().getEnemy1().getMaxHp()) / 2);
+            hpBarCreature3.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy2().getHp(), FightDataStorage.getInstance().getEnemy2().getMaxHp()));
+            hpBarCreature3.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy2().getHp(), FightDataStorage.getInstance().getEnemy2().getMaxHp()) / 2);
+            hpBarCreature4.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy3().getHp(), FightDataStorage.getInstance().getEnemy3().getMaxHp()));
+            hpBarCreature4.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy3().getHp(), FightDataStorage.getInstance().getEnemy3().getMaxHp()) / 2);
         } catch (Exception ex) {
             System.out.println("Mer än fler enemys : Error :");
         }
@@ -636,8 +648,8 @@ public class FightController implements Initializable {
 
     public void calculateAttackOrder() {
 
-        int heroSpeed = heroChar.getSpeed();
-        int heroStartSpeed = heroChar.getSpeed();
+        int heroWeaponSpeed = 0;
+        int heroArmorSpeed = 0;
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
@@ -645,6 +657,17 @@ public class FightController implements Initializable {
         int enemy2StartSpeed = 0;
         int enemy3Speed = 0;
         int enemy3StartSpeed = 0;
+
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
+            heroWeaponSpeed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
+        }
+        if (HeroDataStorage.getInstance().getArmor() != null) {
+            heroArmorSpeed = HeroDataStorage.getInstance().getArmor().getArmorSpeed();
+        }
+
+        int heroSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+        int heroStartSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+
         if (FightDataStorage.getInstance().getEnemy2() != null) {
             enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
             enemy2StartSpeed = FightDataStorage.getInstance().getEnemy2().getSpeed();
@@ -795,7 +818,6 @@ public class FightController implements Initializable {
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
-            
 
         } else if (enemyType.equals(enemy2)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
@@ -972,14 +994,14 @@ public class FightController implements Initializable {
 
         try {
 
-            if (FightDataStorage.getInstance().getEnemy1() != null) {
+            if (FightDataStorage.getInstance().getEnemy1() != null && creaturePane2.isVisible() == true) {
                 damageLabel(creaturePane2);
             }
 
-            if (FightDataStorage.getInstance().getEnemy2() != null) {
+            if (FightDataStorage.getInstance().getEnemy2() != null && creaturePane3.isVisible() == true) {
                 damageLabel(creaturePane3);
             }
-            if (FightDataStorage.getInstance().getEnemy3() != null) {
+            if (FightDataStorage.getInstance().getEnemy3() != null && creaturePane4.isVisible() == true) {
                 damageLabel(creaturePane4);
             }
 
