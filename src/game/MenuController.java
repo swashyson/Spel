@@ -5,6 +5,7 @@
  */
 package game;
 
+import DataStorage.HeroDataStorage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -48,6 +49,7 @@ public class MenuController implements Initializable {
         soundManager.defineSound(buttonClick);
 
         DBConnect.saveToDB();
+        HeroDataStorage.getInstance().setHero(null);
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 
@@ -68,6 +70,7 @@ public class MenuController implements Initializable {
         soundManager.defineSound(buttonClick);
 
         DBConnect.saveToDB();
+        HeroDataStorage.getInstance().setHero(null);
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ViewChar");
 
