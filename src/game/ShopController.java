@@ -71,16 +71,12 @@ public class ShopController implements Initializable {
     private String errorSound = "error";
     private String buttonClick = "button_click";
     private String entranceSound = "entrance";
-    
-    private ConfigFile config = new ConfigFile();
 
     @FXML
     public void goToCity(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
@@ -106,11 +102,9 @@ public class ShopController implements Initializable {
         } else if (getclass == 3) {
             spawnItems("Staff1", "Staff2", "Staff3", "Armor1O", "Armor2O", "Armor3O");
         }
-        
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(entranceSound);
-        }
-        
+
+        soundManager.defineShortSound(entranceSound);
+
     }
 
     public void spawnItems(String itemName1, String itemName2, String itemName3, String itemName4, String itemName5, String itemName6) {
@@ -168,9 +162,7 @@ public class ShopController implements Initializable {
                     setWeaponToHero(weaponList.get(0));
                     removeWeapon(button, button, button, buttonID);
 
-                    if (config.getSound() == 1) {
-                        soundManager.defineShortSound(purchaseSound);
-                    }
+                    soundManager.defineShortSound(purchaseSound);
 
                 } else if (buttonID == 2 && levelReq(weaponList.get(1).getWeaponLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= weaponList.get(0).getWeaponGold()) {
                     //tar väck guld
@@ -180,9 +172,7 @@ public class ShopController implements Initializable {
                     removeWeapon(button, button, button, buttonID);
                     removeWeaponRequest();
 
-                    if (config.getSound() == 1) {
-                        soundManager.defineShortSound(purchaseSound);
-                    }
+                    soundManager.defineShortSound(purchaseSound);
 
                 } else if (buttonID == 3 && levelReq(weaponList.get(2).getWeaponLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= weaponList.get(0).getWeaponGold()) {
                     //tar väck guld
@@ -192,9 +182,7 @@ public class ShopController implements Initializable {
                     removeWeapon(button, button, button, buttonID);
                     removeWeaponRequest();
 
-                    if (config.getSound() == 1) {
-                        soundManager.defineShortSound(purchaseSound);
-                    }
+                    soundManager.defineShortSound(purchaseSound);
 
                 } else {
 
@@ -242,9 +230,7 @@ public class ShopController implements Initializable {
                     setArmorToHero(armorList.get(0));
                     removeArmor(button, button, button, buttonID);
 
-                    if (config.getSound() == 1) {
-                        soundManager.defineShortSound(purchaseSound);
-                    }
+                    soundManager.defineShortSound(purchaseSound);
 
                 } else if (buttonID == 5 && levelReq(armorList.get(1).getArmorLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= armorList.get(1).getArmorGold()) {
                     //tar väck guld 
@@ -254,9 +240,7 @@ public class ShopController implements Initializable {
                     removeArmor(button, button, button, buttonID);
                     removeArmorRequest();
 
-                    if (config.getSound() == 1) {
-                        soundManager.defineShortSound(purchaseSound);
-                    }
+                    soundManager.defineShortSound(purchaseSound);
 
                 } else if (buttonID == 6 && levelReq(armorList.get(2).getArmorLevel()) == true && HeroDataStorage.getInstance().getHero().getGold() >= armorList.get(0).getArmorGold()) {
                     //tar väck guld 
@@ -266,16 +250,13 @@ public class ShopController implements Initializable {
                     removeArmor(button, button, button, buttonID);
                     removeArmorRequest();
 
-                    if (config.getSound() == 1) {
-                        soundManager.defineShortSound(purchaseSound);
-                    }
+                    soundManager.defineShortSound(purchaseSound);
 
                 } else {
 
                     System.out.println("Not enough gold or experience.");
-                    if(config.getSound() == 1){
-                        soundManager.defineShortSound(errorSound);
-                    }
+
+                    soundManager.defineShortSound(errorSound);
 
                     messageFade();
                 }

@@ -26,30 +26,29 @@ public class SoundManager {
 
     private MediaPlayer shortSound;
     private Media defineShortSoundFile;
-    
+
     private final ConfigFile cF = new ConfigFile();
 
     public void defineBackgroundSound(String newBackgroundSound) { //ha någon sorts input, string?
-        try{
-        cF.readConfigFile();
-        if(cF.getSound() == 1){// ha kvar???
-            soundOn = true;
-        }else if(cF.getSound() == 0) {
-            soundOn = false;
-        }
-        
-        if (newBackgroundSound == "Fight" && soundOn == true) {
-            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.wav").toString());
-            System.out.println("playing fighting sound");
-            playBackgroundSound();
-        } 
-        else if (newBackgroundSound == "City" && soundOn == true) {
-            defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
-            System.out.println("playing city sound");
-            playBackgroundSound();
-        }
-        }catch(Exception ex){
-            
+        try {
+            cF.readConfigFile();
+            if (cF.getSound() == 1) {// ha kvar???
+                soundOn = true;
+            } else if (cF.getSound() == 0) {
+                soundOn = false;
+            }
+
+            if (newBackgroundSound == "Fight" && soundOn == true) {
+                defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.wav").toString());
+                System.out.println("playing fighting sound");
+                playBackgroundSound();
+            } else if (newBackgroundSound == "City" && soundOn == true) {
+                defineBackgroundSoundFile = new Media(getClass().getResource("sounds/CitySound_ChirpingBirds.wav").toString());
+                System.out.println("playing city sound");
+                playBackgroundSound();
+            }
+        } catch (Exception ex) {
+
         }
     }
 
@@ -60,7 +59,8 @@ public class SoundManager {
             backgroundSound = new MediaPlayer(defineBackgroundSoundFile);
             backgroundSound.setCycleCount(MediaPlayer.INDEFINITE);
             backgroundSound.setVolume(0.5);
-            backgroundSound.setAutoPlay(true);
+//            backgroundSound.setAutoPlay(true);
+            backgroundSound.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,37 +68,56 @@ public class SoundManager {
 
     //stänger av bakgrundsljudet som spelas.
     public void stopTheSound() {
-            backgroundSound.stop();
+        backgroundSound.stop();
     }
 
     public void defineShortSound(String shortSound) {
 
-        //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
-        if (shortSound == "purchase" && soundOn == true) {
-            defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
-            System.out.println("played purchase sound");
-            playShortSound();
-        } else if (shortSound == "button_click" && soundOn == true) { // ska vi ha ljud till knapparna???
-            defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
-            playShortSound();
-        } else if (shortSound == "arrow_attack" && soundOn == true) {
-            defineShortSoundFile = new Media(getClass().getResource("sounds/ArrowDamage.wav").toString());
-            playShortSound();
-        } else if (shortSound == "bear_attack" && soundOn == true) {
-            defineShortSoundFile = new Media(getClass().getResource("sounds/BearAttack.wav").toString());
-            playShortSound();
-        } else if (shortSound == "snake_attack" && soundOn == true) {
-            defineShortSoundFile = new Media(getClass().getResource("sounds/HissingSnake.wav").toString());
-            playShortSound();
-        }else if (shortSound == "error" && soundOn == true){
-            defineShortSoundFile = new Media(getClass().getResource("sounds/error_sound.wav").toString());
-            playShortSound();
-        }else if (shortSound == "level_up" && soundOn == true){
-            defineShortSoundFile = new Media(getClass().getResource("sounds/level_up.wav").toString());
-            playShortSound();
-        }else if(shortSound == "entrance" && soundOn == true){
-            defineShortSoundFile = new Media(getClass().getResource("sounds/entranceBell.wav").toString());
-            playShortSound();
+        try {
+            cF.readConfigFile();
+            if (cF.getSound() == 1) {// ha kvar???
+                soundOn = true;
+            } else if (cF.getSound() == 0) {
+                soundOn = false;
+            }
+
+            //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
+            if (shortSound == "purchase" && soundOn == true) {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
+                System.out.println("played " + shortSound);
+                playShortSound();
+            } else if (shortSound == "button_click" && soundOn == true) { // ska vi ha ljud till knapparna???
+                defineShortSoundFile = new Media(getClass().getResource("sounds/buttonEffect.aif").toString());
+                System.out.println("played " + shortSound);
+                playShortSound();
+            } else if (shortSound == "arrow_attack" && soundOn == true) {
+                System.out.println("played " + shortSound);
+                defineShortSoundFile = new Media(getClass().getResource("sounds/ArrowDamage.wav").toString());
+                playShortSound();
+            } else if (shortSound == "bear_attack" && soundOn == true) {
+                System.out.println("played " + shortSound);
+                defineShortSoundFile = new Media(getClass().getResource("sounds/BearAttack.wav").toString());
+                playShortSound();
+            } else if (shortSound == "snake_attack" && soundOn == true) {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/HissingSnake.wav").toString());
+                System.out.println("played " + shortSound);
+                playShortSound();
+            } else if (shortSound == "error" && soundOn == true) {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/error_sound.wav").toString());
+                System.out.println("played " + shortSound);
+                playShortSound();
+            } else if (shortSound == "level_up" && soundOn == true) {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/level_up.wav").toString());
+                System.out.println("played " + shortSound);
+                playShortSound();
+            } else if (shortSound == "entrance" && soundOn == true) {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/entranceBell.wav").toString());
+                System.out.println("played " + shortSound);
+                playShortSound();
+            }
+
+        } catch (Exception ex) {
+
         }
 
     }
@@ -108,14 +127,15 @@ public class SoundManager {
         try {
             System.out.println(defineShortSoundFile);
             shortSound = new MediaPlayer(defineShortSoundFile);
-            shortSound.setVolume(0.5);
+            shortSound.setVolume(1.5);
             shortSound.setAutoPlay(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public boolean getSoundOn(){
+
+    public boolean getSoundOn() {
         return soundOn;
-    } 
+    }
 
 }

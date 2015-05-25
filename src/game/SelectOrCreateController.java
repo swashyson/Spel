@@ -30,7 +30,6 @@ public class SelectOrCreateController implements Initializable {
     private Button back;
 
     private SoundManager soundManager = new SoundManager();
-    private ConfigFile config = new ConfigFile();
 
     private String buttonClick = "button_click";
 
@@ -52,14 +51,17 @@ public class SelectOrCreateController implements Initializable {
 
         if (event.getSource().equals(create)) {
 
+            soundManager.defineShortSound(buttonClick);
             SC.change(event, "CharCreation");
 
         } else if (event.getSource().equals(choose)) {
 
+            soundManager.defineShortSound(buttonClick);
             SC.change(event, "ViewChar");
 
         } else if (event.getSource().equals(back)) {
 
+            soundManager.defineShortSound(buttonClick);
             SC.change(event, "Login");
 
         }

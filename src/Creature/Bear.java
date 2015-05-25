@@ -5,7 +5,9 @@
  */
 package Creature;
 
+import DataStorage.FightDataStorage;
 import DataStorage.HeroDataStorage;
+import Items.Armor;
 import java.util.Random;
 
 /**
@@ -18,8 +20,8 @@ public class Bear extends Enemy {
         this.name = name;
         this.hp = (hp * HeroDataStorage.getInstance().getHero().getLevel());
         this.maxHp = this.hp;
-        this.maxDamage = maxDamage*(HeroDataStorage.getInstance().getHero().getLevel());
-        this.minDamage = minDamage*(HeroDataStorage.getInstance().getHero().getLevel());
+        this.maxDamage = maxDamage * (HeroDataStorage.getInstance().getHero().getLevel());
+        this.minDamage = minDamage * (HeroDataStorage.getInstance().getHero().getLevel());
         this.speed = speed;
 
     }
@@ -33,7 +35,6 @@ public class Bear extends Enemy {
     protected void specialAttack2(Hero hero) {
 
     }
-
 
     @Override
     public int getMaxDmg() {
@@ -50,12 +51,27 @@ public class Bear extends Enemy {
         Random rand = new Random();
         int minDmg = this.minDamage;
         int maxDmg = this.maxDamage;
-        
+
         int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
 
-        System.out.println("Bear skadade dig med " + dmg);
-        
+        //System.out.println("Bear skadade dig med " + dmg);
         return dmg;
+    }
+
+    public int Attack(Armor armor) {
+
+        if (HeroDataStorage.getInstance().getArmor() == null) {
+
+            System.out.println("Hero har inget armor");
+        } else {
+
+            int armorValue = HeroDataStorage.getInstance().getArmor().getArmor();
+            int calculate = basicAttack() - armorValue* HeroDataStorage.getInstance().getHero().getLevel();
+            System.out.println("armorValue blockade " + armorValue* HeroDataStorage.getInstance().getHero().getLevel());
+            System.out.println("Bear skadade dig med " + calculate);
+            return calculate;
+        }
+        return basicAttack();
     }
 
 }

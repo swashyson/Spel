@@ -50,17 +50,14 @@ public class ViewCharController implements Initializable {
     private final int userID = HeroDataStorage.getInstance().getuserID();
 
     private SoundManager soundManager = new SoundManager();
-    private ConfigFile config = new ConfigFile();
 
     private String buttonClick = "button_click";
 
     @FXML
     public void back(ActionEvent event) {
-        
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+
+        soundManager.defineShortSound(buttonClick);
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "SelectOrCreate");
     }
@@ -123,11 +120,9 @@ public class ViewCharController implements Initializable {
 
     @FXML
     public void play(ActionEvent event) {
-        
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+
+        soundManager.defineShortSound(buttonClick);
+
         loadHero();
         loadEnemysToDataStorage();
         SwitchScene sc = new SwitchScene();
@@ -248,10 +243,8 @@ public class ViewCharController implements Initializable {
 
     public void remove() {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+
         try {
 
             DBConnect.connect();

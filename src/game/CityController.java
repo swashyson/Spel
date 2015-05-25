@@ -34,18 +34,16 @@ public class CityController implements Initializable {
 
     private int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
-    SoundManager soundManager = new SoundManager();
-    ConfigFile config = new ConfigFile();
-    
+    private SoundManager soundManager = new SoundManager();
+
     private String buttonClick = "button_click";
 
     @FXML
     public void goToMenu(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+        System.out.println("buttonclick");
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
 
@@ -55,43 +53,28 @@ public class CityController implements Initializable {
     @FXML
     public void goToInn(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
 
-        //soundManager.stopTheSound();
     }
 
     @FXML
     public void goToFight(ActionEvent event) {
 
-//        if (cf.getSound() == 1) {
-//            soundManager.stopTheSound("City");
-        
-//            soundManager.stopTheSound("City");
-//            System.out.println("stopped backgroundsound - chirping birds - citycontroller");
-//        }       
-        
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
-
 
     }
 
     @FXML
     public void goToShop(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineShortSound(buttonClick);
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
 
@@ -121,7 +104,6 @@ public class CityController implements Initializable {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
     }
 
     public void warrior() {
