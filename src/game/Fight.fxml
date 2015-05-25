@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.FightController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/Fightscene.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="backToCity" layoutX="452.0" layoutY="538.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="30.0" prefWidth="111.0" visible="false">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/CityButton.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <ImageView fx:id="XP" fitHeight="11.0" fitWidth="1.0" layoutX="17.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/1XP.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="800.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/XpBAR.png" />
+            </image>
+        </ImageView>
+      <Label fx:id="levelLabel" alignment="CENTER" layoutX="323.0" layoutY="578.0" prefHeight="17.0" prefWidth="177.0" text="Your level is :" textAlignment="CENTER" textFill="WHITE">
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="combatMessage1" alignment="CENTER" layoutX="254.0" layoutY="328.0" prefHeight="52.0" prefWidth="295.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="defeatPicture" fitHeight="301.0" fitWidth="558.0" layoutX="201.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Recourses/Defeated.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="victoryPicture" fitHeight="301.0" fitWidth="659.0" layoutX="201.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Recourses/Victory.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="combatMessage2" alignment="CENTER" layoutX="254.0" layoutY="380.0" prefHeight="52.0" prefWidth="295.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="combatMessage3" alignment="CENTER" layoutX="253.0" layoutY="338.0" prefHeight="52.0" prefWidth="295.0" textAlignment="CENTER" textFill="WHITE" visible="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="fightAgain" layoutX="181.0" layoutY="538.0" mnemonicParsing="false" onAction="#fightAgain" prefHeight="30.0" prefWidth="219.0" visible="false">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/FightAgain.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="revive" layoutX="356.0" layoutY="538.0" mnemonicParsing="false" onAction="#revive" prefHeight="30.0" prefWidth="111.0" visible="false">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Revive.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="special" layoutX="339.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleSpecialAttack" text="Special Attack" />
+    </children>
+</AnchorPane>
