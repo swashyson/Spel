@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.MenuController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/Inn.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="backToCity" layoutX="345.0" layoutY="171.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="25.0" prefWidth="112.0" text="City">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/CityButton.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <Button fx:id="changeCharacter" layoutX="294.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToCharacter" prefHeight="25.0" prefWidth="221.0" text="Change char">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/ChangeChar.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+        <Button fx:id="logout" layoutX="348.0" layoutY="373.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="112.0" text="Logout">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Logout.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+      <Button fx:id="settings" layoutX="348.0" layoutY="463.0" mnemonicParsing="false" onAction="#settings" prefHeight="25.0" prefWidth="112.0" text="Settings">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Settings.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
+    </children>
+</AnchorPane>
