@@ -51,17 +51,17 @@ public class SelectOrCreateController implements Initializable {
 
         if (event.getSource().equals(create)) {
 
-            soundManager.defineShortSound(buttonClick);
+            soundManager.defineSound(buttonClick);
             SC.change(event, "CharCreation");
 
         } else if (event.getSource().equals(choose)) {
 
-            soundManager.defineShortSound(buttonClick);
+            soundManager.defineSound(buttonClick);
             SC.change(event, "ViewChar");
 
         } else if (event.getSource().equals(back)) {
 
-            soundManager.defineShortSound(buttonClick);
+            soundManager.defineSound(buttonClick);
             SC.change(event, "Login");
 
         }

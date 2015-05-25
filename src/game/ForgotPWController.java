@@ -52,10 +52,8 @@ public class ForgotPWController implements Initializable {
     @FXML
     public void getQuestion(ActionEvent event) throws Exception {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineSound(buttonClick);
+
         DBConnect.connect();
 
         ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName = '" + username.getText() + "'");
@@ -77,11 +75,9 @@ public class ForgotPWController implements Initializable {
 
     // Second return button
     public void getPassword(ActionEvent event) throws Exception {
-        
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+
+        soundManager.defineSound(buttonClick);
+
         DBConnect.connect();
         ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName = '" + username.getText() + "'");
         while (rs.next()) {
@@ -107,10 +103,8 @@ public class ForgotPWController implements Initializable {
     //BACK TO LOGIN
     public void back(ActionEvent event) {
 
-        if(config.getSound() == 1){
-            soundManager.defineShortSound(buttonClick);
-        }
-        
+        soundManager.defineSound(buttonClick);
+
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 

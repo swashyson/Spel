@@ -109,6 +109,12 @@ public class FightController implements Initializable {
     private String fightBackgroundSound = "Fight";
     private String levelUpSound = "level_up";
     private String buttonClick = "button_click";
+    private String heroAttacking = "hero_attacking";
+    private String heroHurt = "hero_being_hit";
+    private String heroDeath = "heroDeath";
+    private String enemyDeath = "enemy_death";
+    private String victory = "victory";
+    private String applause = "applause";
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -119,10 +125,8 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if (soundManager.getSoundOn() == true) {
-            soundManager.stopTheSound();
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.stopTheSound();
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -138,10 +142,9 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if (soundManager.getSoundOn() == true) {
-            soundManager.stopTheSound();
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.stopTheSound();
+        soundManager.defineSound(buttonClick);
+
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(1);
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
@@ -157,10 +160,8 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        if (soundManager.getSoundOn() == true) {
-            soundManager.stopTheSound();
-            soundManager.defineShortSound(buttonClick);
-        }
+        soundManager.stopTheSound();
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
@@ -181,7 +182,8 @@ public class FightController implements Initializable {
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
-        soundManager.defineBackgroundSound(fightBackgroundSound);;
+        soundManager.stopTheSound();
+        soundManager.defineSound(fightBackgroundSound);;
 
     }
 
@@ -535,6 +537,8 @@ public class FightController implements Initializable {
             special.setVisible(true);
         }
         
+        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
+//        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
     }
 
     public void KillEnemyDisplay() {
@@ -546,6 +550,7 @@ public class FightController implements Initializable {
                 if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
 
                     creaturePane2.setVisible(false);
+
                 }
                 if (FightDataStorage.getInstance().getEnemy2().getHp() <= 0) {
 
@@ -609,6 +614,8 @@ public class FightController implements Initializable {
 
             HeroDataStorage.getInstance().getHero().setGold(getGoldLost());
             System.out.println("You're dead mofo");
+            
+            soundManager.defineSound(heroDeath);
 
         }
     }
@@ -805,6 +812,10 @@ public class FightController implements Initializable {
 
     public void victory() {
 
+        soundManager.stopTheSound();
+        soundManager.defineSound(applause);
+        soundManager.randomizeSounds(victory, 0);
+        
         fightAgain.setVisible(true);
         backToCity.setVisible(true);
         victoryPicture.setVisible(true);
@@ -856,9 +867,8 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
 
-        if (config.getSound() == 1) {
-            soundManager.defineShortSound(levelUpSound);
-        }
+        soundManager.defineSound(levelUpSound);
+
     }
 
     public void damageLabel(AnchorPane creaturePane) {

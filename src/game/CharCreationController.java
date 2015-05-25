@@ -49,7 +49,7 @@ public class CharCreationController implements Initializable {
     @FXML
     public void back(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "SelectOrCreate");
@@ -64,7 +64,7 @@ public class CharCreationController implements Initializable {
             HoverMouse.getInstance().outClick(hero3);
             type = 1;
 
-            soundManager.defineShortSound(buttonClick);
+            soundManager.defineSound(buttonClick);
 
         } else if (event.getSource().equals(hero2)) {
             HoverMouse.getInstance().inClick(hero2);
@@ -72,7 +72,7 @@ public class CharCreationController implements Initializable {
             HoverMouse.getInstance().outClick(hero3);
             type = 2;
 
-            soundManager.defineShortSound(buttonClick);
+            soundManager.defineSound(buttonClick);
 
         } else if (event.getSource().equals(hero3)) {
             HoverMouse.getInstance().inClick(hero3);
@@ -80,14 +80,14 @@ public class CharCreationController implements Initializable {
             HoverMouse.getInstance().outClick(hero1);
             type = 3;
 
-            soundManager.defineShortSound(buttonClick);
+            soundManager.defineSound(buttonClick);
 
         }
     }
 
     public void Create(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         try {
             DBConnect.connect();
