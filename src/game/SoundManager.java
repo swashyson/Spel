@@ -38,18 +38,18 @@ public class SoundManager {
     private String[] enemyDeath = {"itsgone"};
     private String[] innKeeperComments = {};
     private String[] innSound = {"snoring", "inn_ambience"};
-    
+
     private Random random = new Random();
     private int soundToPlay;
 
+    
+    // Every sound in the game is defined here, from background sounds to shorter sounds
     public void defineSound(String sound) {
-//    public void defineShortSound(String sound) {
 
         try {
 
             readTheConfigFile();
 
-            //lägg till referenser till annat som också använder korta ljud, till exempel bear, scorpion mm
             if (sound == "Fight" && soundOn == true) {
                 defineBackgroundSoundFile = new Media(getClass().getResource("sounds/FightingSound.mp3").toString());
                 System.out.println("playing " + sound);
@@ -66,7 +66,7 @@ public class SoundManager {
                 defineBackgroundSoundFile = new Media(getClass().getResource("sounds/snoring.mp3").toString());
                 System.out.println("playing " + sound);
                 playBackgroundSound();
-            }else if (sound == "purchase" && soundOn == true) {
+            } else if (sound == "purchase" && soundOn == true) {
                 defineShortSoundFile = new Media(getClass().getResource("sounds/purchaseItem.mp3").toString());
                 System.out.println("played " + sound);
                 playShortSound();
@@ -137,8 +137,9 @@ public class SoundManager {
 
     }
 
+    //Randomizes the sounds in the global arrays defined at the top
     public void randomizeSounds(String soundsToRandomize, int heroType) {
-        //using references to the herotype here (1-3 for the specific class) is for being 
+        //The method is using references to the herotype (1-3 for the specific class), that is to be 
         //able to play the correct sounds for each herotype in the fight
         //since there is sounds applying to every herotype, 0 is used for putting it to all of them
         try {
@@ -174,7 +175,7 @@ public class SoundManager {
                     defineSound(victory[1]);
                     System.out.println("played " + victory[1]);
                 }
-            }else if (soundsToRandomize == "inn" && soundOn == true && heroType == 0) {
+            } else if (soundsToRandomize == "inn" && soundOn == true && heroType == 0) {
                 soundToPlay = random.nextInt(2);
                 System.out.println(soundToPlay);
                 if (soundToPlay == 0) {
@@ -191,7 +192,7 @@ public class SoundManager {
 
     }
 
-    //Spelar upp ett kort ljud utan att loopa det
+    //All defined short sounds uses this method to play once
     private void playShortSound() {
         try {
             System.out.println(defineShortSoundFile);
@@ -203,7 +204,7 @@ public class SoundManager {
         }
     }
 
-    //Spelar upp själva ljudet och loopar det med ungefär 1 sekund innan den startar om.
+    //All defined background sounds uses this method for looping the sound until it is stopped
     private void playBackgroundSound() {
         try {
             System.out.println(defineBackgroundSoundFile);
@@ -217,7 +218,7 @@ public class SoundManager {
         }
     }
 
-    //stänger av bakgrundsljudet som spelas.
+    //This method turns off the sound, whatever sound it is that is playing
     public void stopTheSound() {
         if (soundOn == true) {
             backgroundSound.stop();
