@@ -130,6 +130,10 @@ public class SoundManager {
                 defineShortSoundFile = new Media(getClass().getResource("sounds/hero_hit_2.mp3").toString());
                 System.out.println("played " + sound);
                 playShortSound();
+            } else if (sound == "applause" && soundOn == true) {
+                defineShortSoundFile = new Media(getClass().getResource("sounds/applause.mp3").toString());
+                System.out.println("played " + sound);
+                playBackgroundSound();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
