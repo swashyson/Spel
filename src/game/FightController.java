@@ -58,6 +58,12 @@ public class FightController implements Initializable {
     @FXML
     private ImageView defeatPicture;
     @FXML
+    private ImageView forestFight;
+    @FXML
+    private ImageView desertFight;
+    @FXML
+    private ImageView mountainsFight;
+    @FXML
     private AnchorPane pane;
     @FXML
     private Label levelLabel;
@@ -78,6 +84,7 @@ public class FightController implements Initializable {
     private Snake snake;
     private Spider spider;
     private Wolf wolf;
+
     private AnchorPane creaturePane1 = new AnchorPane();
     private AnchorPane creaturePane2 = new AnchorPane();
     private AnchorPane creaturePane3 = new AnchorPane();
@@ -95,6 +102,7 @@ public class FightController implements Initializable {
     private int goldLost;
     private Timeline timeline;
     private int numberCreature;
+    private int backGroundPicture;
 
     private String[] enemyValue;
 
@@ -170,7 +178,7 @@ public class FightController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        changeBackGround();
         worldTime();
         loadEnemyStatsFromDataStorage();
         loadHeroStatsFromDataStorage();
@@ -179,11 +187,17 @@ public class FightController implements Initializable {
         createEnemy();
         calculateAttackOrder();
         selectEnemy();
+        HoverMouse.getInstance().inHover(revive);
+        HoverMouse.getInstance().outHover(revive);
+        HoverMouse.getInstance().inHover(fightAgain);
+        HoverMouse.getInstance().outHover(fightAgain);
+        HoverMouse.getInstance().inHover(backToCity);
+        HoverMouse.getInstance().outHover(backToCity);
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
         soundManager.stopTheSound();
-        soundManager.defineSound(fightBackgroundSound);;
+        soundManager.defineSound(fightBackgroundSound);
 
     }
 
@@ -197,7 +211,7 @@ public class FightController implements Initializable {
 
         XP.setScaleX((HeroDataStorage.getInstance().getHero().getEXP() * maxXpWidth) / heroExpToLevel);
         XP.setX(XP.getScaleX() / 2);
-        levelLabel.setText("You´r level are " + HeroDataStorage.getInstance().getHero().getLevel());
+        levelLabel.setText("Your level is " + HeroDataStorage.getInstance().getHero().getLevel());
 
         if (currentXP >= heroExpToLevel) {
             heroLevelUp();
@@ -1103,4 +1117,17 @@ public class FightController implements Initializable {
         }
     }
 
+    private void changeBackGround() {
+        Random random = new Random();
+        backGroundPicture = random.nextInt(3);
+
+        if (backGroundPicture == 0) {
+            forestFight.setVisible(true);
+        } else if (backGroundPicture == 1) {
+            mountainsFight.setVisible(true);
+        } else if (backGroundPicture == 2) {
+            desertFight.setVisible(true);
+        }
+
+    }
 }

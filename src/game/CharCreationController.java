@@ -88,31 +88,34 @@ public class CharCreationController implements Initializable {
     public void Create(ActionEvent event) {
 
         soundManager.defineSound(buttonClick);
+        if (name.getText().equals("")) {
+            fel.setText("You need to enter a name");
+        } else {
+            try {
+                DBConnect.connect();
 
-        try {
-            DBConnect.connect();
+                int userID = HeroDataStorage.getInstance().getuserID();
 
-            int userID = HeroDataStorage.getInstance().getuserID();
+                ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
 
-            ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
+                if (rs.next()) {
 
-            if (rs.next()) {
+                    fel.setText("You already have a hero by this name");
+                } else {
 
-                fel.setText("You already have a hero by this name");
-            } else {
+                    DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                            + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2')", fel, "hej");
+                    System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
+                            + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2' )");
 
-                DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2')", fel, "hej");
-                System.out.println("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
-                        + " VALUES ( '" + name.getText() + "', '" + type + "', '" + userID + "', '1', '0', '10', '0', '10', '5', '2' )");
-
-                SwitchScene sc = new SwitchScene();
-                sc.change(event, "ViewChar");
+                    SwitchScene sc = new SwitchScene();
+                    sc.change(event, "ViewChar");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                DBConnect.close();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            DBConnect.close();
         }
     }
 
