@@ -56,7 +56,7 @@ public class ViewCharController implements Initializable {
     @FXML
     public void back(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "SelectOrCreate");
@@ -121,7 +121,7 @@ public class ViewCharController implements Initializable {
     @FXML
     public void play(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         loadHero();
         loadEnemysToDataStorage();
@@ -243,7 +243,7 @@ public class ViewCharController implements Initializable {
 
     public void remove() {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         try {
 

@@ -88,6 +88,11 @@ public class FightController implements Initializable {
     private String fightBackgroundSound = "Fight";
     private String levelUpSound = "level_up";
     private String buttonClick = "button_click";
+    private String heroAttacking = "hero_attacking";
+    private String heroHurt = "hero_being_hit";
+    private String heroDeath = "heroDeath";
+    private String enemyDeath = "enemy_death";
+    private String victory = "victory";
 
     private int specialAttack = 0;
 
@@ -101,7 +106,7 @@ public class FightController implements Initializable {
         attackSelect = null;
 
         soundManager.stopTheSound();
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -122,7 +127,7 @@ public class FightController implements Initializable {
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
-        soundManager.defineBackgroundSound(fightBackgroundSound);;
+        soundManager.defineSound(fightBackgroundSound);;
 
     }
 
@@ -452,6 +457,8 @@ public class FightController implements Initializable {
         heroChar.heroAttack();
         System.out.println(attackOrder.size());
         System.out.println("Heron Lyckades Attakera");
+        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
+//        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
     }
 
     public void KillEnemyDisplay() {
@@ -463,6 +470,7 @@ public class FightController implements Initializable {
                 if (DataStorage.FightDataStorage.getInstance().getEnemy1().getHp() <= 0) {
 
                     creaturePane2.setVisible(false);
+
                 }
                 if (FightDataStorage.getInstance().getEnemy2().getHp() <= 0) {
 
@@ -521,6 +529,9 @@ public class FightController implements Initializable {
             creaturePane1.setVisible(false);
             stopWorldTime();
             System.out.println("You dead mofo");
+
+            soundManager.defineSound(heroDeath);
+
         }
     }
 
@@ -732,6 +743,7 @@ public class FightController implements Initializable {
         XPBAR();
         getGold();
         System.err.println(HeroDataStorage.getInstance().getHero().getGold());
+        soundManager.randomizeSounds(victory, 0);
     }
 
     public void getGold() {  // for guld efter att man har dödat alla enemys
@@ -746,7 +758,7 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
 
-        soundManager.defineShortSound(levelUpSound);
+        soundManager.defineSound(levelUpSound);
 
     }
 
@@ -894,11 +906,11 @@ public class FightController implements Initializable {
         } else if (specialAttack == 2) {
 
             System.out.println("Attack not implemented yet");
-            
+
         } else if (specialAttack == 3) {
 
             System.out.println("Attack not implemented yet");
-            
+
         }
     }
 

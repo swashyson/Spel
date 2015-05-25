@@ -74,7 +74,7 @@ public class CreateAccountController implements Initializable {
 
     public void create(ActionEvent event) {
         try{
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
         ResultSet rS ;
         DBConnect.connect();
         typeName = name.getText();
@@ -102,7 +102,7 @@ public class CreateAccountController implements Initializable {
 
     public void back(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
         System.out.println("buttonclick");
 
         SwitchScene sc = new SwitchScene();

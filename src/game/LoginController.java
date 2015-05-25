@@ -46,12 +46,12 @@ public class LoginController implements Initializable {
     SoundManager soundManager = new SoundManager();
 
     private String buttonClick = "button_click";
+    private String error = "error";
 
     @FXML
     public void logIn(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
-
+        
         try {
             DBConnect.connect();
             ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
@@ -66,12 +66,16 @@ public class LoginController implements Initializable {
 
                 HeroDataStorage.getInstance().setuserID(ID);
                 DBConnect.close();
+                
+                soundManager.defineSound(buttonClick);
             } else {
                 fel.setText("Wrong username/password");
                 FadeTransition ft = new FadeTransition(Duration.millis(4000), fel);
                 ft.setFromValue(1.0);
                 ft.setToValue(0. - 1);
                 ft.play();
+                
+                soundManager.defineSound(error);
             }
 
         } catch (Exception ex) {
@@ -82,7 +86,7 @@ public class LoginController implements Initializable {
     @FXML
     public void createAccount(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "CreateAccount");
@@ -91,7 +95,7 @@ public class LoginController implements Initializable {
     @FXML
     public void forgot(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ForgotPW");
@@ -101,7 +105,7 @@ public class LoginController implements Initializable {
     @FXML
     public void settings(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Settings");

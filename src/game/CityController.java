@@ -37,48 +37,53 @@ public class CityController implements Initializable {
     private SoundManager soundManager = new SoundManager();
 
     private String buttonClick = "button_click";
+    private String citySound = "City";
 
     @FXML
     public void goToMenu(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
         System.out.println("buttonclick");
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
 
-        //soundManager.stopTheSound();
+        soundManager.stopTheSound();
     }
 
     @FXML
     public void goToInn(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
 
+        soundManager.stopTheSound();
+        
     }
 
     @FXML
     public void goToFight(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
+        
+        soundManager.stopTheSound();
 
     }
 
     @FXML
     public void goToShop(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
 
-        //soundManager.stopTheSound();
+        soundManager.stopTheSound();
     }
 
     @Override
@@ -98,12 +103,8 @@ public class CityController implements Initializable {
         checkWeapon();
         checkArmor();
 
-//        try {
-//            soundManager.defineBackgroundSound("City");
-//            System.out.println("Started backgroundsound - chirping birds - city controller");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        soundManager.defineSound(citySound);
+
     }
 
     public void warrior() {
