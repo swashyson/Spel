@@ -42,15 +42,31 @@ public class FightController implements Initializable {
     @FXML
     private Button backToCity;
     @FXML
+    private Button fightAgain;
+    @FXML
+    private Button revive;
+    @FXML
+    private Button special;
+    @FXML
+    private Label experienceGained;
+    @FXML
+    private Label goldGained;
+    @FXML
     private ImageView XP;
+    @FXML
+    private ImageView victoryPicture;
+    @FXML
+    private ImageView defeatPicture;
     @FXML
     private AnchorPane pane;
     @FXML
     private Label levelLabel;
     @FXML
-    private Label fel;
+    private Label combatMessage1;
     @FXML
-    private Button special;
+    private Label combatMessage2;
+    @FXML
+    private Label combatMessage3;
 
     private int heroEXP;
     public int timerCounter = 0;
@@ -76,6 +92,7 @@ public class FightController implements Initializable {
     private ArrayList<String> attackOrder = new ArrayList();
     private int currentXP;
     private int heroExpToLevel;
+    private int goldLost;
     private Timeline timeline;
     private int numberCreature;
 
@@ -83,7 +100,11 @@ public class FightController implements Initializable {
 
     private int damageDisplay;
 
+    private int specialAttack = 0;
+
     private SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
+
+    private ConfigFile config = new ConfigFile();
 
     private String fightBackgroundSound = "Fight";
     private String levelUpSound = "level_up";
@@ -110,6 +131,44 @@ public class FightController implements Initializable {
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
+
+    }
+
+    @FXML
+    public void revive(ActionEvent event) {
+
+        stopWorldTime();
+        FightDataStorage.getInstance().setEnemy1(null);
+        FightDataStorage.getInstance().setEnemy2(null);
+        FightDataStorage.getInstance().setEnemy3(null);
+        attackSelect = null;
+
+        if (soundManager.getSoundOn() == true) {
+            soundManager.stopTheSound();
+            soundManager.defineShortSound(buttonClick);
+        }
+        HeroDataStorage.getInstance().getHero().setHeroCurrentHP(1);
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "InnScene");
+
+    }
+
+    @FXML
+    public void fightAgain(ActionEvent event) {
+
+        stopWorldTime();
+        FightDataStorage.getInstance().setEnemy1(null);
+        FightDataStorage.getInstance().setEnemy2(null);
+        FightDataStorage.getInstance().setEnemy3(null);
+        attackSelect = null;
+
+        if (soundManager.getSoundOn() == true) {
+            soundManager.stopTheSound();
+            soundManager.defineShortSound(buttonClick);
+        }
+
+        SwitchScene sc = new SwitchScene();
+        sc.change(event, "Fight");
 
     }
 
@@ -405,6 +464,7 @@ public class FightController implements Initializable {
     }
 
     public void worldTime() {
+
         timeline = new Timeline(new KeyFrame(
                 Duration.millis(2000),
                 ae -> handleWorldTime()));
@@ -433,16 +493,18 @@ public class FightController implements Initializable {
             pane3.blendModeProperty().set(BlendMode.SRC_OVER);
             pane4.blendModeProperty().set(BlendMode.SRC_OVER);
             attackSelect = pane.getId();
-            if (attackOrder.get(0).equals("Hero") && fel.getText().equals("") && specialAttack == 0) {
+            if (attackOrder.get(0).equals("Hero") && combatMessage1.getText().equals("") && specialAttack == 0) {
                 selectEnemyToAttack();
                 heroAttack();
+
                 damageLabelCheckEnemy();
+
                 KillEnemyDisplay();
                 healthPaneScaleInGame();
                 checkIfEnemyIsDead();
                 attackOrder.remove(0); // kolla om det är heros tur, ta väck honom i ordningen
 //                extendAttackOrder();
-            } else if (attackOrder.get(0).equals("Hero") && fel.getText().equals("") && specialAttack > 0) {
+            } else if (attackOrder.get(0).equals("Hero") && combatMessage1.getText().equals("") && specialAttack > 0) {
                 doSpecialAttack();
             } else {
                 System.out.println("Det är inte din tur idiot");
@@ -509,46 +571,39 @@ public class FightController implements Initializable {
 
             System.out.println("Victory");
             victory();
-            stopWorldTime();
         } else if (creaturePane2.isVisible() == false && creaturePane3.isVisible() == false && numberCreature == 2) {
 
             System.out.println("Victory");
             victory();
-            stopWorldTime();
         } else if (creaturePane2.isVisible() == false && numberCreature == 1) {
 
             System.out.println("Victory");
             victory();
-            stopWorldTime();
         }
     }
 
     public void killHero() {
         if (heroChar.getHeroCurrentHP() <= 0) {
 
-            creaturePane1.setVisible(false);
             stopWorldTime();
-            System.out.println("You dead mofo");
+            creaturePane1.setVisible(false);
+            defeatPicture.setVisible(true);
+            combatMessage1.setVisible(false);
 
-            soundManager.defineSound(heroDeath);
+            revive.setVisible(true);
+            combatMessage3.setVisible(true);
+            combatMessage3.setText("You lost : " + Integer.toString(getGoldLost()) + "gold");
+
+            HeroDataStorage.getInstance().getHero().setGold(getGoldLost());
+            System.out.println("You're dead mofo");
 
         }
     }
 
     public void calculateAttackOrder() {
 
-        int heroWeaponSpeed = 0;
-        int heroArmorSpeed = 0;
-
-        if (HeroDataStorage.getInstance().getWeapon() != null) {
-            heroWeaponSpeed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
-        }
-        if (HeroDataStorage.getInstance().getArmor() != null) {
-            heroArmorSpeed = HeroDataStorage.getInstance().getArmor().getArmorSpeed();
-        }
-
-        int heroSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
-        int heroStartSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+        int heroSpeed = heroChar.getSpeed();
+        int heroStartSpeed = heroChar.getSpeed();
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
@@ -607,21 +662,21 @@ public class FightController implements Initializable {
 
                 enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 1);
                 healthPaneScaleInGame();
-                fel.setText("Opponents turn");
+                combatMessage1.setText("Opponents turn");
 
             } else if (attackOrder.get(0).equals("Enemy2") && creaturePane3.isVisible() == true) {
 
                 enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 2);
                 healthPaneScaleInGame();
-                fel.setText("Opponents turn");
+                combatMessage1.setText("Opponents turn");
 
             } else if (attackOrder.get(0).equals("Enemy3") && creaturePane4.isVisible() == true) {
-
                 enemyAttack("Bear", "Scorpion", "Snake", "Spider", "Wolf", 3);
                 healthPaneScaleInGame();
-                fel.setText("Opponents turn");
+                combatMessage1.setText("Opponents turn");
+
             } else {
-                fel.setText("");
+                combatMessage1.setText("");
             }
         } catch (Exception ex) {
             System.err.println("ErrorCode 10293");
@@ -702,31 +757,31 @@ public class FightController implements Initializable {
 
         if (enemyType.equals(enemy1)) {
 
-            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().Attack(HeroDataStorage.getInstance().getArmor());
+            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy2)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
+            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy3)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().Attack(HeroDataStorage.getInstance().getArmor());
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy4)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().Attack(HeroDataStorage.getInstance().getArmor());
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
 
         } else if (enemyType.equals(enemy5)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().Attack(HeroDataStorage.getInstance().getArmor());
+            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
@@ -737,24 +792,54 @@ public class FightController implements Initializable {
 
     public void victory() {
 
-        int exp = numberCreature * 10;
+        fightAgain.setVisible(true);
+        backToCity.setVisible(true);
+        victoryPicture.setVisible(true);
 
-        HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + exp);
+        HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + expGain());
+        HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() + getGoldGained());
+
         XPBAR();
-        getGold();
-        System.err.println(HeroDataStorage.getInstance().getHero().getGold());
-        soundManager.randomizeSounds(victory, 0);
+
+        combatMessage1.setText("Exp gained: " + Integer.toString(expGain()));
+        combatMessage2.setText("Gold gained: " + Integer.toString(getGoldGained()));
+
+        stopWorldTime();
     }
 
-    public void getGold() {  // for guld efter att man har dödat alla enemys
-        int gold = numberCreature * 10 * HeroDataStorage.getInstance().getHero().getLevel();
-        HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() + gold);
+    public int expGain() {
+
+        int experienceGain = 0;
+
+        if (numberCreature == 1) {
+            experienceGain = 1 * 10;
+
+        } else if (numberCreature == 2) {
+            experienceGain = 2 * 15;
+
+        } else if (numberCreature == 3) {
+            experienceGain = 3 * 20;
+        }
+        return experienceGain;
+    }
+
+    public int getGoldGained() {  // for guld efter att man har dödat alla enemys
+
+        int goldGained = numberCreature * 10 * numberCreature;
+        return goldGained;
+
+    }
+
+    public int getGoldLost() {
+
+        goldLost = HeroDataStorage.getInstance().getHero().getGold() / 2;
+        return goldLost;
     }
 
     private void heroLevelUp() {
         HeroDataStorage.getInstance().getHero().setLevel(HeroDataStorage.getInstance().getHero().getLevel() + 1);
         HeroDataStorage.getInstance().getHero().setEXP(currentXP - heroExpToLevel);
-        HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
+        HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 20);
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
 
@@ -786,7 +871,7 @@ public class FightController implements Initializable {
             checkWhoAttackDisplay(damageLabel, "Bear", "Scorpion", "Snake", "Spider", "Wolf", 3);
         }
 
-        damageLabel.textFillProperty().set(Color.WHITE); //Färg
+        damageLabel.textFillProperty().set(Color.WHITE);
         System.out.println("New damage");
 
         if (specialAttack > 0 && attackOrder.get(0).equals("Hero")) {
@@ -879,6 +964,10 @@ public class FightController implements Initializable {
 
     }
 
+    public void chooseBackground() {
+
+    }
+
     @FXML
     public void handleSpecialAttack(ActionEvent event) {
 
@@ -894,8 +983,8 @@ public class FightController implements Initializable {
         //1//
         if (specialAttack == 1) {
             selectEnemyToAttack();
-            System.out.println("GOGO");
-            damageDisplay = heroChar.specialAttack1();
+            System.out.println("Special Attack 1");
+            damageDisplay = heroChar.specialAttack2();
 
             damageLabelCheckEnemy();
             KillEnemyDisplay();
@@ -905,11 +994,40 @@ public class FightController implements Initializable {
             specialAttack = 0;
         } else if (specialAttack == 2) {
 
-            System.out.println("Attack not implemented yet");
+            selectEnemyToAttack();
+            System.out.println("Special Attack 2");
+            damageDisplay = heroChar.specialAttack2(); //2x
+
+            damageLabelCheckEnemy();
+            KillEnemyDisplay();
+            healthPaneScaleInGame();
+            checkIfEnemyIsDead();
+            attackOrder.remove(0);
+            specialAttack = 0;
+
+            selectEnemyToAttack();
+            System.out.println("Special Attack 2");
+            damageDisplay = heroChar.specialAttack2(); //2x
+
+            damageLabelCheckEnemy();
+            KillEnemyDisplay();
+            healthPaneScaleInGame();
+            checkIfEnemyIsDead();
+            attackOrder.remove(0);
+            specialAttack = 0;
 
         } else if (specialAttack == 3) {
 
-            System.out.println("Attack not implemented yet");
+            selectEnemyToAttack();
+            System.out.println("Special Attack 3");
+            damageDisplay = heroChar.specialAttack2();
+
+            damageLabelCheckEnemy();
+            KillEnemyDisplay();
+            healthPaneScaleInGame();
+            checkIfEnemyIsDead();
+            attackOrder.remove(0);
+            specialAttack = 0;
 
         }
     }

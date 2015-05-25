@@ -136,7 +136,7 @@ public class Hero extends Creature {
             int R = rand.nextInt(maxDamage - minDamage) + minDamage;
             return R;
         }
-        
+
         return heroBaseDamage;
     }
 
@@ -179,6 +179,31 @@ public class Hero extends Creature {
                 System.out.println("Error");
         }
         return massiveBlow;
+    }
+
+    public int specialAttack2() {
+
+        System.out.println("Dubbel attack");
+        int dubbelAttack = getWeaponRandomDamage();
+
+        switch (FightDataStorage.getInstance().getEnemyID()) {
+
+            case "1":
+                displayedDamage = dubbelAttack;
+                FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
+                break;
+            case "2":
+                displayedDamage = dubbelAttack;
+                FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
+                break;
+            case "3":
+                displayedDamage = dubbelAttack;
+                FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
+                break;
+            case "null":
+                System.out.println("Error");
+        }
+        return dubbelAttack;
     }
 
 }

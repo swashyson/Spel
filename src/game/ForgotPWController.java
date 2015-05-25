@@ -45,6 +45,7 @@ public class ForgotPWController implements Initializable {
     private TextField secretQuestion;
 
     private SoundManager soundManager = new SoundManager();
+    private ConfigFile config = new ConfigFile();
 
     private String buttonClick = "button_click";
 
