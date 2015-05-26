@@ -97,9 +97,7 @@ public class CityController implements Initializable {
         HoverMouse.getInstance().outHover(shop);
         HoverMouse.getInstance().inHover(menu);
         HoverMouse.getInstance().outHover(menu);
-
-        HeroDataStorage.getInstance().printHero();
-
+        
         checkWeapon();
         checkArmor();
 

@@ -18,7 +18,7 @@
                 <Image url="@Recourses/Shop.png" />
             </image>
         </ImageView>
-        <Button fx:id="backToCity" alignment="CENTER" contentDisplay="CENTER" layoutX="356.0" layoutY="558.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="32.0" prefWidth="109.0" text="City" translateX="1.0">
+        <Button fx:id="backToCity" alignment="CENTER" contentDisplay="CENTER" layoutX="356.0" layoutY="558.0" onAction="#goToCity" prefHeight="32.0" prefWidth="109.0" text="City" translateX="1.0">
             <effect>
                 <ImageInput>
                     <source>

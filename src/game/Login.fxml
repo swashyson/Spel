@@ -18,6 +18,16 @@
             <Image url="@Recourses/LoginCityO.png" />
          </image>
       </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="306.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="306.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Recourses/TextField.png" />
+            </image>
+        </ImageView>
         <Button fx:id="createAccount" focusTraversable="false" layoutX="331.0" layoutY="427.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="32.0" prefWidth="110.0" text="Create Account">
             <effect>
                 <ImageInput>
@@ -45,22 +55,11 @@
                 </ImageInput>
             </effect>
         </Button>
-        <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="305.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Recourses/TextField.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="305.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Recourses/TextField.png" />
-            </image>
-        </ImageView>
         <TextField fx:id="name" layoutX="306.0" layoutY="300.0" prefHeight="25.0" prefWidth="160.0" promptText="Name">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </TextField>
-        <TextField fx:id="password" layoutX="305.0" layoutY="342.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
         <Label fx:id="fel" alignment="CENTER" layoutX="259.0" layoutY="117.0" prefHeight="45.0" prefWidth="282.0" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="20.0" />
@@ -82,5 +81,6 @@
                </source>
             </ImageInput>
          </effect></Button>
+      <PasswordField fx:id="password" layoutX="306.0" layoutY="340.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
     </children>
 </AnchorPane>

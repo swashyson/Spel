@@ -51,6 +51,10 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+         HoverMouse.getInstance().inHover(backButton);
+        HoverMouse.getInstance().outHover(backButton);
+        
         loadSettings();
     }
 

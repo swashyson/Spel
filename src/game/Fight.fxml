@@ -11,11 +11,21 @@
 
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.FightController">
     <children>
-        <ImageView fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="forestFight" fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
-                <Image url="@Recourses/Fightscene.png" />
+                <Image url="@Recourses/ForestFight.png" />
             </image>
         </ImageView>
+      <ImageView fx:id="desertFight" fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Recourses/DesertFight.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mountainsFight" fitHeight="600.0" fitWidth="806.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Recourses/MountainsFight.png" />
+         </image>
+      </ImageView>
         <Button fx:id="backToCity" layoutX="452.0" layoutY="538.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="30.0" prefWidth="111.0" visible="false">
          <effect>
             <ImageInput>

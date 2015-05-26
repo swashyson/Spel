@@ -10,6 +10,7 @@ import Creature.Hero;
 import DataStorage.*;
 import java.lang.reflect.Array;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -58,6 +59,12 @@ public class FightController implements Initializable {
     @FXML
     private ImageView defeatPicture;
     @FXML
+    private ImageView forestFight;
+    @FXML
+    private ImageView desertFight;
+    @FXML
+    private ImageView mountainsFight;
+    @FXML
     private AnchorPane pane;
     @FXML
     private Label levelLabel;
@@ -78,6 +85,7 @@ public class FightController implements Initializable {
     private Snake snake;
     private Spider spider;
     private Wolf wolf;
+
     private AnchorPane creaturePane1 = new AnchorPane();
     private AnchorPane creaturePane2 = new AnchorPane();
     private AnchorPane creaturePane3 = new AnchorPane();
@@ -95,6 +103,7 @@ public class FightController implements Initializable {
     private int goldLost;
     private Timeline timeline;
     private int numberCreature;
+    private int backGroundPicture;
 
     private String[] enemyValue;
 
@@ -194,7 +203,8 @@ public class FightController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        loadEnemysToDataStorage();
+        changeBackGround();
         worldTime();
         loadEnemyStatsFromDataStorage();
         loadHeroStatsFromDataStorage();
@@ -203,6 +213,12 @@ public class FightController implements Initializable {
         createEnemy();
         calculateAttackOrder();
         selectEnemy();
+        HoverMouse.getInstance().inHover(revive);
+        HoverMouse.getInstance().outHover(revive);
+        HoverMouse.getInstance().inHover(fightAgain);
+        HoverMouse.getInstance().outHover(fightAgain);
+        HoverMouse.getInstance().inHover(backToCity);
+        HoverMouse.getInstance().outHover(backToCity);
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
@@ -221,7 +237,7 @@ public class FightController implements Initializable {
 
         XP.setScaleX((HeroDataStorage.getInstance().getHero().getEXP() * maxXpWidth) / heroExpToLevel);
         XP.setX(XP.getScaleX() / 2);
-        levelLabel.setText("You´r level are " + HeroDataStorage.getInstance().getHero().getLevel());
+        levelLabel.setText("Your level is " + HeroDataStorage.getInstance().getHero().getLevel());
 
         if (currentXP >= heroExpToLevel) {
             heroLevelUp();
@@ -433,6 +449,18 @@ public class FightController implements Initializable {
         return 0;
     }
 
+    public int healthPaneCreatureScalerUpdateAll(int enemyHp, int enemyMaxHP) {
+
+        int hp = enemyHp;
+        int maxHp = enemyMaxHP;
+        int maxImageView = 50;
+        int calculate;
+
+        calculate = (hp * maxImageView) / maxHp;
+
+        return calculate;
+    }
+
     public void healthPaneScaleInGame() {
 
         try {
@@ -459,12 +487,12 @@ public class FightController implements Initializable {
     public void healthPaneScaleInGameUpdateAll() {
 
         try {
-            hpBarCreature2.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature2.setX(healthPaneCreatureScaler() / 2);
-            hpBarCreature3.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature3.setX(healthPaneCreatureScaler() / 2);
-            hpBarCreature4.setScaleX(healthPaneCreatureScaler());
-            hpBarCreature4.setX(healthPaneCreatureScaler() / 2);
+            hpBarCreature2.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy1().getHp(), FightDataStorage.getInstance().getEnemy1().getMaxHp()));
+            hpBarCreature2.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy1().getHp(), FightDataStorage.getInstance().getEnemy1().getMaxHp()) / 2);
+            hpBarCreature3.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy2().getHp(), FightDataStorage.getInstance().getEnemy2().getMaxHp()));
+            hpBarCreature3.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy2().getHp(), FightDataStorage.getInstance().getEnemy2().getMaxHp()) / 2);
+            hpBarCreature4.setScaleX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy3().getHp(), FightDataStorage.getInstance().getEnemy3().getMaxHp()));
+            hpBarCreature4.setX(healthPaneCreatureScalerUpdateAll(FightDataStorage.getInstance().getEnemy3().getHp(), FightDataStorage.getInstance().getEnemy3().getMaxHp()) / 2);
         } catch (Exception ex) {
             System.out.println("Mer än fler enemys : Error :");
         }
@@ -647,8 +675,8 @@ public class FightController implements Initializable {
 
     public void calculateAttackOrder() {
 
-        int heroSpeed = heroChar.getSpeed();
-        int heroStartSpeed = heroChar.getSpeed();
+        int heroWeaponSpeed = 0;
+        int heroArmorSpeed = 0;
 
         int enemy1Speed = FightDataStorage.getInstance().getEnemy1().getSpeed();
         int enemy1StartSpeed = FightDataStorage.getInstance().getEnemy1().getSpeed();
@@ -656,6 +684,17 @@ public class FightController implements Initializable {
         int enemy2StartSpeed = 0;
         int enemy3Speed = 0;
         int enemy3StartSpeed = 0;
+
+        if (HeroDataStorage.getInstance().getWeapon() != null) {
+            heroWeaponSpeed = HeroDataStorage.getInstance().getWeapon().getWeaponSpeed();
+        }
+        if (HeroDataStorage.getInstance().getArmor() != null) {
+            heroArmorSpeed = HeroDataStorage.getInstance().getArmor().getArmorSpeed();
+        }
+
+        int heroSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+        int heroStartSpeed = heroChar.getSpeed() + heroArmorSpeed + heroWeaponSpeed;
+
         if (FightDataStorage.getInstance().getEnemy2() != null) {
             enemy2Speed = FightDataStorage.getInstance().getEnemy2().getSpeed();
             enemy2StartSpeed = FightDataStorage.getInstance().getEnemy2().getSpeed();
@@ -802,35 +841,35 @@ public class FightController implements Initializable {
 
         if (enemyType.equals(enemy1)) {
 
-            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getBear().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(bearAttack);
 
         } else if (enemyType.equals(enemy2)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(scorpionAttack);
 
         } else if (enemyType.equals(enemy3)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(snakeAttack);
 
         } else if (enemyType.equals(enemy4)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(spiderAttack);
 
         } else if (enemyType.equals(enemy5)) {
-            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().basicAttack();
+            damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().Attack(HeroDataStorage.getInstance().getArmor());
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
@@ -851,6 +890,7 @@ public class FightController implements Initializable {
         fightAgain.setVisible(true);
         backToCity.setVisible(true);
         victoryPicture.setVisible(true);
+        special.setVisible(false);
 
         HeroDataStorage.getInstance().getHero().setEXP(HeroDataStorage.getInstance().getHero().getEXP() + expGain());
         HeroDataStorage.getInstance().getHero().setGold(HeroDataStorage.getInstance().getHero().getGold() + getGoldGained());
@@ -860,6 +900,7 @@ public class FightController implements Initializable {
         combatMessage1.setText("Exp gained: " + Integer.toString(expGain()));
         combatMessage2.setText("Gold gained: " + Integer.toString(getGoldGained()));
 
+        DBConnect.saveToDB();
         stopWorldTime();
     }
 
@@ -898,7 +939,6 @@ public class FightController implements Initializable {
         HeroDataStorage.getInstance().getHero().setHp(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(HeroDataStorage.getInstance().getHero().getLevel() * 100);
         HeroDataStorage.getInstance().getHero().setBaseDamage(HeroDataStorage.getInstance().getHero().getLevel() * 5);
-
         soundManager.defineSound(levelUpSound);
 
     }
@@ -988,14 +1028,14 @@ public class FightController implements Initializable {
 
         try {
 
-            if (FightDataStorage.getInstance().getEnemy1() != null) {
+            if (FightDataStorage.getInstance().getEnemy1() != null && creaturePane2.isVisible() == true) {
                 damageLabel(creaturePane2);
             }
 
-            if (FightDataStorage.getInstance().getEnemy2() != null) {
+            if (FightDataStorage.getInstance().getEnemy2() != null && creaturePane3.isVisible() == true) {
                 damageLabel(creaturePane3);
             }
-            if (FightDataStorage.getInstance().getEnemy3() != null) {
+            if (FightDataStorage.getInstance().getEnemy3() != null && creaturePane4.isVisible() == true) {
                 damageLabel(creaturePane4);
             }
 
@@ -1125,6 +1165,59 @@ public class FightController implements Initializable {
 
             soundManager.playSoundAtSpecialOccation(heroSpecialAttack3, heroChar.getHeroID());
 
+        }
+    }
+
+    private void changeBackGround() {
+        Random random = new Random();
+        backGroundPicture = random.nextInt(3);
+
+        if (backGroundPicture == 0) {
+            forestFight.setVisible(true);
+        } else if (backGroundPicture == 1) {
+            mountainsFight.setVisible(true);
+        } else if (backGroundPicture == 2) {
+            desertFight.setVisible(true);
+        }
+
+    }
+
+    private void loadEnemysToDataStorage() {
+        try {
+            DBConnect.connect();
+            ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
+            while (getCreature.next()) {
+                String enemyName = getCreature.getString("enemyName");
+                int enemyHp = getCreature.getInt("enemyBaseHP");
+                int enemyMaxDamage = getCreature.getInt("enemyBaseMaxDamage");
+                int enemyMinDamage = getCreature.getInt("enemyBaseMinDamage");
+                int enemySpeed = getCreature.getInt("enemyBaseSpeed");
+
+                switch (enemyName) {
+                    case "Bear":
+                        Bear bear = new Bear(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setBear(bear);
+                        break;
+                    case "Scorpion":
+                        Scorpion scorpion = new Scorpion(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setScorpion(scorpion);
+                        break;
+                    case "Snake":
+                        Snake snake = new Snake(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setSnake(snake);
+                        break;
+                    case "Spider":
+                        Spider spider = new Spider(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setSpider(spider);
+                        break;
+                    case "Wolf":
+                        Wolf wolf = new Wolf(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
+                        EnemyBaseDataStorage.getInstance().setWolf(wolf);
+                        break;
+                }
+            }
+            DBConnect.close();
+        } catch (Exception ex) {
         }
     }
 

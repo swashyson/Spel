@@ -15,7 +15,7 @@
                 <Image url="@Recourses/Inn.png" />
             </image>
         </ImageView>
-        <Button fx:id="backToCity" layoutX="345.0" layoutY="171.0" mnemonicParsing="false" onAction="#goToCity" prefHeight="25.0" prefWidth="112.0" text="City">
+        <Button fx:id="backToCity" layoutX="345.0" layoutY="171.0" onAction="#goToCity" prefHeight="25.0" prefWidth="112.0" text="City">
          <effect>
             <ImageInput>
                <source>

@@ -124,7 +124,6 @@ public class ViewCharController implements Initializable {
         soundManager.defineSound(buttonClick);
 
         loadHero();
-        loadEnemysToDataStorage();
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
     }
@@ -171,7 +170,7 @@ public class ViewCharController implements Initializable {
         try {
             DBConnect.connect();
 
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "'");
             System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
 
             while (rs.next()) {
@@ -182,55 +181,14 @@ public class ViewCharController implements Initializable {
             list.setItems(OL);
 
             System.out.println("Antalet Gubbar = " + getName.size());
-
             DBConnect.close();
-
+           
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void loadEnemysToDataStorage() {
-        try {
-            DBConnect.connect();
-            ResultSet getCreature = DBConnect.CreateSelectStatement("select * from game.enemy");
-            while (getCreature.next()) {
-                String enemyName = getCreature.getString("enemyName");
-                int enemyHp = getCreature.getInt("enemyBaseHP");
-                int enemyMaxDamage = getCreature.getInt("enemyBaseMaxDamage");
-                int enemyMinDamage = getCreature.getInt("enemyBaseMinDamage");
-                int enemySpeed = getCreature.getInt("enemyBaseSpeed");
-
-                switch (enemyName) {
-                    case "Bear":
-                        Bear bear = new Bear(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
-                        EnemyBaseDataStorage.getInstance().setBear(bear);
-                        break;
-                    case "Scorpion":
-                        Scorpion scorpion = new Scorpion(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
-                        EnemyBaseDataStorage.getInstance().setScorpion(scorpion);
-                        break;
-                    case "Snake":
-                        Snake snake = new Snake(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
-                        EnemyBaseDataStorage.getInstance().setSnake(snake);
-                        break;
-                    case "Spider":
-                        Spider spider = new Spider(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
-                        EnemyBaseDataStorage.getInstance().setSpider(spider);
-                        break;
-                    case "Wolf":
-                        Wolf wolf = new Wolf(enemyName, enemyHp, enemyMaxDamage, enemyMinDamage, enemySpeed);
-                        EnemyBaseDataStorage.getInstance().setWolf(wolf);
-                        break;
-                }
-            }
-            DBConnect.close();
-        } catch (Exception ex) {
-            fel.setText("Error when loading enemys");
-        }
-    }
-
-    public void changePic(String type) {
+     public void changePic(String type) {
         javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("Recourses/" + type + ".png").toExternalForm());
         imageView.setImage(image);
 

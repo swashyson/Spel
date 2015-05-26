@@ -5,7 +5,7 @@
  */
 package Creature;
 
-import Creature.Creature;
+
 
 /**
  *
@@ -22,9 +22,10 @@ public abstract class Enemy extends Creature {
     protected abstract int getMaxDmg();
 
     protected abstract int getMinDmg();
-
-    protected abstract void specialAttack1(Hero hero);
-
-    protected abstract void specialAttack2(Hero hero);
+    
+    protected abstract int specialAttack1();
+    
+    protected abstract int specialAttack2();
+           
 
 }
