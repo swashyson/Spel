@@ -68,21 +68,4 @@ public class HeroDataStorage {
     public int getuserID(){
         return userID;
     } 
-
-    public void printHero() {
-
-        System.out.println("UserID = " + hero.getUserID());
-        System.out.println("HeroID = " + hero.getHeroID());
-        System.out.println("HeroName = " + hero.getName());
-        System.out.println("HeroType = " + hero.getHeroType());
-        System.out.println("HeroSpeed = " + hero.getSpeed());
-        System.out.println("HeroGold = " + hero.getGold());
-        System.out.println("HeroBaseDamage = " + hero.getBaseDamage());
-        System.out.println("HeroLevel = " + hero.getLevel());
-        System.out.println("HeroEXP = " + hero.getEXP());
-        System.out.println("HeroHP = " + hero.getHp());
-        System.out.println("HeroCurrentHP = " + hero.getHeroCurrentHP());
-
-    }
-
 }

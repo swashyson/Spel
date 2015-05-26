@@ -40,7 +40,6 @@ public class CharCreationController implements Initializable {
     private Label fel;
 
     private int type;
-    private Hero hero;
 
     private SoundManager soundManager = new SoundManager();
 
@@ -121,13 +120,10 @@ public class CharCreationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //System.out.println(DataStorage.getInstance().getUserID());
-
         HoverMouse.getInstance().inHover(create);
         HoverMouse.getInstance().outHover(create);
         HoverMouse.getInstance().inHover(back);
         HoverMouse.getInstance().outHover(back);
-
     }
 
     public void clickOnTextField() {
