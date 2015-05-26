@@ -108,32 +108,32 @@ public class FightController implements Initializable {
     private int damageDisplay;
     private int specialAttack = 0;
 
-    private SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
+    private final SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
 
-    private ConfigFile config = new ConfigFile();
+    private final ConfigFile config = new ConfigFile();
 
-    private String fightBackgroundSound = "Fight";
-    private String levelUpSound = "level_up";
-    private String buttonClick = "button_click";
-    private String heroAttacking = "hero_attacking";
-    private String heroSpecialAttack1 = "hero_special_1";
-    private String heroSpecialAttack2 = "hero_special_2";
-    private String heroSpecialAttack3 = "hero_special_3";
-    private String heroHurt = "hero_being_hit";
-    private String heroDeath = "heroDeath";
-    private String enemyDeath = "enemy_death";
-    private String victory = "victory";
-    private String thatwaseasy = "thatwaseasy";
-    private String applause = "applause";
-    private String gameOver = "gameover";
-    private String bearAttack = "bear_attack";
-    private String wolfAttack = "wolf_attack";
-    private String snakeAttack = "snake_attack";
-    private String scorpionAttack = "scorpion_attack";
-    private String spiderAttack = "spider_attack";
-    private String primarySound = "primary";
-    private String secondarySound = "secondary";
-    private String backgroundSound = "background";
+    private final String fightBackgroundSound = "Fight";
+    private final String levelUpSound = "level_up";
+    private final String buttonClick = "button_click";
+    private final String heroAttacking = "hero_attacking";
+    private final String heroSpecialAttack1 = "hero_special_1";
+    private final String heroSpecialAttack2 = "hero_special_2";
+    private final String heroSpecialAttack3 = "hero_special_3";
+    private final String heroHurt = "hero_being_hit";
+    private final String heroDeath = "heroDeath";
+    private final String enemyDeath = "enemy_death";
+    private final String victory = "victory";
+    private final String thatwaseasy = "thatwaseasy";
+    private final String applause = "applause";
+    private final String gameOver = "gameover";
+    private final String bearAttack = "bear_attack";
+    private final String wolfAttack = "wolf_attack";
+    private final String snakeAttack = "snake_attack";
+    private final String scorpionAttack = "scorpion_attack";
+    private final String spiderAttack = "spider_attack";
+    private final String primarySound = "primary";
+    private final String secondarySound = "secondary";
+    private final String backgroundSound = "background";
 
     private boolean victoryDeath = false;
 

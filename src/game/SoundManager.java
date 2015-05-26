@@ -29,12 +29,12 @@ public class SoundManager {
     private final ConfigFile cF = new ConfigFile();
 
     // Arrays used for keeping track of which sounds to choose between when special occations occur
-    private String[] heroHurt = {"hero_hit_1", "hero_hit_2"};
+    private final String[] heroHurt = {"hero_hit_1", "hero_hit_2"};
 
-    private String[] heroAttack = {"warrior_attack", "bowman_attack", "mage_attack"};
-    private String[] specialAttack_2 = {"warrior_special_2", "bowman_special_2", "mage_special_2"};
+    private final String[] heroAttack = {"warrior_attack", "bowman_attack", "mage_attack"};
+    private final String[] specialAttack_2 = {"warrior_special_2", "bowman_special_2", "mage_special_2"};
 
-    private String[] innSound = {"snoring", "inn_ambience"};
+    private final String[] innSound = {"snoring", "inn_ambience"};
 
     private final Random random = new Random();
     private int soundToPlay;

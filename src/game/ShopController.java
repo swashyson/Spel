@@ -198,7 +198,7 @@ public class ShopController implements Initializable {
                 }
                 listViewGetCurrentItems();
 
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 felText.setText("Error buying item");
             } finally {
                 DBConnect.close(felText);
@@ -269,7 +269,7 @@ public class ShopController implements Initializable {
 
                 listViewGetCurrentItems();
 
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 felText.setText("Error buying item");
             } finally {
                 DBConnect.close(felText);
@@ -415,7 +415,6 @@ public class ShopController implements Initializable {
             currentItems.add("Weapon Min Damage: " + HeroDataStorage.getInstance().getWeapon().getWeaponMinDamage());
             currentItems.add("Weapon Max Damage: " + HeroDataStorage.getInstance().getWeapon().getWeaponMaxDamage());
             currentItems.add("Weapon Speed: " + HeroDataStorage.getInstance().getWeapon().getWeaponSpeed());
-            //          currentItems.add("Weapon Cost: " + HeroDataStorage.getInstance().getWeapon().getWeaponGold());
 
         } else {
             currentItems.add("You dont have a weapon");
@@ -427,7 +426,6 @@ public class ShopController implements Initializable {
             currentItems.add("Armor Name: " + HeroDataStorage.getInstance().getArmor().getName());
             currentItems.add("Armor Value: " + HeroDataStorage.getInstance().getArmor().getArmor());
             currentItems.add("Armor Speed: " + HeroDataStorage.getInstance().getArmor().getArmorSpeed());
-//            currentItems.add("Armor cost: " + HeroDataStorage.getInstance().getArmor().getArmorGold());
 
         } else {
             currentItems.add("You dont have a armor set");
