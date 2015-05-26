@@ -6,15 +6,12 @@
 package game;
 
 import java.util.Random;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 /**
  *
- * @author Mohini
+ * @author Mohini, Mattias, Johan, Jonathan, Fredrik
  */
 public class SoundManager {
 
@@ -32,17 +29,17 @@ public class SoundManager {
     private final ConfigFile cF = new ConfigFile();
 
     // Arrays used for keeping track of which sounds to choose between when random sounds are needed
-    private String[] chooseArmorWeaponVoice = {};
-    private String[] heroHurt = {"hero_hit_1", "hero_hit_2"};
-    private String[] heroAttack = {"warrior_attack", "bowman_attack", "mage_attack"};
-    private String[] warriorSpecialAttack = {"warrior_special_1", "warrior_special_2", "warrior_special_3"};
-    private String[] bowmanSpecialAttack = {"bowman_special_1", "bowman_special_2", "bowman_special_3"};
-    private String[] mageSpecialAttack = {"mage_special_1", "mage_special_2", "mage_special_3"};
-    private String[] victory = {"thatwaseasy", "nailedit"};
+    private final String[] chooseArmorWeaponVoice = {};
+    private final String[] heroHurt = {"hero_hit_1", "hero_hit_2"};
+    private final String[] heroAttack = {"warrior_attack", "bowman_attack", "mage_attack"};
+    private final String[] warriorSpecialAttack = {"warrior_special_1", "warrior_special_2", "warrior_special_3"};
+    private final String[] bowmanSpecialAttack = {"bowman_special_1", "bowman_special_2", "bowman_special_3"};
+    private final String[] mageSpecialAttack = {"mage_special_1", "mage_special_2", "mage_special_3"};
+    private final String[] victory = {"thatwaseasy", "nailedit"};
 //    private String[] innKeeperComments = {};
-    private String[] innSound = {"snoring", "inn_ambience"};
+    private final String[] innSound = {"snoring", "inn_ambience"};
 
-    private Random random = new Random();
+    private final Random random = new Random();
     private int soundToPlay;
 
     // Every sound in the game is defined here, from background sounds to shorter sounds

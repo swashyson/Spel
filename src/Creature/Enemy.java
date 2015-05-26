@@ -9,15 +9,12 @@ package Creature;
 
 /**
  *
- * @author Mohini
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public abstract class Enemy extends Creature {
 
     protected int maxDamage;
     protected int minDamage;
-    
-    
-
     
     protected abstract int getMaxDmg();
 

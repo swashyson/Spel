@@ -5,10 +5,10 @@
  */
 package game;
 
-import Creature.Hero;
 import DataStorage.*;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,12 +41,12 @@ public class CharCreationController implements Initializable {
 
     private int type;
 
-    private SoundManager soundManager = new SoundManager();
+    private final SoundManager soundManager = new SoundManager();
 
-    private String buttonClick = "button_click";
+    private final String buttonClick = "button_click";
 
     @FXML
-    public void back(ActionEvent event) {
+    public void back(ActionEvent event) { //tillbaka knappen
 
         soundManager.defineSound(buttonClick);
 
@@ -55,7 +55,7 @@ public class CharCreationController implements Initializable {
     }
 
     @FXML
-    public void Select(ActionEvent event) {
+    public void Select(ActionEvent event) { //kollar vilken typ av hero man väljer och markerar den
 
         if (event.getSource().equals(hero1)) {
             HoverMouse.getInstance().inClick(hero1);
@@ -84,22 +84,22 @@ public class CharCreationController implements Initializable {
         }
     }
 
-    public void Create(ActionEvent event) {
+    public void Create(ActionEvent event) { //skapa en hero och lägger in den i databasen
 
         soundManager.defineSound(buttonClick);
         if (name.getText().equals("")) {
-            fel.setText("You need to enter a name");
+            fel.setText("You need to enter a name"); // fel hantering
         } else {
             try {
-                DBConnect.connect();
+                DBConnect.connect(fel);
 
                 int userID = HeroDataStorage.getInstance().getuserID();
 
-                ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'");
+                ResultSet rs = DBConnect.CreateSelectStatement("Select * from game.hero where userID = '" + userID + "' and heroName = '" + name.getText() + "'", fel);
 
                 if (rs.next()) {
 
-                    fel.setText("You already have a hero by this name");
+                    fel.setText("You already have a hero by this name"); //fel hantering
                 } else {
 
                     DBConnect.CreateInsertStatement("INSERT INTO game.hero (heroName, heroType, userID, heroLevel, heroGold, heroCurrentHP, heroEXP, heroBaseHP, heroBaseSpeed, heroBaseDamage)"
@@ -110,23 +110,23 @@ public class CharCreationController implements Initializable {
                     SwitchScene sc = new SwitchScene();
                     sc.change(event, "ViewChar");
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                fel.setText("Error");
             } finally {
-                DBConnect.close();
+                DBConnect.close(fel);
             }
         }
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) { //hover mouse metoder för att få effekt på knapparna
         HoverMouse.getInstance().inHover(create);
         HoverMouse.getInstance().outHover(create);
         HoverMouse.getInstance().inHover(back);
         HoverMouse.getInstance().outHover(back);
     }
 
-    public void clickOnTextField() {
+    public void clickOnTextField() { // en resetter
         fel.setText(null);
     }
 

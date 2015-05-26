@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * FXML Controller class
@@ -34,7 +35,6 @@ public class CreateAccountController implements Initializable {
     private Button create;
     @FXML
     private Button back;
-
     @FXML
     private Label fel;
 
@@ -43,9 +43,9 @@ public class CreateAccountController implements Initializable {
     private String typeQuestion;
     private String typeAnswer;
 
-    private SoundManager soundManager = new SoundManager();
+    private final SoundManager soundManager = new SoundManager();
 
-    private String buttonClick = "button_click";
+    private final String buttonClick = "button_click";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,37 +54,35 @@ public class CreateAccountController implements Initializable {
         HoverMouse.getInstance().outHover(create);
         HoverMouse.getInstance().inHover(back);
         HoverMouse.getInstance().outHover(back);
-
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
         if (event.getSource().equals(create)) {
-
             create(event);
 
         } else if (event.getSource().equals(back)) {
-
             back(event);
 
         }
 
     }
 
-    public void create(ActionEvent event) {
+    public void create(ActionEvent event) { // skapa ett account
         try{
+            
         soundManager.defineSound(buttonClick);
-        ResultSet rS ;
-        DBConnect.connect();
+        ResultSet rs;
+        DBConnect.connect(fel);
         typeName = name.getText();
         typePassword = password.getText();
         typeQuestion = question.getText();
         typeAnswer = answer.getText();
 
-        rS = DBConnect.CreateSelectStatement("select * from game.login where userName = '" + typeName + "'");
-        if(rS.next()){
-            fel.setText("That name is used");
+        rs = DBConnect.CreateSelectStatement("select * from game.login where userName = '" + typeName + "'", fel);
+        if(rs.next()){
+            fel.setText("That name is used"); //fel hantering
             
         }else{
             DBConnect.CreateInsertStatement("INSERT INTO game.login (userName, userPassword, userQuestion, userAnswer)" + " VALUES('" + typeName + "','" + typePassword + "','" + typeQuestion + "','" + typeAnswer + "')", fel, "User already exists");
@@ -92,10 +90,10 @@ public class CreateAccountController implements Initializable {
         SwitchScene sc = new SwitchScene();
                 sc.change(event, "Login");
         }
-        }catch(Exception ex){
-            fel.setText("fel");
+        }catch(SQLException ex){
+            fel.setText("Error loading from database"); // fel hantering
         } finally {
-            DBConnect.close();
+            DBConnect.close(fel);
         }
 
     }

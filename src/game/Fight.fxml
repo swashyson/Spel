@@ -92,6 +92,13 @@
             </ImageInput>
          </effect>
       </Button>
-      <Button fx:id="special" layoutX="475.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleSpecialAttack" prefHeight="63.0" prefWidth="111.0" text="Special Attack" visible="false" />
+      <Button fx:id="special" layoutX="345.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleSpecialAttack" prefHeight="63.0" prefWidth="111.0" text="Special Attack" visible="false">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@Recourses/Special.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
     </children>
 </AnchorPane>
