@@ -24,15 +24,7 @@ public class Snake extends Enemy {
         this.speed = speed;
     }
 
-    @Override
-    protected void specialAttack1(Hero hero) {
-
-    }
-
-    @Override
-    protected void specialAttack2(Hero hero) {
-
-    }
+    
 
     @Override
     public int getMaxDmg() {
@@ -108,31 +100,15 @@ public class Snake extends Enemy {
         return basicAttack();
     }
 
+    @Override
     public int specialAttack1() {
-
-        Random rand = new Random();
-        int minDmg = this.minDamage;
-        int maxDmg = this.maxDamage;
-
-        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
-        dmg = dmg * 3;
-
-        System.out.println("SpecialAttack1 " + dmg);
+        int dmg = basicAttack() * 3;
         return dmg;
     }
 
+    @Override
     public int specialAttack2() {
-        
-        Random rand = new Random();
-        int minDmg = this.minDamage;
-        int maxDmg = this.maxDamage;
-
-        int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
-
-        System.out.println("SpecialAttack2 " + dmg);
-        
-        dmg = dmg * 2;
-        
+        int dmg = basicAttack() * 2;
         return dmg;
     }
 
