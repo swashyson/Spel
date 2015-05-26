@@ -14,7 +14,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-//import javafx.scene.control.Button;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
@@ -30,8 +30,9 @@ public class InnSceneController implements Initializable {
      */
     //@FXML
     //private Button restoreHealth;
-    //@FXML
-    //private Button back;
+    @FXML
+    private Button back;
+    
     @FXML
     private Label health;
 
@@ -54,6 +55,9 @@ public class InnSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        HoverMouse.getInstance().inHover(back);
+        HoverMouse.getInstance().outHover(back);
         currentHealth = HeroDataStorage.getInstance().getHero().getHeroCurrentHP();
         maxHealth = HeroDataStorage.getInstance().getHero().getHp();
         heroGold = HeroDataStorage.getInstance().getHero().getGold();

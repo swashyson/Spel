@@ -33,5 +33,5 @@ public class SwitchScene {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
+    }        
 }

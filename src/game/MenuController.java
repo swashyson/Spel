@@ -78,7 +78,15 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        HoverMouse.getInstance().inHover(backToCity);
+        HoverMouse.getInstance().outHover(backToCity);
+        HoverMouse.getInstance().inHover(logout);
+        HoverMouse.getInstance().outHover(logout);
+        HoverMouse.getInstance().inHover(changeCharacter);
+        HoverMouse.getInstance().outHover(changeCharacter);
+        HoverMouse.getInstance().inHover(settings);
+        HoverMouse.getInstance().outHover(settings);
 
     }
 
