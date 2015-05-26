@@ -58,7 +58,7 @@ public class InnSceneController implements Initializable {
         maxHealth = HeroDataStorage.getInstance().getHero().getHp();
         heroGold = HeroDataStorage.getInstance().getHero().getGold();
 
-        soundManager.randomizeSounds(innSound, 0);
+        soundManager.playSoundAtSpecialOccation(innSound, 0);
         
         System.out.println("Amount of gold: " + heroGold);
 
@@ -92,7 +92,7 @@ public class InnSceneController implements Initializable {
     public void back(ActionEvent event) {
 
         soundManager.defineSound(buttonClick);
-        soundManager.stopTheSound();
+        soundManager.stopTheSound("back");
         
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");

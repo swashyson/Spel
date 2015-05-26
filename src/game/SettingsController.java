@@ -27,13 +27,18 @@ public class SettingsController implements Initializable {
     private CheckBox cBSoundOn;
 
     private final ConfigFile cF = new ConfigFile();
-
+    
+    SoundManager soundManager = new SoundManager();
+    private String buttonClick = "button_click";
+    
     @FXML
     private void goBack(ActionEvent event) {
         if (HeroDataStorage.getInstance().getHero() == null) {
+            soundManager.defineSound(buttonClick);
             SwitchScene sc = new SwitchScene();
             sc.change(event, "Login");
         } else {
+            soundManager.defineSound(buttonClick);
             SwitchScene sc = new SwitchScene();
             sc.change(event, "Menu");
         }

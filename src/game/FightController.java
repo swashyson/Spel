@@ -110,11 +110,23 @@ public class FightController implements Initializable {
     private String levelUpSound = "level_up";
     private String buttonClick = "button_click";
     private String heroAttacking = "hero_attacking";
+    private String heroSpecialAttack1 = "hero_special_1";
+    private String heroSpecialAttack2 = "hero_special_2";
+    private String heroSpecialAttack3 = "hero_special_3";
     private String heroHurt = "hero_being_hit";
     private String heroDeath = "heroDeath";
     private String enemyDeath = "enemy_death";
     private String victory = "victory";
+    private String thatwaseasy = "thatwaseasy";
     private String applause = "applause";
+    private String gameOver = "gameover";
+    private String bearAttack = "bear_attack";
+    private String wolfAttack = "wolf_attack";
+    private String snakeAttack = "snake_attack";
+    private String scorpionAttack = "scorpion_attack";
+    private String spiderAttack = "spider_attack";
+
+    private boolean victoryDeath = false;
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -125,7 +137,11 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        soundManager.stopTheSound();
+        if(victoryDeath == true){
+            soundManager.stopTheSound("primary");
+            victoryDeath = false;
+        }
+        soundManager.stopTheSound("back");
         soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
@@ -142,7 +158,12 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        soundManager.stopTheSound();
+        if(victoryDeath == true){
+            soundManager.stopTheSound("primary");
+            victoryDeath = false;
+        }
+        
+        soundManager.stopTheSound("back");
         soundManager.defineSound(buttonClick);
 
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(1);
@@ -160,7 +181,10 @@ public class FightController implements Initializable {
         FightDataStorage.getInstance().setEnemy3(null);
         attackSelect = null;
 
-        soundManager.stopTheSound();
+        if (victoryDeath == true) {
+            soundManager.stopTheSound("primary");
+            victoryDeath = false;
+        }
         soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
@@ -182,7 +206,7 @@ public class FightController implements Initializable {
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound("primary");
         soundManager.defineSound(fightBackgroundSound);;
 
     }
@@ -528,16 +552,16 @@ public class FightController implements Initializable {
         heroChar.heroAttack();
         System.out.println(attackOrder.size());
         System.out.println("Heron Lyckades Attakera");
-        
+
         Random randSpecial = new Random();
-        
+
         int value = randSpecial.nextInt(3) + 1;
-        if(value == 3){
-        
+        if (value == 3) {
+
             special.setVisible(true);
         }
-        
-        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
+
+        soundManager.playSoundAtSpecialOccation(heroAttacking, heroChar.getHeroType());
 //        soundManager.randomizeSounds(heroAttacking, heroChar.getHeroType());
     }
 
@@ -614,8 +638,9 @@ public class FightController implements Initializable {
 
             HeroDataStorage.getInstance().getHero().setGold(getGoldLost());
             System.out.println("You're dead mofo");
-            
+
             soundManager.defineSound(heroDeath);
+            soundManager.defineSound(gameOver);
 
         }
     }
@@ -781,30 +806,35 @@ public class FightController implements Initializable {
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
+            soundManager.defineSound(bearAttack);
 
         } else if (enemyType.equals(enemy2)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
+            soundManager.defineSound(scorpionAttack);
 
         } else if (enemyType.equals(enemy3)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
+            soundManager.defineSound(snakeAttack);
 
         } else if (enemyType.equals(enemy4)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
+            soundManager.defineSound(spiderAttack);
 
         } else if (enemyType.equals(enemy5)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().basicAttack();
             heroChar.setHeroCurrentHP(heroChar.getHeroCurrentHP() - damageDisplay);
             damageLabel(creaturePane1);
             attackOrder.remove(0);
+            soundManager.defineSound(wolfAttack);
 
         }
         killHero();
@@ -812,10 +842,12 @@ public class FightController implements Initializable {
 
     public void victory() {
 
-        soundManager.stopTheSound();
+        victoryDeath = true;
+        soundManager.stopTheSound("back");
         soundManager.defineSound(applause);
-        soundManager.randomizeSounds(victory, 0);
-        
+//        soundManager.randomizeSounds(victory, 0);
+//        soundManager.defineSound(thatwaseasy);
+
         fightAgain.setVisible(true);
         backToCity.setVisible(true);
         victoryPicture.setVisible(true);
@@ -909,10 +941,10 @@ public class FightController implements Initializable {
                 = new TranslateTransition(Duration.millis(1000), damageLabel);
 
         Random randomXPos = new Random();
-        
+
         int randomNumber = randomXPos.nextInt(15 + 15) - 15;
         System.out.println(randomNumber);
-        
+
         move.setFromY(0);
         move.setToY(-20);
         move.setFromX(0);
@@ -1029,17 +1061,15 @@ public class FightController implements Initializable {
 
             System.out.println("You got attack " + specialAttack);
             special.setVisible(false);
-            
-            if(specialAttack == 1){
-            
+
+            if (specialAttack == 1) {
+
                 combatMessage1.setText("You got a strong attack");
-            }
-            else if(specialAttack == 2){
-            
+            } else if (specialAttack == 2) {
+
                 combatMessage1.setText("You got a double attack");
-            }
-            else if(specialAttack == 3){
-            
+            } else if (specialAttack == 3) {
+
                 combatMessage1.setText("You got a cleave attack");
             }
         }
@@ -1058,8 +1088,9 @@ public class FightController implements Initializable {
             checkIfEnemyIsDead();
             attackOrder.remove(0);
             specialAttack = 0;
-           
-            
+
+            soundManager.playSoundAtSpecialOccation(heroSpecialAttack1, heroChar.getHeroID());
+
         } else if (specialAttack == 2) {
 
             selectEnemyToAttack();
@@ -1077,6 +1108,8 @@ public class FightController implements Initializable {
             attackOrder.remove(0);
             specialAttack = 0;
 
+            soundManager.playSoundAtSpecialOccation(heroSpecialAttack2, heroChar.getHeroID());
+
         } else if (specialAttack == 3) {
 
             selectEnemyToAttack();
@@ -1089,6 +1122,8 @@ public class FightController implements Initializable {
             checkIfEnemyIsDead();
             attackOrder.remove(0);
             specialAttack = 0;
+
+            soundManager.playSoundAtSpecialOccation(heroSpecialAttack3, heroChar.getHeroID());
 
         }
     }

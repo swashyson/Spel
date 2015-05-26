@@ -48,7 +48,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound("back");
     }
 
     @FXML
@@ -59,7 +59,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound("back");
         
     }
 
@@ -71,7 +71,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
         
-        soundManager.stopTheSound();
+        soundManager.stopTheSound("back");
 
     }
 
@@ -83,7 +83,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound("back");
     }
 
     @Override
