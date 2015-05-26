@@ -265,7 +265,7 @@ public class SoundManager {
         }
     }
 
-    //This method turns off the sound, whatever sound it is that is playing
+    //This method turns off the specified sound in the class it's called from, whatever sound it is that it is playing
     public void stopTheSound(String stop) {
         if (soundOn == true) {
             if (stop == "background") {

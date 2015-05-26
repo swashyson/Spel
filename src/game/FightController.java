@@ -137,30 +137,6 @@ public class FightController implements Initializable {
 
     private boolean victoryDeath = false;
 
-    private final SoundManager soundManager = new SoundManager(); // tar hand om alla ljud i spelet
-
-    private final ConfigFile config = new ConfigFile(); //config
-    //ALLA LJUD FILER//
-    private final String fightBackgroundSound = "Fight";
-    private final String levelUpSound = "level_up";
-    private final String buttonClick = "button_click";
-    private final String heroAttacking = "hero_attacking";
-    private final String heroSpecialAttack1 = "hero_special_1";
-    private final String heroSpecialAttack2 = "hero_special_2";
-    private final String heroSpecialAttack3 = "hero_special_3";
-    private final String heroHurt = "hero_being_hit";
-    private final String heroDeath = "heroDeath";
-    private final String enemyDeath = "enemy_death";
-    private final String victory = "victory";
-    private final String thatwaseasy = "thatwaseasy";
-    private final String applause = "applause";
-    private final String gameOver = "gameover";
-    private final String bearAttack = "bear_attack";
-    private final String wolfAttack = "wolf_attack";
-    private final String snakeAttack = "snake_attack";
-    private final String scorpionAttack = "scorpion_attack";
-    private final String spiderAttack = "spider_attack";
-
     @FXML
     public void goToCity(ActionEvent event) {
 
