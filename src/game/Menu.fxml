@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -15,7 +16,7 @@
                 <Image url="@Recourses/Inn.png" />
             </image>
         </ImageView>
-        <Button fx:id="backToCity" layoutX="345.0" layoutY="171.0" onAction="#goToCity" prefHeight="25.0" prefWidth="112.0" text="City">
+        <Button fx:id="backToCity" layoutX="366.0" layoutY="109.0" onAction="#goToCity" prefHeight="25.0" prefWidth="112.0" text="City">
          <effect>
             <ImageInput>
                <source>
@@ -23,7 +24,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-        <Button fx:id="changeCharacter" layoutX="294.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToCharacter" prefHeight="25.0" prefWidth="221.0" text="Change char">
+        <Button fx:id="changeCharacter" layoutX="312.0" layoutY="232.0" mnemonicParsing="false" onAction="#goToCharacter" prefHeight="25.0" prefWidth="221.0" text="Change char">
          <effect>
             <ImageInput>
                <source>
@@ -31,7 +32,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-        <Button fx:id="logout" layoutX="348.0" layoutY="373.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="112.0" text="Logout">
+        <Button fx:id="logout" layoutX="366.0" layoutY="500.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="112.0" text="Logout">
          <effect>
             <ImageInput>
                <source>
@@ -39,7 +40,7 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <Button fx:id="settings" layoutX="348.0" layoutY="463.0" mnemonicParsing="false" onAction="#settings" prefHeight="25.0" prefWidth="112.0" text="Settings">
+      <Button fx:id="settings" layoutX="367.0" layoutY="375.0" mnemonicParsing="false" onAction="#settings" prefHeight="25.0" prefWidth="112.0" text="Settings">
          <effect>
             <ImageInput>
                <source>
@@ -47,5 +48,10 @@
                </source>
             </ImageInput>
          </effect></Button>
+      <Label fx:id="fel" layoutX="238.0" layoutY="35.0" prefHeight="60.0" prefWidth="370.0" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

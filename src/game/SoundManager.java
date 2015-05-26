@@ -6,15 +6,12 @@
 package game;
 
 import java.util.Random;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 /**
  *
- * @author Mohini
+ * @author Mohini, Mattias, Johan, Jonathan, Fredrik
  */
 public class SoundManager {
 
@@ -39,7 +36,7 @@ public class SoundManager {
 
     private String[] innSound = {"snoring", "inn_ambience"};
 
-    private Random random = new Random();
+    private final Random random = new Random();
     private int soundToPlay;
 
     // Every sound in the game is defined here, from background sounds to shorter sounds

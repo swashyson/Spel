@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author Mohini
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class Wolf extends Enemy {
 
@@ -37,14 +37,9 @@ public class Wolf extends Enemy {
     }
 
     public int basicAttack() {
-
+        
         Random rand = new Random();
-        int minDmg = this.minDamage;
-        int maxDmg = this.maxDamage;
-
         int dmg = rand.nextInt(maxDamage - minDamage) + minDamage;
-
-        //System.out.println("Bear skadade dig med " + dmg);
         return dmg;
     }
 

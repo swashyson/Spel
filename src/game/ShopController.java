@@ -5,11 +5,12 @@
  */
 package game;
 
-import Items.Weapon;
-import Items.Armor;
 import DataStorage.HeroDataStorage;
+import Items.Armor;
+import Items.Weapon;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -66,11 +67,11 @@ public class ShopController implements Initializable {
 
     private final int getclass = HeroDataStorage.getInstance().getHero().getHeroType();
 
-    private SoundManager soundManager = new SoundManager();
-    private String purchaseSound = "purchase";
-    private String errorSound = "error";
-    private String buttonClick = "button_click";
-    private String entranceSound = "entrance";
+    private final SoundManager soundManager = new SoundManager();
+    private final String purchaseSound = "purchase";
+    private final String errorSound = "error";
+    private final String buttonClick = "button_click";
+    private final String entranceSound = "entrance";
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -83,15 +84,15 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-         HoverMouse.getInstance().inHover(backToCity);
+
+        HoverMouse.getInstance().inHover(backToCity);
         HoverMouse.getInstance().outHover(backToCity);
 
         startMethodWithBinds();
 
         int i = 1;
         for (Button array1 : array) {
-            HoverMouse.getInstance().inHoverSize(array1, i, buy);
+            HoverMouse.getInstance().inHoverSize(array1, i, buy, felText);
             HoverMouse.getInstance().outHoverSize(array1, buy);
             i = i + 1;
         }
@@ -140,8 +141,8 @@ public class ShopController implements Initializable {
         button.setOnMouseClicked((MouseEvent event) -> {
             try {
                 weaponList = new ArrayList();
-                DBConnect.connect();
-                ResultSet rs = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';");
+                DBConnect.connect(felText);
+                ResultSet rs = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';", felText);
 
                 while (rs.next()) {
 
@@ -190,17 +191,17 @@ public class ShopController implements Initializable {
                 } else {
 
                     soundManager.defineSound(errorSound);
-                    
+
                     System.err.println("Not enough Gold or Experience!");
 
                     messageFade();
                 }
                 listViewGetCurrentItems();
 
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                felText.setText("Error buying item");
             } finally {
-                DBConnect.close();
+                DBConnect.close(felText);
             }
         });
 
@@ -211,8 +212,8 @@ public class ShopController implements Initializable {
         button.setOnMouseClicked((MouseEvent event) -> {
             try {
                 armorList = new ArrayList();
-                DBConnect.connect();
-                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.armor where armorType = '" + getclass + "'");
+                DBConnect.connect(felText);
+                ResultSet rs = DBConnect.CreateSelectStatement("select * from game.armor where armorType = '" + getclass + "'", felText);
 
                 while (rs.next()) {
 
@@ -268,10 +269,10 @@ public class ShopController implements Initializable {
 
                 listViewGetCurrentItems();
 
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                felText.setText("Error buying item");
             } finally {
-                DBConnect.close();
+                DBConnect.close(felText);
             }
         });
 
@@ -279,16 +280,16 @@ public class ShopController implements Initializable {
 
     public void setWeaponToHero(Weapon weapon) {
 
-        DBConnect.connect();
+        DBConnect.connect(felText);
 
         HeroDataStorage.getInstance().setWeapon(weapon);
         int LocalWeaponID = HeroDataStorage.getInstance().getWeapon().getWeaponID();
         int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
         try {
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_weapon where hero_idHero = '" + heroID + "';");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_weapon where hero_idHero = '" + heroID + "';", felText);
             if (rs.next()) {
-                DBConnect.CreateAlterStatement("UPDATE game.hero_has_weapon SET weapon_weaponID='" + LocalWeaponID + "' WHERE hero_idHero='" + heroID + "';");
+                DBConnect.CreateAlterStatement("UPDATE game.hero_has_weapon SET weapon_weaponID='" + LocalWeaponID + "' WHERE hero_idHero='" + heroID + "';", felText);
                 System.out.println("Du har lyckats alter statement i mysql för att lägga till ett vapen");
 
             } else {
@@ -297,26 +298,26 @@ public class ShopController implements Initializable {
 
             }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            felText.setText("Error equipping weapon to hero");
         } finally {
-            DBConnect.close();
+            DBConnect.close(felText);
         }
 
     }
 
     public void setArmorToHero(Armor armor) {
 
-        DBConnect.connect();
+        DBConnect.connect(felText);
 
         HeroDataStorage.getInstance().setArmor(armor);
         int localArmorID = HeroDataStorage.getInstance().getArmor().getArmorID();
         int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
         try {
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_armor where hero_idHero = '" + heroID + "';");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from hero_has_armor where hero_idHero = '" + heroID + "';", felText);
             if (rs.next()) {
-                DBConnect.CreateAlterStatement("UPDATE game.hero_has_armor SET armor_armorID='" + localArmorID + "' WHERE hero_idHero='" + heroID + "';");
+                DBConnect.CreateAlterStatement("UPDATE game.hero_has_armor SET armor_armorID='" + localArmorID + "' WHERE hero_idHero='" + heroID + "';", felText);
                 System.out.println("Du har lyckats alter statement i mysql för att lägga till en armor");
 
             } else {
@@ -325,10 +326,10 @@ public class ShopController implements Initializable {
 
             }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            felText.setText("Error equipping armor to hero");
         } finally {
-            DBConnect.close();
+            DBConnect.close(felText);
         }
     }
 
@@ -439,8 +440,8 @@ public class ShopController implements Initializable {
 
     public void removeWeaponRequest() {
         if (HeroDataStorage.getInstance().getWeapon() != null) {
-            DBConnect.connect();
-            ResultSet RS = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';");
+            DBConnect.connect(felText);
+            ResultSet RS = DBConnect.CreateSelectStatement("select * from weapon where weapontype = '" + getclass + "';", felText);
             int heroWeaponID = HeroDataStorage.getInstance().getWeapon().getWeaponID();
 
             int counter = 0;
@@ -463,10 +464,10 @@ public class ShopController implements Initializable {
                         }
                     }
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                felText.setText("Error equipping weapon to hero");
             } finally {
-                DBConnect.close();
+                DBConnect.close(felText);
             }
 
         }
@@ -474,8 +475,8 @@ public class ShopController implements Initializable {
 
     public void removeArmorRequest() {
         if (HeroDataStorage.getInstance().getArmor() != null) {
-            DBConnect.connect();
-            ResultSet RS = DBConnect.CreateSelectStatement("select * from armor where armortype = '" + getclass + "';");
+            DBConnect.connect(felText);
+            ResultSet RS = DBConnect.CreateSelectStatement("select * from armor where armortype = '" + getclass + "';", felText);
             int heroArmorID = HeroDataStorage.getInstance().getArmor().getArmorID();
 
             int counter = 0;
@@ -498,10 +499,10 @@ public class ShopController implements Initializable {
                         }
                     }
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                felText.setText("Error equipping armor to hero");
             } finally {
-                DBConnect.close();
+                DBConnect.close(felText);
             }
 
         }

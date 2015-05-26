@@ -13,7 +13,7 @@ import Creature.Wolf;
 
 /**
  *
- * @author Jonni
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class EnemyBaseDataStorage {
     private static EnemyBaseDataStorage enemyDataStorage;

@@ -17,7 +17,7 @@ import javafx.scene.control.CheckBox;
 /**
  * FXML Controller class
  *
- * @author Johan Nilsson
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class SettingsController implements Initializable {
 
@@ -27,10 +27,10 @@ public class SettingsController implements Initializable {
     private CheckBox cBSoundOn;
 
     private final ConfigFile cF = new ConfigFile();
-    
+
     SoundManager soundManager = new SoundManager();
-    private String buttonClick = "button_click";
-    
+    private final String buttonClick = "button_click";
+
     @FXML
     private void goBack(ActionEvent event) {
         if (HeroDataStorage.getInstance().getHero() == null) {
@@ -47,14 +47,16 @@ public class SettingsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-         HoverMouse.getInstance().inHover(backButton);
+
+        HoverMouse.getInstance().inHover(backButton);
         HoverMouse.getInstance().outHover(backButton);
-        
+
         loadSettings();
     }
 

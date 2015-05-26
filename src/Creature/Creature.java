@@ -7,7 +7,7 @@ package Creature;
 
 /**
  *
- * @author Mattias
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public abstract class Creature {
 

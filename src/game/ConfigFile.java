@@ -14,12 +14,12 @@ import java.io.FileOutputStream;
 
 /**
  *
- * @author gul_h_000
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class ConfigFile {
 
-    private File file = new File("Config.cfg"); //Direction
-    private int configSize = 8; //Storleken på config
+    private final File file = new File("Config.cfg"); //Direction
+    private final int configSize = 8; //Storleken på config
     private int sound; //Ljudet
 
     //Ljud värden
@@ -41,7 +41,7 @@ public class ConfigFile {
 
     }
 
-    public void readConfigFile() {
+    public void readConfigFile() { // läser config filen
 
         try (FileInputStream FIS = new FileInputStream(file);
                 DataInputStream DIS = new DataInputStream(FIS)) {
@@ -74,7 +74,7 @@ public class ConfigFile {
         }
     }
 
-    public void setSoundConfig() {
+    public void setSoundConfig() { //ändrar ljudet
 
         switch (stringLastCharSound) {
             case "1":
@@ -92,7 +92,7 @@ public class ConfigFile {
         }
     }
 
-    public void setSound(int sound) {
+    public void setSound(int sound) { //ändrar ljuder i config filen
         this.sound = sound;
         try (FileOutputStream FOS = new FileOutputStream(file);
                 DataOutputStream DOS = new DataOutputStream(FOS);) {
@@ -106,7 +106,7 @@ public class ConfigFile {
         }
     }
 
-    public int getSound() {
+    public int getSound() { //hämta ljudet
         
         return sound;
     }

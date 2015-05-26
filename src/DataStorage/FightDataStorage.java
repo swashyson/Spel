@@ -9,7 +9,7 @@ import Creature.*;
 
 /**
  *
- * @author Johan Nilsson
+ * @author @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class FightDataStorage {
     private static FightDataStorage fightDataStorage ;
