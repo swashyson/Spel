@@ -222,7 +222,11 @@ public class FightController implements Initializable {
 
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
-        soundManager.stopTheSound("primary");
+        if(victoryDeath == true){
+            soundManager.stopTheSound("primary");
+            victoryDeath = false;
+        }
+        
         soundManager.defineSound(fightBackgroundSound);;
 
     }

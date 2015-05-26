@@ -55,11 +55,7 @@
                 </ImageInput>
             </effect>
         </Button>
-        <TextField fx:id="name" layoutX="306.0" layoutY="300.0" prefHeight="25.0" prefWidth="160.0" promptText="Name">
-            <cursor>
-                <Cursor fx:constant="DEFAULT" />
-            </cursor>
-        </TextField>
+        <TextField fx:id="name" layoutX="306.0" layoutY="300.0" prefHeight="25.0" prefWidth="160.0" promptText="Name" />
         <Label fx:id="fel" alignment="CENTER" layoutX="259.0" layoutY="117.0" prefHeight="45.0" prefWidth="282.0" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="20.0" />
