@@ -50,6 +50,7 @@ public class InnSceneController implements Initializable {
     private String purchaseSound = "purchase";
     private String buttonClick = "button_click";
     private String errorSound = "error";
+    private String innSound = "inn";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,6 +58,8 @@ public class InnSceneController implements Initializable {
         maxHealth = HeroDataStorage.getInstance().getHero().getHp();
         heroGold = HeroDataStorage.getInstance().getHero().getGold();
 
+        soundManager.randomizeSounds(innSound, 0);
+        
         System.out.println("Amount of gold: " + heroGold);
 
         health.setText(currentHealth + " / " + maxHealth);
@@ -88,8 +91,9 @@ public class InnSceneController implements Initializable {
 
     public void back(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
-
+        soundManager.defineSound(buttonClick);
+        soundManager.stopTheSound();
+        
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
@@ -100,7 +104,7 @@ public class InnSceneController implements Initializable {
     public void restoreHealthpointsNow(ActionEvent event) {
         if (currentHealth < maxHealth) {
 
-            soundManager.defineShortSound(purchaseSound);
+            soundManager.defineSound(purchaseSound);
 
             if (heroGold < restoreHealthCost) {
                 //Möjligtvis switcha bilder på knappen istället för att ändra en label.
@@ -112,13 +116,13 @@ public class InnSceneController implements Initializable {
                 HeroDataStorage.getInstance().getHero().setHeroCurrentHP(currentHealth);
                 System.out.println("Current health restored to maximum.");
 
-                soundManager.defineShortSound(purchaseSound);
+                soundManager.defineSound(purchaseSound);
 
             }
         } else if (currentHealth == maxHealth) {
             System.out.println("Current health already restored to maximum");
             fel.setText("Your health is now full.");
-            soundManager.defineShortSound(errorSound);
+            soundManager.defineSound(errorSound);
         }
     }
 }

@@ -134,9 +134,9 @@ public class Hero extends Creature {
             int minDamage = HeroDataStorage.getInstance().getWeapon().getWeaponMinDamage();
             int maxDamage = HeroDataStorage.getInstance().getWeapon().getWeaponMaxDamage();
             int R = rand.nextInt(maxDamage - minDamage) + minDamage;
-            return R;
+            return R + heroBaseDamage;
         }
-        
+
         return heroBaseDamage;
     }
 
@@ -181,4 +181,46 @@ public class Hero extends Creature {
         return massiveBlow;
     }
 
+    public int specialAttack2() {
+
+        System.out.println("Dubbel attack");
+        int dubbelAttack = getWeaponRandomDamage();
+
+        switch (FightDataStorage.getInstance().getEnemyID()) {
+
+            case "1":
+                displayedDamage = dubbelAttack;
+                FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
+                break;
+            case "2":
+                displayedDamage = dubbelAttack;
+                FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
+                break;
+            case "3":
+                displayedDamage = dubbelAttack;
+                FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
+                break;
+            case "null":
+                System.out.println("Error");
+        }
+        return dubbelAttack;
+    }
+
+    public int specialAttack3() {
+        System.out.println("Cleave attack");
+        int cleaveAttack = getWeaponRandomDamage();
+
+        try {
+
+            displayedDamage = cleaveAttack;
+            FightDataStorage.getInstance().getEnemy1().setHp(FightDataStorage.getInstance().getEnemy1().getHp() - displayedDamage);
+            FightDataStorage.getInstance().getEnemy2().setHp(FightDataStorage.getInstance().getEnemy2().getHp() - displayedDamage);
+            FightDataStorage.getInstance().getEnemy3().setHp(FightDataStorage.getInstance().getEnemy3().getHp() - displayedDamage);
+
+        } catch (Exception ex) {
+            System.out.println("Dunk");
+        }
+        return cleaveAttack;
+
+    }
 }

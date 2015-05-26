@@ -5,6 +5,7 @@
  */
 package game;
 
+import DataStorage.HeroDataStorage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -35,7 +36,7 @@ public class MenuController implements Initializable {
     @FXML
     public void goToCity(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
@@ -45,9 +46,10 @@ public class MenuController implements Initializable {
     @FXML
     public void logout(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         DBConnect.saveToDB();
+        HeroDataStorage.getInstance().setHero(null);
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Login");
 
@@ -56,7 +58,7 @@ public class MenuController implements Initializable {
     @FXML
     public void settings(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Settings");
@@ -65,9 +67,10 @@ public class MenuController implements Initializable {
     @FXML
     public void goToCharacter(ActionEvent event) {
 
-        soundManager.defineShortSound(buttonClick);
+        soundManager.defineSound(buttonClick);
 
         DBConnect.saveToDB();
+        HeroDataStorage.getInstance().setHero(null);
         SwitchScene sc = new SwitchScene();
         sc.change(event, "ViewChar");
 
