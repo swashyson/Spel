@@ -560,6 +560,7 @@ public class FightController implements Initializable {
                 checkIfEnemyIsDead(); //kolla om alla fiender är döda
                 attackOrder.remove(0); // kolla om det är heros tur, ta väck honom i ordningen
             } else if (attackOrder.get(0).equals("Hero") && combatMessage1.getText().equals("") && specialAttack > 0) { // kolla om det är en special attack
+                selectEnemyToAttack();
                 doSpecialAttack();
             } else {
                 System.out.println("Det är inte din tur idiot"); //debugg
@@ -1107,7 +1108,7 @@ public class FightController implements Initializable {
     public void doSpecialAttack() { // gör alla attacker med hjälp av hero klassen
         //1//
         if (specialAttack == 1) {
-            selectEnemyToAttack();
+            
             System.out.println("Special Attack 1");
             damageDisplay = heroChar.specialAttack1();
 
@@ -1122,7 +1123,7 @@ public class FightController implements Initializable {
 
         } else if (specialAttack == 2) {
 
-            selectEnemyToAttack();
+            
             System.out.println("Special Attack 2 1/2");
             damageDisplay = heroChar.specialAttack2(); //2x
             damageLabelCheckEnemy();
@@ -1141,7 +1142,7 @@ public class FightController implements Initializable {
 
         } else if (specialAttack == 3) {
 
-            selectEnemyToAttack();
+            
             System.out.println("Special Attack 3");
             damageDisplay = heroChar.specialAttack3();
 
