@@ -56,6 +56,7 @@
             </effect>
         </Button>
         <TextField fx:id="name" layoutX="306.0" layoutY="300.0" prefHeight="25.0" prefWidth="160.0" promptText="Name" />
+      <PasswordField fx:id="password" layoutX="306.0" layoutY="340.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
         <Label fx:id="fel" alignment="CENTER" layoutX="259.0" layoutY="117.0" prefHeight="45.0" prefWidth="282.0" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="20.0" />
@@ -77,6 +78,5 @@
                </source>
             </ImageInput>
          </effect></Button>
-      <PasswordField fx:id="password" layoutX="306.0" layoutY="340.0" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
     </children>
 </AnchorPane>

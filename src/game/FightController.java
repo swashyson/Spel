@@ -134,6 +134,9 @@ public class FightController implements Initializable {
     private String snakeAttack = "snake_attack";
     private String scorpionAttack = "scorpion_attack";
     private String spiderAttack = "spider_attack";
+    private String primarySound = "primary";
+    private String secondarySound = "secondary";
+    private String backgroundSound = "background";
 
     private boolean victoryDeath = false;
 
@@ -147,10 +150,10 @@ public class FightController implements Initializable {
         attackSelect = null;
 
         if(victoryDeath == true){
-            soundManager.stopTheSound("primary");
+            soundManager.stopTheSound(secondarySound);
             victoryDeath = false;
         }
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
         soundManager.defineSound(buttonClick);
 
         SwitchScene sc = new SwitchScene();
@@ -168,11 +171,11 @@ public class FightController implements Initializable {
         attackSelect = null;
 
         if(victoryDeath == true){
-            soundManager.stopTheSound("primary");
+            soundManager.stopTheSound(secondarySound);
             victoryDeath = false;
         }
         
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
         soundManager.defineSound(buttonClick);
 
         HeroDataStorage.getInstance().getHero().setHeroCurrentHP(1);
@@ -191,7 +194,7 @@ public class FightController implements Initializable {
         attackSelect = null;
 
         if (victoryDeath == true) {
-            soundManager.stopTheSound("primary");
+            soundManager.stopTheSound(secondarySound);
             victoryDeath = false;
         }
         soundManager.defineSound(buttonClick);
@@ -223,7 +226,7 @@ public class FightController implements Initializable {
         System.out.println("heroEXP" + HeroDataStorage.getInstance().getHero().getEXP());
 
         if(victoryDeath == true){
-            soundManager.stopTheSound("primary");
+            soundManager.stopTheSound(secondarySound);
             victoryDeath = false;
         }
         
@@ -850,6 +853,7 @@ public class FightController implements Initializable {
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(bearAttack);
+            soundManager.playSoundAtSpecialOccation(heroHurt, 0);
 
         } else if (enemyType.equals(enemy2)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getScorpion().Attack(HeroDataStorage.getInstance().getArmor());
@@ -857,6 +861,7 @@ public class FightController implements Initializable {
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(scorpionAttack);
+            soundManager.playSoundAtSpecialOccation(heroHurt, 0);
 
         } else if (enemyType.equals(enemy3)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getSnake().Attack(HeroDataStorage.getInstance().getArmor());
@@ -864,6 +869,7 @@ public class FightController implements Initializable {
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(snakeAttack);
+            soundManager.playSoundAtSpecialOccation(heroHurt, 0);
 
         } else if (enemyType.equals(enemy4)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getSpider().Attack(HeroDataStorage.getInstance().getArmor());
@@ -871,6 +877,7 @@ public class FightController implements Initializable {
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(spiderAttack);
+            soundManager.playSoundAtSpecialOccation(heroHurt, 0);
 
         } else if (enemyType.equals(enemy5)) {
             damageDisplay = EnemyBaseDataStorage.getInstance().getWolf().Attack(HeroDataStorage.getInstance().getArmor());
@@ -878,6 +885,7 @@ public class FightController implements Initializable {
             damageLabel(creaturePane1);
             attackOrder.remove(0);
             soundManager.defineSound(wolfAttack);
+            soundManager.playSoundAtSpecialOccation(heroHurt, 0);
 
         }
         killHero();
@@ -886,10 +894,8 @@ public class FightController implements Initializable {
     public void victory() {
 
         victoryDeath = true;
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
         soundManager.defineSound(applause);
-//        soundManager.randomizeSounds(victory, 0);
-//        soundManager.defineSound(thatwaseasy);
 
         fightAgain.setVisible(true);
         backToCity.setVisible(true);
@@ -1133,7 +1139,7 @@ public class FightController implements Initializable {
             attackOrder.remove(0);
             specialAttack = 0;
 
-            soundManager.playSoundAtSpecialOccation(heroSpecialAttack1, heroChar.getHeroID());
+            soundManager.playSoundAtSpecialOccation(heroSpecialAttack1, heroChar.getHeroType());
 
         } else if (specialAttack == 2) {
 
@@ -1152,7 +1158,7 @@ public class FightController implements Initializable {
             attackOrder.remove(0);
             specialAttack = 0;
 
-            soundManager.playSoundAtSpecialOccation(heroSpecialAttack2, heroChar.getHeroID());
+            soundManager.playSoundAtSpecialOccation(heroSpecialAttack2, heroChar.getHeroType());
 
         } else if (specialAttack == 3) {
 
@@ -1167,7 +1173,7 @@ public class FightController implements Initializable {
             attackOrder.remove(0);
             specialAttack = 0;
 
-            soundManager.playSoundAtSpecialOccation(heroSpecialAttack3, heroChar.getHeroID());
+            soundManager.playSoundAtSpecialOccation(heroSpecialAttack3,0);
 
         }
     }

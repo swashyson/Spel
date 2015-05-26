@@ -38,7 +38,8 @@ public class CityController implements Initializable {
 
     private String buttonClick = "button_click";
     private String citySound = "City";
-
+    private String backgroundSound = "background";
+    
     @FXML
     public void goToMenu(ActionEvent event) {
 
@@ -48,7 +49,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
 
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
     }
 
     @FXML
@@ -59,7 +60,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
 
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
         
     }
 
@@ -71,7 +72,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
         
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
 
     }
 
@@ -83,7 +84,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
 
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound(backgroundSound);
     }
 
     @Override

@@ -31,15 +31,12 @@ public class SoundManager {
 
     private final ConfigFile cF = new ConfigFile();
 
-    // Arrays used for keeping track of which sounds to choose between when random sounds are needed
-    private String[] chooseArmorWeaponVoice = {};
+    // Arrays used for keeping track of which sounds to choose between when special occations occur
     private String[] heroHurt = {"hero_hit_1", "hero_hit_2"};
+
     private String[] heroAttack = {"warrior_attack", "bowman_attack", "mage_attack"};
-    private String[] warriorSpecialAttack = {"warrior_special_1", "warrior_special_2", "warrior_special_3"};
-    private String[] bowmanSpecialAttack = {"bowman_special_1", "bowman_special_2", "bowman_special_3"};
-    private String[] mageSpecialAttack = {"mage_special_1", "mage_special_2", "mage_special_3"};
-    private String[] victory = {"thatwaseasy", "nailedit"};
-//    private String[] innKeeperComments = {};
+    private String[] specialAttack_2 = {"warrior_special_2", "bowman_special_2", "mage_special_2"};
+
     private String[] innSound = {"snoring", "inn_ambience"};
 
     private Random random = new Random();
@@ -88,8 +85,20 @@ public class SoundManager {
                 definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/entranceBell.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
-            } else if (sound == "thatwaseasy" && soundOn == true) { // ta bort?
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/thatwaseasy.mp3").toString());
+            } else if (sound == "applause" && soundOn == true) {
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/applause.mp3").toString());
+                System.out.println("played " + sound);
+                playSecondaryShortSound();
+            } else if (sound == "gameover" && soundOn == true) {
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/gameover.mp3").toString());
+                System.out.println("played " + sound);
+                playSecondaryShortSound();
+            } else if (sound == "hero_hit_1" && soundOn == true) {
+                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/hero_hit_1.mp3").toString());
+                System.out.println("played " + sound);
+                playPrimaryShortSound();
+            } else if (sound == "hero_hit_2" && soundOn == true) {
+                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/hero_hit_2.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
             } else if (sound == "heroDeath" && soundOn == true) {
@@ -100,84 +109,48 @@ public class SoundManager {
                 definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/warrior_attack_1.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
-            } else if (sound == "warrior_special_1" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/warrior_attack_1.mp3").toString());
-                System.out.println("played " + sound);
-                playPrimaryShortSound();
-            } else if (sound == "warrior_special_2" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/warrior_attack_1.mp3").toString());
-                System.out.println("played " + sound);
-                playPrimaryShortSound();
-            } else if (sound == "warrior_special_3" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/warrior_attack_1.mp3").toString());
-                System.out.println("played " + sound);
-                playPrimaryShortSound();
             } else if (sound == "bowman_attack" && soundOn == true) {
                 System.out.println("played " + sound);
                 definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/bowman_attack_1.mp3").toString());
                 playPrimaryShortSound();
-            } else if (sound == "bowman_special_1" && soundOn == true) {
-                System.out.println("played " + sound);
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/bowman_special_2.mp3").toString());
-                playPrimaryShortSound();
-            } else if (sound == "bowman_special_2" && soundOn == true) {
-                System.out.println("played " + sound);
-                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/bowman_special_3.mp3").toString());
-                playSecondaryShortSound();
-            } else if (sound == "bowman_special_3" && soundOn == true) {
-                System.out.println("played " + sound);
-                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/bowman_attack_1.mp3").toString());
-                playSecondaryShortSound();
             } else if (sound == "mage_attack" && soundOn == true) {
                 definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/mage_attack_1.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
-            } else if (sound == "mage_special_1" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/mage_attack_1.mp3").toString());
+            } else if (sound == "warrior_special_2" && soundOn == true) {
+                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/warrior_special_2.mp3").toString());
+                System.out.println("played " + sound);
+                playPrimaryShortSound();
+            } else if (sound == "bowman_special_2" && soundOn == true) {
+                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/bowman_special_2.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
             } else if (sound == "mage_special_2" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/mage_attack_1.mp3").toString());
+                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/mage_special_2.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
-            } else if (sound == "mage_special_3" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/mage_attack_1.mp3").toString());
+            } else if (sound == "hero_special_3" && soundOn == true) {
+                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/explosion.mp3").toString());
                 System.out.println("played " + sound);
                 playPrimaryShortSound();
             } else if (sound == "bear_attack" && soundOn == true) {
                 System.out.println("played " + sound);
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/BearAttack.mp3").toString());
-                playPrimaryShortSound();
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/BearAttack.mp3").toString());
+                playSecondaryShortSound();
             } else if (sound == "snake_attack" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/hissingSnake.mp3").toString());
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/hissingSnake.mp3").toString());
                 System.out.println("played " + sound);
-                playPrimaryShortSound();
+                playSecondaryShortSound();
             } else if (sound == "spider_attack" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/spider_squeek.mp3").toString());
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/spider_squeek.mp3").toString());
                 System.out.println("played " + sound);
-                playPrimaryShortSound();
+                playSecondaryShortSound();
             } else if (sound == "scorpion_attack" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/swoosh_hit.mp3").toString());
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/swoosh_hit.mp3").toString());
                 System.out.println("played " + sound);
-                playPrimaryShortSound();
+                playSecondaryShortSound();
             } else if (sound == "wolf_attack" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/wolf_barking.mp3").toString());
-                System.out.println("played " + sound);
-                playPrimaryShortSound();
-            } else if (sound == "hero_hit_1" && soundOn == true) {
-                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/hero_hit_1.mmp3").toString());
-                System.out.println("played " + sound);
-                playSecondaryShortSound();
-            } else if (sound == "hero_hit_2" && soundOn == true) {
-                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/hero_hit_2.mp3").toString());
-                System.out.println("played " + sound);
-                playSecondaryShortSound();
-            } else if (sound == "applause" && soundOn == true) {
-                definePrimaryShortSoundFile = new Media(getClass().getResource("sounds/applause.mp3").toString());
-                System.out.println("played " + sound);
-                playPrimaryShortSound();
-            } else if (sound == "gameover" && soundOn == true) {
-                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/gameover.mp3").toString());
+                defineSecondaryShortSoundFile = new Media(getClass().getResource("sounds/wolf_barking.mp3").toString());
                 System.out.println("played " + sound);
                 playSecondaryShortSound();
             }
@@ -190,7 +163,7 @@ public class SoundManager {
     //Plays the sounds in the global arrays defined at the top, at occations where the
     //sounds need to be specific to the hero, or at occations where the sounds need 
     //to be random
-    public void playSoundAtSpecialOccation(String soundsToRandomize, int heroType) {
+    public void playSoundAtSpecialOccation(String specialOccationSound, int heroType) {
         //The method is using references to the herotype (1-3 for the specific class), that is to be 
         //able to play the correct sounds for each herotype in the fight
         //since there is sounds applying to every herotype, 0 is used for applying it to all of them
@@ -198,7 +171,7 @@ public class SoundManager {
 
             readTheConfigFile();
 
-            if (soundsToRandomize == "hero_being_hit" && soundOn == true && heroType == 0) {
+            if (specialOccationSound == "hero_being_hit" && soundOn == true && heroType == 0) {
                 soundToPlay = random.nextInt(2);
                 System.out.println(soundToPlay);
                 if (soundToPlay == 0) {
@@ -208,56 +181,37 @@ public class SoundManager {
                     defineSound(heroHurt[1]);
                     System.out.println("played " + heroHurt[1]);
                 }
-            } else if (soundsToRandomize == "hero_special_1" && soundOn == true && heroType == 1) {
-                defineSound(warriorSpecialAttack[0]);
-                System.out.println("played " + warriorSpecialAttack[0]);
-            } else if (soundsToRandomize == "hero_special_1" && soundOn == true && heroType == 2) {
-                defineSound(bowmanSpecialAttack[0]);
-                System.out.println("played " + bowmanSpecialAttack[0]);
-            } else if (soundsToRandomize == "hero_special_1" && soundOn == true && heroType == 3) {
-                defineSound(mageSpecialAttack[0]);
-                System.out.println("played " + mageSpecialAttack[0]);
-
-            } else if (soundsToRandomize == "hero_special_2" && soundOn == true && heroType == 1) {
-                defineSound(warriorSpecialAttack[1]);
-                System.out.println("played " + warriorSpecialAttack[1]);
-            } else if (soundsToRandomize == "hero_special_2" && soundOn == true && heroType == 2) {
-                defineSound(bowmanSpecialAttack[1]);
-                System.out.println("played " + bowmanSpecialAttack[1]);
-            } else if (soundsToRandomize == "hero_special_2" && soundOn == true && heroType == 3) {
-                defineSound(mageSpecialAttack[1]);
-                System.out.println("played " + mageSpecialAttack[1]);
-
-            } else if (soundsToRandomize == "hero_special_3" && soundOn == true && heroType == 1) {
-                defineSound(warriorSpecialAttack[3]);
-                System.out.println("played " + warriorSpecialAttack[3]);
-            } else if (soundsToRandomize == "hero_special_3" && soundOn == true && heroType == 2) {
-                defineSound(bowmanSpecialAttack[3]);
-                System.out.println("played " + bowmanSpecialAttack[3]);
-            } else if (soundsToRandomize == "hero_special_3" && soundOn == true && heroType == 3) {
-                defineSound(mageSpecialAttack[3]);
-                System.out.println("played " + mageSpecialAttack[3]);
-
-            } else if (soundsToRandomize == "hero_attacking" && soundOn == true && heroType == 1) {
+            } else if (specialOccationSound == "hero_special_1" && soundOn == true && heroType == 1) {
                 defineSound(heroAttack[0]);
                 System.out.println("played " + heroAttack[0]);
-            } else if (soundsToRandomize == "hero_attacking" && soundOn == true && heroType == 2) {
+            } else if (specialOccationSound == "hero_special_1" && soundOn == true && heroType == 2) {
+                defineSound(heroAttack[0]);
+                System.out.println("played " + heroAttack[0]);
+            } else if (specialOccationSound == "hero_special_1" && soundOn == true && heroType == 3) {
+                defineSound(heroAttack[0]);
+                System.out.println("played " + heroAttack[0]);
+            } else if (specialOccationSound == "hero_special_2" && soundOn == true && heroType == 1) {
+                defineSound(specialAttack_2[0]);
+                System.out.println("played " + specialAttack_2[0]);
+            } else if (specialOccationSound == "hero_special_2" && soundOn == true && heroType == 2) {
+                defineSound(specialAttack_2[1]);
+                System.out.println("played " + specialAttack_2[1]);
+            } else if (specialOccationSound == "hero_special_2" && soundOn == true && heroType == 3) {
+                defineSound(specialAttack_2[2]);
+                System.out.println("played " + specialAttack_2[2]);
+            } else if (specialOccationSound == "hero_special_3" && soundOn == true && heroType == 0) {
+                defineSound("hero_special_3");
+                System.out.println("played hero_special_3");
+            } else if (specialOccationSound == "hero_attacking" && soundOn == true && heroType == 1) {
+                defineSound(heroAttack[0]);
+                System.out.println("played " + heroAttack[0]);
+            } else if (specialOccationSound == "hero_attacking" && soundOn == true && heroType == 2) {
                 defineSound(heroAttack[1]);
                 System.out.println("played " + heroAttack[1]);
-            } else if (soundsToRandomize == "hero_attacking" && soundOn == true && heroType == 3) {
+            } else if (specialOccationSound == "hero_attacking" && soundOn == true && heroType == 3) {
                 defineSound(heroAttack[2]);
                 System.out.println("played " + heroAttack[2]);
-            } else if (soundsToRandomize == "victory" && soundOn == true && heroType == 0) {
-                soundToPlay = random.nextInt(2);
-                System.out.println(soundToPlay);
-                if (soundToPlay == 0) {
-                    defineSound(victory[0]);
-                    System.out.println("played " + victory[0]);
-                } else if (soundToPlay == 1) {
-                    defineSound(victory[1]);
-                    System.out.println("played " + victory[1]);
-                }
-            } else if (soundsToRandomize == "inn" && soundOn == true && heroType == 0) {
+            } else if (specialOccationSound == "inn" && soundOn == true && heroType == 0) {
                 soundToPlay = random.nextInt(2);
                 System.out.println(soundToPlay);
                 if (soundToPlay == 0) {
@@ -317,7 +271,7 @@ public class SoundManager {
     //This method turns off the sound, whatever sound it is that is playing
     public void stopTheSound(String stop) {
         if (soundOn == true) {
-            if (stop == "back") {
+            if (stop == "background") {
                 backgroundSound.stop();
             } else if (stop == "primary") {
                 primaryShortSound.stop();

@@ -96,7 +96,7 @@ public class InnSceneController implements Initializable {
     public void back(ActionEvent event) {
 
         soundManager.defineSound(buttonClick);
-        soundManager.stopTheSound("back");
+        soundManager.stopTheSound("background");
         
         SwitchScene sc = new SwitchScene();
         sc.change(event, "City");
