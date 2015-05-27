@@ -9,7 +9,7 @@ import game.Item;
 
 /**
  *
- * @author Mattias
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class Armor extends Item {
 

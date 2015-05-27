@@ -6,11 +6,10 @@
 package game;
 
 import Creature.Hero;
-import Creature.Scorpion;
-import Creature.Wolf;
 import DataStorage.*;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -22,8 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
-import Creature.*;
-import DataStorage.EnemyBaseDataStorage;
 
 /**
  * FXML Controller class
@@ -44,14 +41,14 @@ public class ViewCharController implements Initializable {
     private ImageView imageView;
     @FXML
     private Label fel;
-    private Hero hero;
+    
     private final ArrayList<String> getName = new ArrayList();
     private final ArrayList getStats = new ArrayList();
     private final int userID = HeroDataStorage.getInstance().getuserID();
 
-    private SoundManager soundManager = new SoundManager();
+    private final SoundManager soundManager = new SoundManager();
 
-    private String buttonClick = "button_click";
+    private final String buttonClick = "button_click";
 
     @FXML
     public void back(ActionEvent event) {
@@ -70,26 +67,22 @@ public class ViewCharController implements Initializable {
         HoverMouse.getInstance().inHover(back);
         HoverMouse.getInstance().outHover(back);
         listHeros();
-
     }
 
     @FXML
     public void selectChar() {
 
         try {
-
             resetText();
-
             System.out.println("Rad ID = " + list.getSelectionModel().getSelectedIndex());
-
             getStats.removeAll(getStats);
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
 
-            DBConnect.connect();
+            DBConnect.connect(fel);
 
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'", fel);
             while (rs.next()) {
                 int level = rs.getInt("heroLevel");
                 int type = rs.getInt("heroType");
@@ -111,10 +104,11 @@ public class ViewCharController implements Initializable {
             }
             ObservableList<Object> OL = FXCollections.observableArrayList(getStats);
             stats.setItems(OL);
-            DBConnect.close();
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            fel.setText("Error selecting hero");
+        } finally {
+            DBConnect.close(fel);
         }
     }
 
@@ -131,11 +125,11 @@ public class ViewCharController implements Initializable {
     public void loadHero() {
         try {
 
-            DBConnect.connect();
+            DBConnect.connect(fel);
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'", fel);
             System.out.println("select * from game.hero where userID = '" + userID + "' and heroName = '" + stringName + "'");
 
             if (!stringName.equals("")) {
@@ -155,22 +149,23 @@ public class ViewCharController implements Initializable {
 
                     HeroDataStorage.getInstance().setHero(newHero);
                 }
-                DBConnect.close();
 
             } else {
                 fel.setText("You must select a hero");
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             fel.setText("You must select a hero");
+        } finally {
+            DBConnect.close(fel);
         }
 
     }
 
     private void listHeros() {
         try {
-            DBConnect.connect();
+            DBConnect.connect(fel);
 
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "'");
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "'", fel);
             System.out.println("select * from game.login, game.hero where login.userID = hero.userID and login.userID = '" + userID + "';");
 
             while (rs.next()) {
@@ -181,14 +176,15 @@ public class ViewCharController implements Initializable {
             list.setItems(OL);
 
             System.out.println("Antalet Gubbar = " + getName.size());
-            DBConnect.close();
-           
-        } catch (Exception ex) {
-            ex.printStackTrace();
+
+        } catch (SQLException ex) {
+            fel.setText("Error loading hero");
+        } finally {
+            DBConnect.close(fel);
         }
     }
 
-     public void changePic(String type) {
+    public void changePic(String type) {
         javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("Recourses/" + type + ".png").toExternalForm());
         imageView.setImage(image);
 
@@ -205,7 +201,7 @@ public class ViewCharController implements Initializable {
 
         try {
 
-            DBConnect.connect();
+            DBConnect.connect(fel);
 
             Object name = list.getSelectionModel().getSelectedItem();
             String stringName = (String) name;
@@ -227,7 +223,6 @@ public class ViewCharController implements Initializable {
 
         } catch (Exception ex) {
             fel.setText("You must select a hero");
-            ex.printStackTrace();
         }
 
     }

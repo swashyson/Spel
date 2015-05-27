@@ -12,7 +12,7 @@ import java.util.Random;
 
 /**
  *
- * @author Mohini
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class Bear extends Enemy {
 

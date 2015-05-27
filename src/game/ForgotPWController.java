@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -22,41 +23,36 @@ import javafx.scene.control.TextField;
 public class ForgotPWController implements Initializable {
 
     private String question, answer;
-
     @FXML
     private Button getQuestion;
-
     @FXML
     private Button getPassword;
-
     @FXML
     private Button back;
-
     @FXML
     private TextField password;
-
     @FXML
     private TextField username;
-
     @FXML
     private TextField secretAnswer;
-
     @FXML
     private TextField secretQuestion;
+    @FXML
+    private Label fel;
 
-    private SoundManager soundManager = new SoundManager();
-    private ConfigFile config = new ConfigFile();
+    private final SoundManager soundManager = new SoundManager();
+    private final ConfigFile config = new ConfigFile();
 
-    private String buttonClick = "button_click";
+    private final String buttonClick = "button_click";
 
     @FXML
     public void getQuestion(ActionEvent event) throws Exception {
 
         soundManager.defineSound(buttonClick);
 
-        DBConnect.connect();
+        DBConnect.connect(fel);
 
-        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName = '" + username.getText() + "'");
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName = '" + username.getText() + "'", fel);
         // If user exists
         if (rs.first()) {
 
@@ -67,7 +63,7 @@ public class ForgotPWController implements Initializable {
         } else {
             username.setText("This user does not exist bitch!");
         }
-        DBConnect.close();
+        DBConnect.close(fel);
 
     }
 
@@ -78,8 +74,8 @@ public class ForgotPWController implements Initializable {
 
         soundManager.defineSound(buttonClick);
 
-        DBConnect.connect();
-        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName = '" + username.getText() + "'");
+        DBConnect.connect(fel);
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName = '" + username.getText() + "'", fel);
         while (rs.next()) {
 
             answer = rs.getString("userAnswer");
@@ -96,7 +92,7 @@ public class ForgotPWController implements Initializable {
             }
 
         }
-        DBConnect.close();
+        DBConnect.close(fel);
     }
 
     @FXML

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -51,5 +52,10 @@
                 </ImageInput>
             </effect>
         </Button>
+      <Label fx:id="fel" layoutX="259.0" layoutY="356.0" prefHeight="53.0" prefWidth="304.0" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

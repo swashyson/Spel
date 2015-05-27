@@ -5,22 +5,20 @@
  */
 package game;
 
-import Creature.Hero;
+import DataStorage.*;
+import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import DataStorage.*;
-import java.awt.Desktop;
-import java.io.File;
-import java.nio.file.Path;
-import javafx.animation.FadeTransition;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 /**
@@ -29,8 +27,6 @@ import javafx.util.Duration;
  */
 public class LoginController implements Initializable {
 
-    // @FXML
-    // private Label label;
     @FXML
     private Label fel;
     @FXML
@@ -48,18 +44,17 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField password;
 
-    SoundManager soundManager = new SoundManager();
+    private final SoundManager soundManager = new SoundManager();
 
-    private String buttonClick = "button_click";
-    private String error = "error";
+    private final String buttonClick = "button_click";
+    private final String error = "error";
 
     @FXML
     public void logIn(ActionEvent event) {
 
-        
         try {
-            DBConnect.connect();
-            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
+            DBConnect.connect(fel);
+            ResultSet rs = DBConnect.CreateSelectStatement("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'", fel);
             //System.out.println("select * from game.login where login.userName =  '" + name.getText() + "' and login.userPassword = '" + password.getText() + "'");
 
             if (rs.first()) {
@@ -70,8 +65,7 @@ public class LoginController implements Initializable {
                 ID = rs.getInt("userID");
 
                 HeroDataStorage.getInstance().setuserID(ID);
-                DBConnect.close();
-                
+
                 soundManager.defineSound(buttonClick);
             } else {
                 fel.setText("Wrong username/password");
@@ -79,12 +73,14 @@ public class LoginController implements Initializable {
                 ft.setFromValue(1.0);
                 ft.setToValue(0. - 1);
                 ft.play();
-                
+
                 soundManager.defineSound(error);
             }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            fel.setText("Error connecting to database");
+        } finally {
+            DBConnect.close(fel);
         }
     }
 

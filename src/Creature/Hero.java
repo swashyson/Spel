@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author Mattias
+ * @author Mohini, Mattias, Johan, Fredrik, Jonathan
  */
 public class Hero extends Creature {
 
@@ -101,7 +101,7 @@ public class Hero extends Creature {
         return heroBaseDamage;
     }
 
-    public void basicAttack(Weapon weapon) {
+    public void basicAttack(Weapon weapon) { // Kolla vilken hero man attakera och gör damage på den
 
         try {
             switch (FightDataStorage.getInstance().getEnemyID()) {
@@ -127,7 +127,7 @@ public class Hero extends Creature {
 
     }
 
-    public int getWeaponRandomDamage() {
+    public int getWeaponRandomDamage() { //gör random damage om man har ett svärt
 
         if (HeroDataStorage.getInstance().getWeapon() != null) {
             Random rand = new Random();
@@ -137,10 +137,10 @@ public class Hero extends Creature {
             return R + heroBaseDamage;
         }
 
-        return heroBaseDamage;
+        return heroBaseDamage; //skada bara basedamage om man inte har något vapen
     }
 
-    public void heroAttack() {
+    public void heroAttack() { // kallar basicattack
 
         if (HeroDataStorage.getInstance().getWeapon() != null) {
             basicAttack(HeroDataStorage.getInstance().getWeapon());
@@ -149,13 +149,13 @@ public class Hero extends Creature {
         }
     }
 
-    public int getDisplayedDamage() {
+    public int getDisplayedDamage() { //Returnar displayed damage tillbaka till fighting scenen visuellt
 
         return displayedDamage;
 
     }
 
-    public int specialAttack1() {
+    public int specialAttack1() { //special attack som gör 3x skada med random, sen kollar den även vem man trycker på
 
         System.out.println("Massive BLOOOOOOOOW");
         int massiveBlow = getWeaponRandomDamage() * 3;
@@ -181,7 +181,7 @@ public class Hero extends Creature {
         return massiveBlow;
     }
 
-    public int specialAttack2() {
+    public int specialAttack2() { //två attacker efter varandra
 
         System.out.println("Dubbel attack");
         int dubbelAttack = getWeaponRandomDamage();
@@ -206,7 +206,7 @@ public class Hero extends Creature {
         return dubbelAttack;
     }
 
-    public int specialAttack3() {
+    public int specialAttack3() { //cleave attack som skadar alla på banan
         System.out.println("Cleave attack");
         int cleaveAttack = getWeaponRandomDamage();
 

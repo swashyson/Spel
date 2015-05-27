@@ -1,15 +1,17 @@
 package game;
 
-import Items.Weapon;
-import Items.Armor;
 import DataStorage.HeroDataStorage;
+import Items.Armor;
+import Items.Weapon;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -26,19 +28,22 @@ public class CityController implements Initializable {
     private Button shop;
     @FXML
     private Button menu;
+    @FXML
+    private Label fel;
 
     private Weapon weapon;
     private int weaponID;
     private Armor armor;
     private int armorID;
 
-    private int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
+    private final int heroID = HeroDataStorage.getInstance().getHero().getHeroID();
 
-    private SoundManager soundManager = new SoundManager();
+    private final SoundManager soundManager = new SoundManager();
 
     private String buttonClick = "button_click";
     private String citySound = "City";
-
+    private String backgroundSound = "background";
+    
     @FXML
     public void goToMenu(ActionEvent event) {
 
@@ -48,7 +53,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Menu");
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound(backgroundSound);
     }
 
     @FXML
@@ -59,7 +64,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "InnScene");
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound(backgroundSound);
         
     }
 
@@ -71,7 +76,7 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Fight");
         
-        soundManager.stopTheSound();
+        soundManager.stopTheSound(backgroundSound);
 
     }
 
@@ -83,11 +88,11 @@ public class CityController implements Initializable {
         SwitchScene sc = new SwitchScene();
         sc.change(event, "Shop");
 
-        soundManager.stopTheSound();
+        soundManager.stopTheSound(backgroundSound);
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) { // knapp effekter
 
         HoverMouse.getInstance().inHover(fight);
         HoverMouse.getInstance().outHover(fight);
@@ -109,16 +114,16 @@ public class CityController implements Initializable {
 
     }
 
-    public void checkWeapon() {
+    public void checkWeapon() { // kolla om gubben har ett vapen
 
-        DBConnect.connect();
+        DBConnect.connect(fel);
 
-        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_weapon where hero_idHero = '" + heroID + "';");
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_weapon where hero_idHero = '" + heroID + "';", fel);
         try {
             if (rs.next()) {
                 weaponID = rs.getInt("weapon_weaponID");
             }
-            ResultSet check = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '" + weaponID + "';");
+            ResultSet check = DBConnect.CreateSelectStatement("select * from game.weapon where weaponID = '" + weaponID + "';", fel);
             System.out.println("select * from game.weapon where weaponID = '" + weaponID + "';");
             if (check.next()) {
 
@@ -135,24 +140,24 @@ public class CityController implements Initializable {
 
                 System.out.println(weapon);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            fel.setText("Error loading from database"); // kommer aldrig någonsin bli fel här
         } finally {
-            DBConnect.close();
+            DBConnect.close(fel);
         }
 
     }
 
-    public void checkArmor() {
+    public void checkArmor() { //kolla om gubben har en armor
 
-        DBConnect.connect();
+        DBConnect.connect(fel);
 
-        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_armor where hero_idHero = '" + heroID + "';");
+        ResultSet rs = DBConnect.CreateSelectStatement("select * from game.hero_has_armor where hero_idHero = '" + heroID + "';", fel);
         try {
             if (rs.next()) {
                 armorID = rs.getInt("armor_armorID");
             }
-            ResultSet check = DBConnect.CreateSelectStatement("select * from game.armor where armorID = '" + armorID + "';");
+            ResultSet check = DBConnect.CreateSelectStatement("select * from game.armor where armorID = '" + armorID + "';", fel);
             System.out.println("select * from game.armor where armorID = '" + armorID + "';");
             if (check.next()) {
 
@@ -166,13 +171,11 @@ public class CityController implements Initializable {
                 HeroDataStorage.getInstance().setArmor(armor);
 
                 System.out.println(armor);
-
-                DBConnect.close();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            fel.setText("Error loading from database"); // Kommer aldrig någonsin bli fel här
         } finally {
-            DBConnect.close();
+            DBConnect.close(fel);
         }
 
     }

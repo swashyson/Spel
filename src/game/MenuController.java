@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -21,17 +22,18 @@ import javafx.scene.control.Button;
 public class MenuController implements Initializable {
 
     @FXML
-    Button backToCity;
+    private Button backToCity;
     @FXML
-    Button logout;
+    private Button logout;
     @FXML
-    Button changeCharacter;
+    private Button changeCharacter;
     @FXML
-    Button settings;
+    private Button settings;
+    @FXML
+    private Label fel;
 
-    private SoundManager soundManager = new SoundManager();
-
-    private String buttonClick = "button_click";
+    private final SoundManager soundManager = new SoundManager();
+    private final String buttonClick = "button_click";
 
     @FXML
     public void goToCity(ActionEvent event) {
@@ -48,10 +50,18 @@ public class MenuController implements Initializable {
 
         soundManager.defineSound(buttonClick);
 
-        DBConnect.saveToDB();
-        HeroDataStorage.getInstance().setHero(null);
-        SwitchScene sc = new SwitchScene();
-        sc.change(event, "Login");
+        try {
+            DBConnect.connect(fel);
+            DBConnect.saveToDB(fel);
+            HeroDataStorage.getInstance().setHero(null);
+            DBConnect.resetArmorAndWeapon();
+            SwitchScene sc = new SwitchScene();
+            sc.change(event, "Login");
+        } catch (Exception ex) {
+            fel.setText("Error saving hero");
+        } finally {
+            DBConnect.close(fel);
+        }
 
     }
 
@@ -69,16 +79,24 @@ public class MenuController implements Initializable {
 
         soundManager.defineSound(buttonClick);
 
-        DBConnect.saveToDB();
-        HeroDataStorage.getInstance().setHero(null);
-        SwitchScene sc = new SwitchScene();
-        sc.change(event, "ViewChar");
+        try {
+            DBConnect.connect(fel);
+            DBConnect.saveToDB(fel);
+            HeroDataStorage.getInstance().setHero(null);
+            DBConnect.resetArmorAndWeapon();
+            SwitchScene sc = new SwitchScene();
+            sc.change(event, "ViewChar");
+        } catch (Exception ex) {
+            fel.setText("Error saving hero");
+        } finally {
+            DBConnect.close(fel);
+        }
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         HoverMouse.getInstance().inHover(backToCity);
         HoverMouse.getInstance().outHover(backToCity);
         HoverMouse.getInstance().inHover(logout);
