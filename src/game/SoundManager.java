@@ -278,10 +278,6 @@ public class SoundManager {
         }
     }
 
-    public void delay() {
-
-    }
-
     public boolean getSoundOn() {
         return soundOn;
     }
